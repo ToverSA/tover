@@ -7,7 +7,6 @@
 * Admin
 
 ### User ###
-This web platform should provide users with an ability to:
 * view/browse adverts
 * search ad
 * create account
