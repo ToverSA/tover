@@ -4,7 +4,6 @@
 * User
 * Moderator
 * Manager
-* Admin
 
 ### User ###
 * view/browse ads
@@ -32,6 +31,7 @@
 * report misused ads
 
 ### Advertiser ###
+* login/logout with account
 * manage global ads
     * create
     * edit
@@ -39,11 +39,14 @@
 * manage user ads
     * promote user ad
 ### Moderator ###
+* login/logout with account
 * view user insights and analytics
 * view ad insights and analytics
 * block/unblock users
-### Admin ###
 * manage team roles
     * add new member
     * change member role
     * remove member
+* manage settings
+    * add/remove/edit locations
+    * ad categories
