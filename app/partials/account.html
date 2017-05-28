@@ -1,0 +1,25 @@
+<div class="account" ng-switch="accountState">
+    <div class="loader" ng-switch-default>
+        <p>loading</p>
+    </div>
+    <div class="login" ng-switch-when="1">
+        <h2>Login to account</h2>
+        <img src="/img/avatar.png" alt="Account"/>
+        <input type="text" placeholder="Username"/>
+        <input type="password" placeholder="Password"/>
+        <div>
+            <span ng-click="toRecovery()">Having trouble?</span>
+            <span ng-click="logIn()">Log in</span>
+        </div>
+        <span ng-click="toRegister()">Create new account</span>
+    </div>
+    <div class="register" ng-switch-when="2">
+        <p>Register</p>
+    </div>
+    <div class="recovery" ng-switch-when="3">
+        <p>Recovery</p>
+    </div>
+    <div class="main" ng-switch-when="4">
+        <p>Main</p>
+    </div>
+</div>

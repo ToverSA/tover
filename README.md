@@ -2,8 +2,7 @@
 
 ## Actors ##
 * User
-* Moderator
-* Manager
+
 
 ### User ###
 * view/browse ads
@@ -29,24 +28,3 @@
     * delete messages
 * report bug issues
 * report misused ads
-
-### Advertiser ###
-* login/logout with account
-* manage global ads
-    * create
-    * edit
-    * delete
-* manage user ads
-    * promote user ad
-### Moderator ###
-* login/logout with account
-* view user insights and analytics
-* view ad insights and analytics
-* block/unblock users
-* manage team roles
-    * add new member
-    * change member role
-    * remove member
-* manage settings
-    * add/remove/edit locations
-    * ad categories
