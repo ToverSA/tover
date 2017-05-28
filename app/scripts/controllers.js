@@ -1,5 +1,6 @@
 /*global app*/
-app.controller('accountCtl', ['$scope', '$http', function ($scope, $http) {
+/*global log*/
+app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
     'use strict';
     var self = this;
     self.LOADING = 0;
@@ -7,14 +8,15 @@ app.controller('accountCtl', ['$scope', '$http', function ($scope, $http) {
     self.REGISTER = 2;
     self.RECOVERY = 3;
     self.MAIN = 4;
+    // Pages under main
+    self.CONSOLE = 5;
+
     function init() {
         $http.get('/api/access.json').then(function (res) {
             if (res.data.access === true) {
-                window.console.log("state change to main:" + self.MAIN);
                 $scope.accountState = self.MAIN;
             } else {
-                window.console.log("state change to login:" + self.LOGIN);
-                $scope.accountState = self.REGISTER;
+                $scope.accountState = self.LOGIN;
             }
         }, function (err) {});
     }
@@ -23,6 +25,9 @@ app.controller('accountCtl', ['$scope', '$http', function ($scope, $http) {
     $scope.toLogin = function () { $scope.accountState = self.LOGIN; };
     $scope.logIn = function () {
         $scope.accountState = self.MAIN;
+    };
+    $scope.createAd = function () {
+        $location.url('/ads/create');
     };
     $scope.createNew = function () {
         $scope.accountState = self.MAIN;
@@ -33,10 +38,27 @@ app.controller('homeCtl', ['$scope', '$http', function ($scope, $http) {
     'use strict';
     function init() {
         $http.get('/api/ads.json').then(function (res) {
-            window.console.log(res.data);
         }, function (err) {
-            window.console.log(err);
+            log(err);
         });
     }
     init();
+}]);
+app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $location) {
+    'use strict';
+    $scope.cancelAd = function () {
+        $location.url('/');
+    };
+    $scope.back = function () {
+        $scope.aPage -= 1;
+    };
+    $scope.step = function () {
+        if ($scope.aPage === 1) {
+            $scope.aPage += 1;
+        } else if ($scope.aPage === 2) {
+            $scope.aPage += 1;
+        } else if ($scope.aPage === 3) {
+            $location.url('/account');
+        }
+    };
 }]);

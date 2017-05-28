@@ -1,4 +1,8 @@
 /*global angular*/
+function log(str) {
+    'use strict';
+    window.console.log(str);
+}
 var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', function ($routeProvider) {
     'use strict';
     $routeProvider
@@ -11,6 +15,11 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
             {
                 templateUrl: 'app/partials/account.html',
                 controller: 'accountCtl'
+            })
+        .when('/ads/create',
+            {
+                templateUrl: 'app/partials/create.html',
+                controller: 'adsCreateCtl'
             })
         .otherwise({
             redirectTo: '/'

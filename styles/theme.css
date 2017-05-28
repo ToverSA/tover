@@ -6,10 +6,17 @@
 *{
     box-sizing: border-box;
 }
+a{
+    text-decoration: none;
+    color: #FFF;
+}
 body{
     margin: 0;
     background-color: #ECEFF1;
     font-family: Roboto;
+}
+.home{
+    overflow: auto;
 }
 .header{
     height: 50px;
@@ -100,7 +107,15 @@ body{
     background-color: rgba(84, 110, 123, 0.1);
     font-size: 1;
 }
-.account .register span{
+.account .register > a-chooser{
+    display: block;
+    width: 90%;
+    margin: 20px auto 0 auto;
+    outline: none;
+    padding: 10px;
+    background-color: rgba(84, 110, 123, 0.1);
+}
+.account .register > span{
     display: block;
     width: 90%;
     margin: 10px auto;
@@ -117,12 +132,12 @@ body{
 .account .main .header .left{
     display: flex;
 }
-.account .main .header .left div:nth-child(2){
+.account .main .header .left .naver{
     position: relative;
     width: 50px;
     display: none;
 }
-.account .main .header .left div:nth-child(2) span{
+.account .main .header .left .naver span{
     display: block;
     height: 5px;
     width: 25px;
@@ -132,22 +147,22 @@ body{
     border-radius: 3px;
     transition: 0.2s;
 }
-.account .main .header .left div:nth-child(2) span:nth-child(1){
+.account .main .header .left .naver span:nth-child(1){
     top: 12px;
 }
-.account .main .header .left div:nth-child(2) span:nth-child(2){
+.account .main .header .left .naver span:nth-child(2){
     top: 22px;
 }
-.account .main .header .left div:nth-child(2) span:nth-child(3){
+.account .main .header .left .naver span:nth-child(3){
     top: 32px;
 }
-.account .main .header .left div:nth-child(2).opened span:nth-child(2){
+.account .main .header .left .naver.opened span:nth-child(2){
     opacity: 0;
 }
-.account .main .header .left div:nth-child(2).opened span:nth-child(1){
+.account .main .header .left .naver.opened span:nth-child(1){
     transform: rotate(-45deg) translate(-4px);
 }
-.account .main .header .left div:nth-child(2).opened span:nth-child(3){
+.account .main .header .left .naver.opened span:nth-child(3){
     transform: rotate(45deg) translate(-4px);
 }
 .account .main{
@@ -172,9 +187,24 @@ body{
     padding-left: 30px;
     font-size: 1.3em;
     color: #546E7A;
+    cursor: pointer;
 }
 .account .main .content .nav span.active{
     background-color: #B0BEC5;
+}
+.account .main .content .page{
+    flex-grow: 1;
+}
+.create-ad-btn{
+    display: block;
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin: 10px auto;
+    background-color: #009688;
+    color: #FFF;
+    cursor: pointer;
 }
 .main-content{
     max-width: 1024px;
@@ -182,68 +212,185 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-a-ad{
+.ad{
     display: block;
-    height: 160px;
+    height: 210px;
     width: 160px;
-    background-color: #FFF;
     margin: 5px;
+    background-color: #FFF;
+    box-shadow: 0 1px 1px 1px #CCC;
+}
+a-chooser{
+    display: inline-block;
+    min-height: 18px;
+    min-width: 100px;
+    border: 1px solid #CCC;
+}
+.create-ad{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.create-ad:nth-child(1){
+    background-color: #009688;
+/*    background-color: #FF5722;*/
+    height: 20%;
+}
+.create-ad .wrapper{
+    margin: 10px auto;
+    max-width: 450px;
+    min-height: 500px;
+    background-color: #FFF;
     box-shadow: 0 1px 1px 1px #ccc;
-    overflow: hidden;
+    padding: 5px;
+}
+.create-ad .wrapper h3{
+    margin-bottom: 5px;
+}
+.create-ad .wrapper h2{
+    text-align: center;
+}
+.create-ad .wrapper input{
+    outline: none;
+    border: 0px;
+    display: block;
+    font-size: 1em;
+    border-bottom: 2px solid #CFD8DC;
+    padding: 5px;
+}
+.create-ad .wrapper input:focus{
+    border-bottom-color: #00BFA5;
+}
+.create-ad .wrapper input[type=text]{
+    width: 100%;
+}
+.create-ad .wrapper input[type=number]{
+    display: inline-block;
+    width: 100px;
+}
+.create-ad .wrapper a-chooser{
+    padding: 5px;
+    width: 200px;
+}
+.create-ad .wrapper textarea{
+    outline: none;
+    border: 1px solid #CCC;
+    resize: none;
+    box-shadow: 0 0 1px 1px #CCC inset;
+    width: 100%;
+    height: 110px;
+    font-family: Roboto;
+    font-size: 1em;
+}
+.create-ad .wrapper textarea:focus{
+    border-color: #00BFA5;
+}
+.create-ad .wrapper{
     position: relative;
 }
-a-ad img{
-    width: 100%;
-    height: 100%;
-}
-a-ad div{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
-}
-a-ad:hover div{ background-color: rgba(255, 255, 255, 0.4); }
-a-ad div span{
-    display: block;
-    overflow: hidden;
-    max-height: 38px;
+.create-ad .wrapper > div > div{
+    display: flex;
+    justify-content: flex-end;
     margin: 5px 0;
-    padding-left: 5px;
 }
-a-ad div span:nth-child(3){
+.create-ad .wrapper > div > div span{
+    display: block;
+    margin: 0 0 0 5px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.create-ad .wrapper > div > div span:nth-child(1){
+    color: #00BFA5;
+}
+.create-ad .wrapper > div > div span:nth-child(2){
+    background-color: #00BFA5;
+    color: #FFF;
+    border-radius: 5px;
+}
+.create-ad .wrapper .album{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.create-ad .wrapper .album .upload-btn{
+    background-color: #009688;
+}
+.create-ad .wrapper .album div{
+    display: block;
+    height: 120px;
+    width: 120px;
+    margin: 5px;
+    background-color: #ECEFF1;
+}
+.create-ad .wrapper .grav{
     position: absolute;
     bottom: 0;
-    right: 5px;
+    width: 100%;
+    left: 0;
+    padding: 0 5px;
+}
+.create-ad .head{
+    display: flex;
+    justify-content: flex-start;
+}
+.create-ad .head .img{
+    display: block;
+    height: 120px;
+    width: 120px;
+    flex-basis: 120px;
+    background-color: #ECEFF1;
+}
+.create-ad .head h3{
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 200px;
+    margin: 5px;
+    padding: 0;
+}
+.create-ad .pics{
+    display: flex;
+    justify-content: center;
+}
+.create-ad .wrapper{
+    padding-bottom: 55px;
+}
+.create-ad .pics > div{
+    display: block;
+    height: 80px;
+    width: 80px;
+    margin: auto;
+    background-color: #ECEFF1;
+}
+@media screen and (max-width: 1024px){
+    .main-content{
+        max-width: 768px;
+    }
+    .ad{
+        width: 140px;
+        height: 180px;
+        margin: 6px;
+    }
 }
 @media screen and (max-width: 768px){
     .main-content{
         justify-content: center;
     }
-    a-ad{
-        width: 143px;
-        height: 143px;
+    .home .dialog .frame{
+        margin: 60px auto;
     }
 }
 @media screen and (max-width: 450px){
-    a-ad{
+    .main-content{
+        margin: 0;
+    }
+    .ad{
         width: 100%;
         height: 100px;
-        margin: 3px;
-        display: flex;
+        margin: 5px;
     }
-    a-ad img{
-        height: 100px;
-        width: 100px;
-        flex-basis: 100px;
-    }
-    a-ad div{
-        position: static;
-    }
-    a-ad div span:nth-child(2){
-        position: absolute;
-        bottom: 0;
-    }
-    .account .main .header .left div:nth-child(2){
+    .account .main .header .left .naver{
         display: block;
     }
     .account .main .content .nav.opened{
@@ -257,25 +404,15 @@ a-ad div span:nth-child(3){
         left: -240px;
         transition: 0.2s
     }
+    .create-ad .wrapper{
+        margin: 10px;
+    }
+    .create-ad .wrapper .album div{
+        width: 100px;
+        height: 100px;
+    }
+    .create-ad .pics > div{
+        width: 58px;
+        height: 58px;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

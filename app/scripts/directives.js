@@ -1,4 +1,5 @@
 /*global app*/
+/*global log*/
 app.directive('enterKey', [function () {
     'use strict';
     return function (scope, element, attrs) {
@@ -17,7 +18,6 @@ app.directive('aHeader', [function () {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
-            window.console.log('working');
         }
     };
 }]);
@@ -27,6 +27,7 @@ app.directive('aAd', [function () {
         restrict: 'E',
         templateUrl: 'app/partials/ad.html',
         link: function (scope, element, attrs) {
+
         }
     };
 }]);
