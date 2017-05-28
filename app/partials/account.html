@@ -5,7 +5,7 @@
     <div class="login" ng-switch-when="1">
         <h2>Login to account</h2>
         <img src="/img/avatar.png" alt="Account"/>
-        <input type="text" placeholder="Username"/>
+        <input type="text" placeholder="Email"/>
         <input type="password" placeholder="Password"/>
         <div>
             <span ng-click="toRecovery()">Having trouble?</span>
@@ -14,7 +14,14 @@
         <span ng-click="toRegister()">Create new account</span>
     </div>
     <div class="register" ng-switch-when="2">
-        <p>Register</p>
+        <h2>Register new account</h2>
+        <input type="text" placeholder="Display name"/>
+        <input type="email" placeholder="Email"/>
+        <a-chooser></a-chooser>
+        <input type="password" placeholder="Password"/>
+        <input type="password" placeholder="Re-enter password"/>
+        <span ng-click="createNew()">Create account</span>
+        <span ng-click="toLogin()">Already have an account?</span>
     </div>
     <div class="recovery" ng-switch-when="3">
         <p>Recovery</p>

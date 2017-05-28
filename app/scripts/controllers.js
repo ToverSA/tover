@@ -20,6 +20,23 @@ app.controller('accountCtl', ['$scope', '$http', function ($scope, $http) {
     }
     $scope.toRecovery = function () { $scope.accountState = self.RECOVERY; };
     $scope.toRegister = function () { $scope.accountState = self.REGISTER; };
-    $scope.logIn = function () {};
+    $scope.toLogin = function () { $scope.accountState = self.LOGIN; };
+    $scope.logIn = function () {
+        $scope.accountState = self.MAIN;
+    };
+    $scope.createNew = function () {
+        $scope.accountState = self.MAIN;
+    };
+    init();
+}]);
+app.controller('homeCtl', ['$scope', '$http', function ($scope, $http) {
+    'use strict';
+    function init() {
+        $http.get('/api/ads.json').then(function (res) {
+            window.console.log(res.data);
+        }, function (err) {
+            window.console.log(err);
+        });
+    }
     init();
 }]);

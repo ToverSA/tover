@@ -2,9 +2,10 @@
 var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', function ($routeProvider) {
     'use strict';
     $routeProvider
-        .when('/n',
+        .when('/',
             {
-                templateUrl: 'app/partials/home.html'
+                templateUrl: 'app/partials/home.html',
+                controller: 'homeCtl'
             })
         .when('/account',
             {
@@ -12,7 +13,7 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
                 controller: 'accountCtl'
             })
         .otherwise({
-            redirectTo: '/account'
+            redirectTo: '/'
         });
 }]);
 app.config(["$httpProvider", function ($httpProvider) {

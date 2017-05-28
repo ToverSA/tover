@@ -21,3 +21,12 @@ app.directive('aHeader', [function () {
         }
     };
 }]);
+app.directive('aAd', [function () {
+    'use strict';
+    return {
+        restrict: 'E',
+        templateUrl: 'app/partials/ad.html',
+        link: function (scope, element, attrs) {
+        }
+    };
+}]);

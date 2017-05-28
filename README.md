@@ -3,7 +3,6 @@
 ## Actors ##
 * User
 
-
 ### User ###
 * view/browse ads
     * sort by latest/earliest
@@ -15,7 +14,7 @@
 * login/logout with account
 * manage account
     * edit info/details
-    * remove account
+    * delete account
 * manage ads
     * create ad
     * edit ad
