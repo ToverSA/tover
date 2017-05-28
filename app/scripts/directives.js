@@ -30,3 +30,12 @@ app.directive('aAd', [function () {
         }
     };
 }]);
+app.directive('aChooser', [function () {
+    'use strict';
+    return {
+        restrict: 'E',
+        templateUrl: 'app/partials/chooser.html',
+        link: function (scope, element, attrs) {
+        }
+    };
+}]);

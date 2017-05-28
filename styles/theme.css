@@ -42,18 +42,40 @@ body{
 }
 .account .login img{
     display: block;
-    height: 100px;
+    height: 190px;
     margin: auto;
+    border: 25px solid #546E7A;
+    background-color: #546E7A;
+    border-radius: 95px;
+    opacity: 0.3;
 }
 .account .login input{
     width: 90%;
-    margin: auto;
+    margin: 20px auto 0 auto;
     display: block;
+    outline: none;
+    padding: 10px;
+    border: 0px;
+    border-bottom: 2px solid #546E7A;
+    background-color: rgba(84, 110, 123, 0.1);
+    font-size: 1;
+}
+.account .login input:focus{
+    background-color: rgba(84, 110, 123, 0.3);
 }
 .account .login span{
     display: block;
-    margin: auto;
+    margin: 10px auto 0 auto;
     width: 90%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #009688;
+    cursor: pointer;
+}
+.account .login span:nth-child(2){
+    background-color: #009688;
+    color: #FFF;
 }
 .account .login > div{
     width: 90%;
@@ -70,14 +92,90 @@ body{
 .account .register input{
     display: block;
     width: 90%;
-    margin: auto;
+    margin: 20px auto 0 auto;
+    outline: none;
+    padding: 10px;
+    border: 0px;
+    border-bottom: 2px solid #546E7A;
+    background-color: rgba(84, 110, 123, 0.1);
+    font-size: 1;
 }
 .account .register span{
     display: block;
     width: 90%;
-    margin: auto;
+    margin: 10px auto;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #009688;
+    cursor: pointer;
 }
-.account .register{}
+.account .register span:nth-child(7){
+    background-color: #009688;
+    color: #FFF;
+}
+.account .main .header .left{
+    display: flex;
+}
+.account .main .header .left div:nth-child(2){
+    position: relative;
+    width: 50px;
+    display: none;
+}
+.account .main .header .left div:nth-child(2) span{
+    display: block;
+    height: 5px;
+    width: 25px;
+    position: absolute;
+    background-color: #FFF;
+    left: 12px;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+.account .main .header .left div:nth-child(2) span:nth-child(1){
+    top: 12px;
+}
+.account .main .header .left div:nth-child(2) span:nth-child(2){
+    top: 22px;
+}
+.account .main .header .left div:nth-child(2) span:nth-child(3){
+    top: 32px;
+}
+.account .main .header .left div:nth-child(2).opened span:nth-child(2){
+    opacity: 0;
+}
+.account .main .header .left div:nth-child(2).opened span:nth-child(1){
+    transform: rotate(-45deg) translate(-4px);
+}
+.account .main .header .left div:nth-child(2).opened span:nth-child(3){
+    transform: rotate(45deg) translate(-4px);
+}
+.account .main{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+.account .main .content{
+    flex-grow: 1;
+    display: flex;
+}
+.account .main .content .nav{
+    background-color: #CFD8DC;
+    flex-basis: 280px;
+}
+.account .main .content .nav span{
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 30px;
+    font-size: 1.3em;
+    color: #546E7A;
+}
+.account .main .content .nav span.active{
+    background-color: #B0BEC5;
+}
 .main-content{
     max-width: 1024px;
     margin: 20px auto;
@@ -145,7 +243,20 @@ a-ad div span:nth-child(3){
         position: absolute;
         bottom: 0;
     }
-    a-ad div{}
+    .account .main .header .left div:nth-child(2){
+        display: block;
+    }
+    .account .main .content .nav.opened{
+        left: 0;
+    }
+    .account .main .content .nav{
+        position: absolute;
+        width: 240px;
+        bottom: 0;
+        top: 50px;
+        left: -240px;
+        transition: 0.2s
+    }
 }
 
 

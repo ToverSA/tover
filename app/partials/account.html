@@ -8,7 +8,7 @@
         <input type="text" placeholder="Email"/>
         <input type="password" placeholder="Password"/>
         <div>
-            <span ng-click="toRecovery()">Having trouble?</span>
+            <span ng-click="toRecovery()">Trouble logging in?</span>
             <span ng-click="logIn()">Log in</span>
         </div>
         <span ng-click="toRegister()">Create new account</span>
@@ -26,7 +26,27 @@
     <div class="recovery" ng-switch-when="3">
         <p>Recovery</p>
     </div>
-    <div class="main" ng-switch-when="4">
-        <p>Main</p>
+    <div class="main" ng-switch-when="4" ng-switch="mSection">
+        <div class="header" a-header>
+            <div class="left">
+                <a href="#/"><img src="/img/favicon.png" alt="Akomo"/></a>
+                <div ng-click="navOpen = !navOpen"  ng-class="{opened: navOpen}">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+        <div class="content">
+            <div class="nav" ng-class="{opened: navOpen}">
+                <span>Console</span>
+                <span>My Messages</span>
+                <span>My Account</span>
+                <span>FAQs</span>
+            </div>
+            <div class="page" ng-switch-when="5">Hi</div>
+        </div>
     </div>
 </div>
