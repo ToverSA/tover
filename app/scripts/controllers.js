@@ -36,6 +36,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
 }]);
 app.controller('homeCtl', ['$scope', '$http', function ($scope, $http) {
     'use strict';
+    $scope.title = 'Some demo text and more testimonial bitch';
     function init() {
         $http.get('/api/ads.json').then(function (res) {
         }, function (err) {

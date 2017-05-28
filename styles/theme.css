@@ -15,9 +15,6 @@ body{
     background-color: #ECEFF1;
     font-family: Roboto;
 }
-.home{
-    overflow: auto;
-}
 .header{
     height: 50px;
     display: flex;
@@ -214,11 +211,45 @@ body{
 }
 .ad{
     display: block;
-    height: 210px;
-    width: 160px;
-    margin: 5px;
+    height: 285px;
+    width: 174px;
+    margin: 15px;
     background-color: #FFF;
     box-shadow: 0 1px 1px 1px #CCC;
+    position: relative;
+}
+.ad img{
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    border-radius: 15px
+}
+.ad > div > span:nth-child(3), .ad > div > span:nth-child(2){
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: 0;
+    padding: 5px;
+}
+.ad > div > span:nth-child(3){
+    color: #90A4AE;
+}
+.ad > div > span:nth-child(2){
+    text-align: right;
+    color: #004D40;
+    background-color: #ECEFF1;
+}
+.ad > div > span.large{
+    font-size: 1.3em;
+}
+.ad > div{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFF;
+    height: 115px;
+    padding: 5px;
 }
 a-chooser{
     display: inline-block;
@@ -368,9 +399,7 @@ a-chooser{
         max-width: 768px;
     }
     .ad{
-        width: 140px;
-        height: 180px;
-        margin: 6px;
+        margin: 15px 9px;
     }
 }
 @media screen and (max-width: 768px){
@@ -388,7 +417,29 @@ a-chooser{
     .ad{
         width: 100%;
         height: 100px;
-        margin: 5px;
+        margin: 5px 5px 0 5px;
+        display: flex;
+    }
+    .ad img{
+        height: 100px;
+        width: 100px;
+    }
+    .ad > div > span:nth-child(3){
+        top: auto;
+        left: 105px;
+        bottom: 5px;
+    }
+    .ad > div > span:nth-child(2){
+        bottom: 5px;
+        top: auto;
+    }
+    .ad > div{
+        display: block;
+        position: static;
+        height: 100px;
+    }
+    .ad > div > span:nth-child(2){
+        background-color: transparent;
     }
     .account .main .header .left .naver{
         display: block;
