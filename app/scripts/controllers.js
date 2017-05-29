@@ -10,6 +10,9 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
     self.MAIN = 4;
     // Pages under main
     self.CONSOLE = 5;
+    self.MESSAGES = 6;
+    self.PREFERENCES = 7;
+    self.FAQS = 8;
 
     function init() {
         $http.get('/api/access.json').then(function (res) {

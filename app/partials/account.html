@@ -43,8 +43,9 @@
             <div class="nav" ng-class="{opened: navOpen}" ng-click="navOpen = !navOpen">
                 <span ng-class="{active: (mSection === 5)}" ng-click="mSection = 5">Console</span>
                 <span ng-class="{active: (mSection === 6)}" ng-click="mSection = 6">My Messages</span>
-                <span ng-class="{active: (mSection === 7)}" ng-click="mSection = 7">My Account</span>
-                <span>FAQs</span>
+                <span ng-class="{active: (mSection === 7)}" ng-click="mSection = 7">My Preferences</span>
+                <span ng-class="{active: (mSection === 8)}" ng-click="mSection = 8">FAQs</span>
+                <span>Sign out</span>
             </div>
             <div class="page" ng-switch-when="5">
                 <span class="create-ad-btn" ng-click="createAd()">CREATE AD</span>
@@ -53,6 +54,9 @@
                 No new mesages
             </div>
             <div class="page" ng-switch-when="7"></div>
+            <div class="page" ng-switch-when="8">
+                FAQs
+            </div>
         </div>
     </div>
 </div>
