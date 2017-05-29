@@ -26,7 +26,7 @@
     <div class="recovery" ng-switch-when="3">
         <p>Recovery</p>
     </div>
-    <div class="main" ng-switch-when="4" ng-switch="mSection" ng-init="mSection = 5">
+    <div class="main" ng-switch-when="4" ng-switch="mSection" ng-init="mSection = 6">
         <div class="header" a-header>
             <div class="left">
                 <div ng-click="navOpen = !navOpen" class="naver" ng-class="{opened: navOpen}">
@@ -49,9 +49,23 @@
             </div>
             <div class="page" ng-switch-when="5">
                 <span class="create-ad-btn" ng-click="createAd()">CREATE AD</span>
+                <div class="ad-prev">
+                    <div class="item" ng-repeat="x in [1, 2, 3, 4]">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
             </div>
             <div class="page" ng-switch-when="6">
-                No new mesages
+                <div class="inbox">
+                    <div class="thread">
+                        <p>From</p>
+                        <h2>gumedesduduzo@gmail.com</h2>
+                    </div>
+                    <div class="list" ng-click="expand = !expand" ng-class="{expanded: expand}">
+                        <h2>Inbox</h2>
+                    </div>
+                </div>
             </div>
             <div class="page" ng-switch-when="7"></div>
             <div class="page" ng-switch-when="8">

@@ -27,7 +27,7 @@ body{
 .header .right img{
     display: inline-block;
     height: 50px;
-    padding: 10px;
+    padding: 14px;
     filter: invert();
 }
 .header .left{
@@ -172,9 +172,10 @@ body{
 .account .main .content{
     flex-grow: 1;
     display: flex;
+    flex-basis: 100px;
+    overflow: auto;
 }
 .account .main .content .nav{
-    background-color: #CFD8DC;
     flex-basis: 280px;
 }
 .account .main .content .nav span{
@@ -185,6 +186,7 @@ body{
     font-size: 1.3em;
     color: #546E7A;
     cursor: pointer;
+    background-color: #CFD8DC;
 }
 .account .main .content .nav span.active{
     background-color: #B0BEC5;
@@ -192,6 +194,54 @@ body{
 .account .main .content .page{
     flex-grow: 1;
 }
+.account .main .content .page .ad-prev{
+    display: block;
+    margin: auto;
+    max-width: 768px;
+}
+.account .main .content .page .ad-prev .item{
+    background-color: #FFF;
+    display: block;
+    margin: 2px;
+    height: 80px;
+    box-shadow: 0 1px 1px 1px #CCC;
+}
+.account .main .content .page .inbox{
+    width: 100%;
+    display: flex;
+}
+.account .main .content .page .inbox .thread{
+    flex-basis: 500px;
+    padding: 10px;
+}
+.account .main .content .page .inbox .thread p{
+    margin: 0;
+    opacity: 0.3;
+}
+.account .main .content .page .inbox .thread h2{
+    margin: 5px 0;
+    opacity: 0.3;
+}
+.account .main .content .page .inbox .thread{}
+.account .main .content .page .inbox .list{
+    background-color: #F9F9F9;
+    box-shadow: 0 1px 1px 1px #CCC;
+    flex-basis: 400px;
+    margin: 40px;
+    height: 500px;
+}
+.account .main .content .page .inbox .list h2{
+    text-align: center;
+    margin: 0;
+    padding: 10px 5px;
+    box-shadow: 0 0 1px 1px #CCC;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.account .main .content .page .inbox .list{}
 .create-ad-btn{
     display: block;
     width: 300px;
@@ -530,6 +580,9 @@ a-chooser{
     .ad{
         margin: 15px 9px;
     }
+    .account .main .content .page .inbox .list{
+        margin: 30px 0;
+    }
 }
 @media screen and (max-width: 768px){
     .main-content{
@@ -537,6 +590,24 @@ a-chooser{
     }
     .home .dialog .frame{
         margin: 60px auto;
+    }
+    .account .main .content .page .inbox{
+        position: relative;
+        height: 100%;
+    }
+    .account .main .content .page .inbox .list{
+        position: absolute;
+        height: 48px;
+        margin: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: 0.2s;
+    }
+    .account .main .content .page .inbox .list.expanded{
+        height: 100%;
+        overflow: auto;
     }
 }
 @media screen and (max-width: 450px){
@@ -585,7 +656,9 @@ a-chooser{
         bottom: 0;
         top: 50px;
         left: -240px;
-        transition: 0.2s
+        transition: 0.2s;
+        background-color: #CFD8DC;
+        z-index: 1;
     }
     .ads-view .main .head > div{
         width: 110px;

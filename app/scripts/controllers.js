@@ -54,7 +54,7 @@ app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $ht
 app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $location) {
     'use strict';
     $scope.cancelAd = function () {
-        $location.url('/');
+        $location.url('/account');
     };
     $scope.back = function () {
         $scope.aPage -= 1;
