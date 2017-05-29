@@ -34,7 +34,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
     };
     init();
 }]);
-app.controller('homeCtl', ['$scope', '$http', function ($scope, $http) {
+app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
     'use strict';
     $scope.title = 'Some demo text and more testimonial bitch';
     function init() {
@@ -43,6 +43,9 @@ app.controller('homeCtl', ['$scope', '$http', function ($scope, $http) {
             log(err);
         });
     }
+    $scope.viewAd = function (i) {
+        $location.url('/ads/' + i);
+    };
     init();
 }]);
 app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $location) {
@@ -62,4 +65,21 @@ app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $locati
             $location.url('/account');
         }
     };
+}]);
+app.controller('adsCtl', ['$scope', '$timeout', '$location', function ($scope, $timeout, $location) {
+    'use strict';
+    $scope.isGuest = true;
+    $scope.sendMessage = function () {
+        $scope.state = 2;
+        $timeout(function () {
+            $scope.state = -1;
+        }, 1000);
+    };
+    $scope.reportAd = function (id) {
+        $location.url('/ads/report/' + id);
+    };
+}]);
+app.controller('adsReportCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+    'use strict';
+    log($routeParams);
 }]);

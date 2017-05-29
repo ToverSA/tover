@@ -1,7 +1,7 @@
 <div class="home">
     <div class="header" a-header>
         <div class="left">
-            <img src="/img/favicon.png" alt="Akomo"/>
+            <a href="#/"><img src="/img/favicon.png" alt="Akomo"/></a>
         </div>
         <div class="right">
             <img src="/img/magnifying-glass.png" alt="search"/>
@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="main-content">
-        <div class="ad" ng-repeat="x in [1, 2, 3, 4, 5, 6, 7, 8, 9]">
+        <div class="ad" ng-repeat="x in [1, 2, 3, 4, 5, 6, 7, 8, 9]" ng-click="viewAd(x)">
             <img src="/img/placeholder.jpg"/>
             <div>
                 <!--70 characters for the title-->

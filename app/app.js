@@ -21,9 +21,15 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
                 templateUrl: 'app/partials/create.html',
                 controller: 'adsCreateCtl'
             })
+        .when('/ads/report/:id',
+            {
+                templateUrl: 'app/partials/report.html',
+                controller: 'adsReportCtl'
+            })
         .when('/ads/:id',
             {
-                templateUrl: 'app/partials/ads.html'
+                templateUrl: 'app/partials/ads.html',
+                controller: 'adsCtl'
             })
         .otherwise({
             redirectTo: '/'

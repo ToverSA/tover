@@ -227,7 +227,6 @@ body{
 }
 .ad > div > span:nth-child(3), .ad > div > span:nth-child(2){
     position: absolute;
-    width: 100%;
     left: 0px;
     bottom: 0;
     padding: 5px;
@@ -239,6 +238,8 @@ body{
     text-align: right;
     color: #004D40;
     background-color: #ECEFF1;
+    right: 0;
+    left: auto;
 }
 .ad > div > span.large{
     font-size: 1.3em;
@@ -250,6 +251,134 @@ body{
     background-color: #FFF;
     height: 115px;
     padding: 5px;
+}
+.ads-view{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.ads-view > div{
+    margin: 40px 2%;
+}
+.ads-view > div:nth-child(1){
+    display: block;
+    flex-basis: 550px;
+    min-height: 400px;
+    background-color: #FFF;
+    box-shadow: 0 1px 1px 1px #CCC;
+    padding-bottom: 5px;
+}
+.ads-view > div:nth-child(2){
+    flex-basis: 350px;
+    height: 20px;
+}
+
+.ads-view .main .head{
+    padding: 5px;
+    display: flex;
+}
+.ads-view .main .head > div{
+    height: 180px;
+    flex-basis: 180px;
+    background-color: #ECEFF1;
+}
+.ads-view .main .head > h3{
+    padding-left: 5px;
+    flex-grow: 1;
+    flex-basis: 100px;
+    margin: 0;
+}
+.ads-view .btns{
+    background-color: #ECEFF1;
+    min-height: 25px;
+    display: flex;
+    justify-content: flex-end;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.ads-view .btns a{
+    text-decoration: none;
+}
+.ads-view .btns span > span{
+    display: inline;
+    color: #FFF;
+}
+.ads-view .btns span{
+    display: block;
+    padding: 0 5px;
+    margin: 5px;
+    height: 35px;
+    line-height: 35px;
+    color: #00BFA5;
+    cursor: pointer;
+}
+.ads-view .btns span.a{
+    color: #FFF;
+    border-radius: 5px;
+    background-color: #00BFA5;
+}
+.ads-view .pics{
+    display: flex;
+    justify-content: center;
+}
+.ads-view .pics > div{
+    display: block;
+    height: 80px;
+    width: 80px;
+    margin: auto;
+    background-color: #ECEFF1;
+}
+.ads-view .messenger{
+    background-color: #ECEFF1;
+    padding: 5px;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.2s;
+    height: 0;
+}
+.ads-view .messenger span{
+    display: block;
+    width: 100%;
+    background-color: #FFF;
+    padding: 10px;
+    font-size: 1em;
+}
+.ads-view .messenger input{
+    display: block;
+    outline: none;
+    border: 0px;
+    font-size: 1em;
+    padding: 10px;
+    width: 100%;
+
+}
+.ads-view .messenger textarea{
+    outline: none;
+    border: 0px;
+    box-shadow: 0 0 1px 1px #CCC;
+    width: 100%;
+    height: 120px;
+    resize: none;
+    font-size: 1em;
+    padding: 5px;
+    font-family: Roboto;
+}
+.ads-view .messenger h2{
+    text-align: center;
+}
+.ads-view .messenger img{
+    display: block;
+    height: 50px;
+    width: auto;
+    margin: 30px auto 0 auto;
+    filter: blur(2px);
+}
+.ads-view .messenger.expanded{
+    height: 172px;
+    opacity: 1;
 }
 a-chooser{
     display: inline-block;
@@ -441,6 +570,9 @@ a-chooser{
     .ad > div > span:nth-child(2){
         background-color: transparent;
     }
+    .ads-view .btns span > span{
+        display: none;
+    }
     .account .main .header .left .naver{
         display: block;
     }
@@ -455,6 +587,11 @@ a-chooser{
         left: -240px;
         transition: 0.2s
     }
+    .ads-view .main .head > div{
+        width: 110px;
+        flex-basis: 110px;
+        height: 110px;
+    }
     .create-ad .wrapper{
         margin: 10px;
     }
@@ -465,5 +602,15 @@ a-chooser{
     .create-ad .pics > div{
         width: 58px;
         height: 58px;
+    }
+    .ads-view > div:nth-child(2){
+        flex-basis: 400px;
+    }
+    .ads-view .pics > div{
+        height: 58px;
+        width: 58px;
+    }
+    .ads-view > div{
+        margin: 0;
     }
 }

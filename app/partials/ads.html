@@ -1,1 +1,62 @@
-<div>id here</div>
+<div class="header" a-header>
+    <div class="left">
+        <a href="#/"><img src="/img/favicon.png" alt="Akomo"/></a>
+    </div>
+    <div class="right">
+        <img src="/img/magnifying-glass.png" alt="search"/>
+        <a href="#/account"><img src="/img/avatar.png" alt="account"/></a>
+    </div>
+</div>
+<div class="ads-view">
+    <div class="main" ng-switch="state">
+        <div class="head">
+            <div></div>
+            <h3>Impressing title here of not more than 75 characters. And Im serious about</h3>
+        </div>
+        <div ng-switch-default>
+            <div class="btns" ng-hide="msg">
+                <span ng-click="reportAd(1)">REPORT</span>
+                <span ng-click="msg = !msg">MESSAGE</span>
+                <a href="tel:0604335310"><span class="a">CALL<span>060 433 5310</span></span></a>
+            </div>
+            <div class="btns" ng-show="msg">
+                <span ng-click="msg = !msg">CANCEL</span>
+                <span class="a" ng-click="sendMessage()">SEND</span>
+            </div>
+            <div class="messenger" ng-class="{expanded: msg}">
+                <input type="text" placeholder="Email"/>
+                <textarea placeholder="You message here"></textarea>
+            </div>
+        </div>
+        <div ng-switch-when="1">
+            <div class="btns" ng-hide="msg">
+                <span ng-click="reportAd(1)">REPORT</span>
+                <span ng-click="msg = !msg">MESSAGE</span>
+                <a href="tel:0604335310"><span class="a">CALL<span>060 433 5310</span></span></a>
+            </div>
+            <div class="btns" ng-show="msg">
+                <span ng-click="msg = !msg">CANCEL</span>
+                <span class="a" ng-click="sendMessage()">SEND</span>
+            </div>
+            <div class="messenger" ng-class="{expanded: msg}">
+                <span>&#9679; gumedesduduzo@gmail.com</span>
+                <textarea placeholder="You message here"></textarea>
+            </div>
+        </div>
+        <div ng-switch-when="2">
+            <div class="messenger" ng-class="{expanded: (!msg)}">
+                <img src="/img/envelope.png"/>
+                <h2>Message sent!</h2>
+            </div>
+        </div>
+        <p>Hi this is some text</p>
+        <div class="pics">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="recommendations"></div>
+</div>
