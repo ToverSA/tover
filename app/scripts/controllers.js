@@ -88,13 +88,30 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', function ($scope, $
         $location.url('/ads/report/' + id);
     };
 }]);
-app.controller('adsReportCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+app.controller('adsReportCtl', ['$scope', '$routeParams', '$location', function ($scope, $routeParams, $location) {
     'use strict';
     log($routeParams);
 }]);
-app.controller('adsSearchCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function ($scope, $routeParams, $location) {
     'use strict';
     log($routeParams);
+    if ($routeParams.hasOwnProperty('cat')) {
+        $scope.search = 1;
+        $scope.sSection = 1;
+    }
+    $scope.back = function () {
+        if ($scope.search) {
+            $location.url('/ads/search');
+        } else {
+            $location.url('/');
+        }
+    };
+    $scope.toCat = function (c) {
+        $location.url('/ads/search/?cat=' + c);
+    };
+    $scope.viewAd = function (i) {
+        $location.url('/ads/' + i);
+    };
 }]);
 app.controller('faqsCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
     'use strict';

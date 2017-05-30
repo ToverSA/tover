@@ -745,7 +745,7 @@ a-chooser{
     justify-content: center;
     padding: 50px;
 }
-.search .cat > div{
+.search .cat .elem{
     display: block;
     height: 250px;
     flex-basis: 250px;
@@ -756,15 +756,15 @@ a-chooser{
     overflow: hidden;
     cursor: pointer;
 }
-.search .cat > div:hover{
+.search .cat .elem:hover{
     box-shadow: 0 0 2px 2px #CCC;
 }
-.search .cat > div img{
+.search .cat .elem img{
     height: 100%;
     width: 100%;
     padding: 60px;
 }
-.search .cat > div span{
+.search .cat .elem span{
     display: block;
     position: absolute;
     height: 100%;
@@ -777,7 +777,7 @@ a-chooser{
     font-weight: bold;
     transition: 0.3s;
 }
-.search .cat > div span:hover{
+.search .cat .elem span:hover{
     opacity: 0.7;
     transform: rotate(360deg);
 }
@@ -793,7 +793,47 @@ a-chooser{
 .search .cat:nth-child(2) > div:nth-child(2) > span:nth-child(2){
     background-color: #C8E6C9;
 }
-.search .cat{}
+.search-bar{
+    height: 50px;
+    background-color: #FFF;
+    display: flex;
+}
+.search-bar img{
+    height: 50px;
+    width: 50px;
+    flex-basis: 50px;
+    padding: 14px;
+}
+.search-bar input{
+    outline: none;
+    flex-basis: 700px;
+    border: 0;
+    padding: 10px;
+    font-size: 1em;
+    margin-left: 17%;
+}
+.suggest{
+    position: absolute;
+    width: 100%;
+    background-color: #FFF;
+    box-shadow: 0 1px 1px 1px #CCC;
+    display: none;
+}
+.suggest > div{
+    background-color: #FFF;
+    max-width: 650px;
+    margin-left: 17%;
+    padding: 10px 0 10px 60px;
+    cursor: pointer;
+}
+.suggest > div{
+    color: #AAA;
+}
+.suggest > div > span{
+    color: #000;
+    font-weight: bold;
+}
+.suggest > div{}
 @media screen and (max-width: 1024px){
     .main-content{
         max-width: 768px;
@@ -803,6 +843,12 @@ a-chooser{
     }
     .account .main .content .page .inbox .list{
         margin: 30px 0;
+    }
+    .search-bar input{
+        margin-left: 5%;
+    }
+    .suggest > div{
+        margin-left: 5%;
     }
 }
 @media screen and (max-width: 768px){
@@ -839,13 +885,25 @@ a-chooser{
     .search .cat{
         padding: 20px;
     }
-    .search .cat > div{
+    .search .cat .elem{
         flex-basis: 200px;
         height: 200px;
         margin: 0 20px;
     }
-    .search .cat > div span{
+    .search .cat .elem span{
         line-height: 200px;
+    }
+    .search-bar input{
+        margin: 0;
+    }
+    .suggest{
+        z-index: 1;
+    }
+    .suggest > div{
+        margin: 0;
+        width: 100%;
+        max-width: none;
+        padding-left: 57px;
     }
 }
 @media screen and (max-width: 450px){
@@ -926,7 +984,8 @@ a-chooser{
     }
     .search{
         position: absolute;
-        height: 100%;
+        bottom: 0;
+        top: 50px;
         width: 100%;
     }
     .search .cat{
@@ -939,17 +998,17 @@ a-chooser{
     .search .cat:nth-child(2){
         top: 50%;
     }
-    .search .cat > div{
+    .search .cat .elem{
         height: 50%;
         border-radius: 0;
         margin: 0;
         width: 100%;
         position: relative;
     }
-    .search .cat > div:hover{
+    .search .cat .elem:hover{
         box-shadow: none;
     }
-    .search .cat > div img{
+    .search .cat .elem img{
         display: inline-block;
         position: absolute;
         height: 100px;
@@ -957,7 +1016,7 @@ a-chooser{
         padding: 20px;
         object-fit: contain
     }
-    .search .cat > div span{
+    .search .cat .elem span{
         opacity: 0.2;
         transition: none;
     }
