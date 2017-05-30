@@ -296,6 +296,59 @@ body{
     text-align: center;
 }
 .account .main .content .page .prefs{}
+.account .main .content .page .prefs .sections{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #F6F6F6;
+}
+.account .main .content .page .prefs .section:nth-child(1){
+}
+.account .main .content .page .prefs .section{
+    flex-grow: 1;
+    flex-basis: 350px;
+    padding: 5px;
+    position: relative;
+}
+.account .main .content .page .prefs .section > span:nth-child(1){
+    display: block;
+    padding: 5px;
+    color: #90A4AE;
+    border-bottom: 1px solid #90A4AE;
+    margin-bottom: 5px;
+}
+.account .main .content .page .prefs .section > span:nth-child(2){
+    position: absolute;
+    top: 0;
+    right: 5px;
+    padding: 7px;
+    color: #90A4AE;
+}
+.account .main .content .page .prefs .section > span.editing{
+    color: #00BFA5;
+    font-weight: bold;
+    border: 1px solid #00BFA5;
+}
+.account .main .content .page .prefs p{
+    margin-bottom: 0;
+}
+.account .main .content .page .prefs input{
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    padding: 7px 0 2px 0 ;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 2px solid #90A4AE;
+}
+.account .main .content .page .prefs input:focus{
+    border-bottom-color: #00BFA5;
+}
+.account .main .content .page .prefs a-chooser{
+    display: block;
+    padding: 5px;
+
+}
 .account .main .content .page .faqs{}
 .create-ad-btn{
     display: block;
@@ -668,6 +721,12 @@ a-chooser{
         right: 0;
         bottom: 0;
         transition: 0.2s;
+    }
+    .account .main .content .page .inbox .list >h2{
+        transition: 0.2s;
+    }
+    .account .main .content .page .inbox .list.expanded > h2{
+        opacity: 0.3;
     }
     .account .main .content .page .inbox .list.expanded{
         height: 100%;
