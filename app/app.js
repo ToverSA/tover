@@ -26,6 +26,11 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
                 templateUrl: 'app/partials/report.html',
                 controller: 'adsReportCtl'
             })
+        .when('/ads/search',
+            {
+                templateUrl: 'app/partials/search.html',
+                controller: 'adsSearchCtl'
+            })
         .when('/ads/:id',
             {
                 templateUrl: 'app/partials/ads.html',

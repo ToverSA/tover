@@ -26,7 +26,7 @@
     <div class="recovery" ng-switch-when="3">
         <p>Recovery</p>
     </div>
-    <div class="main" ng-switch-when="4" ng-switch="mSection" ng-init="mSection = 6">
+    <div class="main" ng-switch-when="4" ng-switch="mSection" ng-init="mSection = 7">
         <div class="header" a-header>
             <div class="left">
                 <div ng-click="navOpen = !navOpen" class="naver" ng-class="{opened: navOpen}">
@@ -59,17 +59,35 @@
             <div class="page" ng-switch-when="6">
                 <div class="inbox">
                     <div class="thread">
-                        <p>From</p>
-                        <h2>gumedesduduzo@gmail.com</h2>
+                        <p>From:</p>
+                        <p>gumedesduduzo@gmail.com</p>
+                        <div class="mes">
+                            <span class="rec">How much?</span>
+                        </div>
+                        <div class="mes">
+                            <span class="sent">But its there. Go back and look at the ad again.</span>
+                        </div>
+                        <div class="reply">
+                            <input type="text" placeholder="reply"/>
+                            <div>
+                                <img src="/img/paper-plane.png"/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="list" ng-click="expand = !expand" ng-class="{expanded: expand}">
+                    <div class="list" ng-click="expand = !expand" ng-class="{expanded: !expand}">
                         <h2>Inbox</h2>
                     </div>
                 </div>
             </div>
-            <div class="page" ng-switch-when="7"></div>
+            <div class="page" ng-switch-when="7">
+                <div class="prefs">
+                    <h3>Preferences</h3>
+                </div>
+            </div>
             <div class="page" ng-switch-when="8">
-                FAQs
+                <div class="faqs">
+                    <h3>FAQs</h3>
+                </div>
             </div>
         </div>
     </div>

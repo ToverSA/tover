@@ -213,16 +213,61 @@ body{
 .account .main .content .page .inbox .thread{
     flex-basis: 500px;
     padding: 10px;
+    position: relative;
+    padding-bottom: 50px;
 }
 .account .main .content .page .inbox .thread p{
     margin: 0;
     opacity: 0.3;
 }
-.account .main .content .page .inbox .thread h2{
-    margin: 5px 0;
-    opacity: 0.3;
+.account .main .content .page .inbox .thread .mes{
+
 }
-.account .main .content .page .inbox .thread{}
+.account .main .content .page .inbox .thread .mes span{
+    background-color: #FFF;
+    display: inline-block;
+    padding: 10px;
+    box-shadow: 0 1px 1px 1px #CCC;
+    margin: 5px 0;
+    border-radius: 15px 15px 15px 0;
+    max-width: 90%;
+}
+.account .main .content .page .inbox .thread .mes .sent{
+    background-color: #A7FFEB;
+    float: right;
+    border-radius: 15px 15px 0 15px;
+}
+.account .main .content .page .inbox .thread .reply{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    background-color: #FFF;
+    position: absolute;
+    left: 0;
+    bottom: 49px;
+}
+.account .main .content .page .inbox .thread .reply > input{
+    font-size: 1em;
+    flex-grow: 1;
+    outline: none;
+    border: 0px;
+    padding: 5px;
+}
+.account .main .content .page .inbox .thread .reply > div{
+    height: 50px;
+    width: 50px;
+    flex-basis: 50px;
+    margin: 5px;
+    background-color: #009688;
+    border-radius: 25px;
+}
+.account .main .content .page .inbox .thread .reply > div img{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    filter: invert();
+    transform: rotate(45deg) translateX(-3px) translateY(3px);
+}
 .account .main .content .page .inbox .list{
     background-color: #F9F9F9;
     box-shadow: 0 1px 1px 1px #CCC;
@@ -241,7 +286,17 @@ body{
     -o-user-select: none;
     user-select: none;
 }
-.account .main .content .page .inbox .list{}
+.account .main .content .page .prefs{
+    padding: 5px;
+}
+.account .main .content .page .prefs > h3, .account .main .content .page .faqs > h3{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    opacity: 0.3;
+    text-align: center;
+}
+.account .main .content .page .prefs{}
+.account .main .content .page .faqs{}
 .create-ad-btn{
     display: block;
     width: 300px;
@@ -326,6 +381,7 @@ body{
 .ads-view .main .head{
     padding: 5px;
     display: flex;
+    position: relative;
 }
 .ads-view .main .head > div{
     height: 180px;
@@ -337,6 +393,14 @@ body{
     flex-grow: 1;
     flex-basis: 100px;
     margin: 0;
+}
+.ads-view .main .head > span{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #FFF;
+    padding: 5px;
+    font-size: 1.2em;
 }
 .ads-view .btns{
     background-color: #ECEFF1;

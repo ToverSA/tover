@@ -86,3 +86,7 @@ app.controller('adsReportCtl', ['$scope', '$routeParams', function ($scope, $rou
     'use strict';
     log($routeParams);
 }]);
+app.controller('adsSearchCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+    'use strict';
+    log($routeParams);
+}]);
