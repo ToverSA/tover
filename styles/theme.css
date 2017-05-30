@@ -203,9 +203,11 @@ body{
     background-color: #FFF;
     display: block;
     margin: 2px;
-    height: 80px;
+    height: 100px;
     box-shadow: 0 1px 1px 1px #CCC;
 }
+.account .main .content .page .ad-prev .item{}
+.account .main .content .page .ad-prev .item:last-child:not(:first-child){}
 .account .main .content .page .inbox{
     width: 100%;
     display: flex;
@@ -295,7 +297,6 @@ body{
     opacity: 0.3;
     text-align: center;
 }
-.account .main .content .page .prefs{}
 .account .main .content .page .prefs .sections{
     display: flex;
     flex-wrap: wrap;
@@ -1013,7 +1014,7 @@ a-chooser{
         position: absolute;
         height: 100px;
         width: 100%;
-        padding: 20px;
+        padding: 30px;
         object-fit: contain
     }
     .search .cat .elem span{
