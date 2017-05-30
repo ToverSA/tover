@@ -327,6 +327,7 @@ body{
     color: #00BFA5;
     font-weight: bold;
     border: 1px solid #00BFA5;
+    cursor: pointer;
 }
 .account .main .content .page .prefs p{
     margin-bottom: 0;
@@ -347,9 +348,58 @@ body{
 .account .main .content .page .prefs a-chooser{
     display: block;
     padding: 5px;
+    margin-top: 5px;
 
 }
-.account .main .content .page .faqs{}
+.account .main .content .page .prefs .section > .dbtn{
+    display: block;
+    text-align: center;
+    max-width: 350px;
+    margin: 20px auto;
+    background-color: #EF5350;
+    color: #FFF;
+    height: 40px;
+    line-height: 34px;
+    border-radius: 10px;
+    border: 3px solid #FFF;
+    cursor: pointer;
+}
+.dlt-acc{
+    padding: 5px;
+    display: block;
+    max-width: 450px;
+    margin: 90px auto;
+}
+.dlt-acc h2{
+    text-align: center;
+}
+.dlt-acc p{
+    text-align: center;
+}
+.dlt-acc input{
+    display: block;
+    width: 70%;
+    margin: auto;
+    padding: 10px 10px 3px 10px;
+    font-size: 1em;
+    border: 0px;
+    outline: none;
+    border-bottom: 2px solid #CCC;
+    text-align: center;
+}
+.dlt-acc span{
+    float: left;
+    margin: 5px  0 0 15%;
+    padding: 9px;
+    border-radius: 5px;
+    color: #009688;
+    cursor: pointer;
+}
+.dlt-acc span:nth-child(5){
+    float: right;
+    margin: 5px 15% 0 0;
+    color: #EF5350;
+}
 .create-ad-btn{
     display: block;
     width: 300px;
@@ -690,6 +740,60 @@ a-chooser{
     margin: auto;
     background-color: #ECEFF1;
 }
+.search .cat{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+.search .cat > div{
+    display: block;
+    height: 250px;
+    flex-basis: 250px;
+    margin: 0 50px;
+    background-color: #FFF;
+    border-radius: 125px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.search .cat > div:hover{
+    box-shadow: 0 0 2px 2px #CCC;
+}
+.search .cat > div img{
+    height: 100%;
+    width: 100%;
+    padding: 60px;
+}
+.search .cat > div span{
+    display: block;
+    position: absolute;
+    height: 100%;
+    line-height: 250px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    opacity: 0;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.search .cat > div span:hover{
+    opacity: 0.7;
+    transform: rotate(360deg);
+}
+.search .cat:nth-child(1) > div:nth-child(1) > span:nth-child(2){
+    background-color: #E1BEE7;
+}
+.search .cat:nth-child(1) > div:nth-child(2) > span:nth-child(2){
+    background-color: #FFCDD2;
+}
+.search .cat:nth-child(2) > div:nth-child(1) > span:nth-child(2){
+    background-color: #FFF9C4;
+}
+.search .cat:nth-child(2) > div:nth-child(2) > span:nth-child(2){
+    background-color: #C8E6C9;
+}
+.search .cat{}
 @media screen and (max-width: 1024px){
     .main-content{
         max-width: 768px;
@@ -731,6 +835,17 @@ a-chooser{
     .account .main .content .page .inbox .list.expanded{
         height: 100%;
         overflow: auto;
+    }
+    .search .cat{
+        padding: 20px;
+    }
+    .search .cat > div{
+        flex-basis: 200px;
+        height: 200px;
+        margin: 0 20px;
+    }
+    .search .cat > div span{
+        line-height: 200px;
     }
 }
 @media screen and (max-width: 450px){
@@ -808,5 +923,42 @@ a-chooser{
     }
     .ads-view > div{
         margin: 0;
+    }
+    .search{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    .search .cat{
+        position: absolute;
+        height: 50%;
+        padding: 0;
+        display: block;
+        width: 100%;
+    }
+    .search .cat:nth-child(2){
+        top: 50%;
+    }
+    .search .cat > div{
+        height: 50%;
+        border-radius: 0;
+        margin: 0;
+        width: 100%;
+        position: relative;
+    }
+    .search .cat > div:hover{
+        box-shadow: none;
+    }
+    .search .cat > div img{
+        display: inline-block;
+        position: absolute;
+        height: 100px;
+        width: 100%;
+        padding: 20px;
+        object-fit: contain
+    }
+    .search .cat > div span{
+        opacity: 0.2;
+        transition: none;
     }
 }

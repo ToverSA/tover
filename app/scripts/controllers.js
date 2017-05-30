@@ -29,6 +29,12 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
     $scope.logIn = function () {
         $scope.accountState = self.MAIN;
     };
+    $scope.delAcc = function () {
+        $location.url('/account/delete');
+    };
+    $scope.faqs = function () {
+        $location.url('/faqs/account');
+    };
     $scope.createAd = function () {
         $location.url('/ads/create');
     };
@@ -89,4 +95,15 @@ app.controller('adsReportCtl', ['$scope', '$routeParams', function ($scope, $rou
 app.controller('adsSearchCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
     'use strict';
     log($routeParams);
+}]);
+app.controller('faqsCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+    'use strict';
+    log($routeParams);
+}]);
+app.controller('delAccCtl', ['$scope', '$location', function ($scope, $location) {
+    'use strict';
+    $scope.cancel = function () {
+        $location.url('/account');
+    };
+    $scope.conf = function () {};
 }]);
