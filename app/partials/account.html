@@ -50,9 +50,25 @@
             <div class="page" ng-switch-when="5">
                 <span class="create-ad-btn" ng-click="createAd()">CREATE AD</span>
                 <div class="ad-prev">
-                    <div class="item" ng-repeat="x in [1, 2, 3, 4]">
-                        <div></div>
-                        <div></div>
+                    <div class="item" ng-repeat="x in [1, 2, 3]" a-ad>
+                        <div class="head">
+                            <div></div>
+                            <h3>Your title. Obviously sometimes its gonna do stuff.stuff you can't control.</h3>
+                            <div class="opt" ng-click="popup(x)">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <div class="popup" ng-class="{popped: isPop && (toPop === x)}">
+                                    <span>Edit</span>
+                                    <span>Remove</span>
+                                    <span>Details</span>
+                                </div>
+                            </div>
+                            <span>R 343.90</span>
+                        </div>
+                        <div class="body">
+                            <p>Description here. it is usually very long, compared to the title as it is more detailed.</p>
+                        </div>
                     </div>
                 </div>
             </div>

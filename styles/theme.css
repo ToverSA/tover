@@ -197,17 +197,78 @@ body{
 .account .main .content .page .ad-prev{
     display: block;
     margin: auto;
-    max-width: 768px;
+    max-width: 668px;
 }
 .account .main .content .page .ad-prev .item{
     background-color: #FFF;
     display: block;
     margin: 2px;
-    height: 100px;
     box-shadow: 0 1px 1px 1px #CCC;
+    padding: 5px 0 0 0;
 }
-.account .main .content .page .ad-prev .item{}
-.account .main .content .page .ad-prev .item:last-child:not(:first-child){}
+.account .main .content .page .ad-prev .item > .head{
+    display: flex;
+    position: relative;
+}
+.account .main .content .page .ad-prev .item > .head h3{
+    margin: 0 0 0 5px;
+    flex-basis: 100px;
+    flex-grow: 1;
+}
+.account .main .content .page .ad-prev .item > .head .opt{
+    height: 40px;
+    flex-basis: 20px;
+    cursor: pointer;
+    position: relative;
+}
+.account .main .content .page .ad-prev .item > .head .opt .popup{
+    display: none;
+    position: absolute;
+    z-index: 2;
+    right: 4px;
+    top: 2px;
+    box-shadow: 0 1px 1px 1px #CCC;
+    border-radius: 2px;
+    height: 0;
+    overflow: hidden;
+}
+.account .main .content .page .ad-prev .item > .head .opt .popup.popped{
+    display: block;
+    height: auto;
+}
+.account .main .content .page .ad-prev .item > .head .opt .popup > span{
+    display: block;
+    padding: 7px;
+    width: 120px;
+    background-color: #FFF;
+}
+.account .main .content .page .ad-prev .item > .head .opt > span{
+    display: block;
+    height: 7px;
+    width: 7px;
+    margin:  5px 7px;
+    background-color: #CCC;
+}
+.account .main .content .page .ad-prev .item > .head > div:first-child{
+    display: block;
+    height: 80px;
+    flex-basis: 80px;
+    background-color: #ECEFF1;
+    margin-left: 5px;
+}
+.account .main .content .page .ad-prev .item .head > span{
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    background-color: #FFF;
+}
+.account .main .content .page .ad-prev .item > .body{
+    padding: 5px;
+}
+.account .main .content .page .ad-prev .item > .body p{
+    border-top: 1px solid #ECEFF1;
+    margin: 5px 0;
+}
 .account .main .content .page .inbox{
     width: 100%;
     display: flex;
@@ -403,7 +464,8 @@ body{
 }
 .create-ad-btn{
     display: block;
-    width: 300px;
+/*    width: 300px;*/
+    max-width: 668px;
     height: 50px;
     line-height: 50px;
     text-align: center;
@@ -906,6 +968,12 @@ a-chooser{
         max-width: none;
         padding-left: 57px;
     }
+    .create-ad-btn{
+        height: 40px;
+        line-height: 40px;
+        margin: 5px 3px;
+        box-shadow: 0 1px 1px 1px #CCC;
+    }
 }
 @media screen and (max-width: 450px){
     .main-content{
@@ -1020,5 +1088,10 @@ a-chooser{
     .search .cat .elem span{
         opacity: 0.2;
         transition: none;
+    }
+    .account .main .content .page .ad-prev .item > .head .opt > span{
+        height: 5px;
+        flex-basis: 5px;
+        width: 5px;
     }
 }

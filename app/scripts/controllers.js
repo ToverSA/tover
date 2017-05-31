@@ -23,6 +23,12 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
             }
         }, function (err) {});
     }
+    $scope.isPop = false;
+    $scope.toPop = -1;
+    $scope.popup = function (x) {
+        $scope.toPop = x;
+        $scope.isPop = !$scope.isPop;
+    };
     $scope.toRecovery = function () { $scope.accountState = self.RECOVERY; };
     $scope.toRegister = function () { $scope.accountState = self.REGISTER; };
     $scope.toLogin = function () { $scope.accountState = self.LOGIN; };

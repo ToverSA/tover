@@ -27,7 +27,13 @@ app.directive('aAd', [function () {
         restrict: 'E',
         templateUrl: 'app/partials/ad.html',
         link: function (scope, element, attrs) {
-
+            scope.pop = function (n) {
+                if (n === true) {
+                    scope.isPop = true;
+                } else {
+                    scope.isPop = false;
+                }
+            };
         }
     };
 }]);
