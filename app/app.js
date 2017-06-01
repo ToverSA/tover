@@ -16,6 +16,11 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
                 templateUrl: 'app/partials/account.html',
                 controller: 'accountCtl'
             })
+        .when('/account/ads/:id',
+            {
+                templateUrl: 'app/partials/account-ads.html',
+                controller: 'accountAdsCtl'
+            })
         .when('/account/delete',
             {
                 templateUrl: 'app/partials/delete.html'
@@ -24,11 +29,6 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
             {
                 templateUrl: 'app/partials/create.html',
                 controller: 'adsCreateCtl'
-            })
-        .when('/ads/report/:id',
-            {
-                templateUrl: 'app/partials/report.html',
-                controller: 'adsReportCtl'
             })
         .when('/ads/search',
             {

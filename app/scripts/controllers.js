@@ -23,12 +23,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
             }
         }, function (err) {});
     }
-    $scope.isPop = false;
-    $scope.toPop = -1;
-    $scope.popup = function (x) {
-        $scope.toPop = x;
-        $scope.isPop = !$scope.isPop;
-    };
+
     $scope.toRecovery = function () { $scope.accountState = self.RECOVERY; };
     $scope.toRegister = function () { $scope.accountState = self.REGISTER; };
     $scope.toLogin = function () { $scope.accountState = self.LOGIN; };
@@ -54,12 +49,14 @@ app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $ht
     $scope.title = 'Some demo text and more testimonial bitch';
     function init() {
         $http.get('/api/ads.json').then(function (res) {
+            log(res);
         }, function (err) {
             log(err);
         });
     }
     $scope.viewAd = function (i) {
         $location.url('/ads/' + i);
+        $http.delete('everything');
     };
     init();
 }]);
@@ -91,12 +88,8 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', function ($scope, $
         }, 1000);
     };
     $scope.reportAd = function (id) {
-        $location.url('/ads/report/' + id);
+        //TODO implement dialog for this
     };
-}]);
-app.controller('adsReportCtl', ['$scope', '$routeParams', '$location', function ($scope, $routeParams, $location) {
-    'use strict';
-    log($routeParams);
 }]);
 app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function ($scope, $routeParams, $location) {
     'use strict';

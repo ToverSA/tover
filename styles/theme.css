@@ -37,6 +37,37 @@ body{
     height: 50px;
     display: block;
 }
+.dialog{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+.dialog .frame{
+    background-color: #FFF;
+    margin: 70px auto;
+    padding: 5px;
+    box-shadow: 0 1px 2px 1px #DDD;
+    position: relative;
+}
+.dialog .frame.large{
+    max-width: 768px;
+}
+.dialog .frame.small{
+    max-width: 450px;
+}
+.dialog .cancel{
+    position: absolute;
+    display: block;
+    height: 40px;
+    width: 40px;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+.dialog .frame.large{}
 .account .login{
     max-width: 450px;
     margin: 40px auto;
@@ -193,81 +224,6 @@ body{
 }
 .account .main .content .page{
     flex-grow: 1;
-}
-.account .main .content .page .ad-prev{
-    display: block;
-    margin: auto;
-    max-width: 668px;
-}
-.account .main .content .page .ad-prev .item{
-    background-color: #FFF;
-    display: block;
-    margin: 2px;
-    box-shadow: 0 1px 1px 1px #CCC;
-    padding: 5px 0 0 0;
-}
-.account .main .content .page .ad-prev .item > .head{
-    display: flex;
-    position: relative;
-}
-.account .main .content .page .ad-prev .item > .head h3{
-    margin: 0 0 0 5px;
-    flex-basis: 100px;
-    flex-grow: 1;
-}
-.account .main .content .page .ad-prev .item > .head .opt{
-    height: 40px;
-    flex-basis: 20px;
-    cursor: pointer;
-    position: relative;
-}
-.account .main .content .page .ad-prev .item > .head .opt .popup{
-    display: none;
-    position: absolute;
-    z-index: 2;
-    right: 4px;
-    top: 2px;
-    box-shadow: 0 1px 1px 1px #CCC;
-    border-radius: 2px;
-    height: 0;
-    overflow: hidden;
-}
-.account .main .content .page .ad-prev .item > .head .opt .popup.popped{
-    display: block;
-    height: auto;
-}
-.account .main .content .page .ad-prev .item > .head .opt .popup > span{
-    display: block;
-    padding: 7px;
-    width: 120px;
-    background-color: #FFF;
-}
-.account .main .content .page .ad-prev .item > .head .opt > span{
-    display: block;
-    height: 7px;
-    width: 7px;
-    margin:  5px 7px;
-    background-color: #CCC;
-}
-.account .main .content .page .ad-prev .item > .head > div:first-child{
-    display: block;
-    height: 80px;
-    flex-basis: 80px;
-    background-color: #ECEFF1;
-    margin-left: 5px;
-}
-.account .main .content .page .ad-prev .item .head > span{
-    position: absolute;
-    bottom: 0;
-    right: 5px;
-    background-color: #FFF;
-}
-.account .main .content .page .ad-prev .item > .body{
-    padding: 5px;
-}
-.account .main .content .page .ad-prev .item > .body p{
-    border-top: 1px solid #ECEFF1;
-    margin: 5px 0;
 }
 .account .main .content .page .inbox{
     width: 100%;
@@ -464,16 +420,57 @@ body{
 }
 .create-ad-btn{
     display: block;
-/*    width: 300px;*/
-    max-width: 668px;
-    height: 50px;
-    line-height: 50px;
+    max-width: 268px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
-    margin: 10px auto;
+    margin: 10px 30px;
     background-color: #009688;
     color: #FFF;
     cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 100px;
 }
+.account .content .ad-prev{
+    background-color: #FFF;
+    box-shadow: 0 1px 1px 1px #CCC;
+    margin: 60px 30px;
+    padding: 5px;
+    min-width: 815px;
+}
+.account .page{
+    overflow-x: auto;
+}
+.account .content .ad-prev .heading{
+    border-bottom: 1px solid #CCC;
+    padding: 5px 0;
+    opacity: 0.5;
+}
+.account .content .ad-prev .item > span{
+    display: inline-block;
+    min-width: 100px;
+}
+.account .content .ad-prev .item > span:first-child{
+    width: 320px;
+}
+.account .content .ad-prev .item{
+    padding: 10px 0;
+}
+.account .content .ad-prev .item:hover:not(:first-child){
+    background-color: #F3F3F3;
+    cursor: pointer;
+}
+.account .content .ad-prev .item img{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    object-fit: contain;
+    margin: 0 10px;
+    transform: translateY(4px)
+}
+.account .content .ad-prev .item{}
 .main-content{
     max-width: 1024px;
     margin: 20px auto;
@@ -924,9 +921,6 @@ a-chooser{
     .main-content{
         justify-content: center;
     }
-    .home .dialog .frame{
-        margin: 60px auto;
-    }
     .account .main .content .page .inbox{
         position: relative;
         height: 100%;
@@ -1095,9 +1089,7 @@ a-chooser{
         opacity: 0.2;
         transition: none;
     }
-    .account .main .content .page .ad-prev .item > .head .opt > span{
-        height: 5px;
-        flex-basis: 5px;
-        width: 5px;
+    .account .content .ad-prev{
+        margin: 50px 10px;
     }
 }
