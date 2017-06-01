@@ -30,6 +30,7 @@
 
 ## URLs ##
 * GET /ads (get list of ads)
+* GET /ads/:query (get list of searched ads)
 * GET /ads/:id (Get single ad)
 * GET /image/:id.jpg
 * GET /image/thumb/:id.jpg
