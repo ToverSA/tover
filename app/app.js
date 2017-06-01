@@ -8,6 +8,10 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
     $routeProvider
         .when('/',
             {
+                templateUrl: 'app/partials/landing.html'
+            })
+        .when('/home',
+            {
                 templateUrl: 'app/partials/home.html',
                 controller: 'homeCtl'
             })

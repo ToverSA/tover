@@ -2,7 +2,14 @@
     font-family: Roboto;
     src: url(fonts/Roboto-Regular.ttf)
 }
-@font-face{}
+@font-face{
+    font-family: SixCaps;
+    src: url(fonts/SixCaps.ttf)
+}
+@font-face{
+    font-family: Lato Thin;
+    src: url(fonts/Lato-Hairline.ttf)
+}
 *{
     box-sizing: border-box;
 }
@@ -14,6 +21,51 @@ body{
     margin: 0;
     background-color: #ECEFF1;
     font-family: Roboto;
+}
+.landing{
+    background-image: url(/img/college-student.jpg);
+    background-position: top;
+    background-attachment: fixed;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.landing .splash{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+}
+.landing .heading{
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 60px;
+}
+.landing .splash img{
+    width: 600px;
+    margin: 30px;
+    object-fit: contain;
+}
+.landing .splash h1{
+    color: #FFF;
+    margin: 0;
+    text-align: center;
+}
+.landing .splash h1:first-child{
+    font-family: Lato Thin;
+    font-size: 4.7em;
+}
+.landing .splash h1:nth-child(2){
+    font-family: Lato;
+}
+.landing .splash h1:nth-child(3){
+    font-family: Lato Thin;
+    font-size: 5.02em;
+}
+.landing .splash h1:nth-child(4){
+    font-family: Lato Thin;
+    font-size: 5.91em;
+}
+.landing .splash h1:nth-child(5){
+    font-family: Lato Thin;
 }
 .header{
     height: 50px;
@@ -976,6 +1028,9 @@ a-chooser{
     }
 }
 @media screen and (max-width: 450px){
+    .landing{
+        background-image: url(/img/college-student-small.jpg);
+    }
     .main-content{
         margin: 0;
     }
