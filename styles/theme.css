@@ -34,20 +34,29 @@ body{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
+    padding-top: 70px;
+    flex-wrap: wrap;
+    justify-content: space-around
 }
 .landing .heading{
-    background-color: rgba(0, 0, 0, 0.7);
     height: 60px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.landing .splash > div{
+    height:
 }
 .landing .splash img{
-    width: 600px;
-    margin: 30px;
+    height: 400px;
+    flex-basis: 400px
     object-fit: contain;
 }
 .landing .splash h1{
     color: #FFF;
     margin: 0;
     text-align: center;
+    flex-basis: 300px;
 }
 .landing .splash h1:first-child{
     font-family: Lato Thin;
@@ -953,6 +962,12 @@ a-chooser{
 }
 .suggest > div{}
 @media screen and (max-width: 1024px){
+    .landing .splash img{
+        height: 270px;
+    }
+    .landing .splash >div{
+        transform: scale(0.7) translateY(-100px);
+    }
     .main-content{
         max-width: 768px;
     }
@@ -970,6 +985,10 @@ a-chooser{
     }
 }
 @media screen and (max-width: 768px){
+    .landing .splash img{
+        height: 200px;
+    }
+    .landing .splash{}
     .main-content{
         justify-content: center;
     }
@@ -1030,6 +1049,12 @@ a-chooser{
 @media screen and (max-width: 450px){
     .landing{
         background-image: url(/img/college-student-small.jpg);
+    }
+    .landing .splash > div{
+        transform: scale(0.5) translateY(-150px);
+    }
+    .landing .splash img{
+        height: 120px;
     }
     .main-content{
         margin: 0;
