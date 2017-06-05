@@ -36,16 +36,29 @@ body{
     display: flex;
     padding-top: 70px;
     flex-wrap: wrap;
-    justify-content: space-around
+    justify-content: space-around;
 }
 .landing .heading{
     height: 60px;
     position: absolute;
     top: 0;
     width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
-.landing .splash > div{
-    height:
+.landing .heading img{
+    height: 60px;
+}
+.landing .heading span{
+    margin: 10px;
+    padding: 10px 18px;
+    border: 1px solid #FFF;
+    border-radius: 5px;
+    color: #FFF;
+    cursor: pointer;
+}
+.landing .heading span:hover{
+    background-color: rgba(255, 255, 255, 0.3);
 }
 .landing .splash img{
     height: 400px;
@@ -1052,6 +1065,9 @@ a-chooser{
     }
     .landing .splash > div{
         transform: scale(0.5) translateY(-150px);
+    }
+    .landing .heading{
+        justify-content: center;
     }
     .landing .splash img{
         height: 120px;
