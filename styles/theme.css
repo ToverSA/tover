@@ -53,7 +53,7 @@ body{
     display: block;
     margin: auto;
     color: #FFF;
-    width: 150px;
+    width: 200px;
     text-align: center;
     height: 50px;
     line-height: 50px;
@@ -84,6 +84,7 @@ body{
     height: 60px;
 }
 .landing .heading span{
+    display: block;
     margin: 10px;
     padding: 10px 18px;
     border: 1px solid #FFF;
@@ -118,35 +119,59 @@ body{
 }
 .dialog{
     position: fixed;
-    height: 100%;
-    width: 100%;
-    display: none;
-}
-.dialog .frame{
-    background-color: #FFF;
-    margin: 70px auto;
-    padding: 5px;
-    box-shadow: 0 1px 2px 1px #DDD;
-    position: relative;
-}
-.dialog .frame.large{
-    max-width: 768px;
-}
-.dialog .frame.small{
+    background-color: #FFF;;
     max-width: 450px;
+    width: 100%;
+    height: 450px;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%, 0);
+    border-radius: 2px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
-.dialog .cancel{
-    position: absolute;
-    display: block;
-    height: 40px;
-    width: 40px;
-    right: 0;
-    top: 0;
-    padding: 10px;
-    opacity: 0.5;
+.dialog h2{
+    margin: 10px 0;
+}
+.dialog h4{
+    margin: 5px 0;
+    color: #A3A3A3;
+}
+.dialog h4 > span{
+    color: #00BFA5;
     cursor: pointer;
 }
-.dialog .frame.large{}
+.dialog .list-wrapper{
+    flex-grow: 1;
+    overflow: auto;
+}
+.dialog .list-wrapper > span{
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+.dialog .list-wrapper > span:hover{
+    background-color: #F3F3F3;
+}
+.dialog .list-wrapper{}
+.dialog .btns{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+.dialog .btns > span{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.dialog .btns > span:hover{
+    background-color: #F3F3F3;;
+}
 .account .login{
     max-width: 450px;
     margin: 40px auto;

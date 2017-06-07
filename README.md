@@ -29,6 +29,7 @@
 * report misused ads
 
 ## URLs ##
+* GET /campuses
 * GET /ads (get list of ads)
     * limit, count as params
     * responds with json array

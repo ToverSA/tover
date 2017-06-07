@@ -56,7 +56,7 @@ app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $ht
     }
     $scope.viewAd = function (i) {
         $location.url('/ads/' + i);
-        $http.delete('everything');
+        $http.put('everything');
     };
     init();
 }]);
@@ -122,4 +122,19 @@ app.controller('delAccCtl', ['$scope', '$location', function ($scope, $location)
         $location.url('/account');
     };
     $scope.conf = function () {};
+}]);
+app.controller('landingCtl', ['$scope', '$http', function ($scope, $http) {
+    'use strict';
+    var insties = null, state = 0;
+    $http.get('/api/campuses.json').then(function (res) {
+        insties = res.data;
+    }, function (err) {
+        log(err);
+    });
+    $scope.getStarted = function () {
+        $scope.dialog = true;
+    };
+}]);
+app.controller('notFoundCtl', [function () {
+    'use strict';
 }]);

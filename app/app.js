@@ -3,12 +3,13 @@ function log(str) {
     'use strict';
     window.console.log(str);
 }
-var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', function ($routeProvider) {
+var app = angular.module('akomo', ['ngRoute', 'ngCookies']).config(['$routeProvider', function ($routeProvider) {
     'use strict';
     $routeProvider
         .when('/',
             {
-                templateUrl: 'app/partials/landing.html'
+                templateUrl: 'app/partials/landing.html',
+                controller: 'landingCtl'
             })
         .when('/home',
             {
@@ -58,6 +59,11 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
             {
                 templateUrl: 'app/partials/faqs.html',
                 controller: 'faqsCtl'
+            })
+        .when('/404',
+            {
+                templateUrl: 'app/partials/404.html',
+                controller: 'notFoundCtl'
             })
         .otherwise({
             redirectTo: '/'

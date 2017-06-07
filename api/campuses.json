@@ -1,0 +1,9 @@
+[
+    {
+        "name": "University of Zululand",
+        "campuses": [
+            {"id": 1, "name": "KwaDlangezwa Campus"},
+            {"id": 2, "name": "Richard's Bay Campus"}
+        ]
+    }
+]
