@@ -49,7 +49,6 @@ app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $ht
     $scope.title = 'Some demo text and more testimonial bitch';
     function init() {
         $http.get('/api/ads.json').then(function (res) {
-            log(res);
         }, function (err) {
             log(err);
         });
@@ -158,7 +157,11 @@ app.controller('landingCtl', ['$scope', '$http', '$cookies', '$location', functi
         });
     };
     $scope.getStarted = function () {
-        $scope.dialog = true;
+        if (typeof $cookies.get('campusId') === 'undefined') {
+            $scope.dialog = true;
+        } else {
+            $location.url('/home');
+        }
     };
 }]);
 app.controller('notFoundCtl', [function () {
