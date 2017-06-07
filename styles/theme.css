@@ -38,6 +38,18 @@ body{
     flex-wrap: wrap;
     justify-content: space-around;
 }
+.landing .splash > img{
+    display: block;
+    object-fit: contain;
+    flex-basis: 450px;
+    height: 450px;
+    margin: auto;
+}
+.landing .splash > div{
+    flex-basis: 450px;
+    margin: 0 auto;
+    background-color: red;
+}
 .landing .heading{
     height: 60px;
     position: absolute;
@@ -59,35 +71,6 @@ body{
 }
 .landing .heading span:hover{
     background-color: rgba(255, 255, 255, 0.3);
-}
-.landing .splash img{
-    height: 400px;
-    flex-basis: 400px
-    object-fit: contain;
-}
-.landing .splash h1{
-    color: #FFF;
-    margin: 0;
-    text-align: center;
-    flex-basis: 300px;
-}
-.landing .splash h1:first-child{
-    font-family: Lato Thin;
-    font-size: 4.7em;
-}
-.landing .splash h1:nth-child(2){
-    font-family: Lato;
-}
-.landing .splash h1:nth-child(3){
-    font-family: Lato Thin;
-    font-size: 5.02em;
-}
-.landing .splash h1:nth-child(4){
-    font-family: Lato Thin;
-    font-size: 5.91em;
-}
-.landing .splash h1:nth-child(5){
-    font-family: Lato Thin;
 }
 .header{
     height: 50px;
@@ -975,11 +958,13 @@ a-chooser{
 }
 .suggest > div{}
 @media screen and (max-width: 1024px){
-    .landing .splash img{
-        height: 270px;
+    .landing .splash > img{
+        flex-basis: 384px;
+        height: 384px;
+        margin: 20px auto;
     }
-    .landing .splash >div{
-        transform: scale(0.7) translateY(-100px);
+    .landing .splash > div{
+        flex-basis: 384px;
     }
     .main-content{
         max-width: 768px;
@@ -998,10 +983,13 @@ a-chooser{
     }
 }
 @media screen and (max-width: 768px){
-    .landing .splash img{
+    .landing .splash{
+        justify-content: flex-start;
+    }
+    .landing .splash > img {
+        flex-basis: 200px;
         height: 200px;
     }
-    .landing .splash{}
     .main-content{
         justify-content: center;
     }
@@ -1063,14 +1051,8 @@ a-chooser{
     .landing{
         background-image: url(/img/college-student-small.jpg);
     }
-    .landing .splash > div{
-        transform: scale(0.5) translateY(-150px);
-    }
     .landing .heading{
-        justify-content: center;
-    }
-    .landing .splash img{
-        height: 120px;
+        justify-content: space-between;
     }
     .main-content{
         margin: 0;
