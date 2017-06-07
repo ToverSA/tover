@@ -1102,6 +1102,9 @@ a-chooser{
         margin: 5px 3px;
         box-shadow: 0 1px 1px 1px #CCC;
     }
+    .dialog{
+        top: 30px;
+    }
 }
 @media screen and (max-width: 450px){
     .landing{
@@ -1226,5 +1229,13 @@ a-chooser{
     }
     .account .content .ad-prev{
         margin: 50px 10px;
+    }
+    .dialog{
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        transform: none;
+        max-width: none;
+        width: auto;
     }
 }

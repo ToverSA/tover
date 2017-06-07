@@ -56,7 +56,6 @@ app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $ht
     }
     $scope.viewAd = function (i) {
         $location.url('/ads/' + i);
-        $http.put('everything');
     };
     init();
 }]);
@@ -102,7 +101,7 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function 
         if ($scope.search) {
             $location.url('/ads/search');
         } else {
-            $location.url('/');
+            $location.url('/home');
         }
     };
     $scope.toCat = function (c) {
@@ -123,14 +122,41 @@ app.controller('delAccCtl', ['$scope', '$location', function ($scope, $location)
     };
     $scope.conf = function () {};
 }]);
-app.controller('landingCtl', ['$scope', '$http', function ($scope, $http) {
+app.controller('landingCtl', ['$scope', '$http', '$cookies', '$location', function ($scope, $http, $cookies, $location) {
     'use strict';
-    var insties = null, state = 0;
+    var insties = [];
     $http.get('/api/campuses.json').then(function (res) {
         insties = res.data;
+        var i = 0;
+        $scope.list = [];
+        insties.forEach(function (x) {
+            $scope.list.push(x);
+        });
     }, function (err) {
         log(err);
     });
+    $scope.state = 0;
+    $scope.browse = function (i) {
+        if ($scope.state === 0) {
+            $scope.iName = insties[i].name;
+            $scope.list = [];
+            insties[i].campuses.forEach(function (x) {
+                $scope.list.push(x);
+            });
+            $scope.state = 1;
+        } else {
+            $cookies.put('campusId', $scope.list[i].id);
+            $cookies.put('campusName', $scope.list[i].name);
+            $location.url('/home');
+        }
+    };
+    $scope.change = function () {
+        $scope.state = 0;
+        $scope.list = [];
+        insties.forEach(function (x) {
+            $scope.list.push(x);
+        });
+    };
     $scope.getStarted = function () {
         $scope.dialog = true;
     };
