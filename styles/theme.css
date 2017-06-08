@@ -589,6 +589,7 @@ body{
     background-color: #FFF;
     box-shadow: 0 1px 1px 1px #CCC;
     position: relative;
+    cursor: pointer;
 }
 .ad img{
     display: block;
@@ -609,7 +610,6 @@ body{
 .ad > div > span:nth-child(2){
     text-align: right;
     color: #004D40;
-    background-color: #ECEFF1;
     right: 0;
     left: auto;
 }
