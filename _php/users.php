@@ -4,7 +4,9 @@
  * the platform.
  */
 class Users{
-  public static function postNewUser(){}
+  public static function postNewUser(){
+      print_r($_POST);
+  }
 }
 
 ?>

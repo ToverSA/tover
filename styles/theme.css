@@ -610,7 +610,54 @@ body{
     margin: 0 10px;
     transform: translateY(4px)
 }
-.account .content .ad-prev .item{}
+.account .recovery{
+    max-width: 450px;
+    background-color: #FFF;
+    margin: 30px auto;
+    padding: 5px;
+    box-shadow: 0 0 1px 1px #CCC;
+    display: flex;
+    flex-wrap: wrap;
+}
+.account .recovery > h1{
+    text-align: center;
+    flex-basis: 100%;
+}
+.account .recovery > input{
+    padding: 7px;
+    padding-bottom: 2px;
+    border: 0;
+    outline: none;
+    border-bottom: 2px solid #CCC;
+    flex-grow: 1;
+    font-size: 1em;
+    margin-right: 5px;
+}
+.account .recovery > p{
+    flex-basis: 100%;
+}
+
+.account .recovery > span{
+    display: block;
+    padding: 5px 20px;
+    background-color: #00BFA5;
+    color: #FFF;
+    cursor: pointer;
+}
+.account .recovery > h4{
+    text-align: center;
+    flex-basis: 100%;
+    opacity: 0;
+}
+.account .recovery > h4.success{
+    opacity: 1;
+}
+.account .recovery > span.back{
+    display: block;
+    margin: auto;
+    color: #009688;
+    background-color: transparent;
+}
 .main-content{
     max-width: 1024px;
     margin: 20px auto;

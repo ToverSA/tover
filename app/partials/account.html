@@ -5,13 +5,14 @@
     <div class="login" ng-switch-when="1">
         <h2>Login to account</h2>
         <img src="/img/avatar.png" alt="Account"/>
-        <input type="text" placeholder="Email"/>
-        <input type="password" placeholder="Password"/>
+        <input type="text" placeholder="Email" ng-model="authData.email"/>
+        <input type="password" placeholder="Password" ng-model="authData.password"/>
         <div>
-            <span ng-click="toRecovery()">Trouble logging in?</span>
+            <span ng-click="toRecovery()">Fogort password?</span>
             <span ng-click="logIn()">Log in</span>
         </div>
         <span ng-click="toRegister()">Create new account</span>
+        <span ng-show="err" class="err">{{errMsg}}</span>
     </div>
     <div class="register" ng-switch-when="2">
         <h2>Register new account</h2>
@@ -31,7 +32,12 @@
         <span ng-show="err" class="err">{{errMsg}}</span>
     </div>
     <div class="recovery" ng-switch-when="3">
-        <p>Recovery</p>
+        <h1>Recover your account!</h1>
+        <p>Enter your email address</p>
+        <input ng-class="{err: err}" type="text" placeholder="Email" ng-model="recoveryMail"/>
+        <span class="submit" ng-click="recover()">Submit</span>
+        <h4 ng-class="{success: success}">An email to reset your password will be sent to you in a moment</h4>
+        <span ng-click="toLogin()" class="back">Log in</span>
     </div>
     <div class="main" ng-switch-when="4" ng-switch="mSection" ng-init="mSection = 5">
         <div class="header" a-header>

@@ -1,6 +1,7 @@
 /*global app*/
 /*global log*/
-app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', function ($scope, $http, $location, $cookies) {
+/*global $*/
+app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', function ($scope, $http, $location, AppStore) {
     'use strict';
     var self = this;
     self.LOADING = 0;
@@ -15,12 +16,12 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
     self.FAQS = 8;
     self.insties = [];
     function init() {
-        if (typeof $cookies.get('token') === 'undefined') {
+        if (!AppStore.isToken()) {
             $http.get('/api/campuses.json', {cache: true}).then(function (res) {
                 self.insties = res.data;
                 $scope.instList = self.insties;
             });
-            $scope.accountState = self.REGISTER;
+            $scope.accountState = self.LOGIN;
         } else {
             $scope.accountState = self.MAIN;
         }
@@ -75,6 +76,14 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
             return true;
         }
     }
+    function auth(e, p) {
+        var data = {email: e, password: p};
+        $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
+            log(res.data);
+        }, function (err) {
+            //TODO handle auth errors
+        });
+    }
     $scope.error = function (code) {
         switch (code) {
         case 0:
@@ -95,8 +104,13 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
         }
     };
     $scope.formData = {
-        email: 'sdu@gum.com'
+        email: 'sdu@gum.com',
+        password: 'plo0',
+        rePwd: 'plo0',
+        dName: 'nkero',
+        campusId: 1
     };
+    $scope.authData = {};
     $scope.cState = 0;
     $scope.lTitle = '- Select your campus -';
     $scope.sTitle = '';
@@ -119,7 +133,29 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
     $scope.toRecovery = function () { $scope.accountState = self.RECOVERY; };
     $scope.toRegister = function () { $scope.accountState = self.REGISTER; };
     $scope.toLogin = function () { $scope.accountState = self.LOGIN; };
-    $scope.logIn = function () { $scope.accountState = self.MAIN; };
+    $scope.toLogin = function () { $scope.accountState = self.LOGIN; };
+    $scope.recover = function () {
+        if (typeof $scope.recoveryMail === 'undefined') {
+            $scope.err = true;
+        } else {
+            $scope.err = false;
+            $http.post().then(function (res) {
+                //TODO handle recovery
+            });
+        }
+    };
+    $scope.logIn = function () {
+        if (typeof $scope.authData.email === 'undefined') {
+            $scope.err = true;
+            $scope.errMsg = 'Email field is empty!';
+        } else if (typeof $scope.authData.password === 'undefined') {
+            $scope.err = true;
+            $scope.errMsg = 'Password field is empty!';
+        } else {
+            $scope.err = false;
+            auth($scope.authData.email, $scope.authData.password);
+        }
+    };
     $scope.delAcc = function () {
         $location.url('/account/delete');
     };
@@ -133,6 +169,11 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
         isDataValid($scope.formData);
         var data = JSON.parse(JSON.stringify($scope.formData));
         delete data.rePwd;
+        $http.post('/api.php/v1/users/new', $.param(data)).then(function (res) {
+            auth(data.email, data.password);
+        }, function (err) {
+            //TODO handle user creation error
+        });
     };
 
     init();
