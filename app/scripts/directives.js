@@ -13,36 +13,3 @@ app.directive('enterKey', [function () {
         });
     };
 }]);
-app.directive('aHeader', [function () {
-    'use strict';
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-        }
-    };
-}]);
-app.directive('aAd', [function () {
-    'use strict';
-    return {
-        restrict: 'E',
-        templateUrl: 'app/partials/ad.html',
-        link: function (scope, element, attrs) {
-            scope.pop = function (n) {
-                if (n === true) {
-                    scope.isPop = true;
-                } else {
-                    scope.isPop = false;
-                }
-            };
-        }
-    };
-}]);
-app.directive('aChooser', [function () {
-    'use strict';
-    return {
-        restrict: 'E',
-        templateUrl: 'app/partials/chooser.html',
-        link: function (scope, element, attrs) {
-        }
-    };
-}]);

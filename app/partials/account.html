@@ -17,7 +17,13 @@
         <h2>Register new account</h2>
         <input type="text" placeholder="Display name"/>
         <input type="email" placeholder="Email"/>
-        <a-chooser></a-chooser>
+        <div class="a-chooser">
+            <span ng-click="openChooser()">{{lTitle}}</span>
+            <div class="c-dialog" ng-show="isCOpen">
+                <h4 ng-show="(cState === 1)">{{sTitle}} - <span ng-click="changeC()">Change</span></h4>
+                <span ng-click="browse(instList.indexOf(x))" ng-repeat="x in instList">{{x.name}}</span>
+            </div>
+        </div>
         <input type="password" placeholder="Password"/>
         <input type="password" placeholder="Re-enter password"/>
         <span ng-click="createNew()">Create account</span>

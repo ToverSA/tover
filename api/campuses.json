@@ -5,5 +5,14 @@
             {"id": 1, "name": "KwaDlangezwa Campus"},
             {"id": 2, "name": "Richard's Bay Campus"}
         ]
+    },
+    {
+        "name": "University of KwaZulu-Natal",
+        "campuses": [
+            {"id": 1, "name": "Westville Campus"},
+            {"id": 1, "name": "Howard College"},
+            {"id": 1, "name": "School of Medicine"},
+            {"id": 2, "name": "Pietermaritzburg Campus"}
+        ]
     }
 ]

@@ -1,2 +1,5 @@
-<span>Chooser</span>
-<div class="c-dialog"></div>
+<span ng-click="open()">{{title}}</span>
+<div class="c-dialog" ng-show="isOpen">
+    <h4 ng-show="(state === 1)">Nothing - <span ng-click="change()">Change</span></h4>
+    <span ng-click="browse(list.indexOf(x))" ng-repeat="x in list">{{x.name}}</span>
+</div>

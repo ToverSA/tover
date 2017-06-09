@@ -1,6 +1,6 @@
 /*global app*/
 /*global log*/
-app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', function ($scope, $http, $location, $cookies) {
     'use strict';
     var self = this;
     self.LOADING = 0;
@@ -13,23 +13,44 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
     self.MESSAGES = 6;
     self.PREFERENCES = 7;
     self.FAQS = 8;
-
+    self.insties = [];
     function init() {
-        $http.get('/api/access.json').then(function (res) {
-            if (res.data.access === true) {
-                $scope.accountState = self.MAIN;
-            } else {
-                $scope.accountState = self.LOGIN;
-            }
-        }, function (err) {});
+        if (typeof $cookies.get('token') === 'undefined') {
+            $http.get('/api/campuses.json', {cache: true}).then(function (res) {
+                log(res.data);
+                self.insties = res.data;
+                $scope.instList = self.insties;
+            });
+            $scope.accountState = self.REGISTER;
+        } else {
+            $scope.accountState = self.MAIN;
+        }
     }
-
+    $scope.formData = {};
+    $scope.cState = 0;
+    $scope.lTitle = '- Select your campus -';
+    $scope.sTitle = '';
+    $scope.openChooser = function () { $scope.isCOpen = true; };
+    $scope.browse = function (i) {
+        if ($scope.cState === 0) {
+            $scope.sTitle = self.insties[i].name;
+            $scope.instList = self.insties[i].campuses;
+            $scope.cState = 1;
+        } else {
+            log($scope.instList[i].id);
+            $scope.formData.campusId = $scope.instList[i].id;
+            $scope.isCOpen = false;
+            $scope.lTitle = $scope.instList[i].name;
+        }
+    };
+    $scope.changeC = function () {
+        $scope.instList = self.insties;
+        $scope.cState = 0;
+    };
     $scope.toRecovery = function () { $scope.accountState = self.RECOVERY; };
     $scope.toRegister = function () { $scope.accountState = self.REGISTER; };
     $scope.toLogin = function () { $scope.accountState = self.LOGIN; };
-    $scope.logIn = function () {
-        $scope.accountState = self.MAIN;
-    };
+    $scope.logIn = function () { $scope.accountState = self.MAIN; };
     $scope.delAcc = function () {
         $location.url('/account/delete');
     };
@@ -42,6 +63,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', function ($scope, 
     $scope.createNew = function () {
         $scope.accountState = self.MAIN;
     };
+
     init();
 }]);
 app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
@@ -60,8 +82,23 @@ app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $ht
 }]);
 app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $location) {
     'use strict';
+    $scope.cat = false;
+    $scope.display = '- Choose category - ';
+    $scope.cats = [
+        {id: 1, name: "Books & Study Material"},
+        {id: 2, name: "Electronics & Gadgets"},
+        {id: 3, name: "Phones & Laptops"},
+        {id: 4, name: "Services & Other"}
+    ];
     $scope.cancelAd = function () {
         $location.url('/account');
+    };
+    $scope.show = function () {
+        $scope.cat = true;
+    };
+    $scope.sel = function (i) {
+        $scope.display = $scope.cats[i].name;
+        $scope.cat = false;
     };
     $scope.back = function () {
         $scope.aPage -= 1;

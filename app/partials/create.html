@@ -7,12 +7,17 @@
             <h3>Choose Title</h3>
             <input type="text" placeholder="Title"/>
             <h3>Select category</h3>
-            <a-chooser></a-chooser>
+            <div class="a-chooser">
+                <span ng-click="show()">{{display}}</span>
+                <div class="c-dialog" ng-show="cat">
+                    <span ng-click="sel(cats.indexOf(x))" ng-repeat="x in cats">{{x.name}}</span>
+                </div>
+            </div>
             <h3>Price</h3>
             R<input type="number" placeholder="0.00"/>
             <h3>Description</h3>
             <textarea></textarea>
-            <div class="grav">
+            <div class=" btns grav">
                 <span ng-click="cancelAd()">CANCEL</span>
                 <span ng-click="step()">NEXT</span>
             </div>

@@ -60,7 +60,7 @@
 * POST /users/ads (create new ad)
     * resurns status code
     * requires access token
-* PUT /promotion/ads/:id (request promotion)
+* POST /promotion/ads/:id (request promotion)
     * returns status code
     * requires access token
 * DELETE /ads/:id (Delete single ad)
