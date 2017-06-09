@@ -1049,7 +1049,11 @@ a-chooser{
     color: #000;
     font-weight: bold;
 }
-.suggest > div{}
+.err{
+    background-color: #FFE0B2;
+    border-color: #FFE0B2;
+    font-size: 0.8em;
+}
 @media screen and (max-width: 1024px){
     .landing .splash > img{
         flex-basis: 384px;
@@ -1159,7 +1163,6 @@ a-chooser{
     .landing .heading{
         justify-content: space-between;
     }
-    .landing .splash{}
     .main-content{
         margin: 0;
     }

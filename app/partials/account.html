@@ -15,8 +15,8 @@
     </div>
     <div class="register" ng-switch-when="2">
         <h2>Register new account</h2>
-        <input type="text" placeholder="Display name"/>
-        <input type="email" placeholder="Email"/>
+        <input type="text" placeholder="Display name" ng-model="formData.dName"/>
+        <input type="email" placeholder="Email" ng-model="formData.email"/>
         <div class="a-chooser">
             <span ng-click="openChooser()">{{lTitle}}</span>
             <div class="c-dialog" ng-show="isCOpen">
@@ -24,10 +24,11 @@
                 <span ng-click="browse(instList.indexOf(x))" ng-repeat="x in instList">{{x.name}}</span>
             </div>
         </div>
-        <input type="password" placeholder="Password"/>
-        <input type="password" placeholder="Re-enter password"/>
+        <input type="password" placeholder="Password" ng-model="formData.password"/>
+        <input type="password" placeholder="Re-enter password" ng-model="formData.rePwd"/>
         <span ng-click="createNew()">Create account</span>
         <span ng-click="toLogin()">Already have an account?</span>
+        <span ng-show="err" class="err">{{errMsg}}</span>
     </div>
     <div class="recovery" ng-switch-when="3">
         <p>Recovery</p>

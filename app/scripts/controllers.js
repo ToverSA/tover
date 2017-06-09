@@ -17,7 +17,6 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
     function init() {
         if (typeof $cookies.get('token') === 'undefined') {
             $http.get('/api/campuses.json', {cache: true}).then(function (res) {
-                log(res.data);
                 self.insties = res.data;
                 $scope.instList = self.insties;
             });
@@ -26,7 +25,78 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
             $scope.accountState = self.MAIN;
         }
     }
-    $scope.formData = {};
+    function isNameValid(data) {
+        if (typeof data === 'undefined' || data.length < 4) {
+            $scope.errMsg = 'Name must have at least 4 characters';
+            return false;
+        } else if (data.search(/[a-z]/i) < 0) {
+            $scope.errMsg = 'Your name must contain at least one letter.';
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function isEmailValid(data) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(data);
+    }
+    function isPasswordValid(data) {
+        if (typeof data === 'undefined' || data.length < 4) {
+            $scope.errMsg = 'Password must have at least 4 characters';
+            return false;
+        } else if (data.search(/[a-z]/i) < 0) {
+            $scope.errMsg = 'Your password must contain at least one letter.';
+            return false;
+        } else if (data.search(/[0-9]/) < 0) {
+            $scope.errMsg = 'Your password must contain at least one digit.';
+            return false;
+        } else if (data.equals === $scope.formData.rePwd) {
+            $scope.errMsg = 'Passwords do not match';
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function isDataValid(data) {
+        if (!isEmailValid(data.email)) {
+            $scope.error(0);
+            return false;
+        } else if (!isPasswordValid(data.password)) {
+            $scope.error(2);
+            return false;
+        } else if (!isNameValid(data.dName)) {
+            $scope.error(1);
+            return false;
+        } else if (typeof $scope.formData.campusId === 'undefined') {
+            $scope.error(3);
+            $scope.errMsg = 'Campus isn\'t selected';
+        } else {
+            $scope.error(-1);
+            return true;
+        }
+    }
+    $scope.error = function (code) {
+        switch (code) {
+        case 0:
+            $scope.err = true;
+            $scope.errMsg = 'Error in email format i.e. \'@\'';
+            break;
+        case 1:
+            $scope.err = true;
+            break;
+        case 2:
+            $scope.err = true;
+            break;
+        case 3:
+            $scope.err = true;
+            break;
+        default:
+            $scope.err = false;
+        }
+    };
+    $scope.formData = {
+        email: 'sdu@gum.com'
+    };
     $scope.cState = 0;
     $scope.lTitle = '- Select your campus -';
     $scope.sTitle = '';
@@ -37,7 +107,6 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
             $scope.instList = self.insties[i].campuses;
             $scope.cState = 1;
         } else {
-            log($scope.instList[i].id);
             $scope.formData.campusId = $scope.instList[i].id;
             $scope.isCOpen = false;
             $scope.lTitle = $scope.instList[i].name;
@@ -61,7 +130,9 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$cookies', functi
         $location.url('/ads/create');
     };
     $scope.createNew = function () {
-        $scope.accountState = self.MAIN;
+        isDataValid($scope.formData);
+        var data = JSON.parse(JSON.stringify($scope.formData));
+        delete data.rePwd;
     };
 
     init();
@@ -128,7 +199,6 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', function ($scope, $
 }]);
 app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function ($scope, $routeParams, $location) {
     'use strict';
-    log($routeParams);
     if ($routeParams.hasOwnProperty('cat')) {
         $scope.search = 1;
         $scope.sSection = 1;
@@ -158,7 +228,7 @@ app.controller('delAccCtl', ['$scope', '$location', function ($scope, $location)
     };
     $scope.conf = function () {};
 }]);
-app.controller('landingCtl', ['$scope', '$http', '$cookies', '$location', function ($scope, $http, $cookies, $location) {
+app.controller('landingCtl', ['$scope', '$http', 'AppStore', '$location', function ($scope, $http, AppStore, $location) {
     'use strict';
     var insties = [];
     $http.get('/api/campuses.json').then(function (res) {
@@ -181,8 +251,7 @@ app.controller('landingCtl', ['$scope', '$http', '$cookies', '$location', functi
             });
             $scope.state = 1;
         } else {
-            $cookies.put('campusId', $scope.list[i].id);
-            $cookies.put('campusName', $scope.list[i].name);
+            AppStore.setCampus($scope.list[i].id, $scope.list[i].name);
             $location.url('/home');
         }
     };
@@ -194,7 +263,7 @@ app.controller('landingCtl', ['$scope', '$http', '$cookies', '$location', functi
         });
     };
     $scope.getStarted = function () {
-        if (typeof $cookies.get('campusId') === 'undefined') {
+        if (AppStore.isNew()) {
             $scope.dialog = true;
         } else {
             $location.url('/home');
