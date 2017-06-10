@@ -1,16 +1,16 @@
 <div class="home">
     <div class="header" a-header>
         <div class="left">
-            <a href="#!/home"><img src="/img/Ako.png" alt="Akomo"/></a>
+            <a href="#!/home"><img src="img/Ako.png" alt="Akomo"/></a>
         </div>
         <div class="right">
-            <a href="#!/ads/search"><img src="/img/magnifying-glass.png" alt="search"/></a>
-            <a href="#!/account"><img src="/img/avatar.png" alt="account"/></a>
+            <a href="#!/ads/search"><img src="img/magnifying-glass.png" alt="search"/></a>
+            <a href="#!/account"><img src="img/avatar.png" alt="account"/></a>
         </div>
     </div>
     <div class="main-content">
         <div class="ad" ng-repeat="x in [1, 2, 3]" ng-click="viewAd(x)">
-            <img src="/img/placeholder.jpg"/>
+            <img src="img/placeholder.jpg"/>
             <div>
                 <!--70 characters for the title-->
                 <span ng-class="{large: (title.length < 40)}">{{title}}</span>
