@@ -6,6 +6,7 @@ app.service('AppStore', ['$cookies', function ($cookies) {
     var self = this,
         campusName = 'Q0FNUFVTTkFNRQ',
         campusId = 'Q0FNUFVTSUQ',
+        userId = 'VVNFUklE',
         token = 'VE9LRU4';
     function enc(str) {
         return CryptoJS.AES.encrypt(str, 'akomo');
@@ -32,6 +33,12 @@ app.service('AppStore', ['$cookies', function ($cookies) {
     };
     self.getToken = function () {
         return dec($cookies.get(token));
+    };
+    self.setUserId = function (id) {
+        $cookies.put(userId, id);
+    };
+    self.getUserId = function () {
+        return $cookies.get(userId);
     };
     self.setCampus = function (id, name) {
         $cookies.put(campusId, id);

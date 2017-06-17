@@ -17,13 +17,21 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
     self.insties = [];
     function init() {
         if (!AppStore.isToken()) {
-            $http.get('/api/campuses.json', {cache: true}).then(function (res) {
+            $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
                 self.insties = res.data;
                 $scope.instList = self.insties;
             });
             $scope.accountState = self.LOGIN;
         } else {
             $scope.accountState = self.MAIN;
+        }
+    }
+    function isNumberValid(data) {
+        if (typeof data === 'undefined' || data.length < 10) {
+            $scope.errMsg = 'Cellphone diits must be 10 characters long';
+            return false;
+        } else {
+            return true;
         }
     }
     function isNameValid(data) {
@@ -68,6 +76,8 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
         } else if (!isNameValid(data.dName)) {
             $scope.error(1);
             return false;
+        } else if (!isNumberValid(data.number)) {
+            $scope.error(2);
         } else if (typeof $scope.formData.campusId === 'undefined') {
             $scope.error(3);
             $scope.errMsg = 'Campus isn\'t selected';
@@ -79,7 +89,9 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
     function auth(e, p) {
         var data = {email: e, password: p};
         $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
-            log(res.data);
+            AppStore.setToken(res.data.token);
+            AppStore.setUserId(res.data.id);
+            $scope.accountState = self.MAIN;
         }, function (err) {
             //TODO handle auth errors
         });
@@ -103,13 +115,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             $scope.err = false;
         }
     };
-    $scope.formData = {
-        email: 'sdu@gum.com',
-        password: 'plo0',
-        rePwd: 'plo0',
-        dName: 'nkero',
-        campusId: 1
-    };
+    $scope.formData = {};
     $scope.authData = {};
     $scope.cState = 0;
     $scope.lTitle = '- Select your campus -';
@@ -175,7 +181,6 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             //TODO handle user creation error
         });
     };
-
     init();
 }]);
 app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
@@ -272,7 +277,7 @@ app.controller('delAccCtl', ['$scope', '$location', function ($scope, $location)
 app.controller('landingCtl', ['$scope', '$http', 'AppStore', '$location', function ($scope, $http, AppStore, $location) {
     'use strict';
     var insties = [];
-    $http.get('/api/campuses.json').then(function (res) {
+    $http.get('api.php/v1/campuses').then(function (res) {
         insties = res.data;
         var i = 0;
         $scope.list = [];

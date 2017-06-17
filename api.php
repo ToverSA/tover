@@ -1,4 +1,5 @@
 <?php
+require_once('_php/conf.php');
 require_once('_php/insties.php');
 require_once('_php/ads.php');
 require_once('_php/users.php');
@@ -23,6 +24,10 @@ function handlePost(){
       case '/v1/users/new':
       case '/v1/users/new/':
         Users::postNewUser();
+        break;
+      case '/v1/users/auth':
+      case '/v1/users/auth/':
+        Users::postAuthUser();
         break;
       default:
         break;
