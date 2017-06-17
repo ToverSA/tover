@@ -72,4 +72,11 @@ app.service('AppStore', ['$cookies', function ($cookies) {
         $cookies.put(campusId, id);
         $cookies.put(campusName, enc(name));
     };
+    self.clearAll = function () {
+        $cookies.remove(token);
+        $cookies.remove(userId);
+        $cookies.remove(userName);
+        $cookies.remove(userEmail);
+        $cookies.remove(userNumber);
+    };
 }]);

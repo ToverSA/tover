@@ -1,6 +1,7 @@
 /*global app*/
 /*global log*/
 /*global $*/
+/*global FileReader*/
 app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', function ($scope, $http, $location, AppStore) {
     'use strict';
     var self = this;
@@ -15,6 +16,12 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
     self.PREFERENCES = 7;
     self.FAQS = 8;
     self.insties = [];
+    function loadAccount() {
+        $scope.account.name = AppStore.getUserName();
+        $scope.account.number = AppStore.getUserNumber();
+        $scope.account.email = AppStore.getUserEmail();
+        $scope.account.campus = AppStore.getCampusName();
+    }
     function init() {
         if (!AppStore.isToken()) {
             $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
@@ -23,6 +30,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             });
             $scope.accountState = self.LOGIN;
         } else {
+            loadAccount();
             $scope.accountState = self.MAIN;
         }
     }
@@ -95,8 +103,9 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             AppStore.setUserName(res.data.name);
             AppStore.setUserEmail(res.data.email);
             AppStore.setUserNumber(res.data.number);
+            loadAccount();
         }, function (err) {
-            //TODO handle auth errors
+            //TODO handle account errors
         });
     }
     function auth(e, p) {
@@ -131,6 +140,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
     };
     $scope.formData = {};
     $scope.authData = {};
+    $scope.account = {};
     $scope.cState = 0;
     $scope.lTitle = '- Select your campus -';
     $scope.sTitle = '';
@@ -176,11 +186,18 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             auth($scope.authData.email, $scope.authData.password);
         }
     };
+    $scope.onEdit = function () {
+
+    };
     $scope.delAcc = function () {
         $location.url('/account/delete');
     };
     $scope.faqs = function () {
         $location.url('/faqs/account');
+    };
+    $scope.logout = function () {
+        AppStore.clearAll();
+        $location.url('/home');
     };
     $scope.createAd = function () {
         $location.url('/ads/create');
@@ -222,6 +239,23 @@ app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $locati
         {id: 3, name: "Phones & Laptops"},
         {id: 4, name: "Services & Other"}
     ];
+    $scope.dummy = [1, 2, 3, 4, 5];
+    $scope.images = [];
+    $scope.ad = {
+        images: []
+    };
+    var reader = new FileReader();
+    reader.onload = function () {
+        $scope.images.push(reader.result);
+        $scope.dummy.splice(-1);
+        $scope.$apply();
+    };
+    $scope.clear = function (i) {
+        if ($scope.images.length !== 6) {
+            $scope.dummy.push($scope.dummy.length + 1);
+        }
+        $scope.images.splice(i, 1);
+    };
     $scope.cancelAd = function () {
         $location.url('/account');
     };
@@ -229,20 +263,28 @@ app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $locati
         $scope.cat = true;
     };
     $scope.sel = function (i) {
+        $scope.ad.category = $scope.cats[i].id;
         $scope.display = $scope.cats[i].name;
         $scope.cat = false;
     };
     $scope.back = function () {
         $scope.aPage -= 1;
+        if ($scope.aPage === 2) {
+            $scope.dummy.splice(-1);
+        }
     };
     $scope.step = function () {
         if ($scope.aPage === 1) {
             $scope.aPage += 1;
         } else if ($scope.aPage === 2) {
             $scope.aPage += 1;
+            $scope.dummy.push($scope.dummy.length + 1);
         } else if ($scope.aPage === 3) {
             $location.url('/account');
         }
+    };
+    $scope.fileNameChanged = function (files) {
+        reader.readAsDataURL(files[0]);
     };
 }]);
 app.controller('adsCtl', ['$scope', '$timeout', '$location', function ($scope, $timeout, $location) {

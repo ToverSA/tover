@@ -59,7 +59,7 @@
                 <span ng-class="{active: (mSection === 6)}" ng-click="mSection = 6">My Messages</span>
                 <span ng-class="{active: (mSection === 7)}" ng-click="mSection = 7">My Preferences</span>
                 <span ng-click="faqs()">FAQs</span>
-                <span>Sign out</span>
+                <span ng-click="logout()">Sign out</span>
             </div>
             <div class="page" ng-switch-when="5">
                 <span class="create-ad-btn" ng-click="createAd()">CREATE AD</span>
@@ -104,18 +104,20 @@
             <div class="page" ng-switch-when="7">
                 <div class="prefs">
                     <h3>Preferences</h3>
-                    <div class="sections">
+                    <div class="sections" any-key="onEdit()">
                         <div class="section">
                             <span>Details</span>
                             <span>SAVE</span>
                             <p>Display Name</p>
-                            <input type="text" placeholder="John Wick"/>
+                            <input type="text" placeholder="John Wick" ng-model="account.name"/>
                             <p>Number</p>
-                            <input type="text" placeholder="0604335310"/>
+                            <input type="text" placeholder="0604335310" ng-model="account.number"/>
                             <p>Email</p>
-                            <input type="text" placeholder="foobar@baz.com"/>
-                            <p>Location</p>
-                            <a-chooser></a-chooser>
+                            <input type="text" placeholder="foobar@baz.com" ng-model="account.email" disabled/>
+                            <p>Campus</p>
+                            <div class="a-chooser">
+                                <span>{{account.campus}}</span>
+                            </div>
                         </div>
                         <div class="section">
                             <span>Account Settings</span>
