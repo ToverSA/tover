@@ -10,6 +10,10 @@ function handleGet(){
       case '/v1/campuses/':
         Insties::getCampuses();
         break;
+      case '/v1/account':
+      case '/v1/account/':
+        Users::getAccount();
+        break;
       case '/v1/ads':
       case '/v1/ads/':
         print_r($_GET);

@@ -86,12 +86,26 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             return true;
         }
     }
+    function getUser() {
+        $http.get('api.php/v1/account', {
+            headers: {'token': AppStore.getToken()}
+        }).then(function (res) {
+            AppStore.setCampus(res.data.campus.id, res.data.campus.name);
+            AppStore.setUserId(res.data.id);
+            AppStore.setUserName(res.data.name);
+            AppStore.setUserEmail(res.data.email);
+            AppStore.setUserNumber(res.data.number);
+        }, function (err) {
+            //TODO handle auth errors
+        });
+    }
     function auth(e, p) {
         var data = {email: e, password: p};
         $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
             AppStore.setToken(res.data.token);
             AppStore.setUserId(res.data.id);
             $scope.accountState = self.MAIN;
+            getUser();
         }, function (err) {
             //TODO handle auth errors
         });
@@ -181,6 +195,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             //TODO handle user creation error
         });
     };
+
     init();
 }]);
 app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
