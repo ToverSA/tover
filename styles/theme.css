@@ -1029,6 +1029,9 @@ a-chooser{
 .create-ad .pics > div{
     margin: 0;
 }
+.create-ad .pics > div:nth-child(7){
+    display: none;
+}
 .create-ad .pics > div > img{
     height: 100%;
     width: 100%;
