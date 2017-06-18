@@ -1,48 +1,17 @@
 <div class="search-bar">
     <img ng-click="back()" src="img/back.png"/>
-    <input type="search" ng-show="search" placeholder="Search"/>
-    <span ng-hide="search">Choose category</span>
+    <input type="search" any-key="suggest()" placeholder="Search" ng-model="query"/>
+    <img src="/img/settings.png"/>
 </div>
-<div class="suggest">
-    <div><span>Spe</span>akers sound</div>
-    <div><span>Spe</span>nd cash on junk</div>
-    <div><span>Spe</span>ak for yourself</div>
-    <div><span>Spe</span>ed cars</div>
+<div class="suggest" ng-show="(query.length > 1) && isTyping">
+    <div class="item" ng-click="searchFor()">
+        <span>{{query}}</span>
+        <span>Search...</span>
+    </div>
+    <div class="item" ng-repeat="x in ads" ng-click="viewAd(x.id)">
+        <span>{{x.title}}</span>
+        <span>{{x.price | currency: 'R '}} - {{x.date_created}}</span>
+    </div>
 </div>
-<div class="search" ng-switch="sSection">
-    <div ng-switch-default>
-        <div class="cat">
-            <div class="elem" ng-click="toCat(1)">
-                <img src="img/notebook-4.png"/>
-                <span>Books &amp; Study material</span>
-            </div>
-            <div class="elem" ng-click="toCat(2)">
-                <img src="img/photo-camera.png"/>
-                <span>Electronics &amp; Gadgets</span>
-            </div>
-        </div>
-        <div class="cat" ng-click="toCat(3)">
-            <div class="elem">
-                <img src="img/smartphone.png"/>
-                <span>Phones &amp; Laptops</span>
-            </div>
-            <div class="elem" ng-click="toCat(4)">
-                <img src="img/network.png"/>
-                <span>Services &amp; Other</span>
-            </div>
-        </div>
-    </div>
-    <div ng-switch-when="1">
-        <div class="main-content">
-        <div class="ad" ng-repeat="x in [1, 2, 3, 4, 5, 6, 7, 8, 9]" ng-click="viewAd(x)">
-            <img src="img/placeholder.jpg"/>
-            <div>
-                <!--70 characters for the title-->
-                <span ng-class="{large: (title.length < 40)}">Title{{title}}</span>
-                <span>R345.90</span>
-                <span>29 May</span>
-            </div>
-        </div>
-    </div>
-    </div>
+<div class="search">
 </div>

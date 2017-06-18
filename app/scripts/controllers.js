@@ -339,15 +339,44 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', '$http', '$routePar
     };
     init();
 }]);
-app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function (
-    $scope,
-    $routeParams,
-    $location
-) {
+app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 'AppStore', function ($scope, $routeParams, $location, $http, AppStore) {
     'use strict';
-    if ($routeParams.hasOwnProperty('cat')) {
-        $scope.search = 1;
-        $scope.sSection = 1;
+    $scope.query = '';
+    if (typeof $routeParams.q !== 'undefined') {
+        $scope.query = $routeParams.q;
+    }
+    $scope.ads = [];
+    function isMatch() {
+        if ($scope.ads.length === 0) {
+            return false;
+        } else {
+            var match = false,
+                rem = [];
+            $scope.ads.forEach(function (x) {
+                var a = x.title.toLowerCase(),
+                    b = $scope.query.toLowerCase(),
+                    c = a.match(b);
+                if (c === null) {
+                    rem.push($scope.ads.indexOf(x));
+                } else {
+                    match = true;
+                }
+            });
+            rem.forEach(function (x) {
+                $scope.ads.splice(x, 1);
+            });
+            return match;
+        }
+    }
+    function suggestions() {
+        $http.get('api.php/v1/ads?cid='
+                  + AppStore.getCampusId()
+                  + '&q='
+                  + $scope.query).then(function (res) {
+            $scope.ads = res.data;
+        }, function (err) {
+            //TODO sugestions error
+        });
     }
     $scope.back = function () {
         if ($scope.search) {
@@ -356,11 +385,21 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function 
             $location.url('/home');
         }
     };
-    $scope.toCat = function (c) {
-        $location.url('/ads/search/?cat=' + c);
-    };
     $scope.viewAd = function (i) {
         $location.url('/ads/' + i);
+    };
+    $scope.suggest = function () {
+        if (!$scope.isTyping) {
+            $scope.isTyping = true;
+        }
+        if ($scope.query.length > 1) {
+            if (!isMatch()) {
+                suggestions();
+            }
+        }
+    };
+    $scope.searchFor = function () {
+        $location.url('/ads/search/?q=' + $scope.query);
     };
 }]);
 app.controller('faqsCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {

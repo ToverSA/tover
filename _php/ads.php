@@ -5,6 +5,8 @@
  */
 class Ads{
   public static function getAds(){
+    $limit = 0;
+    $rows = 20;
     if (isset($_GET['id'])){
       $con = new mysqli(HOST, USER, PWD, DB);
       $query = 'SELECT advert.title, advert.price, advert.description, users.name, '.
@@ -34,13 +36,33 @@ class Ads{
         }
         echo json_encode($a);
       }
-    } else if (isset($_GET['cid'])){
-      $limit = 0;
-      $rows = 20;
+    } else if (isset($_GET['cid']) && count($_GET) == 1){
       $con = new mysqli(HOST, USER, PWD, DB);
       $query = 'SELECT advert.id, advert.title, advert.price, '.
       'advert.date_created FROM users JOIN advert ON users.id=advert.user_id '.
       'WHERE users.campus_id=?';
+      $query = $query.' LIMIT ?, ?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('iii', $_GET['cid'], $limit, $rows);
+      $stmt->execute();
+      $stmt->bind_result($id, $title, $price, $date);
+      $arr = array();
+      while ($stmt->fetch()) {
+        $a = new Ads();
+        $a->id = $id;
+        $a->title = $title;
+        $a->price = $price;
+        $d = new DateTime($date);
+        $a->date_created = $d->format('d M');
+        array_push($arr, $a);
+      }
+      echo json_encode($arr);
+    } else if (isset($_GET['cid']) && isset($_GET['uid'])){
+    } else if (isset($_GET['cid']) && isset($_GET['q'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT advert.id, advert.title, advert.price, '.
+      'advert.date_created FROM users JOIN advert ON users.id=advert.user_id '.
+      "WHERE users.campus_id=? AND advert.title LIKE '%".$_GET['q']."%'";
       $query = $query.' LIMIT ?, ?';
       $stmt = $con->prepare($query);
       $stmt->bind_param('iii', $_GET['cid'], $limit, $rows);

@@ -1065,110 +1065,57 @@ a-chooser{
     margin: auto;
     background-color: #ECEFF1;
 }
-.search .cat{
-    display: flex;
-    justify-content: center;
-    padding: 50px;
-}
-.search .cat .elem{
-    display: block;
-    height: 250px;
-    flex-basis: 250px;
-    margin: 0 50px;
-    background-color: #FFF;
-    border-radius: 125px;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-}
-.search .cat .elem:hover{
-    box-shadow: 0 0 2px 2px #CCC;
-}
-.search .cat .elem img{
-    height: 100%;
-    width: 100%;
-    padding: 60px;
-}
-.search .cat .elem span{
-    display: block;
-    position: absolute;
-    height: 100%;
-    line-height: 250px;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-    opacity: 0;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.search .cat .elem span:hover{
-    opacity: 0.7;
-    transform: rotate(360deg);
-}
-.search .cat:nth-child(1) > div:nth-child(1) > span:nth-child(2){
-    background-color: #E1BEE7;
-}
-.search .cat:nth-child(1) > div:nth-child(2) > span:nth-child(2){
-    background-color: #FFCDD2;
-}
-.search .cat:nth-child(2) > div:nth-child(1) > span:nth-child(2){
-    background-color: #FFF9C4;
-}
-.search .cat:nth-child(2) > div:nth-child(2) > span:nth-child(2){
-    background-color: #C8E6C9;
-}
-.search-bar{
-    height: 50px;
-    background-color: #FFF;
-    display: flex;
-}
-.search-bar img{
-    height: 50px;
-    width: 50px;
-    flex-basis: 50px;
-    padding: 14px;
-    cursor: pointer;
-}
-.search-bar input{
-    outline: none;
-    flex-basis: 700px;
-    border: 0;
-    padding: 10px;
-    font-size: 1em;
-    margin-left: 17%;
-    border-bottom: 1px solid #CCC;
-}
-.search-bar span{
-    line-height: 50px;
-    padding: 0 20px;
-    opacity: 0.4;
-}
-.suggest{
-    position: absolute;
-    width: 100%;
-    background-color: #FFF;
-    box-shadow: 0 1px 1px 1px #CCC;
-    display: none;
-}
-.suggest > div{
-    background-color: #FFF;
-    max-width: 650px;
-    margin-left: 17%;
-    padding: 10px 0 10px 60px;
-    cursor: pointer;
-}
-.suggest > div{
-    color: #AAA;
-}
-.suggest > div > span{
-    color: #000;
-    font-weight: bold;
-}
 .err{
     background-color: #FFE0B2;
     border-color: #FFE0B2;
     font-size: 0.8em;
+}
+.search-bar{
+    display: flex;
+    height: 50px;
+    justify-content: flex-;
+    background-color: #FFF;
+}
+.search-bar > input{
+    outline: none;
+    border: 0;
+    padding: 10px;
+    font-size: 1em;
+    flex-grow: 1;
+}
+.search-bar > img{
+    width: 50px;
+    height: 100%;
+    padding: 12px;
+    cursor: pointer;
+}
+.suggest{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #FFF;
+    box-shadow: 0 0 1px 1px #DDD;
+}
+.suggest > .item{
+    padding-left: 50px;
+    cursor: pointer;
+}
+.suggest > .item > span{
+    display: block;
+    padding: 1px 10px;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.suggest > .item > span:first-child{
+    font-weight: 600;
+}
+.suggest > .item > span:last-child{
+    opacity: 0.4;
+}
+.suggest > .item:first-child > span:last-child{
+    font-style: italic;
 }
 @media screen and (max-width: 1024px){
     .landing .splash > img{
@@ -1188,12 +1135,6 @@ a-chooser{
     }
     .account .main .content .page .inbox .list{
         margin: 30px 0;
-    }
-    .search-bar input{
-        margin-left: 5%;
-    }
-    .suggest > div{
-        margin-left: 5%;
     }
 }
 @media screen and (max-width: 768px){
@@ -1239,29 +1180,6 @@ a-chooser{
         height: 100%;
         overflow: auto;
     }
-    .search .cat{
-        padding: 20px;
-    }
-    .search .cat .elem{
-        flex-basis: 200px;
-        height: 200px;
-        margin: 0 20px;
-    }
-    .search .cat .elem span{
-        line-height: 200px;
-    }
-    .search-bar input{
-        margin: 0;
-    }
-    .suggest{
-        z-index: 1;
-    }
-    .suggest > div{
-        margin: 0;
-        width: 100%;
-        max-width: none;
-        padding-left: 57px;
-    }
     .create-ad-btn{
         height: 40px;
         line-height: 40px;
@@ -1289,6 +1207,7 @@ a-chooser{
         display: flex;
     }
     .ad img{
+        display: block;
         height: 100px;
         width: 100px;
     }
@@ -1353,44 +1272,6 @@ a-chooser{
     }
     .ads-view > div{
         margin: 0;
-    }
-    .search{
-        position: absolute;
-        bottom: 0;
-        top: 50px;
-        width: 100%;
-    }
-    .search .cat{
-        position: absolute;
-        height: 50%;
-        padding: 0;
-        display: block;
-        width: 100%;
-    }
-    .search .cat:nth-child(2){
-        top: 50%;
-    }
-    .search .cat .elem{
-        height: 50%;
-        border-radius: 0;
-        margin: 0;
-        width: 100%;
-        position: relative;
-    }
-    .search .cat .elem:hover{
-        box-shadow: none;
-    }
-    .search .cat .elem img{
-        display: inline-block;
-        position: absolute;
-        height: 100px;
-        width: 100%;
-        padding: 30px;
-        object-fit: contain
-    }
-    .search .cat .elem span{
-        opacity: 0.2;
-        transition: none;
     }
     .account .content .ad-prev{
         margin: 50px 0px;

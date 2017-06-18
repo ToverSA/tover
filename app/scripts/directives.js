@@ -16,14 +16,13 @@ app.directive('enterKey', [function () {
 app.directive('anyKey', [function () {
     'use strict';
     return function (scope, element, attrs) {
-        element.bind('keypress', function (event) {
-            log(event);
-            if (event.which === 13) {
+        element.bind('keyup', function (event) {
+            if (event.which >= 65 && event.which <= 90) {
                 scope.$apply(function () {
-                    scope.$eval(attrs.enterKey);
+                    scope.$eval(attrs.anyKey);
                 });
-                event.preventDefault();
             }
         });
     };
 }]);
+
