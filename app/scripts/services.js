@@ -68,6 +68,9 @@ app.service('AppStore', ['$cookies', function ($cookies) {
     self.getCampusName = function () {
         return dec($cookies.get(campusName));
     };
+    self.getCampusId = function () {
+        return $cookies.get(campusId);
+    };
     self.setCampus = function (id, name) {
         $cookies.put(campusId, id);
         $cookies.put(campusName, enc(name));

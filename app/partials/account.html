@@ -70,11 +70,11 @@
                         <span>Date created</span>
                         <span>Views</span>
                     </div>
-                    <div class="item" ng-repeat="x in [1]" a-ad>
-                        <span>My long title goes here</span>
-                        <span>R 423.90</span>
-                        <span>20 Feb 2017</span>
-                        <span>13</span>
+                    <div class="item" ng-repeat="x in ads" a-ad>
+                        <span>{{x.title}}</span>
+                        <span>{{x.price | currency:'R '}}</span>
+                        <span>{{x.date_created}}</span>
+                        <span>-</span>
                     </div>
                 </div>
             </div>

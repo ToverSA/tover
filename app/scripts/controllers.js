@@ -22,6 +22,15 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
         $scope.account.email = AppStore.getUserEmail();
         $scope.account.campus = AppStore.getCampusName();
     }
+    function loadAds() {
+        $http.get('api.php/v1/account/ads', {
+            headers: {'token': AppStore.getToken()}
+        }).then(function (res) {
+            $scope.ads = res.data;
+        }, function (err) {
+            //TODO if getting ads renders an error
+        });
+    }
     function init() {
         if (!AppStore.isToken()) {
             $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
@@ -31,6 +40,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             $scope.accountState = self.LOGIN;
         } else {
             loadAccount();
+            loadAds();
             $scope.accountState = self.MAIN;
         }
     }
@@ -115,6 +125,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
             AppStore.setUserId(res.data.id);
             $scope.accountState = self.MAIN;
             getUser();
+            loadAds();
         }, function (err) {
             //TODO handle auth errors
         });
@@ -215,13 +226,14 @@ app.controller('accountCtl', ['$scope', '$http', '$location', 'AppStore', functi
 
     init();
 }]);
-app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+app.controller('homeCtl', ['$scope', '$http', '$location', 'AppStore', function ($scope, $http, $location, AppStore) {
     'use strict';
     $scope.title = 'Some demo text and more testimonial bitch';
     function init() {
-        $http.get('/api/ads.json').then(function (res) {
+        $http.get('api.php/v1/ads?cid=' + AppStore.getCampusId()).then(function (res) {
+            $scope.ads = res.data;
         }, function (err) {
-            log(err);
+            //TODO handle error for get ads here
         });
     }
     $scope.viewAd = function (i) {
@@ -229,7 +241,7 @@ app.controller('homeCtl', ['$scope', '$http', '$location', function ($scope, $ht
     };
     init();
 }]);
-app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $location) {
+app.controller('adsCreateCtl', ['$scope', '$location', '$http', 'AppStore', function ($scope, $location, $http, AppStore) {
     'use strict';
     $scope.cat = false;
     $scope.display = '- Choose category - ';
@@ -280,15 +292,41 @@ app.controller('adsCreateCtl', ['$scope', '$location', function ($scope, $locati
             $scope.aPage += 1;
             $scope.dummy.push($scope.dummy.length + 1);
         } else if ($scope.aPage === 3) {
-            $location.url('/account');
+            $scope.ad.userId = AppStore.getUserId();
+            $scope.ad.images = [];
+            $scope.images.forEach(function (x) {
+                $scope.ad.images.push(x.substring(x.indexOf(',') + 1));
+            });
+            $http.post('api.php/v1/ads', $.param($scope.ad),
+                       { headers: {'token': AppStore.getToken()} }).then(function (res) {
+                $location.url('/account');
+            }, function (err) {
+                //TODO handle advert error
+            });
         }
     };
     $scope.fileNameChanged = function (files) {
         reader.readAsDataURL(files[0]);
     };
 }]);
-app.controller('adsCtl', ['$scope', '$timeout', '$location', function ($scope, $timeout, $location) {
+app.controller('adsCtl', ['$scope', '$timeout', '$location', '$http', '$routeParams', 'AppStore', function ($scope, $timeout, $location, $http, $routeParams, AppStore) {
     'use strict';
+    function init() {
+        if (typeof $routeParams.id !== 'undefined') {
+            $http.get('api.php/v1/ads?id=' + $routeParams.id).then(function (res) {
+                $scope.ad = res.data;
+                $scope.cover = $scope.ad.src_id.splice(0, 1);
+                $scope.dummy = new Array(5 - $scope.ad.src_id.length);
+                //$scope.dummy
+                var i = 0;
+                for (i = 0; i < $scope.dummy.length; i += 1) {
+                    $scope.dummy[i] = i;
+                }
+            }, function (err) {
+                //TODO handle geting ads error
+            });
+        }
+    }
     $scope.isGuest = true;
     $scope.sendMessage = function () {
         $scope.state = 2;
@@ -299,8 +337,13 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', function ($scope, $
     $scope.reportAd = function (id) {
         //TODO implement dialog for this
     };
+    init();
 }]);
-app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function ($scope, $routeParams, $location) {
+app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', function (
+    $scope,
+    $routeParams,
+    $location
+) {
     'use strict';
     if ($routeParams.hasOwnProperty('cat')) {
         $scope.search = 1;

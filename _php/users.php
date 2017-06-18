@@ -7,6 +7,7 @@ class Users{
   //TODO Send email verification
   public static function postNewUser(){
     $con = new mysqli(HOST, USER, PWD, DB);
+    $con->query('START TRANSACTION');
     $query = 'INSERT INTO login (email, password, token) VALUES (?, ?, ?)';
     $stmt = $con->prepare($query);
     $token = hash('sha256', $_POST['email']);
@@ -30,6 +31,8 @@ class Users{
     } else {
       header('HTTP/1.0 400 Bad request');
     }
+    $con->query('COMMIT');
+    //TODO sql transaction testing
   }
   public static function postAuthUser(){
     $con = new mysqli(HOST, USER, PWD, DB);
@@ -70,6 +73,8 @@ class Users{
       } else {
         header('HTTP/1.0 401 Unauthorized');
       }
+    } else {
+      header('HTTP/1.0 403 Forbidden');
     }
   }
 }

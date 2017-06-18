@@ -737,6 +737,10 @@ body{
     flex-basis: 180px;
     background-color: #ECEFF1;
 }
+.ads-view .main .head > div > img{
+    height: 100%;
+    width: 100%;
+}
 .ads-view .main .head > h3{
     padding-left: 5px;
     flex-grow: 1;
@@ -794,6 +798,10 @@ body{
     margin: auto;
     background-color: #ECEFF1;
 }
+.ads-view .pics > div > img{
+    height: 100%;
+    width: 100%;
+}
 .ads-view .messenger{
     background-color: #ECEFF1;
     padding: 5px;
@@ -832,12 +840,21 @@ body{
 .ads-view .messenger h2{
     text-align: center;
 }
+.ads-view h5{
+    margin: 0;
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    color: #00BFA5;
+}
+.ads-view p{
+    white-space: pre-wrap;
+}
 .ads-view .messenger img{
     display: block;
     height: 50px;
     width: auto;
     margin: 30px auto 0 auto;
-    filter: blur(2px);
 }
 .ads-view .messenger.expanded{
     height: 172px;

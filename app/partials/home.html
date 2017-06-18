@@ -9,13 +9,13 @@
         </div>
     </div>
     <div class="main-content">
-        <div class="ad" ng-repeat="x in [1, 2, 3]" ng-click="viewAd(x)">
-            <img src="img/placeholder.jpg"/>
+        <div class="ad" ng-repeat="x in ads" ng-click="viewAd(x.id)">
+            <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
             <div>
                 <!--70 characters for the title-->
-                <span ng-class="{large: (title.length < 40)}">{{title}}</span>
-                <span>R345.90</span>
-                <span>29 May</span>
+                <span ng-class="{large: (x.title.length < 40)}">{{x.title}}</span>
+                <span>{{x.price | currency:'R '}}</span>
+                <span>{{x.date_created}}</span>
             </div>
         </div>
     </div>

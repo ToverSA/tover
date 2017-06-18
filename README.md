@@ -48,6 +48,11 @@
 * GET /users/messages (get messages)
     * returns json resource
     * requires access token
+* GET /account/ads
+    * returns ads assocciated with account
+    * requires token
+* GET /account
+    * returns logged on user account
 * POST /users/messages (send new message)
     * returns status code
     * requires access token
@@ -57,7 +62,7 @@
     * returns access token
 * POST /users/recovery (recover account)
     * returns status code
-* POST /users/ads (create new ad)
+* POST /ads (create new ad)
     * resurns status code
     * requires access token
 * POST /promotion/ads/:id (request promotion)

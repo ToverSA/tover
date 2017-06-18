@@ -10,15 +10,17 @@
 <div class="ads-view">
     <div class="main" ng-switch="state">
         <div class="head">
-            <div></div>
-            <h3>Impressing title here of not more than 75 characters. And Im serious about</h3>
+            <div>
+                <img ng-src="api.php/v1/image/thumb.jpg?id={{cover[0]}}"/>
+            </div>
+            <h3>{{ad.title}}</h3>
             <span>R 321.45</span>
         </div>
         <div ng-switch-default>
             <div class="btns" ng-hide="msg">
 <!--                <span ng-click="reportAd(1)">REPORT</span>-->
                 <span ng-click="msg = !msg">MESSAGE</span>
-                <a href="tel:0604335310"><span class="a">CALL<span>060 433 5310</span></span></a>
+                <a ng-href="tel:{{ad.number}}"><span class="a">CALL<span>{{ad.number.substring(0, 3)}} {{ad.number.substring(3, 6)}} {{ad.number.substring(6, 10)}}</span></span></a>
             </div>
             <div class="btns" ng-show="msg">
                 <span ng-click="msg = !msg">CANCEL</span>
@@ -33,30 +35,30 @@
             <div class="btns" ng-hide="msg">
 <!--                <span ng-click="reportAd(1)">REPORT</span>-->
                 <span ng-click="msg = !msg">MESSAGE</span>
-                <a href="tel:0604335310"><span class="a">CALL<span>060 433 5310</span></span></a>
+                <a ng-href="tel:{{ad.number}}"><span class="a">CALL<span>{{ad.number.substring(0, 3)}} {{ad.number.substring(3, 6)}} {{ad.number.substring(6, 10)}}</span></span></a>
             </div>
             <div class="btns" ng-show="msg">
                 <span ng-click="msg = !msg">CANCEL</span>
                 <span class="a" ng-click="sendMessage()">SEND</span>
             </div>
             <div class="messenger" ng-class="{expanded: msg}">
-                <span>&#9679; gumedesduduzo@gmail.com</span>
+                <span>&#9679; {{email}}</span>
                 <textarea placeholder="You message here"></textarea>
             </div>
         </div>
         <div ng-switch-when="2">
             <div class="messenger" ng-class="{expanded: (!msg)}">
-                <img src="img/envelope.png"/>
+                <img src="img/success.png"/>
                 <h2>Message sent!</h2>
             </div>
         </div>
-        <p>Hi this is some text</p>
+        <h5>{{ad.name}}</h5>
+        <p>{{ad.description}}</p>
         <div class="pics">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div ng-repeat="x in ad.src_id">
+                <img ng-src="api.php/v1/image/thumb.jpg?id={{x}}"/>
+            </div>
+            <div ng-repeat="x in dummy"></div>
         </div>
     </div>
     <div class="recommendations"></div>

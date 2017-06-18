@@ -53,7 +53,7 @@ var app = angular.module('akomo', ['ngRoute', 'ngCookies']).config(['$routeProvi
         .when('/faqs',
             {
                 templateUrl: 'app/partials/ads.html',
-                controller: 'adsCtl'
+                controller: 'faqsCtl'
             })
         .when('/faqs/:section',
             {
