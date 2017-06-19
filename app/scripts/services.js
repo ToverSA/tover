@@ -1,7 +1,8 @@
 /*global app*/
 /*global log*/
 /*global CryptoJS*/
-app.service('AppStore', ['$cookies', function ($cookies) {
+/*global localStorage*/
+app.service('AppStore', [function () {
     'use strict';
     var self = this,
         campusName = 'Q0FNUFVTTkFNRQ',
@@ -21,65 +22,65 @@ app.service('AppStore', ['$cookies', function ($cookies) {
 //        return CryptoJS.AES.decrypt(str, 'akomo');
     }
     self.isToken = function () {
-        if (typeof $cookies.get(token) === 'undefined') {
+        if (localStorage.getItem(token) === null) {
             return false;
         } else {
             return true;
         }
     };
     self.isNew = function () {
-        if (typeof $cookies.get(campusId) === 'undefined') {
+        if (localStorage.getItem(campusId) === null) {
             return true;
         } else {
             return false;
         }
     };
     self.setToken = function (t) {
-        $cookies.put(token, enc(t));
+        localStorage.setItem(token, enc(t));
     };
     self.getToken = function () {
         /* Returns access token */
-        return dec($cookies.get(token));
+        return dec(localStorage.getItem(token));
     };
     self.getUserName = function () {
-        return dec($cookies.get(userName));
+        return dec(localStorage.getItem(userName));
     };
     self.getUserEmail = function () {
-        return dec($cookies.get(userEmail));
+        return dec(localStorage.getItem(userEmail));
     };
     self.getUserNumber = function () {
-        return dec($cookies.get(userNumber));
+        return dec(localStorage.getItem(userNumber));
     };
     self.setUserName = function (name) {
-        $cookies.put(userName, enc(name));
+        localStorage.setItem(userName, enc(name));
     };
     self.setUserNumber = function (number) {
-        $cookies.put(userNumber, enc(number));
+        localStorage.setItem(userNumber, enc(number));
     };
     self.setUserEmail = function (email) {
-        $cookies.put(userEmail, enc(email));
+        localStorage.setItem(userEmail, enc(email));
     };
     self.setUserId = function (id) {
-        $cookies.put(userId, id);
+        localStorage.setItem(userId, id);
     };
     self.getUserId = function () {
-        return $cookies.get(userId);
+        return localStorage.getItem(userId);
     };
     self.getCampusName = function () {
-        return dec($cookies.get(campusName));
+        return dec(localStorage.getItem(campusName));
     };
     self.getCampusId = function () {
-        return $cookies.get(campusId);
+        return localStorage.getItem(campusId);
     };
     self.setCampus = function (id, name) {
-        $cookies.put(campusId, id);
-        $cookies.put(campusName, enc(name));
+        localStorage.setItem(campusId, id);
+        localStorage.setItem(campusName, enc(name));
     };
     self.clearAll = function () {
-        $cookies.remove(token);
-        $cookies.remove(userId);
-        $cookies.remove(userName);
-        $cookies.remove(userEmail);
-        $cookies.remove(userNumber);
+        localStorage.removeItem(token);
+        localStorage.removeItem(userId);
+        localStorage.removeItem(userName);
+        localStorage.removeItem(userEmail);
+        localStorage.removeItem(userNumber);
     };
 }]);
