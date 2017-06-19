@@ -1,17 +1,30 @@
 <div class="search-bar">
     <img ng-click="back()" src="img/back.png"/>
-    <input type="search" any-key="suggest()" placeholder="Search" ng-model="query"/>
-    <img src="/img/settings.png"/>
+    <input type="search" any-key="suggest()" enter-key="searchFor()" placeholder="Search" ng-model="query"/>
+    <img src="/img/settings.png" ng-click="opt = !opt"/>
+    <div class="menu" ng-show="opt"></div>
 </div>
 <div class="suggest" ng-show="(query.length > 1) && isTyping">
     <div class="item" ng-click="searchFor()">
         <span>{{query}}</span>
         <span>Search...</span>
     </div>
-    <div class="item" ng-repeat="x in ads" ng-click="viewAd(x.id)">
+    <div class="item" ng-repeat="x in ad" ng-click="viewAd(x.id)">
         <span>{{x.title}}</span>
-        <span>{{x.price | currency: 'R '}} - {{x.date_created}}</span>
+        <span>{{x.price | currency: 'R'}} - Posted on {{x.date_created}}</span>
     </div>
 </div>
 <div class="search">
+    <div class="main-content">
+<!--        <h2>Showing {{campus}}</h2>-->
+        <div class="ad" ng-repeat="x in ads" ng-click="viewAd(x.id)">
+            <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
+            <div>
+                <!--70 characters for the title-->
+                <span ng-class="{large: (x.title.length < 40)}">{{x.title}}</span>
+                <span>{{x.price | currency:'R '}}</span>
+                <span>{{x.date_created}}</span>
+            </div>
+        </div>
+    </div>
 </div>

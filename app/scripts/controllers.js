@@ -236,6 +236,7 @@ app.controller('homeCtl', ['$scope', '$http', '$location', 'AppStore', function 
             //TODO handle error for get ads here
         });
     }
+    $scope.campus = AppStore.getCampusName();
     $scope.viewAd = function (i) {
         $location.url('/ads/' + i);
     };
@@ -345,25 +346,26 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
     if (typeof $routeParams.q !== 'undefined') {
         $scope.query = $routeParams.q;
     }
-    $scope.ads = [];
+    $scope.ad = [];
     function isMatch() {
-        if ($scope.ads.length === 0) {
+        if ($scope.ad.length === 0) {
             return false;
         } else {
             var match = false,
                 rem = [];
-            $scope.ads.forEach(function (x) {
+            $scope.ad.forEach(function (x) {
                 var a = x.title.toLowerCase(),
                     b = $scope.query.toLowerCase(),
                     c = a.match(b);
                 if (c === null) {
-                    rem.push($scope.ads.indexOf(x));
+                    rem.push($scope.ad.indexOf(x));
                 } else {
                     match = true;
                 }
             });
+
             rem.forEach(function (x) {
-                $scope.ads.splice(x, 1);
+                $scope.ad.splice(x, 1);
             });
             return match;
         }
@@ -373,7 +375,7 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
                   + AppStore.getCampusId()
                   + '&q='
                   + $scope.query).then(function (res) {
-            $scope.ads = res.data;
+            $scope.ad = res.data;
         }, function (err) {
             //TODO sugestions error
         });
@@ -400,6 +402,9 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
     };
     $scope.searchFor = function () {
         $location.url('/ads/search/?q=' + $scope.query);
+    };
+    $scope.fallback = function (evt) {
+        window.alert('fallback');
     };
 }]);
 app.controller('faqsCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
