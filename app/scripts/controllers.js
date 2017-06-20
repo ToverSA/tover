@@ -335,6 +335,10 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', '$http', '$routePar
             $scope.state = -1;
         }, 1000);
     };
+    $scope.userClicked = function () {
+        $location.url('/ads/search?u=' + $scope.ad.uid
+                      + '&name=' + $scope.ad.name);
+    };
     $scope.reportAd = function (id) {
         //TODO implement dialog for this
     };
@@ -342,10 +346,56 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', '$http', '$routePar
 }]);
 app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 'AppStore', function ($scope, $routeParams, $location, $http, AppStore) {
     'use strict';
+    var insties = [],
+        state = 0,
+        prefs,
+        isPrefChanged = false;
+    $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
+        insties = res.data;
+        var i = 0;
+        $scope.list = [];
+        insties.forEach(function (x) {
+            $scope.list.push(x);
+        });
+    }, function (err) {
+        //TODO error requesting campuses
+    });
+    $scope.browse = function (i) {
+        if (state === 0) {
+            $scope.mSub += ' > ' + insties[i].name;
+            $scope.list = [];
+            insties[i].campuses.forEach(function (x) {
+                $scope.list.push(x);
+            });
+            state = 1;
+        } else {
+            AppStore.clearAll();
+            AppStore.setCampus($scope.list[i].id, $scope.list[i].name);
+            $scope.cName = $scope.list[i].name;
+            $scope.mState = 0;
+            $scope.mSub = '';
+            $scope.list = insties;
+            state = 0;
+            $scope.query = '';
+            $scope.sSection = 0;
+            $scope.opt = false;
+            $location.url('/ads/search');
+        }
+    };
+    $scope.cName = AppStore.getCampusName();
     $scope.query = '';
+    $scope.sSection = 0;
+    function search() {}
     if (typeof $routeParams.q !== 'undefined') {
         $scope.query = $routeParams.q;
+        $scope.sSection = 1;
+    } else if (typeof $routeParams.u !== 'undefined') {
+        if (typeof $routeParams.name !== 'undefined') {
+            $scope.sSection = 2;
+            $scope.query = $routeParams.name;
+        }
     }
+    function reload() {}
     $scope.ad = [];
     function isMatch() {
         if ($scope.ad.length === 0) {
@@ -379,6 +429,14 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
         }, function (err) {
             //TODO sugestions error
         });
+        $http.get('api.php/v1/users?cid='
+                  + AppStore.getCampusId()
+                  + '&q='
+                  + $scope.query).then(function (res) {
+            $scope.user = res.data;
+        }, function (err) {
+            //TODO sugestions error
+        });
     }
     $scope.back = function () {
         if ($scope.search) {
@@ -387,12 +445,31 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
             $location.url('/home');
         }
     };
+    $scope.menuBack = function () {
+        if ($scope.mState > 0) {
+            $scope.mState = 0;
+            $scope.mSub = '';
+            $scope.list = [];
+            insties.forEach(function (x) {
+                $scope.list.push(x);
+            });
+            state = 0;
+        } else {
+            $scope.opt = false;
+            $location.url('/ads/search');
+            reload();
+        }
+    };
+    $scope.viewUser = function (i, j) {
+        $location.url('/ads/search?u=' + i + '&name=' + j);
+    };
     $scope.viewAd = function (i) {
         $location.url('/ads/' + i);
     };
     $scope.suggest = function () {
         if (!$scope.isTyping) {
             $scope.isTyping = true;
+            $scope.sSection = 0;
         }
         if ($scope.query.length > 1) {
             if (!isMatch()) {
@@ -401,11 +478,63 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
         }
     };
     $scope.searchFor = function () {
-        $location.url('/ads/search/?q=' + $scope.query);
+        if ($scope.query.length > 1) {
+            $location.url('/ads/search/?q=' + $scope.query);
+        }
     };
-    $scope.fallback = function (evt) {
-        window.alert('fallback');
+    $scope.changeCampus = function () {
+        $scope.mState = 1;
+        $scope.mSub = 'Campus';
     };
+    $scope.cats = [
+        {id: 1, label: 'All categories'},
+        {id: 2, label: 'Books & Study Materials'},
+        {id: 3, label: 'Electronics & Gadgets'},
+        {id: 4, label: 'Phones & Laptops'},
+        {id: 5, label: 'Services & Other'}
+    ];
+    $scope.changeCategory = function (i) {
+        if (typeof i === 'undefined') {
+            $scope.mState = 2;
+            $scope.mSub = 'Category';
+        } else {
+            log($scope.cats[i]);
+            prefs[0] = $scope.cats[i];
+            AppStore.setSearchPrefs(prefs);
+            $scope.catLabel = $scope.cats[i].label;
+            $scope.mState = 0;
+            $scope.mSub = '';
+        }
+    };
+    $scope.sorts = [
+        {id: 1, label: 'Latest'},
+        {id: 2, label: 'Top viewed'},
+        {id: 3, label: 'Price (lowest to highest)'},
+        {id: 4, label: 'Price (highest to lowest)'}
+    ];
+    $scope.changeSorting = function (i) {
+        if (typeof i === 'undefined') {
+            $scope.mState = 3;
+            $scope.mSub = 'Sort By';
+        } else {
+            log($scope.sorts[i]);
+            prefs[1] = $scope.sorts[i];
+            AppStore.setSearchPrefs(prefs);
+            $scope.sortLabel = $scope.sorts[i].label;
+            $scope.mState = 0;
+            $scope.mSub = '';
+        }
+    };
+    prefs = AppStore.getSearchPrefs();
+    if (prefs === false) {
+        $scope.catLabel = $scope.cats[0].label;
+        $scope.sortLabel = $scope.sorts[0].label;
+        prefs = [$scope.cats[0], $scope.sorts[0]];
+        AppStore.setSearchPrefs(prefs);
+    } else {
+        $scope.catLabel = prefs[0].label;
+        $scope.sortLabel = prefs[1].label;
+    }
 }]);
 app.controller('faqsCtl', ['$scope', '$routeParams', function ($scope, $routeParams) {
     'use strict';
@@ -421,7 +550,7 @@ app.controller('delAccCtl', ['$scope', '$location', function ($scope, $location)
 app.controller('landingCtl', ['$scope', '$http', 'AppStore', '$location', function ($scope, $http, AppStore, $location) {
     'use strict';
     var insties = [];
-    $http.get('api.php/v1/campuses').then(function (res) {
+    $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
         insties = res.data;
         var i = 0;
         $scope.list = [];
@@ -429,7 +558,7 @@ app.controller('landingCtl', ['$scope', '$http', 'AppStore', '$location', functi
             $scope.list.push(x);
         });
     }, function (err) {
-        log(err);
+        //TODO error requesting campuses
     });
     $scope.state = 0;
     $scope.browse = function (i) {
