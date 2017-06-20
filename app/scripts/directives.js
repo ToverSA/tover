@@ -17,7 +17,7 @@ app.directive('anyKey', [function () {
     'use strict';
     return function (scope, element, attrs) {
         element.bind('keyup', function (event) {
-            if ((event.which >= 65 && event.which <= 90) || event.which === 229) {
+            if ((event.which >= 65 && event.which <= 90) || event.which === 229 || event.which === 8) {
                 scope.$apply(function () {
                     scope.$eval(attrs.anyKey);
                 });
