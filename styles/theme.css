@@ -135,7 +135,7 @@ body{
     height: 50px;
     display: flex;
     justify-content: space-between;
-    background-color: #607D8B;
+    background-color: #FF6722;
 }
 .header .right{
     overflow: hidden;
@@ -572,7 +572,7 @@ body{
     line-height: 40px;
     text-align: center;
     margin: 10px 30px;
-    background-color: #009688;
+    background-color: #1E88E5;
     color: #FFF;
     cursor: pointer;
     position: absolute;
@@ -729,7 +729,7 @@ h2.title{
     background-color: #FFF;
     box-shadow: 0 1px 1px 1px #CCC;
     padding-bottom: 5px;
-    margin: 40px auto;
+    margin: 40px auto 0 auto;
 }
 .ads-view > div.suggests{
     flex-basis: 400px;
@@ -741,7 +741,6 @@ h2.title{
     font-family: Lato Thin;
     font-family: Lato Thin;
 }
-.ads-view > div.suggests > h3{}
 .ads-view .main .head{
     padding: 5px;
     display: flex;
@@ -795,13 +794,13 @@ h2.title{
     margin: 5px;
     height: 35px;
     line-height: 35px;
-    color: #00BFA5;
+    color: #1E88E5;
     cursor: pointer;
 }
 .ads-view .btns span.a{
     color: #FFF;
     border-radius: 5px;
-    background-color: #00BFA5;
+    background-color: #1E88E5;
 }
 .ads-view > div.main > .pics{
     display: flex;
@@ -858,7 +857,7 @@ h2.title{
 }
 .viewer > .pager{
     position: absolute;
-    bottom: 10px;
+    bottom: 15px;
     height: 60px;
     width: 120px;
     left: 50%;
@@ -938,7 +937,7 @@ h2.title{
     display: inline-block;
     float: right;
     padding: 5px;
-    color: #00BFA5;
+    color: #1E88E5;
     cursor: pointer;
 }
 .ads-view p{
@@ -966,7 +965,7 @@ a-chooser{
     width: 100%;
 }
 .create-ad:nth-child(1){
-    background-color: #009688;
+    background-color: #1E88E5;
 /*    background-color: #FF5722;*/
     height: 20%;
 }
@@ -993,7 +992,7 @@ a-chooser{
     padding: 5px;
 }
 .create-ad .wrapper input:focus{
-    border-bottom-color: #00BFA5;
+    border-bottom-color: #1E88E5;
 }
 .create-ad .wrapper input[type=text]{
     width: 100%;
@@ -1017,7 +1016,7 @@ a-chooser{
     font-size: 1em;
 }
 .create-ad .wrapper textarea:focus{
-    border-color: #00BFA5;
+    border-color: #1E88E5;
 }
 .create-ad .wrapper{
     position: relative;
@@ -1036,10 +1035,10 @@ a-chooser{
     cursor: pointer;
 }
 .create-ad .wrapper > div > .btns span:nth-child(1){
-    color: #00BFA5;
+    color: #1E88E5;
 }
 .create-ad .wrapper > div > .btns span:nth-child(2){
-    background-color: #00BFA5;
+    background-color: #1E88E5;
     color: #FFF;
     border-radius: 5px;
 }
@@ -1053,7 +1052,7 @@ a-chooser{
     padding: 5px;
 }
 .create-ad .wrapper .album .upload-btn{
-    background-color: #009688;
+    background-color: #1E88E5;
     cursor: pointer;
 }
 .create-ad .wrapper .album > div{
