@@ -88,7 +88,6 @@ class Users{
       $query = $query . "WHERE users.campus_id=? AND users.name LIKE '%".$_GET['q']."%' ";
       $query = $query . 'GROUP BY login.id, users.name, users.number';
       $stmt = $con->prepare($query);
-      // print_r($con);
       $stmt->bind_param('i', $_GET['cid']);
       $stmt->execute();
       $stmt->bind_result($id, $email, $name, $num, $num_ads);
