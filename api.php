@@ -15,6 +15,10 @@ function handleGet(){
       case '/v1/account/':
         Users::getAccount();
         break;
+      case '/v1/users':
+      case '/v1/users/':
+        Users::getUsers();
+        break;
       case '/v1/account/ads':
       case '/v1/account/ads/':
         Ads::getAccountAds();
