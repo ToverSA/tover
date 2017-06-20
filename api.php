@@ -31,6 +31,10 @@ function handleGet(){
       case '/v1/image/thumb.jpg/':
         Image::getThumb();
         break;
+      case '/v1/image/large.jpg':
+      case '/v1/image/large.jpg/':
+        Image::getLarge();
+        break;
       default:
         break;
     }

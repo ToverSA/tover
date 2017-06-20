@@ -56,6 +56,28 @@ class Image{
       }
     }
   }
+  public static function getLarge(){
+    $con = new mysqli(HOST, USER, PWD, DB);
+    if ($_GET['id'] == 0){
+      $query = 'SELECT src FROM images WHERE advert_id=? ORDER BY id ASC LIMIT 1';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('i', $_GET['a']);
+      $stmt->execute();
+      $stmt->bind_result($src);
+      if ($stmt->fetch()){
+        self::output($src, false);
+      }
+    } else {
+      $query = 'SELECT src FROM images WHERE id=? ORDER BY id ASC LIMIT 1';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('i', $_GET['id']);
+      $stmt->execute();
+      $stmt->bind_result($src);
+      if ($stmt->fetch()){
+        self::output($src);
+      }
+    }
+  }
 }
 
 ?>
