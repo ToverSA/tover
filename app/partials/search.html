@@ -1,8 +1,49 @@
 <div class="search-bar">
     <img ng-click="back()" src="img/back.png"/>
-    <input type="search" any-key="suggest()" enter-key="searchFor()" placeholder="Search" ng-model="query"/>
+    <input type="text" any-key="suggest()" enter-key="searchFor()" placeholder="Search" ng-model="query"/>
     <img src="/img/settings.png" ng-click="opt = !opt"/>
-    <div class="menu" ng-show="opt"></div>
+    <div class="menu" ng-show="opt">
+        <div class="head" ng-class="{sub: mState > 0}">
+            <div class="icon" ng-click="menuBack()" ng-class="{active: mState > 0}" ng-init="mState = 0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h3>Search options</h3>
+            <span>{{mSub}}</span>
+        </div>
+        <div class="body" ng-switch="mState">
+            <div ng-switch-default>
+                <div class="item a" ng-click="changeSorting()">
+                    <h4>Sort By</h4>
+                    <span>{{sortLabel}}</span>
+                </div>
+                <div class="item a" ng-click="changeCategory()">
+                    <h4>Category</h4>
+                    <span>{{catLabel}}</span>
+                </div>
+                <div class="item a" ng-click="changeCampus()">
+                    <h4>Campus</h4>
+                    <span>{{cName}}</span>
+                </div>
+            </div>
+            <div ng-switch-when="1">
+                <div class="item b" ng-repeat="x in  list" ng-click="browse(list.indexOf(x))">
+                    <h4>{{x.name}}</h4>
+                </div>
+            </div>
+            <div ng-switch-when="2">
+                <div class="item b" ng-repeat="x in cats" ng-click="changeCategory(cats.indexOf(x))">
+                    <h4>{{x.label}}</h4>
+                </div>
+            </div>
+            <div ng-switch-when="3">
+                <div class="item b" ng-repeat="x in sorts" ng-click="changeSorting(sorts.indexOf(x))">
+                    <h4>{{x.label}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="suggest" ng-show="(query.length > 1) && isTyping">
     <div class="item" ng-click="searchFor()">
@@ -10,21 +51,24 @@
         <span>Search...</span>
     </div>
     <div class="item" ng-repeat="x in ad" ng-click="viewAd(x.id)">
+        <img src="/img/shopping-bag.png"/>
         <span>{{x.title}}</span>
         <span>{{x.price | currency: 'R'}} - Posted on {{x.date_created}}</span>
     </div>
+    <div class="item" ng-repeat="x in user" ng-click="viewUser(x.id, x.name)">
+        <img src="/img/man-1.png"/>
+        <span>Ads by {{x.name}}</span>
+        <span>{{x.num_ads}} ads in total</span>
+    </div>
 </div>
-<div class="search">
-    <div class="main-content">
-<!--        <h2>Showing {{campus}}</h2>-->
-        <div class="ad" ng-repeat="x in ads" ng-click="viewAd(x.id)">
-            <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
-            <div>
-                <!--70 characters for the title-->
-                <span ng-class="{large: (x.title.length < 40)}">{{x.title}}</span>
-                <span>{{x.price | currency:'R '}}</span>
-                <span>{{x.date_created}}</span>
-            </div>
-        </div>
+<div class="search" ng-switch="sSection">
+    <div class="main-content" ng-switch-default>
+        <h2>Promoted Ads</h2>
+    </div>
+    <div class="main-content" ng-switch-when="1">
+        <h2>Results for {{query}}</h2>
+    </div>
+    <div class="main-content" ng-switch-when="2">
+        <h2>Ads by {{query}}</h2>
     </div>
 </div>
