@@ -11,15 +11,14 @@ app.service('AppStore', [function () {
         userName = 'VVNFUk5BTUU',
         userEmail = 'VVNFUkVNQUlM',
         userNumber = 'VVNFUk5VTUJFUg',
+        searchSettings = 'U0VBUkNIU0VUVElOR1M',
         token = 'VE9LRU4';
-    //TODO CryptoJS bug
     function enc(str) {
-        return str;
-//        return CryptoJS.AES.encrypt(str, 'akomo');
+        return CryptoJS.AES.encrypt(str, 'akomo');
     }
     function dec(str) {
-        return str;
-//        return CryptoJS.AES.decrypt(str, 'akomo');
+        var bytes = CryptoJS.AES.decrypt(str, 'akomo');
+        return bytes.toString(CryptoJS.enc.Utf8);
     }
     self.isToken = function () {
         if (localStorage.getItem(token) === null) {
@@ -75,6 +74,16 @@ app.service('AppStore', [function () {
     self.setCampus = function (id, name) {
         localStorage.setItem(campusId, id);
         localStorage.setItem(campusName, enc(name));
+    };
+    self.setSearchPrefs = function (obj) {
+        localStorage.setItem(searchSettings, enc(JSON.stringify(obj)));
+    };
+    self.getSearchPrefs = function () {
+        var x = localStorage.getItem(searchSettings);
+        if (x === null) {
+            return false;
+        }
+        return JSON.parse(dec(x));
     };
     self.clearAll = function () {
         localStorage.removeItem(token);
