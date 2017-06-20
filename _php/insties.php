@@ -20,10 +20,10 @@ class Insties{
       array_push($arr, $i);
     }
     $stmt->close();
-    foreach ($arr as &$value) {
+    foreach ($arr as $value) {
       $query = 'SELECT id, name FROM campuses WHERE inst_id=?';
       $stmt = $con->prepare($query);
-      $stmt->bind_param('i', $value);
+      $stmt->bind_param('i', $value->id);
       $stmt->execute();
       $stmt->bind_result($id, $name);
       while ($stmt->fetch()) {
