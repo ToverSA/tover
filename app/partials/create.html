@@ -25,13 +25,13 @@
         <div ng-switch-when="2">
             <h3>Upload pictures</h3>
             <div class="album">
-                <div ng-repeat="x in images">
-                    <img ng-src="{{x}}"/>
-                    <img class="cbtn" src="img/cancel.png" ng-click="clear(images.indexOf(x))"/>
-                </div>
                 <div class="upload-btn" ng-show="images.length < 6">
                     <img src="/img/upload-1.png"/>
                     <input type="file" onchange="angular.element(this).scope().fileNameChanged(this.files)" accept="image/*">
+                </div>
+                <div ng-repeat="x in images">
+                    <img ng-src="{{x}}"/>
+                    <img class="cbtn" src="img/cancel.png" ng-click="clear(images.indexOf(x))"/>
                 </div>
                 <div ng-repeat="x in dummy"></div>
             </div>

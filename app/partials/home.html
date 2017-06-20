@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="main-content">
-        <h2>Latest Ads from {{campus}}</h2>
+        <h2 class="title">Ads for {{campus}}</h2>
         <div class="ad" ng-repeat="x in ads" ng-click="viewAd(x.id)">
             <div class="head">
                 <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>

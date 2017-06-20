@@ -62,19 +62,20 @@
                 <span ng-click="logout()">Sign out</span>
             </div>
             <div class="page" ng-switch-when="5">
+                <h1 ng-show="ads.length === 0">Nothing to see here. Create your first ad!</h1>
                 <span class="create-ad-btn" ng-click="createAd()">CREATE AD</span>
-                <div class="ad-prev">
+                <div class="ad-prev" ng-show="ads.length !== 0">
                     <div class="item heading">
                         <span>Ad Title</span>
                         <span>Price</span>
                         <span>Date created</span>
                         <span>Views</span>
                     </div>
-                    <div class="item" ng-repeat="x in ads" a-ad>
+                    <div class="item" ng-repeat="x in ads" a-ad ng-click="openAd(x.id)">
                         <span>{{x.title}}</span>
                         <span>{{x.price | currency:'R '}}</span>
                         <span>{{x.date_created}}</span>
-                        <span>-</span>
+                        <span>{{x.count}}</span>
                     </div>
                 </div>
             </div>
