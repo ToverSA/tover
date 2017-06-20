@@ -52,7 +52,7 @@
                 <h2>Message sent!</h2>
             </div>
         </div>
-        <h5>{{ad.name}}</h5>
+        <h5 ng-click="userClicked()">{{ad.name}}</h5>
         <p>{{ad.description}}</p>
         <div class="pics">
             <div ng-repeat="x in ad.src_id">
@@ -61,6 +61,7 @@
             <div ng-repeat="x in dummy"></div>
         </div>
     </div>
-    <div class="recommendations"></div>
+    <div class="suggests">
+        <h3>What we thought you might like</h3>
+    </div>
 </div>
-<div class="report-ad"></div>
