@@ -3,7 +3,7 @@ function log(str) {
     'use strict';
     window.console.log(str);
 }
-var app = angular.module('akomo', ['ngRoute', 'ngCookies']).config(['$routeProvider', function ($routeProvider) {
+var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', function ($routeProvider) {
     'use strict';
     $routeProvider
         .when('/',
