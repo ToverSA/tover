@@ -123,6 +123,18 @@ class Ads{
         array_push($imgs, Image::optimise($src));
       }
       $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT id FROM login WHERE token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      $stmt->bind_result($id);
+      if ($stmt->fetch()) {
+        if ($id != $_POST['userId']) {
+          header('HTTP/1.0 401 Unauthorized');
+          return false;
+        }
+      }
+      $stmt->close();
       $con->autocommit(false);
       $con->query('START TRANSACTION');
       $query = 'INSERT INTO advert SET user_id=?, price=?, title=?, description=?,'.
@@ -134,7 +146,6 @@ class Ads{
       $_POST['description'], $_POST['category'], $date);
       $stmt->execute();
       $aid = $stmt->insert_id;
-      $stmt->close();
       if ($aid > 0){
         $query = 'INSERT INTO images (advert_id, src) VALUES (?, ?)';
         $stmt = $con->prepare($query);
@@ -146,15 +157,17 @@ class Ads{
           $con->query('COMMIT');
           header('HTTP/1.0 201 Created');
         } else {
+          print_r($stmt);
           header('HTTP/1.0 500 Internal server Error');
           $con->query('ROLLBACK');
         }
       } else {
-        header('HTTP/1.0 401 Unauthorized');
+        header('HTTP/1.0 500 Internal server Error');
       }
     } else {
-      header('HTTP/1.0 403 Forbidden');
+      header('HTTP/1.0 400 Bad request');
     }
+    return true;
   }
 }
 
