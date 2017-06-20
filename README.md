@@ -53,6 +53,8 @@
     * requires token
 * GET /account
     * returns logged on user account
+* GET /users
+    * returns users as json data
 * POST /users/messages (send new message)
     * returns status code
     * requires access token
