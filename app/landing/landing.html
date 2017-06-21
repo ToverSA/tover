@@ -1,0 +1,21 @@
+<div class="landing" ng-switch="lState">
+    <div class="heading">
+        <a href="/account"><span>LOGIN</span></a>
+        <a href="#"><img src="/img/google-play-badge.png"/></a>
+    </div>
+    <div class="splash" ng-switch-default>
+        <img src="/img/Ako.png"/>
+        <div class="intro">
+            <h1>Sell absolutely anything you want! Buy absolutely everything you can.</h1>
+            <h1>Welcome to the <i>ALL KEPT ORIGINAL</i>&copy; Market Online</h1>
+            <span ng-click="getStarted()">GET STARTED</span>
+        </div>
+    </div>
+</div>
+<div class="dialog" ng-show="dialog">
+    <h2>Choose your campus</h2>
+    <H4 ng-show="(state === 1)">{{iName}} - <span ng-click="change()">change</span></H4>
+    <div class="list-wrapper">
+        <span ng-click="browse(list.indexOf(x))" ng-repeat="x in list">{{x.name}}</span>
+    </div>
+</div>

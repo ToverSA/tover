@@ -1,0 +1,79 @@
+<div header account="1"></div>
+<div class="account" ng-switch="section">
+    <div ng-switch-default></div>
+    <div class="main" ng-switch-when="console" ng-controller="consoleCtl">
+        <div class="header">
+            <div class="item">
+                <img src="/img/add.png"/>
+                <span>CREATE AD</span>
+            </div>
+            <div class="item">
+                <img src="img/envelope.png"/>
+                <span>INBOX</span>
+                <div class="color-accent"></div>
+            </div>
+            <div class="item">
+                <img src="img/settings-2.png"/>
+                <span>PREFRENCES</span>
+                <div class="color-accent"></div>
+            </div>
+            <div class="item" ng-click="logout()">
+                <img src="img/logout.png"/>
+                <span>LOG OUT</span>
+            </div>
+        </div>
+        <h1 ng-show="ads.length === 0">Nothing to see here. Create your first ad!</h1>
+        <div class="ad-prev" ng-show="ads.length !== 0">
+            <div class="item heading">
+                <span>Ad Title</span>
+                <span>Price</span>
+                <span>Date created</span>
+                <span>Views</span>
+            </div>
+            <div class="item" ng-repeat="x in ads" a-ad ng-click="openAd(x.id)">
+                <span>{{x.title}}</span>
+                <span>{{x.price | currency:'R '}}</span>
+                <span>{{x.date_created}}</span>
+                <span>{{x.count}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="login" ng-switch-when="login" ng-controller="loginCtl">
+        <h2>Login to account</h2>
+        <img src="img/avatar.png" alt="Account"/>
+        <input type="text" placeholder="Email" ng-model="authData.email"/>
+        <input type="password" placeholder="Password" ng-model="authData.password"/>
+        <div>
+            <span class="color-accent-inv" ng-click="toRecovery()">Fogort password?</span>
+            <span class="color-accent" ng-click="logIn()">Log in</span>
+        </div>
+        <span class="color-accent-inv" ng-click="toRegister()">Create new account</span>
+        <span ng-show="err" class="err">{{errMsg}}</span>
+    </div>
+    <div class="register" ng-switch-when="register">
+        <h2>Register new account</h2>
+        <input type="text" placeholder="Display name" ng-model="formData.dName"/>
+        <input type="email" placeholder="Email" ng-model="formData.email"/>
+        <input type="text" placeholder="Number" ng-model="formData.number"/>
+        <div class="a-chooser">
+            <span ng-click="openChooser()">{{lTitle}}</span>
+            <div class="c-dialog" ng-show="isCOpen">
+                <h4 ng-show="(cState === 1)">{{sTitle}} - <span ng-click="changeC()">Change</span></h4>
+                <span ng-click="browse(instList.indexOf(x))" ng-repeat="x in instList">{{x.name}}</span>
+            </div>
+        </div>
+        <input type="password" placeholder="Password" ng-model="formData.password"/>
+        <input type="password" placeholder="Re-enter password" ng-model="formData.rePwd"/>
+        <span class="color-accent" ng-click="createNew()">Create account</span>
+        <span class="color-accent-inv" ng-click="toLogin()">Already have an account?</span>
+        <span ng-show="err" class="err">{{errMsg}}</span>
+    </div>
+    <div class="recovery" ng-switch-when="recovery">
+        <h1>Recover your account!</h1>
+        <p>Enter your email address</p>
+        <input ng-class="{err: err}" type="text" placeholder="Email" ng-model="recoveryMail"/>
+        <span class="submit color-accent" ng-click="recover()">Submit</span>
+        <h4 ng-class="{success: success}">An email to reset your password will be sent to you in a moment</h4>
+        <span class="color-accent-inv" ng-click="toLogin()" class="back">Log in</span>
+    </div>
+</div>

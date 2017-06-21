@@ -1,0 +1,52 @@
+<div class="header" header></div>
+<div class="ads-view">
+    <div class="main" ng-switch="state">
+        <div class="head">
+            <div>
+                <img ng-src="api.php/v1/image/thumb.jpg?id={{cover[0]}}" ng-click="view(cover[0])"/>
+            </div>
+            <h2>{{ad.title}}</h2>
+            <span>R 321.45</span>
+        </div>
+        <div ng-switch-default>
+            <div class="btns">
+                <span class="color-accent-inv" ng-click="sendMessage()">MESSAGE</span>
+                <a ng-href="tel:{{ad.number}}"><span class="color-accent a">CALL<span>{{ad.number.substring(0, 3)}} {{ad.number.substring(3, 6)}} {{ad.number.substring(6, 10)}}</span></span></a>
+            </div>
+        </div>
+        <div ng-switch-when="2">
+            <div class="btns">
+                <span>DELETE</span>
+                <span class="a">PROMOTE</span>
+            </div>
+        </div>
+        <h5 class="color-accent-inv" ng-click="userClicked()" ng-hide="state === 2">{{ad.name}}</h5>
+        <p>{{ad.description}}</p>
+        <div class="pics">
+            <div ng-repeat="x in ad.src_id">
+                <img ng-src="api.php/v1/image/thumb.jpg?id={{x}}" ng-click="view(x)"/>
+            </div>
+            <div ng-repeat="x in dummy"></div>
+        </div>
+    </div>
+    <div class="suggests" ng-hide="state === 2">
+        <h2 class="title">Promoted ads</h2>
+    </div>
+</div>
+<div class="viewer" ng-show="isViewing">
+    <img ng-src="api.php/v1/image/large.jpg?id={{inView.id}}"/>
+    <div class="closer" ng-click="isViewing = false">
+        <span></span>
+        <span></span>
+    </div>
+    <div class="pager">
+        <div class="key" ng-class="{off: !inView.prev}"  ng-click="prev()">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="key" ng-class="{off: !inView.next}" ng-click="next()">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,7 @@ class Ads{
       $stmt->bind_result($title, $price, $desc, $name, $uid, $num);
       if ($stmt->fetch()){
         $a = new Ads();
+        $a->id = $_GET['id'];
         $a->title = $title;
         $a->price = $price;
         $a->description = $desc;

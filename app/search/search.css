@@ -1,0 +1,196 @@
+.main-content{
+    max-width: 1024px;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.search-bar{
+    display: flex;
+    height: 50px;
+    justify-content: flex-;
+    background-color: #FFF;
+}
+.search-bar > input{
+    outline: none;
+    border: 0;
+    padding: 10px;
+    font-size: 1em;
+    flex-grow: 1;
+}
+.search-bar > img{
+    width: 50px;
+    height: 100%;
+    padding: 12px;
+    cursor: pointer;
+}
+.search-bar > .menu{
+    display: block;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: #FFF;
+    width: 270px;
+    box-shadow: 0 0 1px 1px #CCC;
+    z-index: 2;
+    transition: 0.2s;
+}
+.search-bar > .menu > .head{
+    display: flex;
+    border-bottom: 1px solid #EEE;
+    position: relative;
+}
+.search-bar > .menu > .head > .icon{
+    display: block;
+    height: 40px;
+    flex-basis: 40px;
+    position: relative;
+    cursor: pointer;
+}
+.search-bar > .menu > .head > .icon > span{
+    display: block;
+    height: 2px;
+    width: 30px;
+    background-color: #000;
+    position: absolute;
+    left: 5px;
+    top: 18px;
+    border-radius: 2px;
+    transition: 0.2s;
+}
+.search-bar > .menu > .head > .icon > span:nth-child(1){
+    transform: rotate(45deg);
+}
+.search-bar > .menu > .head > .icon > span:nth-child(2){
+    opacity: 0;
+}
+.search-bar > .menu > .head > .icon > span:nth-child(3){
+    transform: rotate(-45deg);
+}
+.search-bar > .menu > .head > .icon.active > span:nth-child(1){
+    transform: rotate(45deg) translateY(7px);
+    width: 15px;
+}
+.search-bar > .menu > .head > .icon.active > span:nth-child(2){
+    opacity: 1;
+    width: 25px;
+    left: 4px;
+}
+.search-bar > .menu > .head > .icon.active > span:nth-child(3){
+    transform: rotate(-45deg) translateY(-7px);
+    width: 15px;
+}
+.search-bar > .menu > .head > h3{
+    margin: 0;
+    flex-grow: 1;
+    padding-left: 5px;
+    line-height: 45px;
+    height: 45px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+.search-bar > .menu > .head.sub > h3{
+    line-height: 30px;
+}
+.search-bar > .menu > .head > span{
+    position: absolute;
+    bottom: 0;
+    left: 45px;
+    right: 0;
+    opacity: 0.5;
+    padding: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+}
+.suggest{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #FFF;
+    box-shadow: 0 0 1px 1px #DDD;
+    z-index: 1;
+}
+.search-bar > .menu > .body{
+    min-height: 135px;
+    max-height: 430px;
+    overflow: auto;
+}
+.search-bar > .menu > .body .item{
+    height: 45px;
+    cursor: pointer;
+}
+.search-bar > .menu > .body .item:hover{
+    background-color: #EEE;
+}
+.search-bar > .menu > .body .item:active{
+    background-color: #DDD;
+}
+.search-bar > .menu > .body .item.a > h4{
+    margin: 0;
+    padding: 10px 5px 0 5px;
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-bar > .menu > .body .item.b{
+    height: 40px;
+}
+.search-bar > .menu > .body .item.b > h4{
+    margin: 0;
+    line-height: 40px;
+    padding-left: 5px;
+    font-weight: 500;
+}
+.search-bar > .menu > .body .item > span{
+    padding: 0 5px;
+    display: block;
+    font-size: 0.8em;
+    opacity: 0.4;
+}
+.suggest > .item{
+    cursor: pointer;
+}
+.suggest > .item:first-child{
+    padding-left: 50px;
+}
+.suggest > .item > img{
+    display: block;
+    height: 42px;
+    width: 42px;
+    float: left;
+    margin: 0 0 0 8px;
+    padding: 10px;
+    opacity: 0.3
+}
+.suggest > .item > span{
+    display: block;
+    padding: 1px 10px;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.suggest > .item > span:first-child{
+    font-weight: 600;
+}
+.suggest > .item > span:last-child{
+    opacity: 0.4;
+}
+.suggest > .item:first-child > span:last-child{
+    font-style: italic;
+}
+@media screen and (max-width: 1024px){
+    .main-content{
+        max-width: 768px;
+    }
+}
+@media screen and (max-width: 768px){
+    .main-content{
+        max-width: 684px;
+    }
+}
+@media screen and (max-width: 450px){
+    .main-content{
+        margin: 0;
+    }
+}

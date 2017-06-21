@@ -1,0 +1,24 @@
+
+.header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.header > .left{
+    flex-grow: 0;
+}
+
+.header > .right {
+    flex-grow: 0;
+}
+
+.header img.btn {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+.header .right img.btn {
+    padding: 15px;
+    filter: invert();
+}

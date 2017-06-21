@@ -8,51 +8,51 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
     $routeProvider
         .when('/',
             {
-                templateUrl: 'app/partials/landing.html',
+                templateUrl: 'app/landing/landing.html',
                 controller: 'landingCtl'
             })
         .when('/home',
             {
-                templateUrl: 'app/partials/home.html',
+                templateUrl: 'app/home/home.html',
                 controller: 'homeCtl'
             })
         .when('/account',
             {
-                templateUrl: 'app/partials/account.html',
+                templateUrl: 'app/account/account.html',
                 controller: 'accountCtl'
             })
-        .when('/account/ads/:id',
+        .when('/account/:q',
             {
-                templateUrl: 'app/partials/account-ads.html',
-                controller: 'accountAdsCtl'
+                templateUrl: 'app/account/account.html',
+                controller: 'accountCtl'
             })
         .when('/account/delete',
             {
-                templateUrl: 'app/partials/delete.html'
+                templateUrl: 'app/account/delete.html'
             })
         .when('/ads/create',
             {
-                templateUrl: 'app/partials/create.html',
+                templateUrl: 'app/ads/create.html',
                 controller: 'adsCreateCtl'
             })
-        .when('/ads/search',
+        .when('/search',
             {
-                templateUrl: 'app/partials/search.html',
+                templateUrl: 'app/search/search.html',
                 controller: 'adsSearchCtl'
             })
-        .when('/ads/search/:q',
+        .when('/search/:q',
             {
-                templateUrl: 'app/partials/search.html',
+                templateUrl: 'app/search/search.html',
                 controller: 'adsSearchCtl'
             })
         .when('/ads/:id',
             {
-                templateUrl: 'app/partials/ads.html',
+                templateUrl: 'app/ads/ads.html',
                 controller: 'adsCtl'
             })
         .when('/faqs',
             {
-                templateUrl: 'app/partials/ads.html',
+                templateUrl: 'app/faqs/faqs.html',
                 controller: 'faqsCtl'
             })
         .when('/faqs/:section',
@@ -60,16 +60,28 @@ var app = angular.module('akomo', ['ngRoute']).config(['$routeProvider', functio
                 templateUrl: 'app/partials/faqs.html',
                 controller: 'faqsCtl'
             })
-        .when('/404',
+        .when('/messenger',
             {
-                templateUrl: 'app/partials/404.html',
-                controller: 'notFoundCtl'
+                templateUrl: 'app/messenger/messenger.html',
+                controller: 'messengerCtl'
+            })
+        .when('/messenger/:q',
+            {
+                templateUrl: 'app/messenger/messenger.html',
+                controller: 'messengerCtl'
             })
         .otherwise({
-            redirectTo: '/'
+            templateUrl: 'app/404/404.html',
+            controller: 'notFoundCtl'
         });
 }]);
 app.config(["$httpProvider", function ($httpProvider) {
-    "use strict";
+    'use strict';
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+}]);
+app.config(['$locationProvider', function ($locationProvider) {
+    'use strict';
+    $locationProvider.html5Mode(true);
+//Optional
+    $locationProvider.hashPrefix('!');
 }]);

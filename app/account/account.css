@@ -1,0 +1,212 @@
+.account .login{
+    max-width: 450px;
+    margin: 40px auto;
+}
+.account .login h2{
+    text-align: center;
+}
+.account .login img{
+    display: block;
+    height: 190px;
+    margin: auto;
+    border: 25px solid #546E7A;
+    background-color: #546E7A;
+    border-radius: 95px;
+    opacity: 0.3;
+}
+.account .login input{
+    width: 90%;
+    margin: 20px auto 0 auto;
+    display: block;
+    outline: none;
+    padding: 10px;
+    border: 0px;
+    border-bottom: 2px solid #546E7A;
+    background-color: rgba(84, 110, 123, 0.1);
+    font-size: 1;
+}
+.account .login input:focus{
+    border-bottom-color: #1E88E5;
+    background-color: rgba(84, 110, 123, 0.3);
+}
+.account .login span{
+    display: block;
+    margin: 10px auto 0 auto;
+    width: 90%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.account .login > div{
+    width: 90%;
+    margin: auto;
+    display: flex;
+}
+.account .register{
+    max-width: 450px;
+    margin: 40px auto;
+}
+.account .register h2{
+    text-align: center;
+}
+.account .register input{
+    display: block;
+    width: 90%;
+    margin: 20px auto 0 auto;
+    outline: none;
+    padding: 10px;
+    border: 0px;
+    border-bottom: 2px solid #546E7A;
+    background-color: rgba(84, 110, 123, 0.1);
+    font-size: 1;
+}
+.account .register input:focus{
+    border-bottom-color: #1E88E5;
+}
+.account .register .a-chooser{
+    display: block;
+    width: 90%;
+    margin: 20px auto 0 auto;
+    outline: none;
+    padding: 10px;
+    background-color: rgba(84, 110, 123, 0.1);
+}
+.account .register > span{
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.dlt-acc{
+    padding: 5px;
+    display: block;
+    max-width: 450px;
+    margin: 90px auto;
+}
+.dlt-acc h2{
+    text-align: center;
+}
+.dlt-acc p{
+    text-align: center;
+}
+.dlt-acc input{
+    display: block;
+    width: 70%;
+    margin: auto;
+    padding: 10px 10px 3px 10px;
+    font-size: 1em;
+    border: 0px;
+    outline: none;
+    border-bottom: 2px solid #CCC;
+    text-align: center;
+}
+.dlt-acc span{
+    float: left;
+    margin: 5px  0 0 15%;
+    padding: 9px;
+    border-radius: 5px;
+    color: #009688;
+    cursor: pointer;
+}
+.dlt-acc span:nth-child(5){
+    float: right;
+    margin: 5px 15% 0 0;
+    color: #EF5350;
+}
+.account .recovery{
+    max-width: 450px;
+    background-color: #FFF;
+    margin: 30px auto;
+    padding: 5px;
+    box-shadow: 0 0 1px 1px #CCC;
+    display: flex;
+    flex-wrap: wrap;
+}
+.account .recovery > h1{
+    text-align: center;
+    flex-basis: 100%;
+}
+.account .recovery > input{
+    padding: 7px;
+    padding-bottom: 2px;
+    border: 0;
+    outline: none;
+    border-bottom: 2px solid #CCC;
+    flex-grow: 1;
+    font-size: 1em;
+    margin-right: 5px;
+}
+.account .recovery > p{
+    flex-basis: 100%;
+}
+
+.account .recovery > span{
+    display: block;
+    padding: 5px 20px;
+    color: #FFF;
+    cursor: pointer;
+}
+.account .recovery > h4{
+    text-align: center;
+    flex-basis: 100%;
+    opacity: 0;
+}
+.account .recovery > h4.success{
+    opacity: 1;
+}
+.account .recovery > span.back{
+    display: block;
+    margin: auto;
+    background-color: transparent;
+}
+.account .header{
+    background-color: #FFF;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+}
+.account  .header{}
+.account  .header > .item{
+    height: 36px;
+    display: flex;
+    margin: 2px 5px;
+    cursor: pointer;
+    background-color: #EEE;
+    border-radius: 20px;
+    position: relative;
+    background-color: #FFE0B2;
+    background-color: #FFB74D;
+}
+.account  .header > .item > div{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    right: -2px;
+    top: -2px;
+    border-radius: 8px;
+}
+.account  .header > .item > img{
+    height: 36px;
+    width: 36px;
+    padding: 5px;
+    filter: invert();
+}
+.account  .header > .item > span{
+    display: inline-block;
+    line-height: 40px;
+    padding: 0 10px
+}
+.account  .header > .item > span{}
+@media screen and (max-width: 1024px){
+}
+@media screen and (max-width: 768px){
+    .account  .header > .item > span{
+        display: none;
+    }
+}
+@media screen and (max-width: 450px){
+}
