@@ -65,7 +65,19 @@ function handePut(){
   print_r($_PUT);
 }
 function handleDelete(){
-  print_r($_REQUEST);
+  if (isset($_SERVER['PATH_INFO'])){
+    switch ($_SERVER['PATH_INFO']) {
+      case '/v1/users/new':
+      case '/v1/users/new/':
+        break;
+      case '/v1/ads':
+      case '/v1/ads/':
+        Ads::deleteAds();
+        break;
+      default:
+        break;
+    }
+  }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
   handleGet();

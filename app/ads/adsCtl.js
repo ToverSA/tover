@@ -4,6 +4,12 @@ app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppSt
     'use strict';
     //NOTE ads controller
     var src;
+    function del(id) {
+        $http.delete('api.php/v1/ads', {params: {id: id}, headers: {token: AppStore.getToken()}}).then(function (res) {
+//            $location.url('account');
+            log(res.data);
+        });
+    }
     function init() {
         if (typeof $routeParams.id !== 'undefined') {
             $http.get('api.php/v1/ads?id=' + $routeParams.id, {cache: true}).then(function (res) {
@@ -72,7 +78,13 @@ app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppSt
         }
     };
     $scope.del = function () {
-        $location.url('/account?rel=action&t=del&id=' + $scope.ad.id);
+        if ($scope.isDel === true) {
+            del($scope.ad.id);
+            $scope.isDel = false;
+            $location.url('account');
+        } else {
+            $scope.isDel = true;
+        }
     };
     init();
 }]);

@@ -2,7 +2,6 @@
 /*global log*/
 app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', function ($scope, $http, $location, AppStore) {
     'use strict';
-    log('console');
     $scope.logout = function () {
         AppStore.clearAll();
         $location.url('/home');

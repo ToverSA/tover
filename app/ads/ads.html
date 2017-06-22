@@ -21,6 +21,7 @@
             </div>
         </div>
         <h5 class="color-accent-inv" ng-click="userClicked()" ng-hide="state === 2">{{ad.name}}</h5>
+        <img ng-hide="state === 2 || ad.whatsapp === 0" class="badge" src="/img/whatsapp.png"/>
         <p>{{ad.description}}</p>
         <div class="pics">
             <div ng-repeat="x in ad.src_id">
@@ -48,5 +49,12 @@
             <span></span>
             <span></span>
         </div>
+    </div>
+</div>
+<div class="ads delete-dialog" ng-show="isDel">
+    <h3>Confirm delete.</h3>
+    <div class="btns">
+        <span class="color-accent-inv" ng-click="isDel = !isDel">CANCEL</span>
+        <span class="color-accent-inv" ng-click="del()">OK</span>
     </div>
 </div>

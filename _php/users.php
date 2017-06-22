@@ -54,20 +54,21 @@ class Users{
   public static function getAccount(){
     if (isset($_SERVER['HTTP_TOKEN'])){
       $con = new mysqli(HOST, USER, PWD, DB);
-      $query = 'SELECT login.id, login.email, users.name, users.number,'.
+      $query = 'SELECT login.id, login.email, users.name, users.number, users.whatsapp,'.
       ' users.campus_id, campuses.name '.
       'FROM login JOIN users JOIN campuses ON login.id=users.id AND users.campus_id=campuses.id'.
       ' WHERE login.token=?';
       $stmt = $con->prepare($query);
       $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
       $stmt->execute();
-      $stmt->bind_result($id, $email, $name, $num, $cid, $cname);
+      $stmt->bind_result($id, $email, $name, $num, $w, $cid, $cname);
       $u = new Users();
       if ($stmt->fetch()){
         $u->id = $id;
         $u->name = $name;
         $u->email = $email;
         $u->number = $num;
+        $u->whatsapp = $w;
         $u->campus = array('id' => $cid, 'name' => $cname);
         echo json_encode($u);
       } else {

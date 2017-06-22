@@ -1,1 +1,33 @@
-.messenger{}
+.messenger{
+    background-color: red;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    top: 80px;
+    max-width: 1024px;
+    width: 100%;
+    transform: translate(-50%);
+    display: flex;
+}
+.messenger > .list{
+    background-color: green;
+    flex-basis: 280px;
+    overflow: auto;
+}
+.messenger > .list{}
+.messenger > .list > .item{
+    height: 50px
+}
+.messenger > .list > .item{}
+.messenger > .thread{
+    background-color: yellow;
+    flex-grow: 1;
+}
+.messenger > .thread{}
+@media screen and (max-width: 1024px){
+    .messenger{
+        bottom: 0;
+        top: 50px;
+    }
+    .messenger > .list > .item{}
+}

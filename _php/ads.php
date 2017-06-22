@@ -12,12 +12,12 @@ class Ads{
     if (isset($_GET['id'])){
       $con = new mysqli(HOST, USER, PWD, DB);
       $query = 'SELECT advert.title, advert.price, advert.description, users.name, '.
-      'users.id, users.number FROM advert JOIN users ON advert.user_id=users.id '.
+      'users.id, users.number, users.whatsapp FROM advert JOIN users ON advert.user_id=users.id '.
       'WHERE advert.id=?';
       $stmt = $con->prepare($query);
       $stmt->bind_param('i', $_GET['id']);
       $stmt->execute();
-      $stmt->bind_result($title, $price, $desc, $name, $uid, $num);
+      $stmt->bind_result($title, $price, $desc, $name, $uid, $num ,$w);
       if ($stmt->fetch()){
         $a = new Ads();
         $a->id = $_GET['id'];
@@ -27,6 +27,7 @@ class Ads{
         $a->name = $name;
         $a->uid = $uid;
         $a->number = $num;
+        $a->whatsapp = $w;
         $a->src_id = array();
         $stmt->close();
         $query = 'SELECT id FROM images WHERE advert_id=?';
@@ -247,8 +248,24 @@ class Ads{
     return true;
   }
   public static function deleteAds(){
-    if (isset($_GET['id'])){
-      echo 'covfefe';
+    if (isset($_REQUEST['id'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT id FROM login WHERE token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      $stmt->bind_result($id);
+      if ($stmt->fetch()){
+        $stmt->close();
+        // $con->query('START TRANSACTION');
+        $query = 'DELETE FROM advert, advert_log, images '.
+        'USING advert JOIN advert_log JOIN images WHERE advert.user_id=? AND '.
+        'advert.id=images.advert_id AND advert.id=advert_log.advert_id AND advert.id=?';
+        $stmt = $con->prepare($query);
+        $stmt->bind_param('ii',$id, $_REQUEST['id']);
+        $stmt->execute();
+        print_r($stmt);
+      }
     }
   }
 }

@@ -13,7 +13,7 @@
                 <span>INBOX</span>
                 <div class="color-accent"></div>
             </div>
-            <div class="item">
+            <div class="item" ng-click="toPrefs()">
                 <img src="img/settings-2.png"/>
                 <span>PREFRENCES</span>
                 <div class="color-accent"></div>
@@ -77,5 +77,40 @@
         <h4 ng-class="{success: success}">An email to reset your password will be sent to you in a moment</h4>
         <span class="color-accent-inv" ng-click="toLogin()" class="back">Log in</span>
     </div>
-    <div class="action" ng-switch-when="action" ng-controller="actionCtl"></div>
+    <div class="main" ng-switch-when="prefs" ng-controller="prefsCtl">
+        <div class="header">
+            <span class="label">Preferences</span>
+            <div class="item" ng-click="save()">
+                <img src="/img/correct.png"/>
+                <span>SAVE</span>
+            </div>
+            <div class="item" ng-click="toCons()">
+                <img src="/img/avatar.png"/>
+                <span>BACK</span>
+            </div>
+        </div>
+        <div class="prefs">
+            <div class="item">
+                <span>Display name</span>
+                <span class="color-accent-inv">EDIT</span>
+                <h2>Sdu</h2>
+            </div>
+            <div class="item">
+                <span>Number</span>
+                <span class="color-accent-inv">EDIT</span>
+                <h2>0876534218</h2>
+            </div>
+            <div class="item">
+                <span>Email</span>
+                <h2>gumedesduduzo@gmail.com</h2>
+            </div>
+        </div>
+        <div class="edit-dialog">
+            <h4>Display name</h4>
+            <input type="text"/>
+            <div class="btns">
+                <span class="color-accent-inv">CLOSE</span>
+            </div>
+        </div>
+    </div>
 </div>

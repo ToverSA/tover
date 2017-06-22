@@ -95,6 +95,12 @@
     height: 100%;
     width: 100%;
 }
+img.badge{
+    height: 25px;
+    width: 25px;
+    float: right;
+    padding: 1px;
+}
 .ads-view h5{
     margin: 0;
     display: inline-block;
@@ -179,18 +185,16 @@
     top: 28px;
     height: 4px;
     width: 20px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: #FFF;
     left: 10px;
-    transform: rotate(45deg) translate(9px);
+    transform: rotate(45deg) translate(8px);
+    border-radius: 2px;
 }
 .viewer > .pager .key > span:first-child{
-    transform: rotate(-225deg) translate(-9px);
-}
-.viewer > .pager .key:hover > span{
-    background-color: #FFF;
+    transform: rotate(-225deg) translate(-8px);
 }
 .viewer > .pager .key.off > span{
-    opacity: 0.2;
+    background-color: #999;
 }
 .create-ad{
     position: absolute;
@@ -390,6 +394,29 @@
     margin: auto;
     background-color: #ECEFF1;
 }
+.ads.delete-dialog{
+    position: absolute;
+    min-width: 300px;
+    background-color: #FFF;
+    box-shadow: 0 1px 1px 1px #CCC;
+    top: 240px;
+    left: 50%;
+/*    transform: translate(-50%);*/
+}
+.ads.delete-dialog > h3{
+    margin: 20px;
+}
+.ads.delete-dialog > .btns{}
+.ads.delete-dialog > .btns{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+.ads.delete-dialog > .btns > span{
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 @media screen and (max-width: 1024px){
     .ads-view > div.main{
         flex-basis: 470px;
@@ -400,6 +427,9 @@
     }
     .ads-view > div.suggests{
         flex-basis: 300px;
+    }
+    .ads.delete-dialog{
+        left: 42.5%;
     }
 }
 @media screen and (max-width: 768px){
@@ -414,6 +444,10 @@
     .ads-view > div.suggests{
         flex-basis: 100%;
         margin: 0;
+    }
+    .ads.delete-dialog{
+        left: 49%;
+        top: 200px;
     }
 }
 @media screen and (max-width: 450px){
@@ -451,5 +485,10 @@
     .create-ad .pics > div{
         width: 58px;
         height: 58px;
+    }
+    .ads.delete-dialog{
+        left: auto;
+        right: 5px;
+        top: 150px;
     }
 }

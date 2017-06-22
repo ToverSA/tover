@@ -6,6 +6,7 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$routeParams', 'A
     $scope.toRecovery = function () { $location.url('/account?rel=recovery'); };
     $scope.toRegister = function () { $location.url('/account?rel=register'); };
     $scope.toLogin = function () { $location.url('/account?rel=login'); };
+    $scope.toPrefs = function () { $location.url('/account?rel=prefs'); };
     if (typeof $routeParams.rel === 'undefined') {
         if (AppStore.isToken()) {
             $location.url('/account?rel=console');
@@ -18,9 +19,9 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$routeParams', 'A
         } else {
             $location.url('/account?rel=login');
         }
-    } else if ($routeParams.rel === 'action') {
+    } else if ($routeParams.rel === 'prefs') {
         if (AppStore.isToken()) {
-            $scope.section = 'action';
+            $scope.section = 'prefs';
         } else {
             $location.url('/account?rel=login');
         }
