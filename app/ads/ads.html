@@ -6,7 +6,7 @@
                 <img ng-src="api.php/v1/image/thumb.jpg?id={{cover[0]}}" ng-click="view(cover[0])"/>
             </div>
             <h2>{{ad.title}}</h2>
-            <span>R 321.45</span>
+            <span>{{ad.price | currency: 'R'}}</span>
         </div>
         <div ng-switch-default>
             <div class="btns">
@@ -16,8 +16,8 @@
         </div>
         <div ng-switch-when="2">
             <div class="btns">
-                <span>DELETE</span>
-                <span class="a">PROMOTE</span>
+                <span class="color-accent-inv" ng-click="del()">DELETE</span>
+<!--                <span class="color-accent a">PROMOTE</span>-->
             </div>
         </div>
         <h5 class="color-accent-inv" ng-click="userClicked()" ng-hide="state === 2">{{ad.name}}</h5>

@@ -19,7 +19,10 @@
     color: #BBB;
 }
 @media screen and (max-width: 768px){
+    .notfound > div{
+        padding: 20px;
+    }
     .notfound > div > h1{
-        font-size: 3em;
+        font-size: 2.4em;
     }
 }

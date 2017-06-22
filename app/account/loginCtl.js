@@ -1,7 +1,9 @@
 /*global app*/
+/*global log*/
 /*global $*/
 app.controller('loginCtl', ['$scope', '$location', '$http', 'AppStore', function ($scope, $loaction, $http, AppStore) {
     'use strict';
+    log('login');
     function auth(e, p) {
         var data = {email: e.toLowerCase(), password: p};
         $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
@@ -12,6 +14,7 @@ app.controller('loginCtl', ['$scope', '$location', '$http', 'AppStore', function
             //TODO handle auth errors
         });
     }
+    $scope.authData = {};
     $scope.logIn = function () {
         if (typeof $scope.authData.email === 'undefined') {
             $scope.err = true;

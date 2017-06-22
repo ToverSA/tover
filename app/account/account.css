@@ -4,12 +4,13 @@
 }
 .account .login h2{
     text-align: center;
+    font-family: Lato Thin;
 }
 .account .login img{
     display: block;
-    height: 190px;
+    height: 150px;
     margin: auto;
-    border: 25px solid #546E7A;
+    border: 9px solid #546E7A;
     background-color: #546E7A;
     border-radius: 95px;
     opacity: 0.3;
@@ -147,8 +148,8 @@
 .account .recovery > span{
     display: block;
     padding: 5px 20px;
-    color: #FFF;
     cursor: pointer;
+    margin: auto;
 }
 .account .recovery > h4{
     text-align: center;
@@ -169,7 +170,6 @@
     display: flex;
     justify-content: flex-end;
 }
-.account  .header{}
 .account  .header > .item{
     height: 36px;
     display: flex;
@@ -185,8 +185,8 @@
     position: absolute;
     height: 15px;
     width: 15px;
-    right: -2px;
-    top: -2px;
+    right: -1px;
+    top: -1px;
     border-radius: 8px;
 }
 .account  .header > .item > img{
@@ -198,9 +198,56 @@
 .account  .header > .item > span{
     display: inline-block;
     line-height: 40px;
-    padding: 0 10px
+    color: #FFF;
+    padding: 0 15px 0 0;
 }
-.account  .header > .item > span{}
+.account  .header > span.label{
+    flex-grow: 1;
+    line-height: 40px;
+    padding: 0 5px;
+}
+.account  h1.zero{
+    text-align: center;
+    font-family: Lato Thin;
+    font-size: 3em;
+    opacity: 0.2;
+}
+.account .ads-list{
+    margin: 20px auto;
+    box-shadow: 0 1px 1px 1px #CCC;
+    max-width: 1024px;
+    overflow: auto;
+    background-color: #FFF;
+}
+.account .ads-list > .item{
+    min-width: 758px;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 5px;
+}
+.account .ads-list > .item > span{
+    margin: 0 1px;
+    padding: 5px 0;
+}
+.account .ads-list > .item > span:first-child{
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.account .ads-list > .item > span{
+    flex-basis: 100px;
+}
+.account .ads-list > .item.heading{
+    border-bottom: 1px solid #DDD;
+    height: 40px;
+}
+.account .ads-list > .item:not(:first-child){
+    cursor: pointer;
+}
+.account .ads-list > .item:not(:first-child):hover{
+    background-color: #EEE;
+}
 @media screen and (max-width: 1024px){
 }
 @media screen and (max-width: 768px){

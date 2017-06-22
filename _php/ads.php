@@ -246,5 +246,10 @@ class Ads{
     }
     return true;
   }
+  public static function deleteAds(){
+    if (isset($_GET['id'])){
+      echo 'covfefe';
+    }
+  }
 }
 ?>

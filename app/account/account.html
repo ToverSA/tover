@@ -3,11 +3,12 @@
     <div ng-switch-default></div>
     <div class="main" ng-switch-when="console" ng-controller="consoleCtl">
         <div class="header">
-            <div class="item">
+            <span class="label">{{name}}</span>
+            <div class="item" ng-click="createAd()">
                 <img src="/img/add.png"/>
                 <span>CREATE AD</span>
             </div>
-            <div class="item">
+            <div class="item" ng-click="toInbox()">
                 <img src="img/envelope.png"/>
                 <span>INBOX</span>
                 <div class="color-accent"></div>
@@ -22,8 +23,8 @@
                 <span>LOG OUT</span>
             </div>
         </div>
-        <h1 ng-show="ads.length === 0">Nothing to see here. Create your first ad!</h1>
-        <div class="ad-prev" ng-show="ads.length !== 0">
+        <h1 class="zero" ng-show="ads.length === 0">Nothing to see here. Create your first ad!</h1>
+        <div class="ads-list" ng-show="ads.length !== 0">
             <div class="item heading">
                 <span>Ad Title</span>
                 <span>Price</span>
@@ -32,7 +33,7 @@
             </div>
             <div class="item" ng-repeat="x in ads" a-ad ng-click="openAd(x.id)">
                 <span>{{x.title}}</span>
-                <span>{{x.price | currency:'R '}}</span>
+                <span>{{x.price | currency:'R'}}</span>
                 <span>{{x.date_created}}</span>
                 <span>{{x.count}}</span>
             </div>
@@ -50,7 +51,7 @@
         <span class="color-accent-inv" ng-click="toRegister()">Create new account</span>
         <span ng-show="err" class="err">{{errMsg}}</span>
     </div>
-    <div class="register" ng-switch-when="register">
+    <div class="register" ng-switch-when="register" ng-controller="registerCtl">
         <h2>Register new account</h2>
         <input type="text" placeholder="Display name" ng-model="formData.dName"/>
         <input type="email" placeholder="Email" ng-model="formData.email"/>
@@ -76,4 +77,5 @@
         <h4 ng-class="{success: success}">An email to reset your password will be sent to you in a moment</h4>
         <span class="color-accent-inv" ng-click="toLogin()" class="back">Log in</span>
     </div>
+    <div class="action" ng-switch-when="action" ng-controller="actionCtl"></div>
 </div>

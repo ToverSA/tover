@@ -65,7 +65,7 @@ function handePut(){
   print_r($_PUT);
 }
 function handleDelete(){
-  print_r($_SERVER);
+  print_r($_REQUEST);
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){
   handleGet();

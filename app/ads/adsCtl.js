@@ -1,6 +1,6 @@
 /*global app*/
 /*global log*/
-app.controller('adsCtl', ['$scope', '$timeout', '$location', '$http', '$routeParams', 'AppStore', function ($scope, $timeout, $location, $http, $routeParams, AppStore) {
+app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppStore', function ($scope, $location, $http, $routeParams, AppStore) {
     'use strict';
     //NOTE ads controller
     var src;
@@ -70,6 +70,9 @@ app.controller('adsCtl', ['$scope', '$timeout', '$location', '$http', '$routePar
         if ($scope.inView.prev === true) {
             $scope.view(src[src.indexOf($scope.inView.id) - 1]);
         }
+    };
+    $scope.del = function () {
+        $location.url('/account?rel=action&t=del&id=' + $scope.ad.id);
     };
     init();
 }]);
