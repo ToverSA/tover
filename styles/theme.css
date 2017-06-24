@@ -3,10 +3,6 @@
     src: url(fonts/Roboto-Regular.ttf)
 }
 @font-face{
-    font-family: SixCaps;
-    src: url(fonts/SixCaps.ttf)
-}
-@font-face{
     font-family: Lato Thin;
     src: url(fonts/Lato-Hairline.ttf)
 }
@@ -108,8 +104,7 @@ body{
 }
 .dialog .list-wrapper > span:hover{
     background-color: #F3F3F3;
-}
-.dialog .list-wrapper{}
+}s
 .dialog .btns{
     width: 100%;
     padding: 5px;

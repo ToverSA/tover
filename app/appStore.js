@@ -12,11 +12,15 @@ app.service('AppStore', [function () {
         userEmail = 'VVNFUkVNQUlM',
         userNumber = 'VVNFUk5VTUJFUg',
         searchSettings = 'U0VBUkNIU0VUVElOR1M',
+        msgStore = 'SU5CT1g',
         token = 'VE9LRU4';
     function enc(str) {
         return CryptoJS.AES.encrypt(str, 'akomo');
     }
     function dec(str) {
+        if (str === null) {
+            return null;
+        }
         var bytes = CryptoJS.AES.decrypt(str, 'akomo');
         return bytes.toString(CryptoJS.enc.Utf8);
     }
@@ -33,6 +37,16 @@ app.service('AppStore', [function () {
         } else {
             return false;
         }
+    };
+    self.getInbox = function () {
+        var x = localStorage.getItem(msgStore);
+        if (x === null) {
+            return null;
+        }
+        return JSON.parse(dec(x));
+    };
+    self.setInbox = function (obj) {
+        localStorage.setItem(msgStore, enc(JSON.stringify(obj)));
     };
     self.setToken = function (t) {
         localStorage.setItem(token, enc(t));

@@ -1,6 +1,5 @@
 .messenger{
-    background-color: red;
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     left: 50%;
     top: 80px;
@@ -10,24 +9,209 @@
     display: flex;
 }
 .messenger > .list{
-    background-color: green;
     flex-basis: 280px;
     overflow: auto;
 }
-.messenger > .list{}
+.messenger > .list.open{
+    display: block;
+}
 .messenger > .list > .item{
-    height: 50px
+    height: 50px;
+    background-color: #FFF;
+    margin: 2px;
+    box-shadow: 0 1px 1px 1px #CCC;
 }
-.messenger > .list > .item{}
+.messenger > .list > .item > span{
+    display: block;
+    padding: 3px;
+    white-space: pre;
+    overflow: hidden;
+}
+.messenger > .list > .item > span:first-child{
+    font-weight: 600;
+}
 .messenger > .thread{
-    background-color: yellow;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
-.messenger > .thread{}
+.messenger > .thread .body{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.messenger > .thread .reply{
+    height: 70px;
+    display: flex;
+    background-color: #FFF;
+    flex-shrink: 0;
+}
+.messenger > .thread .reply textarea{
+    flex-grow: 1;
+    resize: none;
+    padding: 5px;
+    font-family: Roboto;
+    font-size: 1em;
+    outline: none;
+    border: 0;
+}
+.messenger > .thread .reply textarea{}
+.messenger > .thread .reply .btn{
+    height: 50px;
+    border-radius: 25px;
+    margin: 10px;
+    box-shadow: 0 1px 2px 1px #CCC;
+    cursor: pointer;
+}
+.messenger > .thread .reply .btn span{
+    display: inline-block;
+    padding: 16px 10px 16px 0;
+    float: right;
+}
+.messenger > .thread .reply .btn img{
+    height: 100%;
+    width: auto;
+    filter: invert();
+    padding: 10px;
+}
+.messenger > .thread .body .bar{
+    display: flex;
+    background-color: #ECEFF1;
+    flex-shrink: 0;
+}
+
+.messenger > .thread .body .msgs{
+    flex-grow: 1;
+    overflow: auto;
+}
+.messenger > .thread .body .bar > p{
+    margin: 10px;
+    flex-grow: 1;
+    color: #777;
+}
+.messenger > .thread .body .bar > p > span{
+    cursor: pointer
+}
+.messenger > .thread .body .bar > .menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 7px 15px;
+    cursor: pointer;
+}
+.messenger > .thread .body .bar > .menu > span{
+    display: block;
+    height: 5px;
+    width: 5px;
+    background-color: #AAA;
+}
+.messenger > .thread .body .bar > .menu-items{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    box-shadow: 0 0 1px 1px #CCC;
+    display: none;
+    z-index: 9;
+}
+.messenger > .thread .body .bar > .menu-items.open{
+    display: block;
+}
+.messenger > .thread .body .bar > .menu-items > span{
+    display: block;
+    background-color: #FFF;
+    padding: 7px;
+    cursor: pointer;
+}
+.messenger > .thread .body .bar > .menu-items > span:hover{
+    background-color: #F3F3F3;
+}
+.messenger > .thread .body .bar{}
+.messenger > .thread .body .msg{
+    padding: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.messenger > .thread .body .msg > p{
+    flex-basis: 80%;
+    margin: 0;
+    white-space: pre-line;
+    padding: 10px;
+    background-color: #FFF;
+    box-shadow: 0 1px 1px 1px #DDD;
+}
+.messenger > .thread .body .msg > span{
+    flex-basis: 100%;
+    padding: 2px;
+    opacity: 0.3;
+}
+.messenger > .thread .body .msg.sent{
+    justify-content: flex-end;
+}
+.messenger > .thread .body .msg.sent > span{
+    text-align: right;
+}
+.messenger-dialog{
+    position: absolute;
+    background-color: #FFF;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%);
+    max-width: 450px;
+    padding: 10px;
+    box-shadow: 0 1px 2px #DDD;
+    width: 100%;
+}
+.messenger-dialog > input{
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: #FAFAFA;
+    border: 0;
+    margin: 5px 0;
+    outline: none;
+}
+.messenger-dialog > input:focus{
+    background-color: #F3F3F3;
+}
+.messenger-dialog > .btns{
+    justify-content: flex-end;
+    display: flex;
+}
+.messenger-dialog > .btns > span{
+    cursor: pointer;
+    padding: 8px;
+}
 @media screen and (max-width: 1024px){
     .messenger{
         bottom: 0;
         top: 50px;
     }
     .messenger > .list > .item{}
+}
+@media screen and (max-width: 768px){
+    .messenger > .thread .reply .btn span{
+        display: none;
+    }
+}
+@media screen and (max-width: 450px){
+    .messenger > .list{
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        background-color: #ECEFF1;
+        width: 100%;
+        z-index: 1;
+    }
+    .messenger > .list{
+        display: none;
+    }
+    .messenger-dialog{
+        width: auto;
+        top: 60px;
+        left: 10px;
+        right: 10px;
+        transform: none;
+    }
 }

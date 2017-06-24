@@ -39,7 +39,7 @@ app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppSt
     }
     $scope.isGuest = true;
     $scope.sendMessage = function () {
-        $location.url('/messenger?ad=' + $scope.ad.id);
+        $location.url('/messenger?id=' + $scope.ad.id + '&name=' + $scope.ad.name);
     };
     $scope.userClicked = function () {
         $location.url('/search?u=' + $scope.ad.uid

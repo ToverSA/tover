@@ -194,7 +194,7 @@ img.badge{
     transform: rotate(-225deg) translate(-8px);
 }
 .viewer > .pager .key.off > span{
-    background-color: #999;
+    background-color: #444;
 }
 .create-ad{
     position: absolute;

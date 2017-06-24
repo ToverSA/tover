@@ -4,6 +4,7 @@ require_once('_php/image.php');
 require_once('_php/insties.php');
 require_once('_php/ads.php');
 require_once('_php/users.php');
+require_once('_php/messages.php');
 function handleGet(){
   if (isset($_SERVER['PATH_INFO'])){
     switch ($_SERVER['PATH_INFO']) {
@@ -54,6 +55,10 @@ function handlePost(){
       case '/v1/users/auth':
       case '/v1/users/auth/':
         Users::postAuthUser();
+        break;
+      case '/v1/messages':
+      case '/v1/messages/':
+        Messages::postMessage();
         break;
       default:
         break;

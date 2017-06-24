@@ -1,7 +1,7 @@
 <div class="search-bar">
     <img ng-click="back()" src="img/back.png"/>
     <input type="text" any-key="suggest()" enter-key="searchFor()" placeholder="Search" ng-model="query"/>
-    <img src="/img/settings.png" ng-click="opt = !opt"/>
+    <img src="img/settings.png" ng-click="opt = !opt"/>
     <div class="menu" ng-show="opt">
         <div class="head" ng-class="{sub: mState > 0}">
             <div class="icon" ng-click="menuBack()" ng-class="{active: mState > 0}" ng-init="mState = 0">
@@ -51,12 +51,12 @@
         <span>Search...</span>
     </div>
     <div class="item" ng-repeat="x in ad" ng-click="viewAd(x.id)">
-        <img src="/img/shopping-bag.png"/>
+        <img src="img/shopping-bag.png"/>
         <span>{{x.title}}</span>
         <span>{{x.price | currency: 'R'}} - Posted on {{x.date_created}}</span>
     </div>
     <div class="item" ng-repeat="x in user" ng-click="viewUser(x.id, x.name)">
-        <img src="/img/man-1.png"/>
+        <img src="img/man-1.png"/>
         <span>Ads by {{x.name}}</span>
         <span>{{x.num_ads}} ads in total</span>
     </div>
