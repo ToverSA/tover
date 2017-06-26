@@ -24,10 +24,10 @@ class Image{
     $im = imagecreatetruecolor($l, $l);
     imagecopy($im, $img, 0, 0, $x, $y, $w, $h);
     if ($l > 768) {
-        $im = imagescale($im, 768, 768);
+        $im = imagescale($im, 512, 512);
     }
     ob_start();
-    imagejpeg($im, NULL, 90);
+    imagejpeg($im, NULL, 85);
     $contents = ob_get_contents();
     ob_end_clean();
     imagedestroy($img);

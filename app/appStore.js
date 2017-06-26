@@ -41,7 +41,7 @@ app.service('AppStore', [function () {
     self.getInbox = function () {
         var x = localStorage.getItem(msgStore);
         if (x === null) {
-            return null;
+            return {};
         }
         return JSON.parse(dec(x));
     };

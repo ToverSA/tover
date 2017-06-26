@@ -1,9 +1,14 @@
 /*global app*/
 /*global log*/
-app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 'AppStore', function ($scope, $routeParams, $location, $http, AppStore) {
+/*global sessionStorage*/
+/*global $*/
+app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 'AppStore', 'mService', function ($scope, $routeParams, $location, $http, AppStore, mService) {
     'use strict';
-    $scope.inbox = {};
     $scope.msg = {};
+    $scope.param = {};
+    $scope.to = {};
+    $scope.inbox = {};
+    $scope.thread = [];
     $scope.body = '';
     function send(body) {
         if (AppStore.isToken()) {
@@ -16,20 +21,20 @@ app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 
             });
         }
     }
-    $scope.delThread = function () {
-//        delete $scope.thread;
-    };
+    $scope.delThread = function () {};
     $scope.viewAd = function () {
-        $location.url('/ads/' + $scope.msg.ad_id);
+        $location.url('/ads/' + $scope.to.ad);
     };
     $scope.setEmail = function () {
-        if (typeof $scope.msg.email !== 'undefined') {
-            AppStore.setUserEmail($scope.msg.email);
-            $scope.setup = true;
+        if (typeof $scope.param.from !== 'undefined') {
+            sessionStorage.setItem('param', $.param($scope.param));
+            $location.url($location.url() + '&' + $.param($scope.param));
         }
-        if (typeof $scope.msg.name !== 'undefined') {
-            AppStore.setUserName($scope.msg.name);
-        }
+    };
+    $scope.open = function (x) {
+        var q = $location.search();
+        q.id = x;
+        $location.search(q);
     };
     $scope.send = function () {
         if ($scope.body.length < 1) {
@@ -38,33 +43,36 @@ app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 
         var msg = {
             body: $scope.body,
             sent: true,
-            status: 'sending',
-            date: new Date().toLocaleString()
+            status: 'sending'
         };
         $scope.thread.push(msg);
-        AppStore.setInbox($scope.inbox);
-        send($scope.body);
+        mService.send($routeParams.id, $scope.body);
         $scope.body = '';
     };
-    if (AppStore.getInbox() !== null) {
-        $scope.inbox = AppStore.getInbox();
-    }
-    if (typeof $routeParams.id !== 'undefined') {
-        $scope.list = false;
-        $scope.msg.ad_id = $routeParams.id;
-        $scope.thread = $scope.inbox[$routeParams.id];
-        if (typeof $scope.thread === 'undefined') {
-            $scope.thread = [];
-            $scope.inbox[$routeParams.id] = $scope.thread;
-        }
-    } else {
-        $scope.list = true;
-    }
+    $scope.to.name = $routeParams.name;
+    $scope.to.ad = $routeParams.id;
+    $scope.$on('NEW_MESSAGE', function (evt) {
+        $scope.inbox = mService.getInbox();
+        $scope.thread = JSON.parse(JSON.stringify($scope.inbox[$routeParams.id].thread));
+    });
+    $scope.$on('MESSAGE_SENT', function (evt) {
+        $scope.inbox = mService.getInbox();
+        $scope.inbox[$routeParams.id].thread.forEach(function (x) {
+            $scope.thread[$scope.inbox[$routeParams.id].thread.indexOf(x)] = x;
+        });
+    });
     if (AppStore.isToken()) {
         $scope.setup = true;
-    } else if (AppStore.getUserEmail() !== null) {
-        $scope.msg.email = AppStore.getUserEmail();
-        $scope.msg.name = AppStore.getUserName();
+        if (typeof $routeParams.id !== 'undefined') {
+            $scope.list = false;
+        } else {
+            $scope.list = true;
+        }
+    } else if (typeof $routeParams.from !== 'undefined') {
+        mService.setup($routeParams.from, $routeParams.fname, $routeParams.id, $routeParams.name);
         $scope.setup = true;
+        $scope.visitor = true;
+    } else if (sessionStorage.length !== 0) {
+        $location.url($location.url() + '&' + sessionStorage.getItem('param'));
     }
 }]);

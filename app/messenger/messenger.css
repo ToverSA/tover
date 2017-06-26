@@ -20,12 +20,15 @@
     background-color: #FFF;
     margin: 2px;
     box-shadow: 0 1px 1px 1px #CCC;
+    cursor: pointer;
+    flex-shrink: 1;
 }
 .messenger > .list > .item > span{
     display: block;
     padding: 3px;
     white-space: pre;
     overflow: hidden;
+    text-overflow: ellipsis
 }
 .messenger > .list > .item > span:first-child{
     font-weight: 600;
@@ -35,6 +38,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    flex-shrink: 10
 }
 .messenger > .thread .body{
     flex-grow: 1;
@@ -109,10 +113,11 @@
 .messenger > .thread .body .bar > .menu-items{
     position: absolute;
     right: 5px;
-    top: 5px;
+    top: 40px;
     box-shadow: 0 0 1px 1px #CCC;
     display: none;
     z-index: 9;
+    min-width: 100px;
 }
 .messenger > .thread .body .bar > .menu-items.open{
     display: block;

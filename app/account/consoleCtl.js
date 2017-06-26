@@ -1,6 +1,6 @@
 /*global app*/
 /*global log*/
-app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', function ($scope, $http, $location, AppStore) {
+app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mService', function ($scope, $http, $location, AppStore, mService) {
     'use strict';
     $scope.logout = function () {
         AppStore.clearAll();
@@ -33,4 +33,5 @@ app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', functi
     }, function (err) {
         //TODO handle account errors
     });
+    $scope.$on('NEW_MESSAGE', function () {});
 }]);

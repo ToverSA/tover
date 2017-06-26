@@ -1,6 +1,6 @@
 /*global app*/
 /*global log*/
-app.directive('header', ['$location', function ($location) {
+app.directive('header', ['$location', 'AppStore', function ($location, AppStore) {
     'use strict';
     return {
         restrict: 'A',
@@ -20,7 +20,11 @@ app.directive('header', ['$location', function ($location) {
                 $location.url('/account');
             };
             scope.toHome = function () {
-                $location.url('/home');
+                if (AppStore.isNew()) {
+                    $location.url('/');
+                } else {
+                    $location.url('/home');
+                }
             };
         }
     };

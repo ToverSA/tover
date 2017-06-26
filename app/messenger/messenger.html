@@ -1,23 +1,22 @@
 <div header></div>
 <div class="messenger" ng-show="setup">
     <div class="list" ng-class="{open: list}">
-        <div class="item" ng-repeat="x in []">
-            <span>{{x}} name</span>
-            <span>Item content</span>
+        <div class="item" ng-repeat="x in inbox" ng-click="open(x.id)">
+            <span>{{x.name}}</span>
+            <span>{{x.thread[x.thread.length - 1].body}}</span>
         </div>
     </div>
     <div class="thread">
         <div class="body">
             <div class="bar">
-                <p>To: {{thread.name}}  - Ad <span class="color-accent-inv" ng-click="viewAd()">&#35;{{msg.ad_id}}</span></p>
-                <div class="menu" ng-click="menu = !menu">
+                <p>To: {{to.name}}  - Ad <span class="color-accent-inv" ng-click="viewAd()">&#35;{{to.ad}}</span></p>
+                <div ng-hide="visitor" class="menu" ng-click="menu = !menu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
                 <div class="menu-items" ng-class="{open: menu}" ng-click="menu = !menu">
-
-                    <span>Delete conversation</span>
+                    <spanng-click="delThread()">Delete conversation</span>
                     <span>Block email</span>
                     <span>View blocked list</span>
                 </div>
@@ -39,11 +38,11 @@
     </div>
 </div>
 <div class="messenger-dialog" ng-hide="setup">
-    <p>For Sdu to be able to reply to your messages, please provide your details</p>
+    <p>For {{to.name}} to be able to reply to your messages, please provide your details</p>
     <span>Name (optional)</span>
-    <input type="text" ng-model="msg.name"/>
+    <input type="text" ng-model="param.fname"/>
     <span>Email</span>
-    <input type="text" ng-model="msg.email"/>
+    <input type="text" ng-model="param.from"/>
     <div class="btns">
         <span class="color-accent-inv" ng-click="setEmail()">DONE</span>
     </div>
