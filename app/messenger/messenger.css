@@ -37,6 +37,17 @@
 .messenger > .list > .item > span:first-child{
     font-weight: 600;
 }
+.messenger > .list > .item > span:not(:first-child){
+    opacity: 0.5;
+}
+.messenger > .list > .item.seen{}
+.messenger > .list > .item.seen > span{}
+.messenger > .list > .item.seen > span:first-child{
+    color: #1E88E5;
+}
+.messenger > .list > .item.seen > span:not(:first-child){
+    color: #1E88E5;
+}
 .messenger > .thread{
     flex-grow: 1;
     display: flex;
@@ -88,7 +99,10 @@
     background-color: #ECEFF1;
     flex-shrink: 0;
 }
-
+.messenger > .thread .body > h1, .messenger > .thread .body > h2{
+    opacity: 0.3;
+    text-align: center;
+}
 .messenger > .thread .body .msgs{
     flex-grow: 1;
     overflow: auto;

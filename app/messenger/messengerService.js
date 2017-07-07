@@ -81,6 +81,11 @@ app.service('mService', ['$rootScope', 'httpFacade', 'AppStore', function ($root
         });
     };
     self.setOpened = function (tid) {
-        log(tid);
+        httpFacade.putMessage($.param({tid: tid})).then(function (res) {});
+        inbox.forEach(function (x) {
+            if (x.tid === tid) {
+                x.seen = true;
+            }
+        });
     };
 }]);

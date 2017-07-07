@@ -2,7 +2,7 @@
 /*global log*/
 /*global sessionStorage*/
 /*global $*/
-app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 'AppStore', 'mService', function ($scope, $routeParams, $location, $http, AppStore, mService) {
+app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', '$timeout', 'AppStore', 'mService', function ($scope, $routeParams, $location, $http, $timeout, AppStore, mService) {
     'use strict';
     $scope.msg = {};
     $scope.param = {};
@@ -10,12 +10,26 @@ app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 
     $scope.inbox = {};
     $scope.thread = [];
     $scope.body = '';
+    function scrollMsgs() {
+        $timeout(function () {
+            var x, y, z;
+            x = $('#msgs').height();
+            y = $('#msg').height();
+            z = y - x;
+            if (z > 0) {
+                $('#msgs').scrollTop(z);
+            }
+        }, 10);
+    }
     $scope.$on('THREAD', function (evt, ar) {
         $scope.inbox.forEach(function (x) {
             if (x.id === ar[0] && x.tid === ar[1]) {
                 $scope.to.name = x.name;
                 $scope.to.ad = $routeParams.id;
                 $scope.thread = x.thread;
+                x.seen = true;
+                mService.setOpened(x.tid);
+                scrollMsgs();
             }
         });
     });
@@ -44,7 +58,6 @@ app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 
         q.id = x;
         if (typeof y !== 'undefined') {
             q.tid = y;
-            mService.setOpened(y);
         }
         $location.search(q);
     };
@@ -56,10 +69,12 @@ app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 
     };
     if (AppStore.isToken()) {
         mService.init();
-        if (typeof $routeParams.tid === 'undefined') {
-            $scope.list = true;
+        if (typeof $routeParams.id === 'undefined') {
+            $scope.list = 0;
+        } else if (typeof $routeParams.tid === 'undefined') {
+            $scope.list = 1;
         } else {
-            $scope.list = false;
+            $scope.list = 2;
         }
     }
 }]);

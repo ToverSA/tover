@@ -16,4 +16,7 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.postMessage = function (param) {
         return $http.post(baseUrl + '/messages', param, { headers: {'token': AppStore.getToken()}});
     };
+    self.putMessage = function (param) {
+        return $http.put(baseUrl + '/messages', param, { headers: {'token': AppStore.getToken()}});
+    };
 }]);
