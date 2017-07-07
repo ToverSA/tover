@@ -9,37 +9,44 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$routeParams', 'A
     $scope.toPrefs = function () { $location.url('/account?rel=prefs'); };
     if (typeof $routeParams.rel === 'undefined') {
         if (AppStore.isToken()) {
-            $location.url('/account?rel=console');
+            $routeParams.rel = 'console';
+            $location.search($routeParams);
         } else {
-            $location.url('/account?rel=login');
+            $routeParams.rel = 'login';
+            $location.search($routeParams);
         }
     } else if ($routeParams.rel === 'console') {
         if (AppStore.isToken()) {
             $scope.section = 'console';
         } else {
-            $location.url('/account?rel=login');
+            $routeParams.rel = 'login';
+            $location.search($routeParams);
         }
     } else if ($routeParams.rel === 'prefs') {
         if (AppStore.isToken()) {
             $scope.section = 'prefs';
         } else {
-            $location.url('/account?rel=login');
+            $routeParams.rel = 'login';
+            $location.search($routeParams);
         }
     } else if ($routeParams.rel === 'login') {
         if (AppStore.isToken()) {
-            $location.url('/account?rel=console');
+            $routeParams.rel = 'console';
+            $location.search($routeParams);
         } else {
             $scope.section = 'login';
         }
     } else if ($routeParams.rel === 'register') {
         if (AppStore.isToken()) {
-            $location.url('/account?rel=console');
+            $routeParams.rel = 'console';
+            $location.search($routeParams);
         } else {
             $scope.section = 'register';
         }
     } else if ($routeParams.rel === 'recovery') {
         if (AppStore.isToken()) {
-            $location.url('/account?rel=console');
+            $routeParams.rel = 'console';
+            $location.search($routeParams);
         } else {
             $scope.section = 'recovery';
         }

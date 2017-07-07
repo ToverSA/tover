@@ -5,10 +5,10 @@ app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppSt
     //NOTE ads controller
     var src;
     function del(id) {
-        $http.delete('api.php/v1/ads', {params: {id: id}, headers: {token: AppStore.getToken()}}).then(function (res) {
+//        $http.delete('api.php/v1/ads', {params: {id: id}, headers: {token: AppStore.getToken()}}).then(function (res) {
 //            $location.url('account');
-            log(res.data);
-        });
+//            log(res.data);
+//        });
     }
     function init() {
         if (typeof $routeParams.id !== 'undefined') {
@@ -39,7 +39,11 @@ app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppSt
     }
     $scope.isGuest = true;
     $scope.sendMessage = function () {
-        $location.url('/messenger?id=' + $scope.ad.id + '&name=' + $scope.ad.name);
+        if (AppStore.isToken()) {
+            $location.url('/messenger?id=' + $scope.ad.id);
+        } else {
+            $location.url('/account?redirect=' + $location.url());
+        }
     };
     $scope.userClicked = function () {
         $location.url('/search?u=' + $scope.ad.uid

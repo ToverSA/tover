@@ -1,15 +1,18 @@
 /*global app*/
 /*global log*/
 /*global $*/
-app.controller('loginCtl', ['$scope', '$location', '$http', 'AppStore', function ($scope, $loaction, $http, AppStore) {
+app.controller('loginCtl', ['$scope', '$location', '$http', 'AppStore', function ($scope, $location, $http, AppStore) {
     'use strict';
-    log('login');
     function auth(e, p) {
         var data = {email: e.toLowerCase(), password: p};
         $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
             AppStore.setToken(res.data.token);
             AppStore.setUserId(res.data.id);
-            $loaction.url('/account?rel=console');
+            if (typeof $location.search().redirect !== 'undefined') {
+                $location.url($location.search().redirect);
+            } else {
+                $location.url('/account?rel=console');
+            }
         }, function (err) {
             //TODO handle auth errors
         });

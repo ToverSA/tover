@@ -227,8 +227,8 @@ class Ads{
       if ($aid > 0){
         $query = 'INSERT INTO images (advert_id, src) VALUES (?, ?)';
         $stmt = $con->prepare($query);
-        $stmt->bind_param('is', $aid, $img);
         foreach ($imgs as $img) {
+          $stmt->bind_param('is', $aid, $img);
           $stmt->execute();
         }
         if ($stmt->affected_rows > 0){

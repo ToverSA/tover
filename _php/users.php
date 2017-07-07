@@ -36,7 +36,7 @@ class Users{
   }
   public static function postAuthUser(){
     $con = new mysqli(HOST, USER, PWD, DB);
-    $query = 'SELECT * FROM login WHERE email=?';
+    $query = 'SELECT id, email, password, token FROM login WHERE email=?';
     $stmt = $con->prepare($query);
     $stmt->bind_param('s', $_POST['email']);
     $stmt->execute();

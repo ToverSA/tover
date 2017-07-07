@@ -7,7 +7,7 @@ require_once('_php/users.php');
 require_once('_php/messages.php');
 function handleGet(){
   if (isset($_SERVER['PATH_INFO'])){
-    switch ($_SERVER['PATH_INFO']) {
+    switch (strtolower($_SERVER['PATH_INFO'])) {
       case '/v1/campuses':
       case '/v1/campuses/':
         Insties::getCampuses();
@@ -35,6 +35,10 @@ function handleGet(){
       case '/v1/image/large.jpg':
       case '/v1/image/large.jpg/':
         Image::getLarge();
+        break;
+      case '/v1/messages':
+      case '/v1/messages/':
+        Messages::getMessages();
         break;
       default:
         break;

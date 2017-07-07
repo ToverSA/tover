@@ -3,7 +3,6 @@
 /*global $*/
 app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', function ($scope, $http, $location, AppStore) {
     'use strict';
-    log('register');
     var self = this,
         insties;
     function isEmailValid(data) {
@@ -36,7 +35,7 @@ app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', funct
         }
     }
     function isNameValid(data) {
-        if (typeof data === 'undefined' || data.length < 4) {
+        if (typeof data === 'undefined' || data.length < 3) {
             $scope.errMsg = 'Name must have at least 4 characters';
             return false;
         } else if (data.search(/[a-z]/i) < 0) {
@@ -71,7 +70,11 @@ app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', funct
         $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
             AppStore.setToken(res.data.token);
             AppStore.setUserId(res.data.id);
-            $location.url('/account?rel=console');
+            if (typeof $location.search().redirect !== 'undefined') {
+                $location.url($location.search().redirect);
+            } else {
+                $location.url('/account?rel=console');
+            }
         }, function (err) {
             //TODO handle auth errors
         });
@@ -83,7 +86,7 @@ app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', funct
         $scope.instList = insties;
         $scope.cState = 0;
     };
-    $scope.openChooser = function () { $scope.isCOpen = true; log(insties); };
+    $scope.openChooser = function () { $scope.isCOpen = true; };
     $scope.browse = function (i) {
         if ($scope.cState === 0) {
             $scope.sTitle = insties[i].name;

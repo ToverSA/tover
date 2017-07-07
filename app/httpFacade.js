@@ -6,7 +6,11 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
         baseUrl = 'api.php/v1';
     self.getAds = function () {};
     self.getMessages = function (param) {
-        return $http.get(baseUrl + '/messages?' + param);
+        if (typeof param === 'undefined') {
+            return $http.get(baseUrl + '/messages', {headers: {'token': AppStore.getToken()}});
+        } else {
+            return $http.get(baseUrl + '/messages?' + param, {headers: {'token': AppStore.getToken()}});
+        }
     };
 //    self.postMessage = function () {};
     self.postMessage = function (param) {

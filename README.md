@@ -75,3 +75,7 @@
     * requires access token
 * DELETE /users/:id (Delete account)
     * requires access token, password
+
+## NOTES ##
+Some bugs when creating ads abnormalities show with images. Apparently
+due to the mysql datatype. check that it is set to lognblob other than blob

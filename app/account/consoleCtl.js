@@ -2,6 +2,7 @@
 /*global log*/
 app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mService', function ($scope, $http, $location, AppStore, mService) {
     'use strict';
+    mService.init(1);
     $scope.logout = function () {
         AppStore.clearAll();
         $location.url('/home');
@@ -29,7 +30,6 @@ app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mServ
         AppStore.setUserEmail(res.data.email);
         AppStore.setUserNumber(res.data.number);
         $scope.name = res.data.name;
-//            loadAccount();
     }, function (err) {
         //TODO handle account errors
     });

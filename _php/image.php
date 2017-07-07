@@ -10,7 +10,7 @@ class Image{
       $img = imagescale($img, 198, 198);
     }
     header('Content-Type: image/jpeg');
-    imagejpeg($img, NULL, 90);
+    imagejpeg($img, NULL, 100);
     imagedestroy($img);
   }
   public static function optimise($str){
@@ -23,7 +23,7 @@ class Image{
     $y = ($h > $w) ? ($h - $w)/2 : 0;
     $im = imagecreatetruecolor($l, $l);
     imagecopy($im, $img, 0, 0, $x, $y, $w, $h);
-    if ($l > 768) {
+    if ($l > 512) {
         $im = imagescale($im, 512, 512);
     }
     ob_start();
