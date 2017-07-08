@@ -79,7 +79,7 @@
     <div class="main" ng-switch-when="prefs" ng-controller="prefsCtl">
         <div class="header">
             <span class="label">Preferences</span>
-            <div class="item" ng-click="save()">
+            <div class="item" ng-click="save()" ng-show="dataChanged">
                 <img src="img/correct.png"/>
                 <span>SAVE</span>
             </div>
@@ -91,24 +91,49 @@
         <div class="prefs">
             <div class="item">
                 <span>Display name</span>
-                <span class="color-accent-inv">EDIT</span>
-                <h2>Sdu</h2>
+                <span class="color-accent-inv" ng-click="edit(1)">EDIT</span>
+                <h2>{{current.name}}</h2>
             </div>
             <div class="item">
                 <span>Number</span>
-                <span class="color-accent-inv">EDIT</span>
-                <h2>0876534218</h2>
+                <span class="color-accent-inv" ng-click="edit(2)">EDIT</span>
+                <h2 ng-switch="current.w">{{current.number}}<img src="/img/whatsapp.png" ng-switch-when="0"/><img class="whatsapp" src="/img/whatsapp.png" ng-switch-when="1"/></h2>
             </div>
             <div class="item">
                 <span>Email</span>
-                <h2>gumedesduduzo@gmail.com</h2>
+                <span class="color-accent-inv" ng-click="edit(3)">DELETE ACCOUNT</span>
+                <h2>{{current.email}}</h2>
             </div>
         </div>
-        <div class="edit-dialog">
-            <h4>Display name</h4>
-            <input type="text"/>
-            <div class="btns">
-                <span class="color-accent-inv">CLOSE</span>
+        <div ng-switch="editing">
+            <div class="edit-dialog" ng-switch-when="1">
+                <h4>Display name</h4>
+                <input type="text" ng-model="data.name"/>
+                <div class="btns">
+                    <span class="color-accent-inv" ng-click="close()">CLOSE</span>
+                </div>
+            </div>
+            <div class="edit-dialog" ng-switch-when="2">
+                <h4>Number</h4>
+                <input type="text" ng-model="data.number"/>
+                <div>
+                    <input name="w" type="checkbox" ng-model="data.w"/>
+                    <label for="w">Available on whatsapp</label>
+                </div>
+                <div class="btns">
+                    <span class="color-accent-inv" ng-click="close()">CLOSE</span>
+                </div>
+            </div>
+            <div class="edit-dialog" ng-switch-when="3">
+                <h4>Are you sure you want to delete this account and erase all adverts associated with it?</h4>
+                <div>
+                    <label>Confirm your password first.</label>
+                    <input type="password" ng-model="pwd"/>
+                </div>
+                <div class="btns">
+                    <span class="color-accent-inv" ng-click="close()">CANCEL</span>
+                    <span class="color-accent-inv" ng-click="del(pwd)">DELETE</span>
+                </div>
             </div>
         </div>
     </div>

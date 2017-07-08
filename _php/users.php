@@ -5,6 +5,21 @@
  */
 class Users{
   //TODO Send email verification
+  public static function deleteUser(){
+    if (isset($_SERVER['HTTP_TOKEN'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT id FROM login WHERE token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      $stmt->bind_result($uid);
+      if ($stmt->fetch()){
+        echo $uid;
+        Ads::clearAds($stmt, $uid);
+        // $stmt->prepare('DELETE FROM somelog WHERE user = 'jcole');
+      }
+    }
+  }
   public static function postNewUser(){
     $con = new mysqli(HOST, USER, PWD, DB);
     $con->autocommit(false);
@@ -49,6 +64,24 @@ class Users{
       }
     } else {
       header('HTTP/1.0 400 Bad request');
+    }
+  }
+  public static function putAccount(){
+    $_SERVER['REQUEST_METHOD']==="PUT" ? parse_str(file_get_contents('php://input', false , null, -1 , $_SERVER['CONTENT_LENGTH'] ), $_PUT): $_PUT=array();
+    if (isset($_SERVER['HTTP_TOKEN'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT id FROM login WHERE token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      $stmt->bind_result($uid);
+      if ($stmt->fetch()){
+        $stmt->prepare('UPDATE users SET users.name=?, users.number=?, users.whatsapp=? WHERE users.id=?');
+        $_PUT['w'] = ($_PUT['w'] == 'true') ? 1 : 0;
+        $stmt->bind_param('ssii', $_PUT['name'], $_PUT['number'], $_PUT['w'], $uid);
+        $stmt->execute();
+        echo $stmt->affected_rows;
+      }
     }
   }
   public static function getAccount(){

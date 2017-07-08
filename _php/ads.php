@@ -5,6 +5,9 @@
  */
 
 class Ads{
+  public static function clearAds(&$stmt, $uid){
+    Messages::clearMessages($stmt, $uid);
+  }
   public static function getAds(){
     $limit = 0;
     $rows = 15;

@@ -70,7 +70,20 @@ function handlePost(){
   }
 }
 function handePut(){
-  Messages::putMessages();
+  if (isset($_SERVER['PATH_INFO'])){
+    switch (strtolower($_SERVER['PATH_INFO'])) {
+      case '/v1/account':
+      case '/v1/account/':
+        Users::putAccount();
+        break;
+      case '/v1/messages':
+      case '/v1/messages/':
+        Messages::putMessages();
+        break;
+      default:
+        break;
+    }
+  }
 }
 function handleDelete(){
   if (isset($_SERVER['PATH_INFO'])){
@@ -81,6 +94,10 @@ function handleDelete(){
       case '/v1/ads':
       case '/v1/ads/':
         Ads::deleteAds();
+        break;
+      case '/v1/account':
+      case '/v1/account/':
+        Users::deleteUser();
         break;
       default:
         break;

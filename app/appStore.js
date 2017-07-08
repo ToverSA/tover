@@ -13,6 +13,7 @@ app.service('AppStore', [function () {
         userNumber = 'VVNFUk5VTUJFUg',
         searchSettings = 'U0VBUkNIU0VUVElOR1M',
         msgStore = 'SU5CT1g',
+        wStore = 'V0hBVFNBUFA',
         token = 'VE9LRU4';
     function enc(str) {
         return CryptoJS.AES.encrypt(str, 'akomo');
@@ -98,6 +99,12 @@ app.service('AppStore', [function () {
             return false;
         }
         return JSON.parse(dec(x));
+    };
+    self.setWhatsapp = function (w) {
+        localStorage.setItem(wStore, w);
+    };
+    self.getWhatsapp = function () {
+        return localStorage.getItem(wStore);
     };
     self.clearAll = function () {
         localStorage.removeItem(token);

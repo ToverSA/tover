@@ -33,6 +33,7 @@ app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mServ
         AppStore.setUserName(res.data.name);
         AppStore.setUserEmail(res.data.email);
         AppStore.setUserNumber(res.data.number);
+        AppStore.setWhatsapp(res.data.whatsapp);
         $scope.name = res.data.name;
     }, function (err) {
         //TODO handle account errors

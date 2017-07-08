@@ -3,6 +3,7 @@
  * All things mesaging are handled here
  */
 class Messages{
+  public static function clearMessages(&$stmt, $uid){}
   public static function putMessages(){
     $_SERVER['REQUEST_METHOD']==="PUT" ? parse_str(file_get_contents('php://input', false , null, -1 , $_SERVER['CONTENT_LENGTH'] ), $_PUT): $_PUT=array();
     if (isset($_SERVER['HTTP_TOKEN'])){
@@ -16,7 +17,6 @@ class Messages{
         $stmt->prepare("UPDATE threads SET reply_id=0 WHERE id=?");
         $stmt->bind_param('i', $_PUT['tid']);
         $stmt->execute();
-        print_r($stmt);
       }
     }
   }

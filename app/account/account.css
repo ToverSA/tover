@@ -272,8 +272,22 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.account .prefs .item > h2 > img{
+    display: inline-block;
+    height: 30px;
+    float: right;
+    filter: grayscale();
+    opacity: 0.3;
+}
+.account .prefs .item > h2 > img.whatsapp{
+    filter: none;
+    opacity: 1;
+}
 .account .prefs .item > span:first-child{
     flex-grow: 1;
+}
+.account .prefs .item > span:nth-child(2){
+    cursor: pointer;
 }
 .account .prefs .item > span{
     padding: 5px 10px;
@@ -290,7 +304,7 @@
     box-shadow: 0 1px 1px 1px #CCC;
     padding: 40px 20px;
 }
-.account .edit-dialog > input{
+.account .edit-dialog > input[type=text], .account .edit-dialog input[type=password]{
     font-size: 1em;
     padding: 10px;
     margin: 5px 0;
@@ -298,16 +312,26 @@
     outline: none;
     border: 0;
     border-bottom: 3px solid #DDD;
-    margin: 30px 0;
+    margin: 10px 0;
+}
+.account .edit-dialog > div label{
+    margin: 5px 0;
+    display: inline-block;
+}
+.account .edit-dialog input[type=password]{
+/*    margin: 0;*/
 }
 .account .edit-dialog > input:focus{
     border-bottom-color: #1E88E5;
     background-color: #FBFBFB;
 }
-.account .edit-dialog{}
 .account .edit-dialog > .btns{
     display: flex;
     justify-content: flex-end;
+}
+.account .edit-dialog > .btns > span{
+    padding: 5px;
+    cursor: pointer;
 }
 .account .edit-dialog > h4{
     margin: 0;
@@ -322,5 +346,12 @@
 @media screen and (max-width: 450px){
     .account .prefs{
         margin: 10px;
+    }
+    .account .edit-dialog{
+        top: 110px;
+        transform: none;
+        left: 5px;
+        right: 5px;
+        width: auto;
     }
 }

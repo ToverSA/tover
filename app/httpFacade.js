@@ -12,11 +12,20 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
             return $http.get(baseUrl + '/messages?' + param, {headers: {'token': AppStore.getToken()}});
         }
     };
-//    self.postMessage = function () {};
     self.postMessage = function (param) {
         return $http.post(baseUrl + '/messages', param, { headers: {'token': AppStore.getToken()}});
     };
     self.putMessage = function (param) {
         return $http.put(baseUrl + '/messages', param, { headers: {'token': AppStore.getToken()}});
+    };
+    self.putAccount = function (param) {
+        return $http.put(baseUrl + '/account', param, { headers: {'token': AppStore.getToken()}});
+    };
+    self.deleteAccount = function (param) {
+        return $http({
+            method: 'DELETE',
+            url: baseUrl + '/account?' + param,
+            headers: {'token': AppStore.getToken()}
+        });
     };
 }]);
