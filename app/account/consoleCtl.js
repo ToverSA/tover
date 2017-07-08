@@ -2,6 +2,10 @@
 /*global log*/
 app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mService', function ($scope, $http, $location, AppStore, mService) {
     'use strict';
+    $scope.$on('NOTIFY', function (evt, n) {
+        log('notify');
+        $scope.notify = n;
+    });
     mService.init(1);
     $scope.logout = function () {
         AppStore.clearAll();

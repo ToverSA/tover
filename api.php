@@ -70,8 +70,7 @@ function handlePost(){
   }
 }
 function handePut(){
-  echo 'hello';
-  print_r($_PUT);
+  Messages::putMessages();
 }
 function handleDelete(){
   if (isset($_SERVER['PATH_INFO'])){

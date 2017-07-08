@@ -184,10 +184,13 @@
 .account  .header > .item > div{
     position: absolute;
     height: 15px;
+    line-height: 15px;
     width: 15px;
     right: -1px;
     top: -1px;
     border-radius: 8px;
+    text-align: center;
+    font-size: 0.7em;
 }
 .account  .header > .item > img{
     height: 36px;

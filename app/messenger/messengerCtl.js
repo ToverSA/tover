@@ -17,7 +17,8 @@ app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', 
             y = $('#msg').height();
             z = y - x;
             if (z > 0) {
-                $('#msgs').scrollTop(z);
+//                $('#msgs').scrollTop(z);
+                $('#msgs').animate({scrollTop: z}, 100, 'swing');
             }
         }, 10);
     }

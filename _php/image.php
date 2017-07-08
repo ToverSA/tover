@@ -27,7 +27,7 @@ class Image{
         $im = imagescale($im, 512, 512);
     }
     ob_start();
-    imagejpeg($im, NULL, 85);
+    imagejpeg($im, NULL, 90);
     $contents = ob_get_contents();
     ob_end_clean();
     imagedestroy($img);

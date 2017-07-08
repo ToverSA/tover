@@ -11,12 +11,11 @@
             <div class="item" ng-click="toInbox()">
                 <img src="img/envelope.png"/>
                 <span>INBOX</span>
-                <div class="color-accent"></div>
+                <div class="color-accent" ng-show="notify > 0">{{notify}}</div>
             </div>
             <div class="item" ng-click="toPrefs()">
                 <img src="img/settings-2.png"/>
                 <span>PREFRENCES</span>
-                <div class="color-accent"></div>
             </div>
             <div class="item" ng-click="logout()">
                 <img src="img/logout.png"/>

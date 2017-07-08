@@ -3,6 +3,23 @@
  * All things mesaging are handled here
  */
 class Messages{
+  public static function putMessages(){
+    $_SERVER['REQUEST_METHOD']==="PUT" ? parse_str(file_get_contents('php://input', false , null, -1 , $_SERVER['CONTENT_LENGTH'] ), $_PUT): $_PUT=array();
+    if (isset($_SERVER['HTTP_TOKEN'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT id FROM login WHERE token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      $stmt->bind_result($uid);
+      if ($stmt->fetch()){
+        $stmt->prepare("UPDATE threads SET reply_id=0 WHERE id=?");
+        $stmt->bind_param('i', $_PUT['tid']);
+        $stmt->execute();
+        print_r($stmt);
+      }
+    }
+  }
   public static function insert(&$stmt, $tid, $uid, $b){
     $d = new DateTime();
     $date = $d->format('Y-m-d, H:m:s');
@@ -70,7 +87,7 @@ class Messages{
           $stmt->bind_result($tid, $aid, $name, $rid);
           $inbox = array();
           while ($stmt->fetch()) {
-            array_push($inbox, array('tid' => $tid, 'id' => $aid, 'name' => $name, 'seen' => ($uid == $rid)));
+            array_push($inbox, array('tid' => $tid, 'id' => $aid, 'name' => $name, 'seen' => (($uid == $rid) || ($rid == 0))));
           }
           echo json_encode($inbox);
         }

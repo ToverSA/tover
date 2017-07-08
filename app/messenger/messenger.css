@@ -56,15 +56,17 @@
     flex-shrink: 10
 }
 .messenger > .thread .body{
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
 }
 .messenger > .thread .reply{
     height: 70px;
     display: flex;
     background-color: #FFF;
     flex-shrink: 0;
+    min-height: 70px;
 }
 .messenger > .thread .reply textarea{
     flex-grow: 1;
@@ -98,6 +100,7 @@
     display: flex;
     background-color: #ECEFF1;
     flex-shrink: 0;
+    border-bottom: 1px solid #CCC;
 }
 .messenger > .thread .body > h1, .messenger > .thread .body > h2{
     opacity: 0.3;
@@ -121,6 +124,7 @@
     justify-content: space-around;
     padding: 7px 15px;
     cursor: pointer;
+    display: none;
 }
 .messenger > .thread .body .bar > .menu > span{
     display: block;
@@ -151,17 +155,19 @@
 }
 .messenger > .thread .body .bar{}
 .messenger > .thread .body .msg{
-    padding: 0 10px;
+    padding: 3px 10px;
     display: flex;
     flex-wrap: wrap;
 }
 .messenger > .thread .body .msg > p{
-    flex-basis: 80%;
+    max-height: 80%;
+    flex-shrink: 1;
     margin: 0;
     white-space: pre-line;
     padding: 10px;
     background-color: #FFF;
     box-shadow: 0 1px 1px 1px #DDD;
+    border-radius: 15px 15px 15px 0;
 }
 .messenger > .thread .body .msg > span{
     flex-basis: 100%;
@@ -170,6 +176,9 @@
 }
 .messenger > .thread .body .msg.sent{
     justify-content: flex-end;
+}
+.messenger > .thread .body .msg.sent > p{
+    border-radius: 15px 15px 0 15px;
 }
 .messenger > .thread .body .msg.sent > span{
     text-align: right;

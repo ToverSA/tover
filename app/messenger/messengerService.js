@@ -18,13 +18,17 @@ app.service('mService', ['$rootScope', 'httpFacade', 'AppStore', function ($root
     };
     function requestThread(tid, t) {
         httpFacade.getMessages($.param({id: tid})).then(function (res) {
-            var id = 0;
+            var id = 0, note = 0;
             inbox.forEach(function (x) {
+                if (x.seen === false) {
+                    note += 1;
+                }
                 if (x.tid === tid) {
                     id = x.id;
                     x.thread = res.data;
                 }
             });
+            $rootScope.$broadcast('NOTIFY', note);
             if (typeof t !== 'undefined' && t === true) {
                 $rootScope.$broadcast('THREAD', [id, tid]);
             } else {
@@ -81,10 +85,12 @@ app.service('mService', ['$rootScope', 'httpFacade', 'AppStore', function ($root
         });
     };
     self.setOpened = function (tid) {
-        httpFacade.putMessage($.param({tid: tid})).then(function (res) {});
         inbox.forEach(function (x) {
-            if (x.tid === tid) {
+            if (x.tid === tid && x.seen === false) {
                 x.seen = true;
+                httpFacade.putMessage($.param({tid: tid})).then(function (res) {
+                    log(res.data);
+                });
             }
         });
     };
