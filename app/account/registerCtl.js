@@ -66,17 +66,20 @@ app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', funct
         }
     }
     function auth(e, p) {
+        //NOTE Email with more than one dot have weird behaivor
         var data = {email: e.toLowerCase(), password: p};
         $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
             AppStore.setToken(res.data.token);
             AppStore.setUserId(res.data.id);
+            $scope.$emit('STOP_LOADING');
             if (typeof $location.search().redirect !== 'undefined') {
                 $location.url($location.search().redirect);
             } else {
                 $location.url('/account?rel=console');
             }
         }, function (err) {
-            //TODO handle auth errors
+            $scope.$emit('STOP_LOADING');
+            $scope.$emit('ERROR', {code: err.status, desc: err.data});
         });
     }
     $scope.lTitle = '- Select your campus -';
@@ -103,10 +106,12 @@ app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', funct
             $scope.formData.email = $scope.formData.email.toLowerCase();
             var data = JSON.parse(JSON.stringify($scope.formData));
             delete data.rePwd;
+            $scope.$emit('START_LOADING');
             $http.post('/api.php/v1/users/new', $.param(data)).then(function (res) {
                 auth(data.email, data.password);
             }, function (err) {
-                //TODO handle user creation error
+                $scope.$emit('STOP_LOADING');
+                $scope.$emit('ERROR', {code: err.status, desc: err.data});
             });
         }
     };

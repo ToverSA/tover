@@ -7,6 +7,23 @@
 class Ads{
   public static function clearAds(&$stmt, $uid){
     Messages::clearMessages($stmt, $uid);
+    $stmt->prepare('DELETE advert, images, advert_log FROM advert JOIN images JOIN advert_log WHERE advert.id=images.advert_id AND advert.id=advert_log.advert_id AND advert.user_id=?');
+    $stmt->bind_param('i', $uid);
+    $stmt->execute();
+  }
+  public static function getAdsCount(){
+    if (isset($_GET['cid'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT COUNT(advert.id) FROM advert JOIN users ON advert.user_id=users.id '.
+      "WHERE users.campus_id=?";
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('i', $_GET['cid']);
+      $stmt->execute();
+      $stmt->bind_result($num);
+      if ($stmt->fetch()){
+        echo $num;
+      }
+    }
   }
   public static function getAds(){
     $limit = 0;
@@ -80,9 +97,10 @@ class Ads{
         $query = ($key) ? $query . 'AND advert.category=' . CAT[$key] . ' ' : $query;
       }
       if (isset($_GET['q'])){
-        $query = $query . "AND advert.title LIKE '%".$_GET['q']."%' ";
+        $q = $con->real_escape_string($_GET['q']);
+        $query = $query . "AND advert.title LIKE '%".$q."%' ";
         if (!(isset($_GET['a']) && $_GET['a'] == 'n')){
-          $query = $query . "OR advert.description LIKE '%".$_GET['q']."%' ";
+          $query = $query . "OR advert.description LIKE '%".$q."%' ";
         }
       }
       $s = 0;
@@ -100,9 +118,10 @@ class Ads{
             $query = ($key) ? $query . 'AND advert.category=' . CAT[$key] . ' ' : $query;
           }
           if (isset($_GET['q'])){
-            $query = $query . "AND advert.title LIKE '%".$_GET['q']."%' ";
+            $q = $con->real_escape_string($_GET['q']);
+            $query = $query . "AND advert.title LIKE '%".$q."%' ";
             if (!(isset($_GET['a']) && $_GET['a'] == 'n')){
-              $query = $query . "OR advert.description LIKE '%".$_GET['q']."%' ";
+              $query = $query . "OR advert.description LIKE '%".$q."%' ";
             }
           }
           $query = $query . 'GROUP BY advert.id ';
@@ -121,7 +140,6 @@ class Ads{
       }
       $query = $query.'LIMIT ?, ?';
       $stmt = $con->prepare($query);
-      // print_r($con);
       $stmt->bind_param('iii', $_GET['cid'], $limit, $rows);
       $stmt->execute();
       // print_r($stmt);
@@ -257,17 +275,17 @@ class Ads{
       $stmt = $con->prepare($query);
       $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
       $stmt->execute();
-      $stmt->bind_result($id);
+      $stmt->bind_result($uid);
       if ($stmt->fetch()){
         $stmt->close();
-        // $con->query('START TRANSACTION');
+        Messages::clearMessages($stmt, $uid);
         $query = 'DELETE FROM advert, advert_log, images '.
         'USING advert JOIN advert_log JOIN images WHERE advert.user_id=? AND '.
         'advert.id=images.advert_id AND advert.id=advert_log.advert_id AND advert.id=?';
         $stmt = $con->prepare($query);
-        $stmt->bind_param('ii',$id, $_REQUEST['id']);
+        $stmt->bind_param('ii', $uid, $_REQUEST['id']);
         $stmt->execute();
-        print_r($stmt);
+        header('204 No Content');
       }
     }
   }

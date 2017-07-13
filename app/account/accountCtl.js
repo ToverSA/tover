@@ -3,6 +3,21 @@
 /*global $*/
 app.controller('accountCtl', ['$scope', '$http', '$location', '$routeParams', 'AppStore', function ($scope, $http, $location, $routeParams, AppStore) {
     'use strict';
+    $scope.error = {};
+    $scope.$on('STOP_LOADING', function () {
+        $scope.loading = false;
+    });
+    $scope.$on('START_LOADING', function () {
+        $scope.loading = true;
+    });
+    $scope.$on('ERROR', function (evt, obj) {
+        $scope.error.title = 'Error : ' + obj.code;
+        $scope.error.description = obj.desc;
+        $scope.error.showing = true;
+    });
+    $scope.closeErrDialog = function () {
+        $scope.error.showing = false;
+    };
     $scope.toRecovery = function () { $location.url('/account?rel=recovery'); };
     $scope.toRegister = function () { $location.url('/account?rel=register'); };
     $scope.toLogin = function () { $location.url('/account?rel=login'); };

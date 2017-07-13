@@ -23,7 +23,7 @@
             </div>
         </div>
         <h1 class="zero" ng-show="ads.length === 0">Nothing to see here. Create your first ad!</h1>
-        <div class="ads-list" ng-show="ads.length !== 0">
+        <div class="ads-list" ng-hide="ads.length === 0">
             <div class="item heading">
                 <span>Ad Title</span>
                 <span>Price</span>
@@ -54,7 +54,7 @@
         <h2>Register new account</h2>
         <input type="text" placeholder="Display name" ng-model="formData.dName"/>
         <input type="email" placeholder="Email" ng-model="formData.email"/>
-        <input type="text" placeholder="Number" ng-model="formData.number"/>
+        <input type="text" placeholder="Cellphone number" ng-model="formData.number"/>
         <div class="a-chooser">
             <span ng-click="openChooser()">{{lTitle}}</span>
             <div class="c-dialog" ng-show="isCOpen">
@@ -132,9 +132,22 @@
                 </div>
                 <div class="btns">
                     <span class="color-accent-inv" ng-click="close()">CANCEL</span>
-                    <span class="color-accent-inv" ng-click="del(pwd)">DELETE</span>
+                    <span class="color-accent" ng-click="del(pwd)">DELETE</span>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="loader" ng-show="loading">
+    <div class="color-primary"></div>
+    <div class="color-primary"></div>
+</div>
+<div class="error-dialog" ng-show="error.showing">
+    <div class="container">
+        <h2>{{error.title}}</h2>
+        <p>{{error.description}}</p>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="closeErrDialog()">CLOSE</span>
         </div>
     </div>
 </div>

@@ -7,6 +7,7 @@ app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mServ
         $scope.notify = n;
     });
     mService.init(1);
+    //NOTE message notification should show on user icon even whilst browsing home
     $scope.logout = function () {
         AppStore.clearAll();
         $location.url('/home');
@@ -22,8 +23,6 @@ app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mServ
         headers: {'token': AppStore.getToken()}
     }).then(function (res) {
         $scope.ads = res.data;
-    }, function (err) {
-        //TODO if getting ads renders an error
     });
     $http.get('api.php/v1/account', {
         headers: {'token': AppStore.getToken()}
@@ -35,8 +34,6 @@ app.controller('consoleCtl', ['$scope', '$http', '$location', 'AppStore', 'mServ
         AppStore.setUserNumber(res.data.number);
         AppStore.setWhatsapp(res.data.whatsapp);
         $scope.name = res.data.name;
-    }, function (err) {
-        //TODO handle account errors
     });
     $scope.$on('NEW_MESSAGE', function () {});
 }]);

@@ -3,7 +3,18 @@
  * All things mesaging are handled here
  */
 class Messages{
-  public static function clearMessages(&$stmt, $uid){}
+  public static function clearMessages(&$stmt, $uid){
+    $stmt->reset();
+    $stmt->prepare('DELETE FROM messages WHERE messages.user_id=?');
+    $stmt->bind_param('i', $uid);
+    $stmt->execute();
+    $stmt->prepare('DELETE FROM threads WHERE threads.user_id=?');
+    $stmt->bind_param('i', $uid);
+    $stmt->execute();
+    $stmt->prepare('DELETE threads FROM threads JOIN advert WHERE advert.id=threads.advert_id AND advert.user_id=?');
+    $stmt->bind_param('i', $uid);
+    $stmt->execute();
+  }
   public static function putMessages(){
     $_SERVER['REQUEST_METHOD']==="PUT" ? parse_str(file_get_contents('php://input', false , null, -1 , $_SERVER['CONTENT_LENGTH'] ), $_PUT): $_PUT=array();
     if (isset($_SERVER['HTTP_TOKEN'])){

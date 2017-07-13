@@ -8,15 +8,26 @@ class Users{
   public static function deleteUser(){
     if (isset($_SERVER['HTTP_TOKEN'])){
       $con = new mysqli(HOST, USER, PWD, DB);
-      $query = 'SELECT id FROM login WHERE token=?';
+      $query = 'SELECT id, password FROM login WHERE token=?';
       $stmt = $con->prepare($query);
       $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
       $stmt->execute();
-      $stmt->bind_result($uid);
-      if ($stmt->fetch()){
-        echo $uid;
+      $stmt->bind_result($uid, $hash);
+      if ($stmt->fetch() && password_verify($_REQUEST['password'], $hash)){
+        $con->autocommit(false);
+        $con->query('START TRANSACTION');
         Ads::clearAds($stmt, $uid);
-        // $stmt->prepare('DELETE FROM somelog WHERE user = 'jcole');
+        $stmt->prepare('DELETE users, login FROM users JOIN login WHERE login.id=users.id AND users.id=?');
+        $stmt->bind_param('i', $uid);
+        $stmt->execute();
+        if ($stmt->errno == 0){
+          $con->query('COMMIT');
+        }else{
+          $con->query('ROLLBACK');
+        }
+      } else {
+        header('HTTP/1.0 400 Bad request');
+        echo 'The password does not match!';
       }
     }
   }
@@ -61,9 +72,11 @@ class Users{
         echo json_encode(array('id' => $id, 'token' => $token));
       } else {
         header('HTTP/1.0 400 Bad request');
+        echo "The password does not match for " . $_POST['email'] . "'s account";
       }
     } else {
       header('HTTP/1.0 400 Bad request');
+      echo "The email ''" . $_POST['email'] . "' does not exists in our systems. New here? create a new account.";
     }
   }
   public static function putAccount(){
@@ -116,10 +129,11 @@ class Users{
       echo 'one user';
     } else if (isset($_GET['cid']) && isset($_GET['q'])){
       $con = new mysqli(HOST, USER, PWD, DB);
+      $q = $con->real_escape_string($_GET['q']);
       $query = 'SELECT login.id, login.email, users.name, users.number, COUNT(advert.id) ';
       $query = $query . 'FROM login JOIN users JOIN advert ';
       $query = $query . 'ON login.id=users.id AND login.id=advert.user_id ';
-      $query = $query . "WHERE users.campus_id=? AND users.name LIKE '%".$_GET['q']."%' ";
+      $query = $query . "WHERE users.campus_id=? AND users.name LIKE '%".$q."%' ";
       $query = $query . 'GROUP BY login.id, users.name, users.number';
       $stmt = $con->prepare($query);
       $stmt->bind_param('i', $_GET['cid']);

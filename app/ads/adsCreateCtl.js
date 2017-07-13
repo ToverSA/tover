@@ -5,6 +5,7 @@
 app.controller('adsCreateCtl', ['$scope', '$location', '$http', 'AppStore', function ($scope, $location, $http, AppStore) {
     'use strict';
     //NOTE create controller
+    //TODO stop allowing empty fields to go unchecked please
     $scope.cat = false;
     $scope.display = '- Choose category - ';
     $scope.cats = [
@@ -24,6 +25,10 @@ app.controller('adsCreateCtl', ['$scope', '$location', '$http', 'AppStore', func
         $scope.images.push(reader.result);
         $scope.dummy.splice(-1);
         $scope.$apply();
+    };
+    $scope.error = {};
+    $scope.closeErrDialog = function () {
+        $scope.error.showing = false;
     };
     $scope.clear = function (i) {
         if ($scope.images.length !== 6) {
@@ -50,7 +55,15 @@ app.controller('adsCreateCtl', ['$scope', '$location', '$http', 'AppStore', func
     };
     $scope.step = function () {
         if ($scope.aPage === 1) {
-            $scope.aPage += 1;
+            if (typeof $scope.ad.title === 'undefined') {
+                $scope.error.showing = true;
+                $scope.error.description = 'Title should not be empty';
+            } else if (typeof $scope.ad.category === 'undefined') {
+                $scope.error.showing = true;
+                $scope.error.description = 'Category not chosen';
+            } else {
+                $scope.aPage += 1;
+            }
         } else if ($scope.aPage === 2) {
             $scope.aPage += 1;
             $scope.dummy.push($scope.dummy.length + 1);
@@ -60,8 +73,10 @@ app.controller('adsCreateCtl', ['$scope', '$location', '$http', 'AppStore', func
             $scope.images.forEach(function (x) {
                 $scope.ad.images.push(x.substring(x.indexOf(',') + 1));
             });
+            $scope.loading = true;
             $http.post('api.php/v1/ads', $.param($scope.ad),
                        { headers: {'token': AppStore.getToken()} }).then(function (res) {
+                $scope.loading = false;
                 $location.url('/account');
             }, function (err) {
                 //TODO handle advert error

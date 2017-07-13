@@ -1,7 +1,7 @@
 /*global app*/
 /*global log*/
 /*global $*/
-app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 'AppStore', function ($scope, $routeParams, $location, $http, AppStore) {
+app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', 'httpFacade', 'AppStore', function ($scope, $routeParams, $location, httpFacade, AppStore) {
     'use strict';
     //NOTE search ctl
     var insties = [],
@@ -9,7 +9,7 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
         prefs,
         isPrefChanged = false,
         url = {};
-    $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
+    httpFacade.getCampuses().then(function (res) {
         insties = res.data;
         var i = 0;
         $scope.list = [];
@@ -46,7 +46,7 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
     $scope.sSection = 0;
     function search() {}
     function reload(param) {
-        $http.get('api.php/v1/ads?' + param).then(function (res) {
+        httpFacade.getAds(param).then(function (res) {
             $scope.ads = res.data;
             $scope.sLabel = prefs[1].label.toLowerCase();
             if (prefs[1].id > 2) {
@@ -81,19 +81,12 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', '$http', 
         }
     }
     function suggestions() {
-        $http.get('api.php/v1/ads?cid='
-                  + AppStore.getCampusId()
-                  + '&q='
-                  + $scope.query
-                  + '&a=n').then(function (res) {
+        httpFacade.getAds($.param({cid: AppStore.getCampusId(), q: $scope.query, a: 'n'})).then(function (res) {
             $scope.ad = res.data;
         }, function (err) {
             //TODO sugestions error
         });
-        $http.get('api.php/v1/users?cid='
-                  + AppStore.getCampusId()
-                  + '&q='
-                  + $scope.query).then(function (res) {
+        httpFacade.getUsers($.param({cid: AppStore.getCampusId(), q: $scope.query})).then(function (res) {
             $scope.user = res.data;
         }, function (err) {
             //TODO sugestions error

@@ -6,6 +6,18 @@
     font-family: Lato Thin;
     src: url(fonts/Lato-Hairline.ttf)
 }
+@keyframes loader-left{
+    50%{
+        background-color: #1E88E5;
+        transform: rotate(270deg) scale(0.5);
+    }
+}
+@keyframes loader-right{
+    50%{
+        background-color: #1E88E5;
+        transform: rotate(-270deg) scale(0.5);
+    }
+}
 *{
     box-sizing: border-box;
 }
@@ -184,7 +196,61 @@ a-chooser{
     border-color: #FFE0B2;
     font-size: 0.8em;
 }
-
+.loader{
+    position: fixed;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+.loader > div{
+    height: 70px;
+    width: 70px;
+    margin: 150px 0px;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    border-radius: 35px;
+}
+.loader > div:first-child{
+    animation-name: loader-left;
+    animation-delay: 0.7s;
+}
+.loader > div:last-child{
+    animation-name: loader-right;
+}
+.error-dialog{
+    position: fixed;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.error-dialog > .container{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    max-width: 450px;
+    min-width: 300px;
+    background-color: #FFF;
+    box-shadow: 0 0 1px 2px #CCC;
+    border-radius: 5px;
+    padding: 5px;
+}
+.error-dialog > .container > h2{}
+.error-dialog > .container > p{}
+.error-dialog > .container > ul > li{}
+.error-dialog > .container > .btns{
+    display: flex;
+    justify-content: flex-end;
+}
+.error-dialog > .container > .btns > span{
+    padding: 5px;
+}
 @media screen and (max-width: 1024px){
     .ad{
         margin: 0.78%;

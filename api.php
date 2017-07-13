@@ -28,6 +28,10 @@ function handleGet(){
       case '/v1/ads/':
         Ads::getAds();
         break;
+      case '/v1/ads/count':
+      case '/v1/ads/count/':
+        Ads::getAdsCount();
+        break;
       case '/v1/image/thumb.jpg':
       case '/v1/image/thumb.jpg/':
         Image::getThumb();

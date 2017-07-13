@@ -333,6 +333,10 @@
     padding: 5px;
     cursor: pointer;
 }
+.account .edit-dialog > .btns > span.color-accent{
+    padding: 5px;
+    border-radius: 3px;
+}
 .account .edit-dialog > h4{
     margin: 0;
 }

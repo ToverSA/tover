@@ -62,3 +62,16 @@
         </div>
     </div>
 </div>
+<div class="loader" ng-show="loading">
+    <div class="color-primary"></div>
+    <div class="color-primary"></div>
+</div>
+<div class="error-dialog" ng-show="error.showing">
+    <div class="container">
+        <h2>{{error.title}}</h2>
+        <p>{{error.description}}</p>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="closeErrDialog()">CLOSE</span>
+        </div>
+    </div>
+</div>

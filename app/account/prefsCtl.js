@@ -58,11 +58,17 @@ app.controller('prefsCtl', ['$scope', '$location', 'httpFacade', 'AppStore', fun
         });
     };
     $scope.del = function (pwd) {
-        $scope.editing = 0;
-        httpFacade.deleteAccount($.param({password: pwd})).then(function (res) {
-            log(res.data);
-//            AppStore.clearAll();
-//            $location.
-        });
+        if (typeof pwd !== 'undefined' && pwd.length > 3) {
+            $scope.editing = 0;
+            $scope.$emit('START_LOADING');
+            httpFacade.deleteAccount($.param({password: pwd})).then(function (res) {
+                AppStore.clearAll();
+                $location.url('home');
+                $scope.$emit('STOP_LOADING');
+            }, function (err) {
+                $scope.$emit('STOP_LOADING');
+                $scope.$emit('ERROR', {code: err.status, desc: err.data});
+            });
+        }
     };
 }]);

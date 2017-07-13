@@ -1,18 +1,18 @@
 /*global app*/
 /*global log*/
-app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppStore', function ($scope, $location, $http, $routeParams, AppStore) {
+/*global $*/
+app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', 'AppStore', function ($scope, $location, $routeParams, httpFacade, AppStore) {
     'use strict';
     //NOTE ads controller
     var src;
     function del(id) {
-//        $http.delete('api.php/v1/ads', {params: {id: id}, headers: {token: AppStore.getToken()}}).then(function (res) {
-//            $location.url('account');
-//            log(res.data);
-//        });
+        httpFacade.deleteAd($.param({id: id})).then(function (res) {
+            $location.url('/account');
+        });
     }
     function init() {
         if (typeof $routeParams.id !== 'undefined') {
-            $http.get('api.php/v1/ads?id=' + $routeParams.id, {cache: true}).then(function (res) {
+            httpFacade.getAds($.param({id: $routeParams.id})).then(function (res) {
                 $scope.ad = res.data;
                 src = new Array($scope.ad.src_id.length);
                 $scope.ad.src_id.forEach(function (x) {
@@ -85,7 +85,6 @@ app.controller('adsCtl', ['$scope', '$location', '$http', '$routeParams', 'AppSt
         if ($scope.isDel === true) {
             del($scope.ad.id);
             $scope.isDel = false;
-            $location.url('account');
         } else {
             $scope.isDel = true;
         }
