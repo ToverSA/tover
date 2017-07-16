@@ -124,6 +124,21 @@ class Users{
       header('HTTP/1.0 403 Forbidden');
     }
   }
+  public static function getCredits(){
+    if (isset($_SERVER['HTTP_TOKEN'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT login.id, login.email, users.name, users.number, users.whatsapp,'.
+      ' users.credits, users.campus_id, campuses.name '.
+      'FROM login JOIN users JOIN campuses ON login.id=users.id AND users.campus_id=campuses.id'.
+      ' WHERE login.token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      if ($stmt->fetch()){
+        echo "verified";
+      }
+    }
+  }
   public static function getUsers(){
     if (isset($_GET['id'])){
       echo 'one user';

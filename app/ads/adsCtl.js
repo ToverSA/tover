@@ -89,5 +89,16 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
             $scope.isDel = true;
         }
     };
+    $scope.confPromo = function () {
+        log($scope.one);
+    };
+    $scope.deal = 1;
+    $scope.sel = function (i) {
+        $scope.deal = i;
+    };
+    $scope.promote = function (v) {
+        $scope.prom = v;
+    };
+    $scope.pState = 1;
     init();
 }]);

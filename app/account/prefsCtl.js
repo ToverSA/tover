@@ -4,8 +4,12 @@
 app.controller('prefsCtl', ['$scope', '$location', 'httpFacade', 'AppStore', function ($scope, $location, httpFacade, AppStore) {
     'use strict';
     function init() {
+        httpFacade.getCredits().then(function (res) {
+            log(res.data);
+        });
         $scope.current = {};
         $scope.data = {};
+        $scope.credits = 0;
         $scope.current.name = AppStore.getUserName();
         $scope.data.name = AppStore.getUserName();
         $scope.current.number = AppStore.getUserNumber();

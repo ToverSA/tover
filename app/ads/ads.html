@@ -17,7 +17,7 @@
         <div ng-switch-when="2">
             <div class="btns">
                 <span class="color-accent-inv" ng-click="del()">DELETE</span>
-<!--                <span class="color-accent a">PROMOTE</span>-->
+                <span class="color-accent a" ng-click="promote(true)">PROMOTE</span>
             </div>
         </div>
         <h5 class="color-accent-inv" ng-click="userClicked()" ng-hide="state === 2">{{ad.name}}</h5>
@@ -56,5 +56,42 @@
     <div class="btns">
         <span class="color-accent-inv" ng-click="isDel = !isDel">CANCEL</span>
         <span class="color-accent-inv" ng-click="del()">OK</span>
+    </div>
+</div>
+<div class="ads dialog-overlay" ng-show="prom"ng-switch="pState">
+    <div class="ads promo-dialog" ng-switch-default>
+        <div class="loader">
+            <div class="color-primary"></div>
+            <div class="color-primary"></div>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="1">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <h3 class="color-primary">Credit balance : 100</h3>
+            <div class="package" ng-class="{active: deal === 1}" ng-click="sel(1)">
+                <h3>3 Days</h3>
+                <h4>20 credits</h4>
+            </div>
+            <div class="package" ng-class="{active: deal === 2}" ng-click="sel(2)">
+                <h3>5 Days</h3>
+                <h4>35 credits</h4>
+            </div>
+            <div class="package" ng-class="{active: deal === 3}" ng-click="sel(3)">
+                <h3>7 Days</h3>
+                <h4>50 credits</h4>
+            </div>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CANCEL</span>
+            <span class="color-accent" ng-click="confPromo()">CONFIRM</span>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="2">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <h3 class="color-primary">Credit balance : 100</h3>
+            <p>This ad is already promoted</p>
+        </div>
     </div>
 </div>

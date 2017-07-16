@@ -100,9 +100,14 @@
                 <h2 ng-switch="current.w">{{current.number}}<img src="/img/whatsapp.png" ng-switch-when="0"/><img class="whatsapp" src="/img/whatsapp.png" ng-switch-when="1"/></h2>
             </div>
             <div class="item">
-                <span>Email</span>
+                <span>Account</span>
                 <span class="color-accent-inv" ng-click="edit(3)">DELETE ACCOUNT</span>
                 <h2>{{current.email}}</h2>
+            </div>
+            <div class="item">
+                <span>Credits</span>
+                <span class="color-accent-inv" ng-click="edit(4)">RECHARGE</span>
+                <h2>{{credits}}</h2>
             </div>
         </div>
         <div ng-switch="editing">

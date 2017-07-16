@@ -7,11 +7,20 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.getAdsCount = function (param) {
         return $http.get(baseUrl + '/ads/count?' + param);
     };
+    self.getAccountAds = function (param) {
+        return $http.get('api.php/v1/account/ads', { headers: {'token': AppStore.getToken()}});
+    };
     self.getAds = function (param) {
         return $http.get(baseUrl + '/ads?' + param, {cache: true});
     };
+    self.getCredits = function () {
+        return $http.get(baseUrl + '/credits', { headers: {'token': AppStore.getToken()}});
+    };
     self.getUsers = function (param) {
         return $http.get(baseUrl + '/users?' + param, {cache: true});
+    };
+    self.getAccount = function () {
+        return $http.get('api.php/v1/account', { headers: {'token': AppStore.getToken()}});
     };
     self.getMessages = function (param) {
         if (typeof param === 'undefined') {

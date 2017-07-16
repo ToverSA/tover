@@ -44,6 +44,10 @@ function handleGet(){
       case '/v1/messages/':
         Messages::getMessages();
         break;
+      case '/v1/credits':
+      case '/v1/credits/':
+        Users::getCredits();
+        break;
       default:
         break;
     }

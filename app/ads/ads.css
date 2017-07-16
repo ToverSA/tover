@@ -89,7 +89,6 @@
     height: 100px;
     width: 100px;
     margin: auto;
-    background-color: #ECEFF1;
 }
 .ads-view .pics > div > img{
     height: 100%;
@@ -406,7 +405,6 @@ img.badge{
 .ads.delete-dialog > h3{
     margin: 20px;
 }
-.ads.delete-dialog > .btns{}
 .ads.delete-dialog > .btns{
     display: flex;
     justify-content: flex-end;
@@ -415,6 +413,72 @@ img.badge{
 .ads.delete-dialog > .btns > span{
     margin: 5px;
     padding: 5px 10px;
+    cursor: pointer;
+}
+.ads.dialog-overlay{
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    bottom: 0;
+    background-color: #ECEFF1;
+}
+.ads.promo-dialog{
+    position: absolute;
+    top: 95px;
+    width: 100%;
+    max-width: 590px;
+    bottom: 0;
+    background-color: #FFF;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 2px 2px #CCC;
+    height: 240px;
+}
+.ads.promo-dialog > div.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.ads.promo-dialog > div.wrapper > h2{
+    flex-basis: 100%;
+    margin: 0;
+    padding: 10px 5px;
+    color: #FFF;
+}
+.ads.promo-dialog > div.wrapper > h3{
+    flex-basis: 100%;
+    margin: 0;
+    padding: 10px 5px;
+    color: #FFF;
+}
+.ads.promo-dialog > div .package.active{
+    box-shadow: 0 1px 1px 2px #CCC;
+}
+.ads.promo-dialog > div .package.active > h3{
+    background-color: #FFCC80;
+}
+.ads.promo-dialog > div .package{
+    flex-grow: 1;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: 0 0 1px 1px #EEE;
+    cursor: pointer;
+}
+.ads.promo-dialog > div .package > h3{
+    margin: 0;
+    padding: 10px 5px;
+    background-color: #FFF3E0;
+}
+.ads.promo-dialog > div .package > h4{
+    margin: 0;
+    padding: 10px 5px;
+}
+.ads.promo-dialog > .btns{
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px;
+}
+.ads.promo-dialog > .btns > span{
+    padding: 10px;
     cursor: pointer;
 }
 @media screen and (max-width: 1024px){
@@ -490,5 +554,13 @@ img.badge{
         left: auto;
         right: 5px;
         top: 150px;
+    }
+    .ads.promo-dialog{
+        top: 55px;
+        bottom: 5px;
+        transform: none;
+        left: 5px;
+        right: 5px;
+        width: auto;
     }
 }
