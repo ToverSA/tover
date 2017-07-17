@@ -5,6 +5,9 @@ app.controller('homeCtl', ['$scope', 'httpFacade', '$location', 'AppStore', func
     'use strict';
     var p = 2, total;
     function init() {
+        httpFacade.getPromoAds($.param({cid: AppStore.getCampusId()})).then(function (res) {
+            $scope.promo = res.data;
+        });
         httpFacade.getAds($.param({cid: AppStore.getCampusId()})).then(function (res) {
             $scope.ads = res.data;
         }, function (err) {
@@ -15,6 +18,7 @@ app.controller('homeCtl', ['$scope', 'httpFacade', '$location', 'AppStore', func
             $scope.total = total;
         });
     }
+    $scope.promo = [];
     $scope.loadMore = function () {
         httpFacade.getAds($.param({cid: AppStore.getCampusId(), page: p})).then(function (res) {
             res.data.forEach(function (x) {

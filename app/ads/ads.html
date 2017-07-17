@@ -6,7 +6,11 @@
                 <img ng-src="api.php/v1/image/thumb.jpg?id={{cover[0]}}" ng-click="view(cover[0])"/>
             </div>
             <h2>{{ad.title}}</h2>
-            <span>{{ad.price | currency: 'R'}}</span>
+            <span>
+                <img ng-hide="state === 2 || ad.whatsapp === 0" class="badge" src="img/whatsapp.png"/>
+                <img ng-hide="state === 2 || ad.promo === 0" class="badge" src="/img/bar-chart-1.png"/>
+                {{ad.price | currency: 'R'}}
+            </span>
         </div>
         <div ng-switch-default>
             <div class="btns">
@@ -21,7 +25,6 @@
             </div>
         </div>
         <h5 class="color-accent-inv" ng-click="userClicked()" ng-hide="state === 2">{{ad.name}}</h5>
-        <img ng-hide="state === 2 || ad.whatsapp === 0" class="badge" src="img/whatsapp.png"/>
         <p>{{ad.description}}</p>
         <div class="pics">
             <div ng-repeat="x in ad.src_id">
@@ -32,6 +35,17 @@
     </div>
     <div class="suggests" ng-hide="state === 2">
         <h2 class="title">Promoted ads</h2>
+        <div class="ad" ng-repeat="x in promo" ng-click="viewAd(x.id)">
+            <div class="head">
+                <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
+            </div>
+            <div class="body">
+                <!--70 characters for the title-->
+                <h3>{{x.title}}</h3>
+                <span>{{x.price | currency:'R'}}</span>
+                <span>{{x.date_created}}</span>
+            </div>
+        </div>
     </div>
 </div>
 <div class="viewer" ng-show="isViewing">
@@ -68,7 +82,7 @@
     <div class="ads promo-dialog" ng-switch-when="1">
         <div class="wrapper">
             <h2 class="color-primary">Promote advert</h2>
-            <h3 class="color-primary">Credit balance : 100</h3>
+            <h3 class="color-primary">Credit balance : {{bal}}</h3>
             <div class="package" ng-class="{active: deal === 1}" ng-click="sel(1)">
                 <h3>3 Days</h3>
                 <h4>20 credits</h4>
@@ -90,8 +104,28 @@
     <div class="ads promo-dialog" ng-switch-when="2">
         <div class="wrapper">
             <h2 class="color-primary">Promote advert</h2>
-            <h3 class="color-primary">Credit balance : 100</h3>
             <p>This ad is already promoted</p>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CLOSE</span>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="3">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <p>Your credits account is not activated yet. Go to your account prefferences to activate.</p>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CLOSE</span>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="4">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <p>You do not have enough credits to promote this advert. Go to your preferences and recharge your credits</p>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CLOSE</span>
         </div>
     </div>
 </div>

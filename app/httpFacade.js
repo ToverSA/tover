@@ -10,8 +10,14 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.getAccountAds = function (param) {
         return $http.get('api.php/v1/account/ads', { headers: {'token': AppStore.getToken()}});
     };
-    self.getAds = function (param) {
-        return $http.get(baseUrl + '/ads?' + param, {cache: true});
+    self.getAds = function (param, c) {
+        if (typeof c === 'undefined') {
+            c = false;
+        }
+        return $http.get(baseUrl + '/ads?' + param, {cache: c});
+    };
+    self.getPromoAds = function (param) {
+        return $http.get(baseUrl + '/ads/promotions?' + param);
     };
     self.getCredits = function () {
         return $http.get(baseUrl + '/credits', { headers: {'token': AppStore.getToken()}});
@@ -32,6 +38,9 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.getCampuses = function () {
         return $http.get('api.php/v1/campuses', {cache: true});
     };
+    self.postCredits = function (param) {
+        return $http.post(baseUrl + '/credits', param, { headers: {'token': AppStore.getToken()}});
+    };
     self.postMessage = function (param) {
         return $http.post(baseUrl + '/messages', param, { headers: {'token': AppStore.getToken()}});
     };
@@ -40,6 +49,9 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     };
     self.putAccount = function (param) {
         return $http.put(baseUrl + '/account', param, { headers: {'token': AppStore.getToken()}});
+    };
+    self.promote = function (param) {
+        return $http.put(baseUrl + '/ads/promotions', param, { headers: {'token': AppStore.getToken()}});
     };
     self.deleteAccount = function (param) {
         return $http({

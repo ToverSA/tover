@@ -29,7 +29,6 @@ app.controller('consoleCtl', ['$scope', '$location', 'AppStore', 'mService', 'ht
         AppStore.setUserNumber(res.data.number);
         AppStore.setWhatsapp(res.data.whatsapp);
         $scope.name = res.data.name;
-        log(res.data);
     });
     $scope.$on('NEW_MESSAGE', function () {});
 }]);

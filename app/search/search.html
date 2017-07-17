@@ -64,6 +64,17 @@
 <div class="search" ng-switch="sSection">
     <div class="main-content" ng-switch-default>
         <h2 class="title">Promoted Ads</h2>
+        <div class="ad" ng-repeat="x in promo" ng-click="viewAd(x.id)">
+            <div class="head">
+                <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
+            </div>
+            <div class="body">
+                <!--70 characters for the title-->
+                <h3>{{x.title}}</h3>
+                <span>{{x.price | currency:'R'}}</span>
+                <span>{{x.date_created}}</span>
+            </div>
+        </div>
     </div>
     <div class="main-content" ng-switch-when="1">
         <h2 class="title">{{ads.length}} Results for &#39;{{query}}&#39; in {{sLabel}} ads</h2>
@@ -79,6 +90,17 @@
             </div>
         </div>
         <h2 class="title">Promoted Ads</h2>
+        <div class="ad" ng-repeat="x in promo" ng-click="viewAd(x.id)">
+            <div class="head">
+                <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
+            </div>
+            <div class="body">
+                <!--70 characters for the title-->
+                <h3>{{x.title}}</h3>
+                <span>{{x.price | currency:'R'}}</span>
+                <span>{{x.date_created}}</span>
+            </div>
+        </div>
     </div>
     <div class="main-content" ng-switch-when="2">
         <h2 class="title">Ads by {{query}}</h2>
@@ -94,5 +116,16 @@
             </div>
         </div>
         <h2 class="title">Promoted Ads</h2>
+        <div class="ad" ng-repeat="x in promo" ng-click="viewAd(x.id)">
+            <div class="head">
+                <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
+            </div>
+            <div class="body">
+                <!--70 characters for the title-->
+                <h3>{{x.title}}</h3>
+                <span>{{x.price | currency:'R'}}</span>
+                <span>{{x.date_created}}</span>
+            </div>
+        </div>
     </div>
 </div>

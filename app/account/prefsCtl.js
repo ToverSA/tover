@@ -3,9 +3,13 @@
 /*global $*/
 app.controller('prefsCtl', ['$scope', '$location', 'httpFacade', 'AppStore', function ($scope, $location, httpFacade, AppStore) {
     'use strict';
+    function purchase(i) {
+        log(i);
+    }
     function init() {
         httpFacade.getCredits().then(function (res) {
-            log(res.data);
+            $scope.credits = res.data.balance;
+            $scope.rates = res.data.rates;
         });
         $scope.current = {};
         $scope.data = {};
@@ -23,10 +27,13 @@ app.controller('prefsCtl', ['$scope', '$location', 'httpFacade', 'AppStore', fun
         $scope.current.email = AppStore.getUserEmail();
         $scope.dataChanged = false;
     }
+    $scope.deal = 1;
+    $scope.choose = function (i) {
+        $scope.deal = i;
+    };
     $scope.toCons = function () {
         $location.url('/account?rel=console');
     };
-    init();
     $scope.edit = function (i) {
         $scope.editing = i;
     };
@@ -75,4 +82,21 @@ app.controller('prefsCtl', ['$scope', '$location', 'httpFacade', 'AppStore', fun
             });
         }
     };
+    $scope.buy = function () {
+        $scope.$emit('START_LOADING');
+        httpFacade.postCredits($.param({pkg: $scope.deal})).then(function (res) {
+            $scope.$emit('STOP_LOADING');
+            $scope.editing = 0;
+            if (res.data === '1') {
+                init();
+            } else {
+                purchase($scope.deal);
+            }
+        }, function (err) {
+            $scope.editing = 0;
+            $scope.$emit('STOP_LOADING');
+            $scope.$emit('ERROR', {code: err.status, desc: err.data});
+        });
+    };
+    init();
 }]);

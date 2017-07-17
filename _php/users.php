@@ -5,6 +5,16 @@
  */
 class Users{
   //TODO Send email verification
+  public static function topupAccount(&$stmt, $uid, $amt){
+    $stmt->prepare('INSERT INTO account (user_id, balance) VALUES (?, ?) ON DUPLICATE KEY UPDATE balance=balance+?');
+    $stmt->bind_param('iii', $uid, $amt, $amt);
+    $stmt->execute();
+    if ($stmt->errno == 0){
+      return $stmt->affected_rows;
+    } else {
+      header('500 Internal server Error.');
+    }
+  }
   public static function deleteUser(){
     if (isset($_SERVER['HTTP_TOKEN'])){
       $con = new mysqli(HOST, USER, PWD, DB);
@@ -97,6 +107,31 @@ class Users{
       }
     }
   }
+  public static function postCredits(){
+    if (isset($_SERVER['HTTP_TOKEN'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT id FROM login WHERE token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      $stmt->bind_result($uid);
+      if ($stmt->fetch()){
+        $stmt->prepare('SELECT balance FROM account WHERE user_id=?');
+        $stmt->bind_param('i', $uid);
+        $stmt->execute();
+        $stmt->bind_result($bal);
+        if ($stmt->fetch()){
+          echo 0;
+        } else {
+          if ($_POST['pkg'] == '1'){
+            echo self::topupAccount($stmt, $uid, RATES[0]);
+          } else {
+            echo 0;
+          }
+        }
+      }
+    }
+  }
   public static function getAccount(){
     if (isset($_SERVER['HTTP_TOKEN'])){
       $con = new mysqli(HOST, USER, PWD, DB);
@@ -127,15 +162,21 @@ class Users{
   public static function getCredits(){
     if (isset($_SERVER['HTTP_TOKEN'])){
       $con = new mysqli(HOST, USER, PWD, DB);
-      $query = 'SELECT login.id, login.email, users.name, users.number, users.whatsapp,'.
-      ' users.credits, users.campus_id, campuses.name '.
-      'FROM login JOIN users JOIN campuses ON login.id=users.id AND users.campus_id=campuses.id'.
-      ' WHERE login.token=?';
+      $query = 'SELECT id FROM login WHERE token=?';
       $stmt = $con->prepare($query);
       $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
       $stmt->execute();
+      $stmt->bind_result($uid);
       if ($stmt->fetch()){
-        echo "verified";
+        $stmt->prepare('SELECT balance FROM account WHERE user_id=?');
+        $stmt->bind_param('i', $uid);
+        $stmt->execute();
+        $stmt->bind_result($bal);
+        if ($stmt->fetch()){
+          echo json_encode(array('balance' => $bal, 'rates' => Ads::getRates()));
+        } else {
+          echo json_encode(array('balance' => -1, 'rates' => Ads::getRates()));
+        }
       }
     }
   }

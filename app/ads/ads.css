@@ -14,7 +14,34 @@
 }
 .ads-view > div.suggests{
     flex-basis: 400px;
-    height: 400px;
+}
+.ads-view > div.suggests{}
+.ads-view > div.suggests .ad{
+    flex-basis: 100%;
+    height: 80px;
+    margin: 1px;
+    flex-wrap: nowrap;
+    width: 80%;
+}
+.ads-view > div.suggests .ad > div.head{
+    flex-basis: 70px;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+.ads-view > div.suggests .ad  div.body{
+    overflow: hidden;
+    position: relative;
+}
+.ads-view > div.suggests .ad > div.body > span{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.ads-view > div.suggests .ad > div.body > span:last-child{
+    left: auto;
+    right: 0;
+    float: none;
 }
 .ads-view > div.suggests > h3{
     margin: 0;
@@ -95,10 +122,10 @@
     width: 100%;
 }
 img.badge{
-    height: 25px;
-    width: 25px;
-    float: right;
+    height: 20px;
+    width: 20px;
     padding: 3px;
+    float: left;
 }
 .ads-view h5{
     margin: 0;
@@ -438,6 +465,14 @@ img.badge{
     display: flex;
     flex-wrap: wrap;
 }
+.ads.promo-dialog > div.wrapper > p{
+    margin: 0;
+    height: 140px;
+    padding: 10px;
+    font-size: 1.5em;
+    text-align: center;
+    color: #AAA;
+}
 .ads.promo-dialog > div.wrapper > h2{
     flex-basis: 100%;
     margin: 0;
@@ -492,6 +527,9 @@ img.badge{
     .ads-view > div.suggests{
         flex-basis: 300px;
     }
+    .ads-view > div.suggests .ad{
+        width: 95%;
+    }
     .ads.delete-dialog{
         left: 42.5%;
     }
@@ -508,6 +546,11 @@ img.badge{
     .ads-view > div.suggests{
         flex-basis: 100%;
         margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .ads-view > div.suggests .ad{
+        flex-basis: 49%;
     }
     .ads.delete-dialog{
         left: 49%;
@@ -562,5 +605,8 @@ img.badge{
         left: 5px;
         right: 5px;
         width: auto;
+    }
+    .ads-view > div.suggests .ad{
+        flex-basis: 100%;
     }
 }

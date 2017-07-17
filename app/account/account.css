@@ -314,20 +314,18 @@
     transform: translate(-50%);
     background-color: #FFF;
     box-shadow: 0 1px 1px 1px #CCC;
-    padding: 40px 20px;
 }
 .account .edit-dialog > input[type=text], .account .edit-dialog input[type=password]{
     font-size: 1em;
     padding: 10px;
-    margin: 5px 0;
-    width: 100%;
+    margin: 2%;
+    width: 96%;
     outline: none;
     border: 0;
     border-bottom: 3px solid #DDD;
-    margin: 10px 0;
 }
 .account .edit-dialog > div label{
-    margin: 5px 0;
+    margin: 10px;
     display: inline-block;
 }
 .account .edit-dialog input[type=password]{
@@ -340,17 +338,37 @@
 .account .edit-dialog > .btns{
     display: flex;
     justify-content: flex-end;
+    margin: 5px;
 }
 .account .edit-dialog > .btns > span{
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
-}
-.account .edit-dialog > .btns > span.color-accent{
-    padding: 5px;
-    border-radius: 3px;
 }
 .account .edit-dialog > h4{
     margin: 0;
+    padding: 20px 10px;
+    color: #FFF;
+}
+.account .edit-dialog .chooser{
+    display: flex;
+}
+.account .edit-dialog .chooser > div{
+    flex-grow: 1;
+    margin: 1px;
+    border: 2px solid #CCC;
+    cursor: pointer;
+}
+.account .edit-dialog .chooser > div > p{
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+}
+.account .edit-dialog .chooser > div > p:first-child{
+    font-size: 1.6em;
+    background-color: #E1F5FE;
+}
+.account .edit-dialog .chooser > div.active{
+    border-color: #FF5722;
 }
 @media screen and (max-width: 1024px){
 }

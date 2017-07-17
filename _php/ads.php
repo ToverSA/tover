@@ -11,6 +11,40 @@ class Ads{
     $stmt->bind_param('i', $uid);
     $stmt->execute();
   }
+  public static function promo(&$stmt, $deal, $aid){
+    $stmt->prepare('INSERT INTO promos (advert_id, deal, date_created) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE views=0, deal=?, date_created=?');
+    $d = new DateTime();
+    $date = $d->format('Y-m-d h:i:s');
+    $stmt->bind_param('iisis', $aid, $deal, $date, $deal, $date);
+    $stmt->execute();
+    return $stmt->insert_id;
+  }
+  public static function getPromos(&$stmt, $id = 0){
+    if ($id > 0){
+      $d = new DateTime();
+      $date = $d->format('Y-m-d h:i:s');
+      $stmt->prepare("SELECT id, deal+0, ABS(DATEDIFF(date_created,'$date')) FROM promos WHERE (ABS(DATEDIFF(date_created,'$date')) < 8) AND advert_id=?");
+      $stmt->bind_param('i', $id);
+      $stmt->execute();
+      $stmt->bind_result($id, $deal, $diff);
+      if ($stmt->fetch()){
+        if ($deal == 1 && $diff < 4){
+          return 1;
+        } else if ($deal == 2 && $diff < 6){
+          return 1;
+        } else if ($deal == 3 && $diff < 8){
+          return 1;
+        } else {
+          return 0;
+        }
+      }else{
+        return 0;
+      }
+    }
+  }
+  public static function getRates(){
+    return 0.1;
+  }
   public static function getAdsCount(){
     if (isset($_GET['cid'])){
       $con = new mysqli(HOST, USER, PWD, DB);
@@ -23,6 +57,52 @@ class Ads{
       if ($stmt->fetch()){
         echo $num;
       }
+    }
+  }
+  public static function getPromoAds(){
+    if (isset($_GET['cid'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $d = new DateTime();
+      $date = $d->format('Y-m-d');
+      $query = "SELECT advert.id, advert.title, advert.price, advert.date_created, promos.deal+0, ABS(DATEDIFF(promos.date_created,'$date')) FROM users JOIN advert JOIN promos ON users.id=advert.user_id AND advert.id=promos.advert_id WHERE ABS(DATEDIFF(promos.date_created,'$date')) < 8 AND users.campus_id=? ORDER BY promos.views ASC LIMIT 5";
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('i', $_GET['cid']);
+      $stmt->execute();
+      $stmt->bind_result($id, $title, $price, $date, $deal, $diff);
+      $arr = array();
+      while ($stmt->fetch()) {
+        if ($deal == 1 && $diff < 4){
+          $a = new Ads();
+          $a->id = $id;
+          $a->title = $title;
+          $a->price = $price;
+          $d = new DateTime($date);
+          $a->date_created = $d->format('d M');
+          array_push($arr, $a);
+        }else if ($deal == 2 && $diff < 6){
+          $a = new Ads();
+          $a->id = $id;
+          $a->title = $title;
+          $a->price = $price;
+          $d = new DateTime($date);
+          $a->date_created = $d->format('d M');
+          array_push($arr, $a);
+        }else if ($deal == 3 && $diff < 8){
+          $a = new Ads();
+          $a->id = $id;
+          $a->title = $title;
+          $a->price = $price;
+          $d = new DateTime($date);
+          $a->date_created = $d->format('d M');
+          array_push($arr, $a);
+        }
+      }
+      foreach ($arr as $val) {
+        $stmt->prepare('UPDATE promos SET views = views + 1 WHERE advert_id = ?');
+        $stmt->bind_param('i', $val->id);
+        $stmt->execute();
+      }
+      echo json_encode($arr);
     }
   }
   public static function getAds(){
@@ -48,6 +128,7 @@ class Ads{
         $a->uid = $uid;
         $a->number = $num;
         $a->whatsapp = $w;
+        $a->promo = self::getPromos($stmt, $_GET['id']);
         $a->src_id = array();
         $stmt->close();
         $query = 'SELECT id FROM images WHERE advert_id=?';
@@ -215,6 +296,30 @@ class Ads{
       header('HTTP/1.0 403 Forbidden');
     }
   }
+  public static function putPromotion(){
+    $_SERVER['REQUEST_METHOD']==="PUT" ? parse_str(file_get_contents('php://input', false , null, -1 , $_SERVER['CONTENT_LENGTH'] ), $_PUT): $_PUT=array();
+    if (isset($_SERVER['HTTP_TOKEN'])){
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $query = 'SELECT id FROM login WHERE token=?';
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
+      $stmt->execute();
+      $stmt->bind_result($uid);
+      if ($stmt->fetch()){
+        $stmt->prepare('SELECT balance FROM account WHERE user_id=?');
+        $stmt->bind_param('i', $uid);
+        $stmt->execute();
+        $stmt->bind_result($bal);
+        if ($stmt->fetch()){
+          if ($bal - DEALS[$_PUT['deal']] >= 0){
+            $ins = self::promo($stmt, $_PUT['deal'], $_PUT['aid']);
+            Users::topupAccount($stmt, $uid, - DEALS[$_PUT['deal']]);
+            echo $ins;
+          }
+        }
+      }
+    }
+  }
   public static function post(){
     if (isset($_SERVER['HTTP_TOKEN'])){
       $imgs = array();
@@ -284,6 +389,9 @@ class Ads{
         'advert.id=images.advert_id AND advert.id=advert_log.advert_id AND advert.id=?';
         $stmt = $con->prepare($query);
         $stmt->bind_param('ii', $uid, $_REQUEST['id']);
+        $stmt->execute();
+        $stmt->prepare('DELETE FROM promos WHERE advert_id=?');
+        $stmt->bind_param('i', $_REQUEST['id']);
         $stmt->execute();
         header('204 No Content');
       }

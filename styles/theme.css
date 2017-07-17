@@ -142,6 +142,9 @@ h2.title{
     font-family: Lato Thin;
     opacity: 0.5;
 }
+h2.title > a{
+    cursor: pointer;
+}
 .ad{
     width: 180px;
     background-color: #FFF;

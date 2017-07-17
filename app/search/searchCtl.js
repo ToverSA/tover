@@ -208,4 +208,7 @@ app.controller('adsSearchCtl', ['$scope', '$routeParams', '$location', 'httpFaca
             reload($.param(url));
         }
     }
+    httpFacade.getPromoAds($.param({cid: AppStore.getCampusId()})).then(function (res) {
+        $scope.promo = res.data;
+    });
 }]);

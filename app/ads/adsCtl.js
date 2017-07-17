@@ -10,9 +10,9 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
             $location.url('/account');
         });
     }
-    function init() {
+    function init(c) {
         if (typeof $routeParams.id !== 'undefined') {
-            httpFacade.getAds($.param({id: $routeParams.id})).then(function (res) {
+            httpFacade.getAds($.param({id: $routeParams.id}), c).then(function (res) {
                 $scope.ad = res.data;
                 src = new Array($scope.ad.src_id.length);
                 $scope.ad.src_id.forEach(function (x) {
@@ -25,12 +25,21 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
                 for (i = 0; i < $scope.dummy.length; i += 1) {
                     $scope.dummy[i] = i;
                 }
+                log('loaded');
                 if (AppStore.isToken()) {
                     $scope.state = 1;
                     $scope.email = AppStore.getUserEmail();
                     if (AppStore.getUserId() - $scope.ad.uid === 0) {
                         $scope.state = 2;
+                    } else {
+                        httpFacade.getPromoAds($.param({cid: AppStore.getCampusId()})).then(function (res) {
+                            $scope.promo = res.data;
+                        });
                     }
+                } else {
+                    httpFacade.getPromoAds($.param({cid: AppStore.getCampusId()})).then(function (res) {
+                        $scope.promo = res.data;
+                    });
                 }
             }, function (err) {
                 //TODO handle geting ads error
@@ -90,15 +99,39 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
         }
     };
     $scope.confPromo = function () {
-        log($scope.one);
+        httpFacade.promote($.param({aid: $scope.ad.id, deal: $scope.deal})).then(function (res) {
+            init(false);
+        }, function (err) {
+            log('eish');
+        });
+        $scope.prom = false;
     };
     $scope.deal = 1;
     $scope.sel = function (i) {
         $scope.deal = i;
     };
     $scope.promote = function (v) {
+        if (v === true) {
+            httpFacade.getCredits().then(function (res) {
+                $scope.pState = 0;
+                if (res.data.balance === -1) {
+                    $scope.pState = 3;
+                } else {
+                    $scope.bal = res.data.balance;
+                    if ($scope.bal <= 20) {
+                        $scope.pState = 4;
+                    } else if ($scope.ad.promo === 1) {
+                        $scope.pState = 2;
+                    } else {
+                        $scope.pState = 1;
+                    }
+                }
+            });
+        }
         $scope.prom = v;
     };
-    $scope.pState = 1;
-    init();
+    $scope.viewAd = function (i) {
+        $location.url('/ads/' + i);
+    };
+    init(false);
 }]);

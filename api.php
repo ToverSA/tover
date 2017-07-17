@@ -48,6 +48,10 @@ function handleGet(){
       case '/v1/credits/':
         Users::getCredits();
         break;
+      case '/v1/ads/promotions':
+      case '/v1/ads/promotions/':
+        Ads::getPromoAds();
+        break;
       default:
         break;
     }
@@ -72,6 +76,10 @@ function handlePost(){
       case '/v1/messages/':
         Messages::postMessage();
         break;
+      case '/v1/credits':
+      case '/v1/credits/':
+        Users::postCredits();
+        break;
       default:
         break;
     }
@@ -87,6 +95,10 @@ function handePut(){
       case '/v1/messages':
       case '/v1/messages/':
         Messages::putMessages();
+        break;
+      case '/v1/ads/promotions':
+      case '/v1/ads/promotions/':
+        Ads::putPromotion();
         break;
       default:
         break;
