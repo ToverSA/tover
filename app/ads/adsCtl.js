@@ -25,7 +25,6 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
                 for (i = 0; i < $scope.dummy.length; i += 1) {
                     $scope.dummy[i] = i;
                 }
-                log('loaded');
                 if (AppStore.isToken()) {
                     $scope.state = 1;
                     $scope.email = AppStore.getUserEmail();

@@ -1,9 +1,9 @@
 /*global app*/
-app.controller('landingCtl', ['$scope', '$http', 'AppStore', '$location', function ($scope, $http, AppStore, $location) {
+app.controller('landingCtl', ['$scope', 'httpFacade', 'AppStore', '$location', function ($scope, httpFacade, AppStore, $location) {
     'use strict';
     //NOTE landing controller
     var insties = [];
-    $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
+    httpFacade.getCampuses().then(function (res) {
         insties = res.data;
         var i = 0;
         $scope.list = [];
@@ -24,6 +24,7 @@ app.controller('landingCtl', ['$scope', '$http', 'AppStore', '$location', functi
             $scope.state = 1;
         } else {
             AppStore.setCampus($scope.list[i].id, $scope.list[i].name);
+            httpFacade.visit('cid=' + $scope.list[i].id);
             $location.url('/home');
         }
     };
@@ -38,6 +39,7 @@ app.controller('landingCtl', ['$scope', '$http', 'AppStore', '$location', functi
         if (AppStore.isNew()) {
             $scope.dialog = true;
         } else {
+            httpFacade.visit('cid=' + AppStore.getCampusId());
             $location.url('/home');
         }
     };

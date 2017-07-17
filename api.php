@@ -5,12 +5,17 @@ require_once('_php/insties.php');
 require_once('_php/ads.php');
 require_once('_php/users.php');
 require_once('_php/messages.php');
+require_once('_php/logs.php');
 function handleGet(){
   if (isset($_SERVER['PATH_INFO'])){
     switch (strtolower($_SERVER['PATH_INFO'])) {
       case '/v1/campuses':
       case '/v1/campuses/':
         Insties::getCampuses();
+        break;
+      case '/v1/visitors':
+      case '/v1/visitors/':
+        Logs::getVisitors();
         break;
       case '/v1/account':
       case '/v1/account/':
@@ -80,6 +85,10 @@ function handlePost(){
       case '/v1/credits/':
         Users::postCredits();
         break;
+        case '/v1/visitors':
+        case '/v1/visitors/':
+          Logs::visit();
+          break;
       default:
         break;
     }

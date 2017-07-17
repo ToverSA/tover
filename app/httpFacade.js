@@ -53,6 +53,9 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.promote = function (param) {
         return $http.put(baseUrl + '/ads/promotions', param, { headers: {'token': AppStore.getToken()}});
     };
+    self.visit = function (param) {
+        return $http.post(baseUrl + '/visitors', param);
+    };
     self.deleteAccount = function (param) {
         return $http({
             method: 'DELETE',
