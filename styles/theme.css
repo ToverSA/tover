@@ -244,15 +244,17 @@ a-chooser{
     border-radius: 5px;
     padding: 5px;
 }
-.error-dialog > .container > h2{}
-.error-dialog > .container > p{}
-.error-dialog > .container > ul > li{}
 .error-dialog > .container > .btns{
     display: flex;
     justify-content: flex-end;
 }
 .error-dialog > .container > .btns > span{
     padding: 5px;
+}
+.confirm-payment > h1{
+    margin: 0;
+    padding: 10px;
+    color: #FFF;
 }
 @media screen and (max-width: 1024px){
     .ad{

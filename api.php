@@ -6,6 +6,7 @@ require_once('_php/ads.php');
 require_once('_php/users.php');
 require_once('_php/messages.php');
 require_once('_php/logs.php');
+require_once('_php/ui.php');
 function handleGet(){
   if (isset($_SERVER['PATH_INFO'])){
     switch (strtolower($_SERVER['PATH_INFO'])) {
@@ -88,6 +89,10 @@ function handlePost(){
         case '/v1/visitors':
         case '/v1/visitors/':
           Logs::visit();
+          break;
+        case '/v1/account/confirm':
+        case '/v1/account/confirm/':
+          UI::confirm();
           break;
       default:
         break;

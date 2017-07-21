@@ -4,7 +4,7 @@
 app.controller('prefsCtl', ['$scope', '$location', 'httpFacade', 'AppStore', function ($scope, $location, httpFacade, AppStore) {
     'use strict';
     function purchase(i) {
-        log(i);
+        httpFacade.purchase(i);
     }
     function init() {
         httpFacade.getCredits().then(function (res) {

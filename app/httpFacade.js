@@ -56,6 +56,23 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.visit = function (param) {
         return $http.post(baseUrl + '/visitors', param);
     };
+    self.purchase = function (param) {
+        var form = document.createElement('form'),
+            id = document.createElement('input'),
+            deal = document.createElement('input');
+        form.method = 'post';
+        form.action = baseUrl + '/account/confirm';
+        id.type = 'hidden';
+        id.name = 'id';
+        id.value = AppStore.getUserId();
+        deal.type = 'hidden';
+        deal.name = 'deal';
+        deal.value = param;
+        form.appendChild(id);
+        form.appendChild(deal);
+        document.body.appendChild(form);
+        form.submit();
+    };
     self.deleteAccount = function (param) {
         return $http({
             method: 'DELETE',

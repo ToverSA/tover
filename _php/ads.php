@@ -64,38 +64,20 @@ class Ads{
       $con = new mysqli(HOST, USER, PWD, DB);
       $d = new DateTime();
       $date = $d->format('Y-m-d');
-      $query = "SELECT advert.id, advert.title, advert.price, advert.date_created, promos.deal+0, ABS(DATEDIFF(promos.date_created,'$date')) FROM users JOIN advert JOIN promos ON users.id=advert.user_id AND advert.id=promos.advert_id WHERE ABS(DATEDIFF(promos.date_created,'$date')) < 8 AND users.campus_id=? ORDER BY promos.views ASC LIMIT 5";
+      $query = "SELECT advert.id, advert.title, advert.price, advert.date_created, promos.deal+0, ABS(DATEDIFF(promos.date_created,'$date')) FROM users JOIN advert JOIN promos ON users.id=advert.user_id AND advert.id=promos.advert_id WHERE ((promos.deal+0 = 1 AND ABS(DATEDIFF(promos.date_created,'$date')) < 4) OR (promos.deal+0 = 2 AND ABS(DATEDIFF(promos.date_created,'$date')) < 6) OR (promos.deal+0 = 3 AND ABS(DATEDIFF(promos.date_created,'$date')) < 8)) AND users.campus_id=? ORDER BY promos.views ASC LIMIT 5";
       $stmt = $con->prepare($query);
       $stmt->bind_param('i', $_GET['cid']);
       $stmt->execute();
       $stmt->bind_result($id, $title, $price, $date, $deal, $diff);
       $arr = array();
       while ($stmt->fetch()) {
-        if ($deal == 1 && $diff < 4){
-          $a = new Ads();
-          $a->id = $id;
-          $a->title = $title;
-          $a->price = $price;
-          $d = new DateTime($date);
-          $a->date_created = $d->format('d M');
-          array_push($arr, $a);
-        }else if ($deal == 2 && $diff < 6){
-          $a = new Ads();
-          $a->id = $id;
-          $a->title = $title;
-          $a->price = $price;
-          $d = new DateTime($date);
-          $a->date_created = $d->format('d M');
-          array_push($arr, $a);
-        }else if ($deal == 3 && $diff < 8){
-          $a = new Ads();
-          $a->id = $id;
-          $a->title = $title;
-          $a->price = $price;
-          $d = new DateTime($date);
-          $a->date_created = $d->format('d M');
-          array_push($arr, $a);
-        }
+        $a = new Ads();
+        $a->id = $id;
+        $a->title = $title;
+        $a->price = $price;
+        $d = new DateTime($date);
+        $a->date_created = $d->format('d M');
+        array_push($arr, $a);
       }
       foreach ($arr as $val) {
         $stmt->prepare('UPDATE promos SET views = views + 1 WHERE advert_id = ?');

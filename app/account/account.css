@@ -253,13 +253,16 @@
 }
 .account .prefs{
     max-width: 768px;
-    margin: 50px;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 .account .prefs .item{
+    flex-basis: 49%;
+    margin: 5px 0.5%;
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
-    margin: 5px 2px;
     background-color: #FFF;
     box-shadow: 0 1px 1px 1px #CCC;
 }
@@ -324,9 +327,17 @@
     border: 0;
     border-bottom: 3px solid #DDD;
 }
+.account .edit-dialog div.w{
+    margin: 5px;
+    display: flex;
+}
+.account .edit-dialog div.w input{
+    width: 25px;
+    height: 25px;
+}
 .account .edit-dialog > div label{
-    margin: 10px;
     display: inline-block;
+    padding: 5px;
 }
 .account .edit-dialog input[type=password]{
 /*    margin: 0;*/
@@ -380,6 +391,9 @@
 @media screen and (max-width: 450px){
     .account .prefs{
         margin: 10px;
+    }
+    .account .prefs .item{
+        flex-basis: 99%;
     }
     .account .edit-dialog{
         top: 110px;
