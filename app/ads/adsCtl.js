@@ -132,5 +132,5 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
     $scope.viewAd = function (i) {
         $location.url('/ads/' + i);
     };
-    init(false);
+    init(true);
 }]);

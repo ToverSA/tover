@@ -255,6 +255,7 @@ a-chooser{
     margin: 0;
     padding: 10px;
     color: #FFF;
+    text-align: center;
 }
 @media screen and (max-width: 1024px){
     .ad{

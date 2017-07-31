@@ -122,7 +122,6 @@
     max-width: 450px;
     background-color: #FFF;
     margin: 30px auto;
-    padding: 5px;
     box-shadow: 0 0 1px 1px #CCC;
     display: flex;
     flex-wrap: wrap;
@@ -130,24 +129,39 @@
 .account .recovery > h1{
     text-align: center;
     flex-basis: 100%;
+    color: #FFF;
+    margin: 0;
+    padding: 10px;
 }
-.account .recovery > input{
-    padding: 7px;
-    padding-bottom: 2px;
+.account .recovery > div > input{
+    padding: 10px;
     border: 0;
     outline: none;
-    border-bottom: 2px solid #CCC;
     flex-grow: 1;
     font-size: 1em;
-    margin-right: 5px;
+    margin: 20px 5px;
+    background-color: #EEE;
+    border-radius: 5px;
 }
-.account .recovery > p{
+.account .recovery > div{
     flex-basis: 100%;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    align-items: baseline;
+    height: 119px;
+    justify-content: flex-end;
 }
-
-.account .recovery > span{
+.account .recovery > div > p{
+    flex-basis: 100%;
+    padding: 5px;
+    text-align: center;
+    margin: 0
+}
+.account .recovery > div > span{
     display: block;
-    padding: 5px 20px;
+    padding: 10px 20px;
     cursor: pointer;
     margin: auto;
 }
@@ -401,5 +415,9 @@
         left: 5px;
         right: 5px;
         width: auto;
+    }
+    .account .recovery{
+        margin: 0px auto;
+        box-shadow: none;
     }
 }
