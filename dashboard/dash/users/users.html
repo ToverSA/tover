@@ -1,0 +1,49 @@
+<div class="u-tab">
+    <div>
+        <span ng-click="view(0)" ng-class="{active:users === 0}">ALL</span>
+    </div>
+    <div>
+        <span ng-click="view(1)" ng-class="{active:users === 1}">BLOCKED</span>
+    </div>
+</div>
+<div class="u-header">
+    <span ng-repeat="x in chars">{{x}}</span>
+</div>
+<div class="users" ng-switch="users">
+    <div ng-switch-default>
+        <div class="item">
+            <span>Email</span>
+            <span>Ads</span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="item" ng-repeat="x in [1, 2, 3, 4, 5]">
+            <span>{{x}}th email</span>
+            <span>{{x*9}}</span>
+            <div>
+                <img src="img/envelope.png"/>
+            </div>
+            <div>
+                <img src="img/prohibition.png"/>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="1">
+        <div class="item">
+            <span>Email</span>
+            <span>Ads</span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="item" ng-repeat="x in [1, 2, 3]">
+            <span>{{x}}th email</span>
+            <span>{{x*9}}</span>
+            <div>
+                <img src="img/padlock.png"/>
+            </div>
+            <div>
+                <img src="img/garbage.png"/>
+            </div>
+        </div>
+    </div>
+</div>

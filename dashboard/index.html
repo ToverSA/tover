@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="/dashboard/"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="styles/theme.css"/>
+        <link rel="stylesheet" href="dash/header/header.css"/>
+        <link rel="stylesheet" href="dash/home/home.css"/>
+        <link rel="stylesheet" href="dash/campuses/campuses.css"/>
+        <link rel="stylesheet" href="dash/users/users.css"/>
+        <link rel="stylesheet" href="dash/ads/ads.css"/>
+        <link rel="stylesheet" href="libs/chartist/chartist.min.css"/>
+        <script src="libs/angular.min.js"></script>
+        <script src="libs/angular-route.min.js"></script>
+        <script src="libs/angular-cookies.min.js"></script>
+        <script src="libs/jquery-1.11.3.min.js"></script>
+        <script src="libs/chartist/chartist.min.js"></script>
+        <script src="dash/dash.js"></script>
+        <script src="dash/home/homeCtl.js"></script>
+        <script src="dash/header/headerCtl.js"></script>
+        <script src="dash/admin/adminCtl.js"></script>
+        <script src="dash/campuses/campusesCtl.js"></script>
+        <script src="dash/users/usersCtl.js"></script>
+        <script src="dash/ads/adsCtl.js"></script>
+        <script src="dash/charts/lineDir.js"></script>
+        <script src="dash/charts/pieDir.js"></script>
+        <script src="dash/home/homeSrv.js"></script>
+        <script src="dash/admin/adminSrv.js"></script>
+        <script src="dash/admin/httpFacade.js"></script>
+        <script src="dash/login/loginCtl.js"></script>
+    </head>
+    <body ng-app="dashboard">
+        <div class="wrapper" ng-view></div>
+    </body>
+</html>

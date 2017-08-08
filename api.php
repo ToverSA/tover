@@ -1,12 +1,12 @@
 <?php
-require_once('_php/conf.php');
-require_once('_php/image.php');
-require_once('_php/insties.php');
-require_once('_php/ads.php');
-require_once('_php/users.php');
-require_once('_php/messages.php');
-require_once('_php/logs.php');
-require_once('_php/ui.php');
+require_once('dash/_php/conf.php');
+require_once('dash/_php/image.php');
+require_once('dash/_php/insties.php');
+require_once('dash/_php/ads.php');
+require_once('dash/_php/users.php');
+require_once('dash/_php/messages.php');
+require_once('dash/_php/logs.php');
+require_once('dash/_php/ui.php');
 function handleGet(){
   if (isset($_SERVER['PATH_INFO'])){
     switch (strtolower($_SERVER['PATH_INFO'])) {

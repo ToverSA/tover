@@ -1,0 +1,99 @@
+@font-face{
+    font-family: Roboto;
+    src: url(fonts/Roboto-Regular.ttf)
+}
+@font-face{
+    font-family: SixCaps;
+    src: url(fonts/SixCaps.ttf)
+}
+@font-face{
+    font-family: Lato Thin;
+    src: url(fonts/Lato-Hairline.ttf)
+}
+*{
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+    color: #FFF;
+}
+body{
+    margin: 0;
+    background-color: #ECEFF1;
+    font-family: Roboto;
+}
+*{
+    box-sizing: border-box;
+}
+.dialog{
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FFF;
+    box-shadow: 0 0 2px 2px #CCC;
+    padding: 5px;
+    max-width: 450px;
+    min-width: 300px;
+    width: 100%;
+}
+.dialog > div.head{
+    display: flex;
+    height: 30px;
+}
+.dialog > div.head > img{
+    display: block;
+    height: 100%;
+    width: 30px;
+    padding: 4px;
+    cursor: pointer;
+}
+.dialog > div.head > h2{
+    margin: 0;
+    flex-grow: 1;
+}
+.dialog > form{
+    display: flex;
+    flex-wrap: wrap;
+}
+.dialog > form input{
+    flex-grow: 1;
+    flex-basis: 100%;
+    padding: 2px;
+    font-size: 1em;
+}
+.dialog > form > .row{
+    display: flex;
+    flex-basis: 100%;
+    margin: 5px 0
+}
+.dialog > form > .row > span{
+    padding: 8px;
+    flex-grow: 1;
+}
+.dialog > form > .row > img{
+    width: 35px;
+    height: 35px;
+    padding: 9px;
+    cursor: pointer;
+}
+.dialog > .btns{
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
+}
+.dialog > .btns > span{
+    padding: 5px;
+    cursor: pointer;
+}
+@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 768px) {
+
+}
+@media screen and (max-width: 450px) {
+    .dialog{
+        top: 0;
+        bottom: 0;
+    }
+}
