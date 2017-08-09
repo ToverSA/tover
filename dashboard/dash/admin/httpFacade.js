@@ -7,6 +7,6 @@ app.service('httpFacade', ['$http', function ($http) {
         return $http.post('_php/createInstitution.php', param);
     };
     self.isAuth = function () {
-        return $http.get('_php/isAuth.php');
+        return $http.get('_php/isAuth.php', {cache: true});
     };
 }]);

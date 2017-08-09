@@ -5,11 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
         <title>Dashboard</title>
         <link rel="stylesheet" href="styles/theme.css"/>
-        <link rel="stylesheet" href="dash/header/header.css"/>
+        <link rel="stylesheet" href="dash/statusbar/statusbar.css"/>
         <link rel="stylesheet" href="dash/home/home.css"/>
         <link rel="stylesheet" href="dash/campuses/campuses.css"/>
         <link rel="stylesheet" href="dash/users/users.css"/>
         <link rel="stylesheet" href="dash/ads/ads.css"/>
+        <link rel="stylesheet" href="dash/sidebar/sidebar.css"/>
         <link rel="stylesheet" href="libs/chartist/chartist.min.css"/>
         <script src="libs/angular.min.js"></script>
         <script src="libs/angular-route.min.js"></script>
@@ -18,7 +19,7 @@
         <script src="libs/chartist/chartist.min.js"></script>
         <script src="dash/dash.js"></script>
         <script src="dash/home/homeCtl.js"></script>
-        <script src="dash/header/headerCtl.js"></script>
+        <script src="dash/statusbar/statusbar.js"></script>
         <script src="dash/admin/adminCtl.js"></script>
         <script src="dash/campuses/campusesCtl.js"></script>
         <script src="dash/users/usersCtl.js"></script>
@@ -26,11 +27,23 @@
         <script src="dash/charts/lineDir.js"></script>
         <script src="dash/charts/pieDir.js"></script>
         <script src="dash/home/homeSrv.js"></script>
+        <script src="dash/sidebar/sidebar.js"></script>
+        <script src="dash/admin/auth.js"></script>
         <script src="dash/admin/adminSrv.js"></script>
         <script src="dash/admin/httpFacade.js"></script>
         <script src="dash/login/loginCtl.js"></script>
     </head>
     <body ng-app="dashboard">
         <div class="wrapper" ng-view></div>
+        <div class="auth-pane" ng-controller="authCtl">
+            <h2>Login to admin dashboard</h2>
+            <form class="auth-form" name="authForm">
+                <label>Email</label>
+                <input type="text" placeholder="john@email.com" ng-model="a.email"/>
+                <label>Password</label>
+                <input type="password" ng-model="a.pwd"/>
+                <input type="button" value="Login" ng-click="auth(a)"/>
+            </form>
+        </div>
     </body>
 </html>

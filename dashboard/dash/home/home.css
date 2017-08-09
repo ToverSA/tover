@@ -1,22 +1,6 @@
 .home{
     display: flex;
 }
-.home .sidebar{
-    flex-basis: 240px;
-    background-color: red;
-}
-.home .sidebar > .head{
-    height: 60px;
-}
-.home .sidebar > .body{
-    padding: 15px;
-}
-.home .sidebar > .body > span{
-    display: block;
-    height: 45px;
-    line-height: 45px;
-}
-.home .sidebar > .body > span{}
 .home > .content{
     display: flex;
     flex-wrap: wrap;
@@ -28,7 +12,7 @@
     flex-basis: 1px;
 }
 .home > .content > .infostatics{
-    flex-basis: 200px;
+    flex-basis: 300px;
     height: 400px;
     background-color: blue;
 }

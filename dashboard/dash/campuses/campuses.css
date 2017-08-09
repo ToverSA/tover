@@ -1,109 +1,91 @@
 .campuses{
-    max-width: 1024px;
     margin: auto;
-}
-.campuses{}
-.campuses .item{
-    margin: 2px 5px;
-    height: 50px;
-    background-color: #FFF;
-    box-shadow: 0 0 1px 1px #CCC;
     display: flex;
 }
-.campuses .item > span{
-    min-width: 70px;
-    line-height: 50px;
-    padding: 0 5px;
-}
-.campuses .item > input{
+.campuses > .content{
     flex-grow: 1;
-    outline: none;
-    border: 0;
-    padding: 15px;
-    font-size: 1em;
 }
-.campuses .item > span:first-child{
-    flex-grow: 1;
+.campuses > .content > .controls{
+    display: flex;
+    height: 45px;
+    background-color: green;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    justify-content: flex-end;
 }
-.campuses .item:not(:first-child){
-    cursor: pointer;
+.campuses > .content > .controls > input{
+    margin: 5px;
+    width: 300px;
 }
-.campuses .item:not(:first-child):hover{
-    background-color: #EEE;
-}
-.c-header{
-    height: 40px;
-    background-color: #FFF;
-    display: flex;
-    justify-content: space-between;
-}
-.c-header > span{
-    padding: 10px;
-    color: #AAA;
-}
-.c-header > div{
-    height: 100%;
-    display: flex;
-}
-.c-header > div > div{
-    display: flex;
-    cursor: pointer;
-}
-.c-header > div > div > img{
-    height: 40px;
-    width: 40px;
-    padding: 10px;
-}
-.c-header > div > div > span{
-    padding: 10px;
-}
-.c-header{}
-.campuses .wrapper{
-    display: flex;
-    flex-wrap: wrap;
-}
-.campus{
-    margin: 0.5%;
-    flex-basis: 49%;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #FFF;
-    box-shadow: 0 0 1px 1px #CCC;
-}
-.campus h3{
-    flex-basis: 100%;
-    padding: 5px;
-    margin: 0;
-}
-.campus .stats{
-    flex-basis: 50%;
-}
-.campus pie-chart{
+.campuses > .content > .controls > div{
+    margin: 5px;
     display: block;
+    text-align: center;
+    display: flex;
+    cursor: pointer;
+}
+.campuses > .content > .controls > div > span{
+    display: block;
+    padding: 8px 5px;
+}
+.campuses > .content > .controls > div > img{
+    height: 35px;
+    width: 35px;
+    padding: 5px;
+}
+.campuses > .content table{
+    background-color: red;
+    width: 99%;
+    margin: 0.5%;
+}
+.campuses > .content table tr{
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+}
+.campuses > .content table td:first-child{
+    flex-grow: 1;
+}
+.campuses > .content table td{
     flex-basis: 200px;
 }
-.campus .stats h4{
-    margin: 0;
+.campus-add-dialog{
+    position: absolute;
+    width: 500px;
+    background-color: #FFF;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
     padding: 10px;
+    transition: 0.2s;
 }
-.campus .stats span{
-    display: inline-block;
-    padding: 0 10px;
+.campus-add-dialog.closed{
+    top: auto;
+    bottom: 100%;
 }
-@media screen and (max-width: 768px){
-    .campus{
-        margin: 0.5%;
-        flex-basis: 99%;
-    }
+.campus-add-dialog > h3{
+    margin: 0;
+    padding: 10px 0;
 }
-@media screen and (max-width: 450px){
-    .c-header > div > div > span{
-        display: none;
-    }
-    .campus pie-chart{
-        flex-basis: 150px;
-    }
+.campus-add-dialog > form > label{
+    margin: 5px 0;
+    display: block;
+}
+.campus-add-dialog > form > input{}
+.campus-add-dialog > form > input{
+    display: block;
+    width: 100%;
+}
+.campus-add-dialog > form > div.btn-row{
+    padding: 5px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.campus-add-dialog > form > div.btn-row > span{
+    padding: 10px;
+    border: 1px solid #CCC;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.campus-add-dialog > form > div.btn-row > span:active{
+    background-color: #EEE;
 }

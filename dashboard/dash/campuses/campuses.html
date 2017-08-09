@@ -1,65 +1,42 @@
-<div class="c-header">
-    <span>{{title}}</span>
-    <div>
-        <div ng-show="campus === 0" ng-click="se = !se">
-            <img src="img/search.png"/>
-            <span>SEARCH</span>
+<div class="campuses">
+    <sidebar></sidebar>
+    <div class="content">
+        <status-bar></status-bar>
+        <div class="controls">
+            <div>
+                <img src="img/add.png"/>
+                <span>ADD CAMPUS</span>
+            </div>
+            <input class="search" type="text" placeholder="Search"/>
         </div>
-        <div ng-click="openDialog()">
-            <img src="img/add.png"/>
+        <table>
+            <thead>
+                <tr>
+                    <td>Institution</td>
+                    <td>Users</td>
+                    <td>Adverts</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Demo</td>
+                    <td>12</td>
+                    <td>124</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="campus-add-dialog closed">
+    <h3>Add campus</h3>
+    <form>
+        <label>Intitution name</label>
+        <input type="text"/>
+        <label>Campus name</label>
+        <input type="text"/>
+        <div class="btn-row">
+            <span>CANCEL</span>
             <span>ADD</span>
         </div>
-        <div ng-show="campus === 1">
-            <img src="img/edit.png"/>
-            <span>EDIT</span>
-        </div>
-    </div>
-</div>
-<div class="campuses" ng-switch="campus">
-    <div ng-switch-default>
-        <div class="item">
-            <span ng-hide="se">Institution name</span>
-            <input type="text" placeholder="Search..." ng-model="search" ng-show="se"/>
-            <span ng-hide="se">Users</span>
-            <span ng-hide="se">Adverts</span>
-        </div>
-        <div class="item" ng-repeat="x in [1, 2, 3, 4] | filter:search" ng-click="open(x)">
-            <span>{{x}} Item</span>
-            <span>{{x*3}}</span>
-            <span>{{x*5}}</span>
-        </div>
-    </div>
-    <div ng-switch-when="1" class="wrapper">
-        <div class="campus" ng-repeat="x in [1, 2, 3, 4]">
-            <h3>Campus name</h3>
-            <div class="stats">
-                <h4>Users</h4>
-                <span>100</span>
-                <h4>Adverts</h4>
-                <span>1234</span>
-            </div>
-            <pie-chart></pie-chart>
-        </div>
-    </div>
-</div>
-<div class="dialog" ng-show="dialog">
-    <div class="head">
-        <h2>Add campuses</h2>
-        <img src="img/cancel.png" ng-click="closeDialog()"/>
-    </div>
-    <form>
-        <label>Institution name</label>
-        <input type="text" ng-model="insti.name"/>
-        <div class="row" ng-repeat="x in insti.campuses">
-            <span>{{x}}</span>
-            <img src="img/cancel-1.png" ng-click="remove(insti.campuses.indexOf(x))"/>
-        </div>
-        <div class="row">
-            <input type="text" placeholder="Campus name" ng-model="cname"/>
-            <img src="img/add.png" ng-click="add(cname)"/>
-        </div>
     </form>
-    <div class="btns">
-        <span ng-click="createInsti()">CREATE</span>
-    </div>
 </div>

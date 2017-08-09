@@ -25,67 +25,45 @@ body{
 *{
     box-sizing: border-box;
 }
-.dialog{
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #FFF;
-    box-shadow: 0 0 2px 2px #CCC;
-    padding: 5px;
-    max-width: 450px;
-    min-width: 300px;
-    width: 100%;
-}
-.dialog > div.head{
-    display: flex;
-    height: 30px;
-}
-.dialog > div.head > img{
-    display: block;
+.auth-pane{
+    position: fixed;
     height: 100%;
-    width: 30px;
-    padding: 4px;
-    cursor: pointer;
+    width: 100%;
+    bottom: 0;
+    background-color: #ECEFF1;
+    transition: 0.3s;
 }
-.dialog > div.head > h2{
-    margin: 0;
-    flex-grow: 1;
+.auth-pane.closed{
+    height: 0;
 }
-.dialog > form{
-    display: flex;
-    flex-wrap: wrap;
-}
-.dialog > form input{
-    flex-grow: 1;
-    flex-basis: 100%;
-    padding: 2px;
+input[type=text], input[type=email], input[type=password]{
+    padding: 10px;
+    outline: none;
+    background-color: #EEE;
+    border: none;
+    box-shadow: 0 0 1px 1px #CCC inset;
     font-size: 1em;
 }
-.dialog > form > .row{
-    display: flex;
-    flex-basis: 100%;
-    margin: 5px 0
-}
-.dialog > form > .row > span{
-    padding: 8px;
-    flex-grow: 1;
-}
-.dialog > form > .row > img{
-    width: 35px;
-    height: 35px;
-    padding: 9px;
-    cursor: pointer;
-}
-.dialog > .btns{
-    display: flex;
-    justify-content: flex-end;
-    margin: 10px 0;
-}
-.dialog > .btns > span{
+input[type=button]{
     padding: 5px;
-    cursor: pointer;
 }
+h2{
+    text-align: center;
+}
+form.auth-form{
+    width: 500px;
+    margin: auto;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 15px;
+    padding: 20px;
+}
+form.auth-form > input{
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+}
+form.auth-form{}
 @media screen and (max-width: 1024px) {
 }
 @media screen and (max-width: 768px) {
