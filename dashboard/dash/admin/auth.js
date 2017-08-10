@@ -1,9 +1,16 @@
 /*global app*/
 /*global log*/
+/*global $*/
 app.controller('authCtl', ['$scope', 'httpFacade', function ($scope, httpFacade) {
     'use strict';
-    log('loaded');
     $scope.auth = function (e) {
-        log(e);
+        httpFacade.auth($.param(e));
     };
+    $scope.$on('NO_AUTH', function () {
+        $scope.isAuth = false;
+    });
+    $scope.$on('AUTH', function () {
+        $scope.isAuth = true;
+    });
+    $scope.isAuth = true;
 }]);

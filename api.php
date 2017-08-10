@@ -1,18 +1,19 @@
 <?php
-require_once('dash/_php/conf.php');
-require_once('dash/_php/image.php');
-require_once('dash/_php/insties.php');
-require_once('dash/_php/ads.php');
-require_once('dash/_php/users.php');
-require_once('dash/_php/messages.php');
-require_once('dash/_php/logs.php');
-require_once('dash/_php/ui.php');
+require_once('dashboard/_php/v1/conf.php');
+// require_once('dashboard_php/v1/image.php');
+require_once('dashboard/_php/v1/insties.php');
+// require_once('dashboard/_php/v1/ads.php');
+// require_once('dashboard/_php/v1/users.php');
+// require_once('dashboard/_php/v1/messages.php');
+// require_once('dashboard/_php/v1/logs.php');
+// require_once('dashboard/_php/v1/ui.php');
 function handleGet(){
   if (isset($_SERVER['PATH_INFO'])){
     switch (strtolower($_SERVER['PATH_INFO'])) {
       case '/v1/campuses':
       case '/v1/campuses/':
-        Insties::getCampuses();
+        $i = new Insties();
+        echo json_encode($i->insties);
         break;
       case '/v1/visitors':
       case '/v1/visitors/':

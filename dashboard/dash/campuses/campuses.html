@@ -3,7 +3,7 @@
     <div class="content">
         <status-bar></status-bar>
         <div class="controls">
-            <div>
+            <div ng-click="addC()">
                 <img src="img/add.png"/>
                 <span>ADD CAMPUS</span>
             </div>
@@ -13,30 +13,35 @@
             <thead>
                 <tr>
                     <td>Institution</td>
+                    <td>Campuses</td>
                     <td>Users</td>
                     <td>Adverts</td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Demo</td>
-                    <td>12</td>
-                    <td>124</td>
+                <tr ng-repeat="x in insties">
+                    <td>{{x.name}}</td>
+                    <td>{{x.campuses.length}}</td>
+                    <td>-1</td>
+                    <td>-1</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-<div class="campus-add-dialog closed">
+<div class="campus-add-dialog" ng-class="{closed:!closed}">
     <h3>Add campus</h3>
     <form>
         <label>Intitution name</label>
-        <input type="text"/>
+        <input type="text" ng-model="insti"/>
         <label>Campus name</label>
-        <input type="text"/>
+        <input type="text" ng-model="campus"/>
         <div class="btn-row">
-            <span>CANCEL</span>
-            <span>ADD</span>
+            <span ng-click="cancelC()">CANCEL</span>
+            <span ng-click="createC()">ADD</span>
+        </div>
+        <div class="suggestions" ng-show="suggest">
+            <span ng-repeat="x in insties | filter:insti" ng-click="fillS(x.name)">{{x.name}}</span>
         </div>
     </form>
 </div>

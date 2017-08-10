@@ -46,7 +46,7 @@
     flex-grow: 1;
 }
 .campuses > .content table td{
-    flex-basis: 200px;
+    flex-basis: 150px;
 }
 .campus-add-dialog{
     position: absolute;
@@ -70,7 +70,25 @@
     margin: 5px 0;
     display: block;
 }
-.campus-add-dialog > form > input{}
+
+.campus-add-dialog > form > .suggestions{
+    position: absolute;
+    background-color: #FFF;
+    top: 115px;
+    left: 12px;
+    box-shadow: 0 1px 1px 1px #CCC;
+}
+.campus-add-dialog > form > .suggestions > span{
+    display: block;
+    cursor: pointer;
+    padding: 5px;
+}
+.campus-add-dialog > form > .suggestions > span:hover{
+    background-color: #EEE;
+}
+.campus-add-dialog.closed > form > .suggestions{
+    display: none;
+}
 .campus-add-dialog > form > input{
     display: block;
     width: 100%;

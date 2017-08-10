@@ -21,7 +21,7 @@
         <script src="dash/home/homeCtl.js"></script>
         <script src="dash/statusbar/statusbar.js"></script>
         <script src="dash/admin/adminCtl.js"></script>
-        <script src="dash/campuses/campusesCtl.js"></script>
+        <script src="dash/campuses/campuses.js"></script>
         <script src="dash/users/usersCtl.js"></script>
         <script src="dash/ads/adsCtl.js"></script>
         <script src="dash/charts/lineDir.js"></script>
@@ -35,13 +35,13 @@
     </head>
     <body ng-app="dashboard">
         <div class="wrapper" ng-view></div>
-        <div class="auth-pane" ng-controller="authCtl">
+        <div class="auth-pane" ng-class="{closed:isAuth}" ng-controller="authCtl">
             <h2>Login to admin dashboard</h2>
             <form class="auth-form" name="authForm">
                 <label>Email</label>
-                <input type="text" placeholder="john@email.com" ng-model="a.email"/>
+                <input type="text" placeholder="john@email.com" ng-model="a.username"/>
                 <label>Password</label>
-                <input type="password" ng-model="a.pwd"/>
+                <input type="password" placeholder="Password" ng-model="a.password"/>
                 <input type="button" value="Login" ng-click="auth(a)"/>
             </form>
         </div>
