@@ -1,89 +1,70 @@
 /*global app*/
 /*global log*/
 /*global $*/
-app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', function ($scope, $http, $location, AppStore) {
+app.controller('registerCtl', ['$scope', '$location', 'AppStore', 'httpFacade', function ($scope, $location, AppStore, httpFacade) {
     'use strict';
     var self = this,
         insties;
-    function isEmailValid(data) {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(data);
-    }
-    function isPasswordValid(data) {
-        if (typeof data === 'undefined' || data.length < 4) {
-            $scope.errMsg = 'Password must have at least 4 characters';
-            return false;
-        } else if (data.search(/[a-z]/i) < 0) {
-            $scope.errMsg = 'Your password must contain at least one letter.';
-            return false;
-        } else if (data.search(/[0-9]/) < 0) {
-            $scope.errMsg = 'Your password must contain at least one digit.';
-            return false;
-        } else if (data.equals === $scope.formData.rePwd) {
-            $scope.errMsg = 'Passwords do not match';
-            return false;
-        } else {
-            return true;
-        }
-    }
-    function isNumberValid(data) {
-        if (typeof data === 'undefined' || data.length !== 10) {
-            $scope.errMsg = 'Cellphone digits must be 10 characters long';
-            return false;
-        } else {
-            return true;
-        }
-    }
-    function isNameValid(data) {
-        if (typeof data === 'undefined' || data.length < 3) {
-            $scope.errMsg = 'Name must have at least 4 characters';
-            return false;
-        } else if (data.search(/[a-z]/i) < 0) {
-            $scope.errMsg = 'Your name must contain at least one letter.';
-            return false;
-        } else {
-            return true;
-        }
-    }
     function isDataValid(data) {
-        if (!isEmailValid(data.email)) {
+        if (typeof data.name === 'undefined' || data.name.length === 0) {
             $scope.err = true;
+            $scope.errMsg = 'Display name is empty';
             return false;
-        } else if (!isPasswordValid(data.password)) {
+        } else if (typeof data.email === 'undefined' || data.email.length === 0) {
             $scope.err = true;
-            return false;
-        } else if (!isNameValid(data.dName)) {
+            $scope.errMsg = 'Email is empty';
+        } else if (data.email.search(/^.+@.+\..+$/) !== 0) {
             $scope.err = true;
-            return false;
-        } else if (!isNumberValid(data.number)) {
+            $scope.errMsg = 'Email is must contain @ and .';
+        } else if (typeof data.number === 'undefined' || data.number.length === 0) {
             $scope.err = true;
-        } else if (typeof $scope.formData.campusId === 'undefined') {
+            $scope.errMsg = 'Cellphone number empty';
+        } else if (data.number.search(/\b\d{10}/) !== 0) {
             $scope.err = true;
-            $scope.errMsg = 'Campus isn\'t selected';
+            $scope.errMsg = 'Your number must be 10 numbers long with no letters or symbols';
+        } else if (typeof data.campusId === 'undefined') {
+            $scope.err = true;
+            $scope.errMsg = 'Please choose your campus';
+        } else if (typeof data.password === 'undefined' || data.password.length === 0) {
+            $scope.err = true;
+            $scope.errMsg = 'Password cannot be empty';
+        } else if (typeof data.rePwd === 'undefined' || data.password !== data.rePwd) {
+            $scope.err = true;
+            $scope.errMsg = 'Passwords do not match';
         } else {
-            $scope.err = false;
             return true;
         }
     }
     function auth(e, p) {
         //NOTE Email with more than one dot have weird behaivor
         var data = {email: e.toLowerCase(), password: p};
-        $http.post('api.php/v1/users/auth', $.param(data)).then(function (res) {
-            AppStore.setToken(res.data.token);
-            AppStore.setUserId(res.data.id);
+        httpFacade.authUser($.param(data)).then(function (res) {
             $scope.$emit('STOP_LOADING');
-            if (typeof $location.search().redirect !== 'undefined') {
-                $location.url($location.search().redirect);
-            } else {
-                $location.url('/account?rel=console');
-            }
+            log(res.data);
+//            AppStore.setToken(res.data.token);
+//            AppStore.setUserId(res.data.id);
+//            $scope.$emit('STOP_LOADING');
+//            if (typeof $location.search().redirect !== 'undefined') {
+//                $location.url($location.search().redirect);
+//            } else {
+//                $location.url('/account?rel=console');
+//            }
         }, function (err) {
             $scope.$emit('STOP_LOADING');
-            $scope.$emit('ERROR', {code: err.status, desc: err.data});
+            if (err.status === 401) {
+                $location.url('/account?rel=verify&email=' + $scope.formData.email + '&from=register');
+            }
+//            $scope.$emit('ERROR', {code: err.status, desc: err.data});
         });
     }
     $scope.lTitle = '- Select your campus -';
-    $scope.formData = {};
+    $scope.formData = {
+        name: 'Sdu',
+        email: 'sdu@gum.com',
+        number: '0604335310',
+        password: 'plo0',
+        rePwd: 'plo0'
+    };
     $scope.cState = 0;
     $scope.changeC = function () {
         $scope.instList = insties;
@@ -102,12 +83,14 @@ app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', funct
         }
     };
     $scope.createNew = function () {
+        $scope.err = false;
+        $scope.errMsg = '';
         if (isDataValid($scope.formData)) {
             $scope.formData.email = $scope.formData.email.toLowerCase();
             var data = JSON.parse(JSON.stringify($scope.formData));
             delete data.rePwd;
             $scope.$emit('START_LOADING');
-            $http.post('/api.php/v1/users/new', $.param(data)).then(function (res) {
+            httpFacade.newUser($.param(data)).then(function (res) {
                 auth(data.email, data.password);
             }, function (err) {
                 $scope.$emit('STOP_LOADING');
@@ -115,7 +98,7 @@ app.controller('registerCtl', ['$scope', '$http', '$location', 'AppStore', funct
             });
         }
     };
-    $http.get('api.php/v1/campuses', {cache: true}).then(function (res) {
+    httpFacade.getCampuses().then(function (res) {
         insties = res.data;
         var i = 0;
         $scope.instList = [];

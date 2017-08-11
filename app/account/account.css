@@ -1,86 +1,64 @@
-.account .login{
-    max-width: 450px;
-    margin: 40px auto;
-}
-.account .login h2{
-    text-align: center;
-    font-family: Lato Thin;
-}
-.account .login img{
-    display: block;
-    height: 150px;
-    margin: auto;
-    border: 9px solid #546E7A;
-    background-color: #546E7A;
-    border-radius: 95px;
-    opacity: 0.3;
-}
-.account .login input{
-    width: 90%;
-    margin: 20px auto 0 auto;
-    display: block;
-    outline: none;
+.account form > h2{
+    margin: 0;
     padding: 10px;
-    border: 0px;
-    border-bottom: 2px solid #546E7A;
-    background-color: rgba(84, 110, 123, 0.1);
-    font-size: 1;
-}
-.account .login input:focus{
-    border-bottom-color: #1E88E5;
-    background-color: rgba(84, 110, 123, 0.3);
-}
-.account .login span{
-    display: block;
-    margin: 10px auto 0 auto;
-    width: 90%;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    cursor: pointer;
-}
-.account .login > div{
-    width: 90%;
-    margin: auto;
-    display: flex;
-}
-.account .register{
-    max-width: 450px;
-    margin: 40px auto;
-}
-.account .register h2{
+    color: #FFF;
     text-align: center;
 }
-.account .register input{
+.account form{
+    margin: 30px auto;
+    width: 100%;
+    max-width: 500px;
+    background-color: #FFF;
+    box-shadow: 0 1px 1px 1px #CCC;
+}
+.account label{
     display: block;
-    width: 90%;
-    margin: 20px auto 0 auto;
-    outline: none;
+    margin: 1%;
+}
+.account input{
+    display: block;
+    margin: 1%;
+    width: 98%;
+}
+.account > .login > form > img{
+    width: 140px;
+    height: 140px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 70px;
+    background-color: #AAA;
+    opacity: 0.05;
     padding: 10px;
-    border: 0px;
-    border-bottom: 2px solid #546E7A;
-    background-color: rgba(84, 110, 123, 0.1);
-    font-size: 1;
 }
-.account .register input:focus{
-    border-bottom-color: #1E88E5;
+.account > .login > form .btns > span{
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+.account .err{
+    display: block;
+    width: 99%;
+    max-width: 500px;
+    margin: 0.5%;
+    padding: 10px;
+    text-align: center;
 }
 .account .register .a-chooser{
     display: block;
-    width: 90%;
-    margin: 20px auto 0 auto;
+    width: 98%;
+    margin: 1% auto;
     outline: none;
     padding: 10px;
     background-color: rgba(84, 110, 123, 0.1);
 }
-.account .register > span{
-    display: block;
-    width: 90%;
-    margin: 10px auto;
-    height: 40px;
-    line-height: 40px;
+.account > .verify{
+    padding-bottom: 5px;
+}
+.account form > p{
     text-align: center;
-    cursor: pointer;
+    margin: 0;
+    padding: 15px;
+    color: #999;
+    font-size: 1.3em;
 }
 .dlt-acc{
     padding: 5px;
@@ -403,6 +381,10 @@
     }
 }
 @media screen and (max-width: 450px){
+    .account form{
+        margin: 10px 2%;
+        width: 96%;
+    }
     .account .prefs{
         margin: 10px;
     }

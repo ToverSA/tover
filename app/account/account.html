@@ -39,37 +39,49 @@
         </div>
     </div>
     <div class="login" ng-switch-when="login" ng-controller="loginCtl">
-        <h2>Login to account</h2>
-        <img src="img/avatar.png" alt="Account"/>
-        <input type="text" placeholder="Email" ng-model="authData.email"/>
-        <input type="password" placeholder="Password" ng-model="authData.password"/>
-        <div>
-            <span class="color-accent-inv" ng-click="toRecovery()">Fogort password?</span>
-            <span class="color-accent" ng-click="logIn()">Log in</span>
-        </div>
-        <span class="color-accent-inv" ng-click="toRegister()">Create new account</span>
-        <span ng-show="err" class="err">{{errMsg}}</span>
+        <form ng-submit="logIn(auth)">
+            <h2 class="color-primary">Login to your account</h2>
+            <img src="img/avatar.png" alt="Account"/>
+            <label for="email">Email</label>
+            <input name="email" type="text" placeholder="john@gmail.com" ng-model="auth.email"/>
+            <label for="password">Password</label>
+            <input name="password" type="password" placeholder="Password" ng-model="auth.password"/>
+            <span ng-show="err" class="err">{{errMsg}}</span>
+            <div class="btns">
+                <span class="color-accent-inv" ng-click="toRecovery()">Forgot password?</span>
+                <span class="color-accent" ng-click="logIn(auth)">Login</span>
+            </div>
+            <span class="btn color-accent-inv" ng-click="toRegister()">Create new account</span>
+        </form>
     </div>
     <div class="register" ng-switch-when="register" ng-controller="registerCtl">
-        <h2>Register new account</h2>
-        <input type="text" placeholder="Display name" ng-model="formData.dName"/>
-        <input type="email" placeholder="Email" ng-model="formData.email"/>
-        <input type="text" placeholder="Cellphone number" ng-model="formData.number"/>
-        <div class="a-chooser">
+        <form>
+            <h2 class="color-primary">Register account</h2>
+            <label for="name">Display name</label>
+            <input name="name" type="text" placeholder="John" ng-model="formData.name"/>
+            <label for="email">Email</label>
+            <input name="email" type="text" placeholder="john@mail.com" ng-model="formData.email"/>
+            <label for="tell">Cellphone number</label>
+            <input name="tell" type="text" placeholder="0734567891" ng-model="formData.number"/>
+            <label>Campus name</label>
+            <div class="a-chooser">
             <span ng-click="openChooser()">{{lTitle}}</span>
             <div class="c-dialog" ng-show="isCOpen">
                 <h4 ng-show="(cState === 1)">{{sTitle}} - <span ng-click="changeC()">Change</span></h4>
                 <span ng-click="browse(instList.indexOf(x))" ng-repeat="x in instList">{{x.name}}</span>
             </div>
         </div>
-        <input type="password" placeholder="Password" ng-model="formData.password"/>
-        <input type="password" placeholder="Re-enter password" ng-model="formData.rePwd"/>
-        <span class="color-accent" ng-click="createNew()">Create account</span>
-        <span class="color-accent-inv" ng-click="toLogin()">Already have an account?</span>
-        <span ng-show="err" class="err">{{errMsg}}</span>
+            <label for="pwd">Password</label>
+            <input name="pwd" type="password" placeholder="Password" ng-model="formData.password"/>
+            <label for="repwd">Re enter password</label>
+            <input name="repwd" type="password" placeholder="Re-enter password" ng-model="formData.rePwd"/>
+            <span ng-show="err" class="err">{{errMsg}}</span>
+            <span class="btn color-accent" ng-click="createNew()">Create account</span>
+            <span class="btn color-accent-inv" ng-click="toLogin()">Already have an account?</span>
+        </form>
     </div>
     <div class="recovery" ng-switch-when="recovery" ng-switch="rState" ng-controller="recoverCtl">
-        <h1 class="color-primary">Recover your account!</h1>
+        <h2 class="color-primary">Recover your account!</h2>
         <div ng-switch-default>
             <p>Enter your email address below</p>
             <input type="email" placeholder="Email" ng-model="em.e"/>
@@ -79,6 +91,14 @@
             <p>An link to reset your password has been sent to your email address</p>
             <span class="color-accent">Submit</span>
         </div>
+    </div>
+    <div class="verify" ng-switch-when="verify" ng-controller="verifyCtl">
+        <form>
+            <h2 class="color-primary">Verify your email address</h2>
+            <p>Your registration process is almost complete. An email with a link to verify your account, has been sent to you. Follow the link to complete your registration and access your console.</p>
+            <p>If you haven't received the verification email please click resend and check your inbox. Also don't forget to check the 'spam' folder.</p>
+            <span class="btn color-accent" ng-click="sendVerification()">RESEND EMAIL</span>
+        </form>
     </div>
     <div class="main" ng-switch-when="prefs" ng-controller="prefsCtl">
         <div class="header">

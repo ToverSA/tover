@@ -1,7 +1,7 @@
 /*global app*/
 /*global log*/
 /*global $*/
-app.controller('authCtl', ['$scope', 'httpFacade', function ($scope, httpFacade) {
+app.controller('authCtl', ['$scope', '$location', 'httpFacade', function ($scope, $location, httpFacade) {
     'use strict';
     $scope.auth = function (e) {
         httpFacade.auth($.param(e));
@@ -11,6 +11,7 @@ app.controller('authCtl', ['$scope', 'httpFacade', function ($scope, httpFacade)
     });
     $scope.$on('AUTH', function () {
         $scope.isAuth = true;
+        $location.url($location.url());
     });
     $scope.isAuth = true;
 }]);

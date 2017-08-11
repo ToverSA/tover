@@ -65,6 +65,13 @@ app.controller('accountCtl', ['$scope', '$http', '$location', '$routeParams', 'A
         } else {
             $scope.section = 'recovery';
         }
+    } else if ($routeParams.rel === 'verify') {
+        if (AppStore.isToken()) {
+            $routeParams.rel = 'console';
+            $location.search($routeParams);
+        } else {
+            $scope.section = 'verify';
+        }
     } else {
         $location.url('/account');
     }

@@ -13,12 +13,13 @@
     flex-grow: 0;
 }
 
-.header img.btn {
+.header img.h-btn {
     height: 50px;
     width: 50px;
     cursor: pointer;
+    border: none;
 }
-.header .right img.btn {
+.header .right img.h-btn {
     padding: 15px;
     filter: invert();
 }

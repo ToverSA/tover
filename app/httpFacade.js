@@ -38,6 +38,15 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.getCampuses = function () {
         return $http.get('api.php/v1/campuses', {cache: true});
     };
+    self.newUser = function (param) {
+        return $http.post(baseUrl + '/users/new', param);
+    };
+    self.sendVerification = function (param) {
+        return $http.post(baseUrl + '/users/verify', param);
+    };
+    self.authUser = function (param) {
+        return $http.post(baseUrl + '/users/auth', param);
+    };
     self.postCredits = function (param) {
         return $http.post(baseUrl + '/credits', param, { headers: {'token': AppStore.getToken()}});
     };

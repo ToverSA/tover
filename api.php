@@ -3,7 +3,7 @@ require_once('dashboard/_php/v1/conf.php');
 // require_once('dashboard_php/v1/image.php');
 require_once('dashboard/_php/v1/insties.php');
 // require_once('dashboard/_php/v1/ads.php');
-// require_once('dashboard/_php/v1/users.php');
+require_once('dashboard/_php/v1/users.php');
 // require_once('dashboard/_php/v1/messages.php');
 // require_once('dashboard/_php/v1/logs.php');
 // require_once('dashboard/_php/v1/ui.php');
@@ -69,7 +69,7 @@ function handlePost(){
     switch ($_SERVER['PATH_INFO']) {
       case '/v1/users/new':
       case '/v1/users/new/':
-        Users::postNewUser();
+        Users::newUser();
         break;
       case '/v1/ads':
       case '/v1/ads/':
@@ -77,7 +77,7 @@ function handlePost(){
         break;
       case '/v1/users/auth':
       case '/v1/users/auth/':
-        Users::postAuthUser();
+        Users::authUser();
         break;
       case '/v1/messages':
       case '/v1/messages/':
@@ -123,9 +123,6 @@ function handePut(){
 function handleDelete(){
   if (isset($_SERVER['PATH_INFO'])){
     switch ($_SERVER['PATH_INFO']) {
-      case '/v1/users/new':
-      case '/v1/users/new/':
-        break;
       case '/v1/ads':
       case '/v1/ads/':
         Ads::deleteAds();
