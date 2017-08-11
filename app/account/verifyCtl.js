@@ -1,12 +1,24 @@
 /*global app*/
 /*global log*/
-app.controller('verifyCtl', ['$scope', '$routeParams', 'httpFacade', function ($scope, $params, httpFacade) {
+/*global $*/
+app.controller('verifyCtl', ['$scope', '$location', '$routeParams', 'httpFacade', function ($scope, $location, $params, httpFacade) {
     'use strict';
     log($params);
     $scope.sendVerification = function () {
-        log('verifying');
-        httpFacade.sendVerification().then(function (res) {
+        $scope.$emit('START_LOADING');
+        httpFacade.sendVerification($.param({email: $params.email})).then(function (res) {
+            $scope.$emit('STOP_LOADING');
+            $location.url('/account');
             log(res.data);
+        }, function (err) {
+            $scope.$emit('STOP_LOADING');
         });
     };
+    if ($params.from === 'register') {
+        httpFacade.sendVerification($.param({email: $params.email})).then(function (res) {
+            $scope.$emit('STOP_LOADING');
+        });
+    } else {
+        $scope.$emit('STOP_LOADING');
+    }
 }]);

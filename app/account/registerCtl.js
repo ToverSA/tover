@@ -52,7 +52,10 @@ app.controller('registerCtl', ['$scope', '$location', 'AppStore', 'httpFacade', 
         }, function (err) {
             $scope.$emit('STOP_LOADING');
             if (err.status === 401) {
+                $scope.$emit('START_LOADING');
                 $location.url('/account?rel=verify&email=' + $scope.formData.email + '&from=register');
+            } else {
+                $scope.$emit('ERROR', {code: err.status, desc: err.data});
             }
 //            $scope.$emit('ERROR', {code: err.status, desc: err.data});
         });

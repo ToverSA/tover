@@ -27,6 +27,10 @@ function handleGet(){
       case '/v1/users/':
         Users::getUsers();
         break;
+      case '/v1/users/verify':
+      case '/v1/users/verify/':
+        Users::verifyUser();
+        break;
       case '/v1/account/ads':
       case '/v1/account/ads/':
         Ads::getAccountAds();
@@ -78,6 +82,10 @@ function handlePost(){
       case '/v1/users/auth':
       case '/v1/users/auth/':
         Users::authUser();
+        break;
+      case '/v1/users/verify':
+      case '/v1/users/verify/':
+        Users::sendVerificationUser();
         break;
       case '/v1/messages':
       case '/v1/messages/':
