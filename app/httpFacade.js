@@ -38,11 +38,17 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.getCampuses = function () {
         return $http.get('api.php/v1/campuses', {cache: true});
     };
+    self.postAd = function (param) {
+        return $http.post(baseUrl + '/ads', param, { headers: {'token': AppStore.getToken()} });
+    };
     self.newUser = function (param) {
         return $http.post(baseUrl + '/users/new', param);
     };
     self.sendVerification = function (param) {
         return $http.post(baseUrl + '/users/verify', param);
+    };
+    self.recover = function (param) {
+        return $http.post(baseUrl + '/users/recovery', param);
     };
     self.authUser = function (param) {
         return $http.post(baseUrl + '/users/auth', param);
@@ -57,7 +63,7 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
         return $http.put(baseUrl + '/messages', param, { headers: {'token': AppStore.getToken()}});
     };
     self.putAccount = function (param) {
-        return $http.put(baseUrl + '/account', param, { headers: {'token': AppStore.getToken()}});
+        return $http.post(baseUrl + '/account/edit', param, { headers: {'token': AppStore.getToken()}});
     };
     self.promote = function (param) {
         return $http.put(baseUrl + '/ads/promotions', param, { headers: {'token': AppStore.getToken()}});
@@ -83,12 +89,15 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
         form.submit();
     };
     self.deleteAccount = function (param) {
-        return $http({
-            method: 'DELETE',
-            url: baseUrl + '/account?' + param,
-            headers: {'token': AppStore.getToken()}
-        });
+        return $http.post(baseUrl + '/account/delete', param, { headers: {'token': AppStore.getToken() } });
     };
+//    self.deleteAccount = function (param) {
+//        return $http({
+//            method: 'DELETE',
+//            url: baseUrl + '/account?' + param,
+//            headers: {'token': AppStore.getToken()}
+//        });
+//    };
     self.deleteAd = function (param) {
         return $http({
             method: 'DELETE',

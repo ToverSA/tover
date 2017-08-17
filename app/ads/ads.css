@@ -243,23 +243,19 @@ img.badge{
 .create-ad .wrapper h2{
     text-align: center;
 }
-.create-ad .wrapper input{
-    outline: none;
-    border: 0px;
-    display: block;
-    font-size: 1em;
-    border-bottom: 2px solid #CFD8DC;
-    padding: 5px;
-}
-.create-ad .wrapper input:focus{
-    border-bottom-color: #1E88E5;
-}
 .create-ad .wrapper input[type=text]{
     width: 100%;
 }
 .create-ad .wrapper input[type=number]{
     display: inline-block;
-    width: 100px;
+    width: 150px;
+    padding-left: 20px;
+}
+.create-ad .wrapper span.label{
+    display: inline-block;
+    position: absolute;
+    padding: 9px;
+    color: #999;
 }
 .create-ad .wrapper a-chooser{
     padding: 5px;

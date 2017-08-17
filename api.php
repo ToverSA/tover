@@ -1,12 +1,13 @@
 <?php
 require_once('dashboard/_php/v1/conf.php');
-// require_once('dashboard_php/v1/image.php');
+require_once('dashboard/_php/v1/image.php');
+require_once('dashboard/_php/v1/credits.php');
 require_once('dashboard/_php/v1/insties.php');
-// require_once('dashboard/_php/v1/ads.php');
+require_once('dashboard/_php/v1/ads.php');
 require_once('dashboard/_php/v1/users.php');
-// require_once('dashboard/_php/v1/messages.php');
+require_once('dashboard/_php/v1/messages.php');
 // require_once('dashboard/_php/v1/logs.php');
-// require_once('dashboard/_php/v1/ui.php');
+require_once('dashboard/_php/v1/ui.php');
 function handleGet(){
   if (isset($_SERVER['PATH_INFO'])){
     switch (strtolower($_SERVER['PATH_INFO'])) {
@@ -21,7 +22,9 @@ function handleGet(){
         break;
       case '/v1/account':
       case '/v1/account/':
-        Users::getAccount();
+        $u = new Users();
+        $u->auth();
+        $u->getAccount();
         break;
       case '/v1/users':
       case '/v1/users/':
@@ -33,7 +36,9 @@ function handleGet(){
         break;
       case '/v1/account/ads':
       case '/v1/account/ads/':
-        Ads::getAccountAds();
+        $u = new Users();
+        $u->auth();
+        $u->getAds();
         break;
       case '/v1/ads':
       case '/v1/ads/':
@@ -53,11 +58,15 @@ function handleGet(){
         break;
       case '/v1/messages':
       case '/v1/messages/':
-        Messages::getMessages();
+        $u = new Users();
+        $u->auth();
+        $u->getMessages();
         break;
       case '/v1/credits':
       case '/v1/credits/':
-        Users::getCredits();
+        $u = new Users();
+        $u->auth();
+        $u->getCredits();
         break;
       case '/v1/ads/promotions':
       case '/v1/ads/promotions/':
@@ -77,7 +86,9 @@ function handlePost(){
         break;
       case '/v1/ads':
       case '/v1/ads/':
-        Ads::post();
+        $u = new Users();
+        $u->auth();
+        $u->postAd();
         break;
       case '/v1/users/auth':
       case '/v1/users/auth/':
@@ -87,22 +98,42 @@ function handlePost(){
       case '/v1/users/verify/':
         Users::sendVerificationUser();
         break;
+      case '/v1/users/recovery':
+      case '/v1/users/recovery/':
+        Users::recoverUser();
+        break;
       case '/v1/messages':
       case '/v1/messages/':
-        Messages::postMessage();
+        $u = new Users();
+        $u->auth();
+        $u->postMessage();
         break;
       case '/v1/credits':
       case '/v1/credits/':
-        Users::postCredits();
+        $u = new Users();
+        $u->auth();
+        $u->postCredits();
         break;
-        case '/v1/visitors':
-        case '/v1/visitors/':
-          Logs::visit();
-          break;
-        case '/v1/account/confirm':
-        case '/v1/account/confirm/':
-          UI::confirm();
-          break;
+      case '/v1/visitors':
+      case '/v1/visitors/':
+        Logs::visit();
+        break;
+      case '/v1/account/confirm':
+      case '/v1/account/confirm/':
+        UI::confirm();
+        break;
+      case '/v1/account/edit':
+      case '/v1/account/edit/':
+        $u = new Users();
+        $u->auth();
+        $u->putAccount();
+        break;
+      case '/v1/account/delete':
+      case '/v1/account/delete/':
+        $u = new Users();
+        $u->auth();
+        $u->deleteUser();
+        break;
       default:
         break;
     }
@@ -113,15 +144,21 @@ function handePut(){
     switch (strtolower($_SERVER['PATH_INFO'])) {
       case '/v1/account':
       case '/v1/account/':
-        Users::putAccount();
+        $u = new Users();
+        $u->auth();
+        $u->putAccount();
         break;
       case '/v1/messages':
       case '/v1/messages/':
-        Messages::putMessages();
+        $u = new Users();
+        $u->auth();
+        $u->putMessages();
         break;
       case '/v1/ads/promotions':
       case '/v1/ads/promotions/':
-        Ads::putPromotion();
+        $u = new Users();
+        $u->auth();
+        $u->putPromotion();
         break;
       default:
         break;

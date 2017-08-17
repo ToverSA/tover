@@ -273,7 +273,7 @@ input[type=text]:focus, input[type=email]:focus, input[type=search]:focus, input
     display: flex;
     justify-content: flex-end;
 }
-.btns > span{
+.btns > span, input[type=button], input[type=submit], a > span{
     display: block;
     border: 1px solid #EEE;
     padding: 10px;
@@ -281,6 +281,9 @@ input[type=text]:focus, input[type=email]:focus, input[type=search]:focus, input
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
+    font-size: 1em;
+    outline: none;
+    width: auto;
 }
 .btn{
     padding: 10px;
@@ -288,6 +291,16 @@ input[type=text]:focus, input[type=email]:focus, input[type=search]:focus, input
     text-align: center;
     border: 1px solid #EEE;
     cursor: pointer;
+}
+div.btn{
+    display: flex;
+    padding: 0px;
+    overflow: hidden;
+}
+div.btn > span{
+}
+div.btn > img{
+    display: none;
 }
 @media screen and (max-width: 1024px){
     .ad{

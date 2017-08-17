@@ -53,6 +53,7 @@
 .account > .verify{
     padding-bottom: 5px;
 }
+.account{}
 .account form > p{
     text-align: center;
     margin: 0;
@@ -95,66 +96,6 @@
     float: right;
     margin: 5px 15% 0 0;
     color: #EF5350;
-}
-.account .recovery{
-    max-width: 450px;
-    background-color: #FFF;
-    margin: 30px auto;
-    box-shadow: 0 0 1px 1px #CCC;
-    display: flex;
-    flex-wrap: wrap;
-}
-.account .recovery > h1{
-    text-align: center;
-    flex-basis: 100%;
-    color: #FFF;
-    margin: 0;
-    padding: 10px;
-}
-.account .recovery > div > input{
-    padding: 10px;
-    border: 0;
-    outline: none;
-    flex-grow: 1;
-    font-size: 1em;
-    margin: 20px 5px;
-    background-color: #EEE;
-    border-radius: 5px;
-}
-.account .recovery > div{
-    flex-basis: 100%;
-    padding: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    align-items: baseline;
-    height: 119px;
-    justify-content: flex-end;
-}
-.account .recovery > div > p{
-    flex-basis: 100%;
-    padding: 5px;
-    text-align: center;
-    margin: 0
-}
-.account .recovery > div > span{
-    display: block;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin: auto;
-}
-.account .recovery > h4{
-    text-align: center;
-    flex-basis: 100%;
-    opacity: 0;
-}
-.account .recovery > h4.success{
-    opacity: 1;
-}
-.account .recovery > span.back{
-    display: block;
-    margin: auto;
-    background-color: transparent;
 }
 .account .header{
     background-color: #FFF;
@@ -313,11 +254,10 @@
 .account .edit-dialog > input[type=text], .account .edit-dialog input[type=password]{
     font-size: 1em;
     padding: 10px;
-    margin: 2%;
+    margin: 20px 2%;
     width: 96%;
     outline: none;
     border: 0;
-    border-bottom: 3px solid #DDD;
 }
 .account .edit-dialog div.w{
     margin: 5px;
@@ -397,9 +337,5 @@
         left: 5px;
         right: 5px;
         width: auto;
-    }
-    .account .recovery{
-        margin: 0px auto;
-        box-shadow: none;
     }
 }

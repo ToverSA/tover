@@ -2,7 +2,7 @@
 /*global log*/
 /*global sessionStorage*/
 /*global $*/
-app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$http', '$timeout', 'AppStore', 'mService', function ($scope, $routeParams, $location, $http, $timeout, AppStore, mService) {
+app.controller('messengerCtl', ['$scope', '$routeParams', '$location', '$timeout', 'AppStore', 'mService', function ($scope, $routeParams, $location, $timeout, AppStore, mService) {
     'use strict';
     $scope.msg = {};
     $scope.param = {};

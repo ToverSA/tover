@@ -40,15 +40,9 @@ app.controller('registerCtl', ['$scope', '$location', 'AppStore', 'httpFacade', 
         var data = {email: e.toLowerCase(), password: p};
         httpFacade.authUser($.param(data)).then(function (res) {
             $scope.$emit('STOP_LOADING');
-            log(res.data);
-//            AppStore.setToken(res.data.token);
-//            AppStore.setUserId(res.data.id);
-//            $scope.$emit('STOP_LOADING');
-//            if (typeof $location.search().redirect !== 'undefined') {
-//                $location.url($location.search().redirect);
-//            } else {
-//                $location.url('/account?rel=console');
-//            }
+            AppStore.setUserId(res.data.id);
+            AppStore.setToken(res.data.token);
+            $location.url('/account');
         }, function (err) {
             $scope.$emit('STOP_LOADING');
             if (err.status === 401) {

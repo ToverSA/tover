@@ -16,6 +16,9 @@
     padding: 10px;
     font-size: 1em;
     flex-grow: 1;
+    background-color: #FFF;
+    border-radius: 0;
+    box-shadow: none;
 }
 .search-bar > img{
     width: 50px;

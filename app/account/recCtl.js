@@ -1,9 +1,14 @@
 /*global app*/
 /*global log*/
-app.controller('recoverCtl', ['$scope', function ($scope) {
+/*global $*/
+app.controller('recoverCtl', ['$scope', '$location', 'httpFacade', function ($scope, $location, httpFacade) {
     'use strict';
-    $scope.recover = function () {
-//        log('rec' + email);
-        log('rec' + $scope.em);
+    $scope.back = function () {
+        $location.url('/account');
+    };
+    $scope.recover = function (e) {
+        httpFacade.recover($.param({email: e})).then(function (res) {
+            log(res.data);
+        });
     };
 }]);

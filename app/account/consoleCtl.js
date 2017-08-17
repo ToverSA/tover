@@ -6,7 +6,7 @@ app.controller('consoleCtl', ['$scope', '$location', 'AppStore', 'mService', 'ht
         $scope.notify = n;
     });
     mService.init(1);
-    //NOTE message notification should show on user icon even whilst browsing home
+    //[x]NOTE message notification should show on user icon even whilst browsing home
     $scope.logout = function () {
         AppStore.clearAll();
         $location.url('/home');
@@ -29,6 +29,11 @@ app.controller('consoleCtl', ['$scope', '$location', 'AppStore', 'mService', 'ht
         AppStore.setUserNumber(res.data.number);
         AppStore.setWhatsapp(res.data.whatsapp);
         $scope.name = res.data.name;
+    }, function (err) {
+        if (err.status === 403) {
+            AppStore.clearAll();
+            $location.url('/home');
+        }
     });
     $scope.$on('NEW_MESSAGE', function () {});
 }]);

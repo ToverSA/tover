@@ -81,16 +81,16 @@
         </form>
     </div>
     <div class="recovery" ng-switch-when="recovery" ng-switch="rState" ng-controller="recoverCtl">
-        <h2 class="color-primary">Recover your account!</h2>
-        <div ng-switch-default>
-            <p>Enter your email address below</p>
-            <input type="email" placeholder="Email" ng-model="em.e"/>
-            <span class="color-accent" ng-click="recover()">Submit</span>
-        </div>
-        <div ng-switch-when="0">
-            <p>An link to reset your password has been sent to your email address</p>
-            <span class="color-accent">Submit</span>
-        </div>
+        <form>
+            <h2 class="color-primary">Recover your account</h2>
+            <p>An email will be sent to you with a link to reset your password</p>
+            <label for="email">Enter your email address</label>
+            <input type="text" name="email" ng-model="em">
+            <div class="btns">
+               <span class="color-accent-inv" ng-click="back()">BACK</span>
+                <span class="color-accent" ng-click="recover(em)">SEND EMAIL</span>
+            </div>
+        </form>
     </div>
     <div class="verify" ng-switch-when="verify" ng-controller="verifyCtl">
         <form>
@@ -98,6 +98,7 @@
             <p>Your registration process is almost complete. An email with a link to verify your account, has been sent to you. Follow the link to complete your registration and access your console.</p>
             <p>If you haven't received the verification email please click resend and check your inbox. Also don't forget to check the 'spam' folder.</p>
             <span class="btn color-accent" ng-click="sendVerification()">RESEND EMAIL</span>
+            <span class="btn color-accent-inv" ng-click="toLogin()">LOGIN</span>
         </form>
     </div>
     <div class="main" ng-switch-when="prefs" ng-controller="prefsCtl">

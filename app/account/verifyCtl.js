@@ -3,7 +3,6 @@
 /*global $*/
 app.controller('verifyCtl', ['$scope', '$location', '$routeParams', 'httpFacade', function ($scope, $location, $params, httpFacade) {
     'use strict';
-    log($params);
     $scope.sendVerification = function () {
         $scope.$emit('START_LOADING');
         httpFacade.sendVerification($.param({email: $params.email})).then(function (res) {
@@ -17,6 +16,7 @@ app.controller('verifyCtl', ['$scope', '$location', '$routeParams', 'httpFacade'
     if ($params.from === 'register') {
         httpFacade.sendVerification($.param({email: $params.email})).then(function (res) {
             $scope.$emit('STOP_LOADING');
+            log(res.data);
         });
     } else {
         $scope.$emit('STOP_LOADING');

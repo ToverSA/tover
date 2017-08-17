@@ -2,7 +2,7 @@
 /*global log*/
 /*global $*/
 /*global FileReader*/
-app.controller('adsCreateCtl', ['$scope', '$location', '$http', 'AppStore', function ($scope, $location, $http, AppStore) {
+app.controller('adsCreateCtl', ['$scope', '$location', 'httpFacade', 'AppStore', function ($scope, $location, httpFacade, AppStore) {
     'use strict';
     //NOTE create controller
     //TODO stop allowing empty fields to go unchecked please
@@ -74,8 +74,7 @@ app.controller('adsCreateCtl', ['$scope', '$location', '$http', 'AppStore', func
                 $scope.ad.images.push(x.substring(x.indexOf(',') + 1));
             });
             $scope.loading = true;
-            $http.post('api.php/v1/ads', $.param($scope.ad),
-                       { headers: {'token': AppStore.getToken()} }).then(function (res) {
+            httpFacade.postAd($.param($scope.ad)).then(function (res) {
                 $scope.loading = false;
                 $location.url('/account');
             }, function (err) {
