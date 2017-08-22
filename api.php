@@ -90,6 +90,12 @@ function handlePost(){
         $u->auth();
         $u->postAd();
         break;
+      case '/v1/ads/delete':
+      case '/v1/ads/delete/':
+        $u = new Users();
+        $u->auth();
+        $u->deleteAd();
+        break;
       case '/v1/users/auth':
       case '/v1/users/auth/':
         Users::authUser();
@@ -116,7 +122,7 @@ function handlePost(){
         break;
       case '/v1/visitors':
       case '/v1/visitors/':
-        Logs::visit();
+        // Logs::visit();
         break;
       case '/v1/account/confirm':
       case '/v1/account/confirm/':

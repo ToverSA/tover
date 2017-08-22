@@ -35,7 +35,7 @@ class UI{
   public static function closeTable(){
     return "\t\t</table>";
   }
-  public static function payButton($amt, $id){
+  public static function payButton($amt, $id, $email){
       $data = array(
            // Merchant details
           'merchant_id' => MERCHANT_ID,
@@ -43,7 +43,7 @@ class UI{
           'return_url' => RETURN_URL,
           'cancel_url' => CANCEL_URL,
           'notify_url' => NOTIFY_URL,
-	        'email_address'=> 'sbtu01@payfast.co.za',
+	        'email_address'=> $email,
            // Transaction details
           'm_payment_id' => $id, //Unique payment ID to pass through to notify_url
 	        'amount' => number_format( sprintf( "%.2f", $amt), 2, '.', '' ),  //Amount needs to be in ZAR,if you have a multicurrency system, the conversion needs to place before building this array
@@ -63,13 +63,14 @@ class UI{
   	}
       // Remove last ampersand
       $getString = substr( $pfOutput, 0, -1 );
+      $passPhrase = "2ce3fdc76ed136f164948bfd3e432597";
       if( isset( $passPhrase ) )
       {
-          $getString .= '&passphrase='. urlencode( trim( $passPhrase ) );
+          $getString .= '&passphrase='. urlencode( trim( strtoupper($passPhrase )));
       }
-      $data['signature'] = md5( $getString );
+      // $data['signature'] = md5( $getString );
     $b = "<div class=\"pay-btn\">";
-    $testingMode = true;
+    $testingMode = false;
     $pfHost = $testingMode ? 'sandbox.payfast.co.za' : 'www.payfast.co.za';
     $b = $b . '<form action="https://'.$pfHost.'/eng/process" method="post">';
     foreach ($data as $name=> $value){
@@ -88,6 +89,12 @@ class UI{
     return "</html>\n";
   }
   public static function confirm(){
+    $con = new mysqli(HOST, USER, PWD, DB);
+    $stmt = $con->prepare("SELECT email FROM users WHERE id");
+    $stmt->bind_param('i', $_POST['id']);
+    $stmt->execute();
+    $stmt->bind_result($email);
+    $stmt->fetch();
     echo self::begin();
     echo self::head("Confirm payment");
     echo self::openBody();
@@ -104,7 +111,7 @@ class UI{
     echo self::closeRow();
     echo self::openRow();
     echo self::tableColumn("User email :");
-    echo self::tableColumn("gum@sdu.com");
+    echo self::tableColumn($email);
     echo self::closeRow();
     echo self::openRow();
     echo self::tableColumn("Credits :");
@@ -119,7 +126,7 @@ class UI{
     echo self::tableColumn("R" . (RATES[$_POST['deal']-1] * Ads::getRates()));
     echo self::closeRow();
     echo self::closeTable();
-    echo self::payButton(RATES[$_POST['deal']-1] * Ads::getRates(), $_POST['id']);
+    echo self::payButton(RATES[$_POST['deal']-1] * Ads::getRates(), $_POST['id'], $email);
     echo self::closeBody();
     echo self::end();
   }

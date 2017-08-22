@@ -59,6 +59,11 @@ class Users{
       Ads::post($this->con, $this->id);
     }
   }
+  public function deleteAd(){
+    if ($this->id != 0){
+      Ads::deleteAds($this->con, $_REQUEST['id']);
+    }
+  }
   public static function newUser(){
     $self = new self();
     if (count($_REQUEST) != 5 && !isset($_REQUEST['name']) && !isset($_REQUEST['email']) && !isset($_REQUEST['number']) && !isset($_REQUEST['campusId']) && !isset($_REQUEST['password'])){
@@ -139,6 +144,26 @@ class Users{
       }
     }
   }
+  public static function sendVerificationEmail($ToEmail, $link){
+    $FromEmail = SYS_EMAIL;
+    $Headers  = "MIME-Version: 1.0\n";
+    $Headers .= "Content-type: text/html; charset=iso-8859-1\n";
+    $Headers .= "From: ".$FromName." <".$FromEmail.">\n";
+    $Headers .= "Reply-To: ".$ReplyTo."\n";
+    $Headers .= "X-Sender: <".$FromEmail.">\n";
+    $Headers .= "X-Mailer: PHP\n";
+    $Headers .= "X-Priority: 1\n";
+    $Headers .= "Return-Path: <".$FromEmail.">\n";
+    $Subject = "Verify your email address";
+    $Content = "<!DOCTYPE html><html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"/>
+    <style>body{margin: 0;}h2{background-color: #FF6722;color: #FFF;margin: 0;padding: 20px;}p{
+    margin: 0;padding: 5px;}a{color: #1E88E5;}</style></head><body><h2>Verify your email address</h2>
+    <p>Hi there</p><p>You're almost done. Click on the link below to activate your account and finish the registration process.</p><br>";
+    $Content .= "<a href=\"$link\">$link</a><br><p>If there are any enquiries, please contact <a href=\"mailto:support@akomo.co.za\">support@akomo.co.za</a> for more info</p></body></html>";
+    if(mail($ToEmail, $Subject, $Content, $Headers) == false) {
+        header('HTTP/1.0 500 Internal Server Error');
+    }
+  }
   public static function sendVerificationUser(){
     $self = new self();
     $d = new DateTime();
@@ -147,9 +172,30 @@ class Users{
     $stmt->bind_param('sss', $token, $_REQUEST['email'], $token);
     $stmt->execute();
     if ($stmt->affected_rows > 0){
-      echo SITE_NAME . "/api.php/v1/users/verify/?" . http_build_query(array('email' => $_REQUEST['email'], 'v_token' => base64_encode($token)));
+      $link = SITE_NAME . "/api.php/v1/users/verify/?" . http_build_query(array('email' => $_REQUEST['email'], 'v_token' => base64_encode($token)));
+      self::sendVerificationEmail($_REQUEST['email'], $link);
     }else{
       header('HTTP/1.0 500 Internal Server Error');
+    }
+  }
+  public static function sendRecoveryEmail($ToEmail, $link){
+    $FromEmail = SYS_EMAIL;
+    $Headers  = "MIME-Version: 1.0\n";
+    $Headers .= "Content-type: text/html; charset=iso-8859-1\n";
+    $Headers .= "From: ".$FromName." <".$FromEmail.">\n";
+    $Headers .= "Reply-To: ".$ReplyTo."\n";
+    $Headers .= "X-Sender: <".$FromEmail.">\n";
+    $Headers .= "X-Mailer: PHP\n";
+    $Headers .= "X-Priority: 1\n";
+    $Headers .= "Return-Path: <".$FromEmail.">\n";
+    $Subject = "Recover your email address";
+    $Content = "<!DOCTYPE html><html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"/>
+    <style>body{margin: 0;}h2{background-color: #FF6722;color: #FFF;margin: 0;padding: 20px;}p{
+    margin: 0;padding: 5px;}a{color: #1E88E5;}</style></head><body><h2>Recover your account</h2>
+    <p>Hi there</p><p>Click on the link below to reset your password</p><br>";
+    $Content .= "<a href=\"$link\">$link</a><br><p>If there are any enquiries, please contact <a href=\"mailto:support@akomo.co.za\">support@akomo.co.za</a> for more info</p></body></html>";
+    if(mail($ToEmail, $Subject, $Content, $Headers) == false) {
+        header('HTTP/1.0 500 Internal Server Error');
     }
   }
   public static function recoverUser(){
@@ -160,7 +206,8 @@ class Users{
     $stmt->bind_param('sss', $token, $_REQUEST['email'], $token);
     $stmt->execute();
     if ($stmt->affected_rows > 0){
-      echo SITE_NAME . "/recover.php/?" . http_build_query(array('email' => $_REQUEST['email'], 'r_token' => base64_encode($token)));
+      $link = SITE_NAME . "/recover.php/?" . http_build_query(array('email' => $_REQUEST['email'], 'r_token' => base64_encode($token)));
+      self::sendRecoveryEmail($_REQUEST['email'], $link);
     }else{
       header('HTTP/1.0 500 Internal Server Error');
     }
@@ -296,7 +343,7 @@ class Users{
       $stmt->bind_result($id, $email, $name, $num, $num_ads);
       $arr = array();
       while ($stmt->fetch()){
-        $u = new Users();
+        $u = new stdClass;
         $u->id = $id;
         $u->name = $name;
         $u->email = $email;

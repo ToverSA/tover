@@ -91,6 +91,9 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
     self.deleteAccount = function (param) {
         return $http.post(baseUrl + '/account/delete', param, { headers: {'token': AppStore.getToken() } });
     };
+    self.deleteAd = function (param) {
+        return $http.post(baseUrl + '/ads/delete', param, { headers: {'token': AppStore.getToken() } });
+    };
 //    self.deleteAccount = function (param) {
 //        return $http({
 //            method: 'DELETE',
@@ -98,11 +101,11 @@ app.service('httpFacade', ['$http', 'AppStore', function ($http, AppStore) {
 //            headers: {'token': AppStore.getToken()}
 //        });
 //    };
-    self.deleteAd = function (param) {
-        return $http({
-            method: 'DELETE',
-            url: baseUrl + '/ads?' + param,
-            headers: {'token': AppStore.getToken()}
-        });
-    };
+//    self.deleteAd = function (param) {
+//        return $http({
+//            method: 'DELETE',
+//            url: baseUrl + '/ads?' + param,
+//            headers: {'token': AppStore.getToken()}
+//        });
+//    };
 }]);

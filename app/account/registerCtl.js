@@ -55,13 +55,7 @@ app.controller('registerCtl', ['$scope', '$location', 'AppStore', 'httpFacade', 
         });
     }
     $scope.lTitle = '- Select your campus -';
-    $scope.formData = {
-        name: 'Sdu',
-        email: 'sdu@gum.com',
-        number: '0604335310',
-        password: 'plo0',
-        rePwd: 'plo0'
-    };
+    $scope.formData = {};
     $scope.cState = 0;
     $scope.changeC = function () {
         $scope.instList = insties;

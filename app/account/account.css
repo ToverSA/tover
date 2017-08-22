@@ -313,6 +313,21 @@
 .account .edit-dialog .chooser > div.active{
     border-color: #FF5722;
 }
+.edit-ad-dialog{
+    display: none;
+    position: absolute;
+    background-color: #FFF;
+    top: 2px;
+    right: 2px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 0 1px 1px #AAA;
+}
+.edit-ad-dialog > h3{
+    margin: 0;
+    padding: 10px;
+}
+.edit-ad-dialog{}
 @media screen and (max-width: 1024px){
 }
 @media screen and (max-width: 768px){

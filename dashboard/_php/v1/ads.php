@@ -79,7 +79,7 @@ class Ads{
         array_push($arr, $a);
       }
       foreach ($arr as $val) {
-        $stmt->prepare('UPDATE promos SET views = views + 1 WHERE advert_id = ?');
+        $stmt->prepare('UPDATE promos SET views = views + 1 WHERE id = ?');
         $stmt->bind_param('i', $val->id);
         $stmt->execute();
       }
@@ -310,29 +310,14 @@ class Ads{
       header('HTTP/1.0 500 Internal server Error');
     }
   }
-  public static function deleteAds(){
-    if (isset($_REQUEST['id'])){
-      $con = new mysqli(HOST, USER, PWD, DB);
-      $query = 'SELECT users_id FROM access_tokens WHERE token=?';
-      $stmt = $con->prepare($query);
-      $stmt->bind_param('s', $_SERVER['HTTP_TOKEN']);
-      $stmt->execute();
-      $stmt->bind_result($uid);
-      if ($stmt->fetch()){
-        $stmt->close();
-        Messages::clearMessages($stmt, $uid);
-        $query = 'DELETE FROM advert, advert_log, images '.
-        'USING advert JOIN advert_log JOIN images WHERE advert.user_id=? AND '.
-        'advert.id=images.advert_id AND advert.id=advert_log.advert_id AND advert.id=?';
-        $stmt = $con->prepare($query);
-        $stmt->bind_param('ii', $uid, $_REQUEST['id']);
-        $stmt->execute();
-        $stmt->prepare('DELETE FROM promos WHERE advert_id=?');
-        $stmt->bind_param('i', $_REQUEST['id']);
-        $stmt->execute();
-        header('204 No Content');
-      }
-    }
+  public static function deleteAds(&$con, $id){
+    $con->query("DELETE FROM advert_log WHERE id=$id");
+    $con->query("DELETE FROM messages WHERE threads_id=(SELECT id WHERE adverts_id=$id)");
+    $con->query("DELETE FROM threads WHERE adverts_id=$id");
+    $con->query("DELETE FROM images WHERE adverts_id=$id");
+    $con->query("DELETE FROM promos WHERE id=$id");
+    $con->query("DELETE FROM adverts WHERE id=$id");
+    echo "done";
   }
 }
 ?>

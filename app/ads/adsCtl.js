@@ -8,6 +8,8 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
     function del(id) {
         httpFacade.deleteAd($.param({id: id})).then(function (res) {
             $location.url('/account');
+        }, function (err) {
+            $location.url('/account');
         });
     }
     function init(c) {

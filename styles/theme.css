@@ -302,6 +302,10 @@ div.btn > span{
 div.btn > img{
     display: none;
 }
+.footer{
+    height: 60px;
+    background-color: #000;
+}
 @media screen and (max-width: 1024px){
     .ad{
         margin: 0.78%;

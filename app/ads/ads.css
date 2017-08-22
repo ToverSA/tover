@@ -453,7 +453,7 @@ img.badge{
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0 2px 2px #CCC;
-    height: 240px;
+    height: 260px;
 }
 .ads.promo-dialog > div.wrapper{
     display: flex;

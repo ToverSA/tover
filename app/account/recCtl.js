@@ -8,7 +8,7 @@ app.controller('recoverCtl', ['$scope', '$location', 'httpFacade', function ($sc
     };
     $scope.recover = function (e) {
         httpFacade.recover($.param({email: e})).then(function (res) {
-            log(res.data);
+            $location.url('/account');
         });
     };
 }]);

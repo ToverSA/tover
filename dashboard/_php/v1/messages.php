@@ -3,6 +3,9 @@
  * All things mesaging are handled here
  */
 class Messages{
+  public static function clearThreads(&$con, $aid){
+    echo "threads";
+  }
   public static function clearMessages(&$con, $uid){
     $con->query("DELETE FROM messages WHERE users_id=$uid");
     $con->query("DELETE FROM threads WHERE users_id=$uid");
