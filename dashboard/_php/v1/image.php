@@ -15,6 +15,7 @@ class Image{
   }
   public static function optimise($str){
     $str = base64_decode($str);
+    ini_set('memory_limit', '-1');
     $img = imagecreatefromstring($str);
     $w = imagesx($img);
     $h = imagesy($img);

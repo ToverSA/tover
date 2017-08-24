@@ -11,6 +11,7 @@ app.controller('prefsCtl', ['$scope', '$location', 'httpFacade', 'AppStore', fun
             $scope.credits = res.data.balance;
             $scope.rates = res.data.rates;
         });
+        $scope.accState = 2;
         $scope.current = {};
         $scope.data = {};
         $scope.credits = 0;

@@ -3,6 +3,7 @@
 /*global $*/
 app.controller('verifyCtl', ['$scope', '$location', '$routeParams', 'httpFacade', function ($scope, $location, $params, httpFacade) {
     'use strict';
+    $scope.accState = 1;
     $scope.sendVerification = function () {
         $scope.$emit('START_LOADING');
         httpFacade.sendVerification($.param({email: $params.email})).then(function (res) {

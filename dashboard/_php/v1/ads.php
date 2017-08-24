@@ -126,6 +126,53 @@ class Ads{
         $stmt->bind_param('i', $_GET['id']);
         $stmt->execute();
       }
+    } else if (isset($_GET['q'])){
+      $q = $_GET['q'];
+      $s = 0;
+      if (isset($_GET['s'])){
+        $s = intval($_GET['s']);
+        $s = ($s < 0) ? - $s : $s;
+      }
+      $select = "SELECT adverts.id, adverts.title, adverts.price, adverts.date_created, SUM(advert_log.views) views FROM adverts JOIN users JOIN advert_log ON adverts.users_id=users.id AND	adverts.id=advert_log.id WHERE users.campuses_id=?";
+      $cat = (isset($_GET['c'])) ? "AND adverts.category=". $_GET['c'] : "";
+      $cond = "(adverts.title LIKE '%$q%' $cat) OR (adverts.description LIKE '%$q%' $cat)";
+      $sort = " GROUP BY adverts.id";
+      switch ($s) {
+        case 2:
+          $sort .= " ORDER BY views DESC";
+          break;
+        case 3:
+          $sort .= " ORDER BY adverts.price ASC";
+          break;
+        case 4:
+          $sort .= "  ORDER BY adverts.price DESC";
+          break;
+        default:
+          $sort .= " ORDER BY adverts.id DESC";
+          break;
+      }
+      $query = $select . " AND " . $cond . $sort;
+
+      $query = $query.' LIMIT ?, ?';
+
+      $con = new mysqli(HOST, USER, PWD, DB);
+      $stmt = $con->prepare($query);
+      $stmt->bind_param('iii', $_GET['cid'], $limit, $rows);
+      $stmt->execute();
+      $stmt->bind_result($id, $title, $price, $date, $cnt);
+      $arr = array();
+      $carr = array();
+      while ($stmt->fetch()) {
+        $a = new Ads();
+        $a->id = $id;
+        $a->title = $title;
+        $a->price = $price;
+        $d = new DateTime($date);
+        $a->date_created = $d->format('d M');
+        array_push($arr, $a);
+        array_push($carr, $cnt);
+      }
+      echo json_encode($arr);
     } else if (isset($_GET['uid'])){
       $uid = intval($_GET['uid']);
       $con = new mysqli(HOST, USER, PWD, DB);
@@ -149,92 +196,51 @@ class Ads{
       }
       echo json_encode($arr);
     } else if (isset($_GET['cid'])){
-      $con = new mysqli(HOST, USER, PWD, DB);
-      $query = 'SELECT adverts.id, adverts.title, adverts.price, '.
-      'adverts.date_created FROM users JOIN adverts ON users.id=adverts.users_id '.
-      'WHERE users.campuses_id=? ';
-      if (isset($_GET['c'])){
-        $key = array_search($_GET['c'], CAT);
-        $query = ($key) ? $query . 'AND adverts.category=' . $key . ' ' : $query;
-      }
-      if (isset($_GET['q'])){
-        $q = $con->real_escape_string($_GET['q']);
-        $query = $query . "AND adverts.title LIKE '%".$q."%' ";
-        if (!(isset($_GET['a']) && $_GET['a'] == 'n')){
-          $query = $query . "OR adverts.description LIKE '%".$q."%' ";
-        }
-      }
       $s = 0;
       if (isset($_GET['s'])){
         $s = intval($_GET['s']);
         $s = ($s < 0) ? - $s : $s;
-        switch ($s) {
-          case 2:
-          $query = 'SELECT adverts.id, adverts.title, adverts.price,  '.
-          'adverts.date_created, SUM(advert_log.views) FROM adverts JOIN users JOIN advert_log '.
-          'ON adverts.users_id=users.id AND adverts.id=advert_log.id '.
-          "WHERE users.campuses_id=? ";
-          if (isset($_GET['c'])){
-            $key = array_search($_GET['c'], CAT);
-            $query = ($key) ? $query . 'AND adverts.category=' . $key . ' ' : $query;
-          }
-          if (isset($_GET['q'])){
-            $q = $con->real_escape_string($_GET['q']);
-            $query = $query . "AND adverts.title LIKE '%".$q."%' ";
-            if (!(isset($_GET['a']) && $_GET['a'] == 'n')){
-              $query = $query . "OR adverts.description LIKE '%".$q."%' ";
-            }
-          }
-          $query = $query . 'GROUP BY adverts.id ';
-            break;
-          case 3:
-            $query = $query . 'ORDER BY adverts.price ASC ';
-            break;
-          case 4:
-            $query = $query . 'ORDER BY adverts.price DESC ';
-            break;
-
-          default:
-            $query = $query . 'ORDER BY adverts.id DESC ';
-            break;
-        }
       }
-      $query = $query.'LIMIT ?, ?';
+      $select = "SELECT adverts.id, adverts.title, adverts.price, adverts.date_created, SUM(advert_log.views) views FROM adverts JOIN users JOIN advert_log ON adverts.users_id=users.id AND	adverts.id=advert_log.id WHERE users.campuses_id=?";
+      $cat = (isset($_GET['c'])) ? " AND adverts.category=". $_GET['c'] : "";
+      $cond = $cat;
+      $sort = " GROUP BY adverts.id";
+      switch ($s) {
+        case 2:
+          $sort .= " ORDER BY views DESC";
+          break;
+        case 3:
+          $sort .= " ORDER BY adverts.price ASC";
+          break;
+        case 4:
+          $sort .= "  ORDER BY adverts.price DESC";
+          break;
+        default:
+          $sort .= " ORDER BY adverts.id DESC";
+          break;
+      }
+      $query = $select . $cond . $sort;
+
+      $query = $query.' LIMIT ?, ?';
+
+      $con = new mysqli(HOST, USER, PWD, DB);
       $stmt = $con->prepare($query);
       $stmt->bind_param('iii', $_GET['cid'], $limit, $rows);
       $stmt->execute();
-      // print_r($stmt);
-      if ($s == 2){
-        $stmt->bind_result($id, $title, $price, $date, $cnt);
-        $arr = array();
-        $carr = array();
-        while ($stmt->fetch()) {
-          $a = new Ads();
-          $a->id = $id;
-          $a->title = $title;
-          $a->price = $price;
-          $d = new DateTime($date);
-          $a->date_created = $d->format('d M');
-          array_push($arr, $a);
-          array_push($carr, $cnt);
-        }
-        array_multisort($carr, SORT_DESC, $arr);
-        echo json_encode($arr);
-        // echo json_encode($arr) . "\n";
-      } else {
-        $stmt->bind_result($id, $title, $price, $date);
-        $arr = array();
-        while ($stmt->fetch()) {
-          $a = new Ads();
-          $a->id = $id;
-          $a->title = $title;
-          $a->price = $price;
-          $d = new DateTime($date);
-          $a->date_created = $d->format('d M');
-          array_push($arr, $a);
-        }
-        echo json_encode($arr);
+      $stmt->bind_result($id, $title, $price, $date, $cnt);
+      $arr = array();
+      $carr = array();
+      while ($stmt->fetch()) {
+        $a = new Ads();
+        $a->id = $id;
+        $a->title = $title;
+        $a->price = $price;
+        $d = new DateTime($date);
+        $a->date_created = $d->format('d M');
+        array_push($arr, $a);
+        array_push($carr, $cnt);
       }
+      echo json_encode($arr);
     }
   }
   public static function getAccountAds($con, $uid){

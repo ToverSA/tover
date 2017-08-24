@@ -2,7 +2,7 @@
 /*global log*/
 /*global CryptoJS*/
 /*global localStorage*/
-app.service('AppStore', [function () {
+app.service('AppStore', ['$rootScope', function ($rootScope) {
     'use strict';
     var self = this,
         campusName = 'Q0FNUFVTTkFNRQ',
@@ -67,6 +67,7 @@ app.service('AppStore', [function () {
     };
     self.setUserName = function (name) {
         localStorage.setItem(userName, enc(name));
+        $rootScope.$broadcast('NAME_SET', name);
     };
     self.setUserNumber = function (number) {
         localStorage.setItem(userNumber, enc(number));

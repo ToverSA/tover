@@ -303,6 +303,7 @@ div.btn > img{
     display: none;
 }
 .footer{
+    display: none;
     height: 60px;
     background-color: #000;
 }

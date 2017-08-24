@@ -4,6 +4,10 @@
     </div>
     <div class="right">
         <img class="h-btn" src="img/magnifying-glass.png" alt="search" ng-click="toSearch()"/>
-        <img ng-hide="account" class="h-btn" src="img/avatar.png" alt="account" ng-click="toAccount()"/>
+        <img ng-hide="(account) || name" class="h-btn" src="img/avatar.png" alt="account" ng-click="toAccount()"/>
+        <div ng-show="(!account) && name" class="h-label">
+            <span ng-click="toAccount()">{{name}}</span>
+            <img class="h-btn" ng-click="logout()" src="/img/logout.png"/>
+        </div>
     </div>
 </div>

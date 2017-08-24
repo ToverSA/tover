@@ -19,7 +19,7 @@ app.controller('registerCtl', ['$scope', '$location', 'AppStore', 'httpFacade', 
         } else if (typeof data.number === 'undefined' || data.number.length === 0) {
             $scope.err = true;
             $scope.errMsg = 'Cellphone number empty';
-        } else if (data.number.search(/\b\d{10}/) !== 0) {
+        } else if (data.number.search(/^[0-9]{10}$/) !== 0) {
             $scope.err = true;
             $scope.errMsg = 'Your number must be 10 numbers long with no letters or symbols';
         } else if (typeof data.campusId === 'undefined') {

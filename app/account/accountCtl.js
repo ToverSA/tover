@@ -4,6 +4,10 @@
 app.controller('accountCtl', ['$scope', '$http', '$location', '$routeParams', 'AppStore', function ($scope, $http, $location, $routeParams, AppStore) {
     'use strict';
     $scope.error = {};
+    $scope.logout = function () {
+        AppStore.clearAll();
+        $location.url('/home');
+    };
     $scope.$on('STOP_LOADING', function () {
         $scope.loading = false;
     });

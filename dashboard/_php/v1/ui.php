@@ -52,7 +52,6 @@ class UI{
           'custom_amount' => $amt, //custom integer to be passed through
           );
 
-      // Create GET string
       $pfOutput = '';
       foreach( $data as $key => $val)
       {
@@ -66,11 +65,11 @@ class UI{
       $passPhrase = "2ce3fdc76ed136f164948bfd3e432597";
       if( isset( $passPhrase ) )
       {
-          $getString .= '&passphrase='. urlencode( trim( strtoupper($passPhrase )));
+          $getString .= '&passphrase='. urlencode( trim( $passPhrase ));
       }
-      // $data['signature'] = md5( $getString );
+      // $data['signature'] = md5( strtoupper( $getString ) );
     $b = "<div class=\"pay-btn\">";
-    $testingMode = false;
+    $testingMode = true;
     $pfHost = $testingMode ? 'sandbox.payfast.co.za' : 'www.payfast.co.za';
     $b = $b . '<form action="https://'.$pfHost.'/eng/process" method="post">';
     foreach ($data as $name=> $value){
@@ -90,7 +89,7 @@ class UI{
   }
   public static function confirm(){
     $con = new mysqli(HOST, USER, PWD, DB);
-    $stmt = $con->prepare("SELECT email FROM users WHERE id");
+    $stmt = $con->prepare("SELECT email FROM users WHERE id=?");
     $stmt->bind_param('i', $_POST['id']);
     $stmt->execute();
     $stmt->bind_result($email);

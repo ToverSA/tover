@@ -2,15 +2,12 @@
 /*global log*/
 app.controller('consoleCtl', ['$scope', '$location', 'AppStore', 'mService', 'httpFacade', function ($scope, $location, AppStore, mService, httpFacade) {
     'use strict';
+    $scope.accState = 2;
     $scope.$on('NOTIFY', function (evt, n) {
         $scope.notify = n;
     });
     mService.init(1);
     //[x]NOTE message notification should show on user icon even whilst browsing home
-    $scope.logout = function () {
-        AppStore.clearAll();
-        $location.url('/home');
-    };
     $scope.createAd = function () {
         $location.url('/ads/create');
     };
