@@ -34,12 +34,23 @@ app.controller('adsCtl', ['$scope', '$location', '$routeParams', 'httpFacade', '
                         $scope.state = 2;
                     } else {
                         httpFacade.getPromoAds($.param({cid: AppStore.getCampusId()})).then(function (res) {
-                            $scope.promo = res.data;
+                            $scope.promo = [];
+                            res.data.forEach(function (x) {
+                                if (x.id !== Number.parseInt($routeParams.id)) {
+                                    $scope.promo.push(x);
+                                }
+                            });
                         });
                     }
                 } else {
                     httpFacade.getPromoAds($.param({cid: AppStore.getCampusId()})).then(function (res) {
-                        $scope.promo = res.data;
+                        $scope.promo = [];
+                        res.data.forEach(function (x) {
+                            if (x.id !== Number.parseInt($routeParams.id)) {
+                                $scope.promo.push(x);
+                            }
+                        });
+                        //$scope.promo = res.data;
                     });
                 }
             }, function (err) {

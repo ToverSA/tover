@@ -135,7 +135,12 @@ class Ads{
       }
       $select = "SELECT adverts.id, adverts.title, adverts.price, adverts.date_created, SUM(advert_log.views) views FROM adverts JOIN users JOIN advert_log ON adverts.users_id=users.id AND	adverts.id=advert_log.id WHERE users.campuses_id=?";
       $cat = (isset($_GET['c'])) ? "AND adverts.category=". $_GET['c'] : "";
-      $cond = "(adverts.title LIKE '%$q%' $cat) OR (adverts.description LIKE '%$q%' $cat)";
+      $desc = " OR (adverts.description LIKE '%$q%' $cat)";
+      if (isset($_GET['a']) && $_GET['a'] == 'n'){
+        $desc = "";
+      }
+
+      $cond = "(adverts.title LIKE '%$q%' $cat)$desc";
       $sort = " GROUP BY adverts.id";
       switch ($s) {
         case 2:
@@ -201,7 +206,7 @@ class Ads{
         $s = intval($_GET['s']);
         $s = ($s < 0) ? - $s : $s;
       }
-      $select = "SELECT adverts.id, adverts.title, adverts.price, adverts.date_created, SUM(advert_log.views) views FROM adverts JOIN users JOIN advert_log ON adverts.users_id=users.id AND	adverts.id=advert_log.id WHERE users.campuses_id=?";
+      $select = "SELECT adverts.id, adverts.title, adverts.price, adverts.date_created, SUM(advert_log.views) views FROM adverts JOIN users LEFT JOIN advert_log ON adverts.users_id=users.id AND	adverts.id=advert_log.id WHERE users.campuses_id=?";
       $cat = (isset($_GET['c'])) ? " AND adverts.category=". $_GET['c'] : "";
       $cond = $cat;
       $sort = " GROUP BY adverts.id";

@@ -35,7 +35,7 @@
     </div>
     <div class="suggests" ng-hide="state === 2">
         <h2 class="title">Promoted ads</h2>
-        <div class="ad" ng-repeat="x in promo" ng-click="viewAd(x.id)">
+        <div ng-hide="x.id === ad.id" class="ad" ng-repeat="x in promo" ng-click="viewAd(x.id)">
             <div class="head">
                 <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
             </div>

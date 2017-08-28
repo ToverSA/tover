@@ -86,3 +86,7 @@ in users.name, advert.title and advert.description.
 ## Questions ##
 What does it do?
 Why can't I see pictures on the list of ads I created?
+
+* Command to concat files
+
+ find app/ -name '*.js' -exec cat {} \; > app/script.js
