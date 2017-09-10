@@ -1,0 +1,89 @@
+.users{
+    max-width: 1024px;
+    margin: 5px auto;
+    box-shadow: 0 0 1px 1px #CCC;
+}
+.users .item{
+    background-color: #FFF;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 5px;
+    display: flex;
+}
+.users .item:not(:first-child) > div{
+    cursor: pointer;
+}
+.users .item:not(:first-child):hover{
+    background-color: #EEE;
+}
+.users .item:first-child{
+    border-bottom: 1px solid #BBB;
+}
+.users .item > span{
+    flex-basis: 30px;
+}
+.users .item:first-child > span:nth-child(3), .users .item:first-child > span:nth-child(4){
+    flex-basis: 70px;
+}
+.users .item > span:first-child{
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.users .item > div{
+    flex-basis: 70px;
+    height: 19px;
+    display: flex;
+}
+.users .item > div > img{
+    height: 19px;
+    width: 19px;
+    flex-grow: 1;
+    object-fit: contain;
+}
+.u-tab{
+    background-color: #FFF;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+.u-tab > div{
+    flex-grow: 1;
+    flex-basis: 33.3%;
+}
+.u-tab > div > span{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    text-align: center;
+    color: #AAA;
+    border: 1px solid #CCC;
+    border-top: 0px;
+    cursor: pointer;
+}
+.u-tab > div >span.active{
+    color: #000;
+    border: 0;
+}
+.u-header{
+    background-color: #FFF;
+    display: flex;
+    flex-wrap: wrap;
+}
+.u-header > span{
+    min-width: 40px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+@media screen and (max-width: 450px){
+    .users .item > div > span{
+        display: none;
+    }
+    .users .item:first-child > span:nth-child(3), .users .item:first-child > span:nth-child(4), .users .item > div{
+        flex-basis: 40px;
+    }
+}

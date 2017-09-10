@@ -1,0 +1,131 @@
+<div class="header" header></div>
+<div class="ads-view">
+    <div class="main" ng-switch="state">
+        <div class="head">
+            <div>
+                <img ng-src="api.php/v1/image/thumb.jpg?id={{cover[0]}}" ng-click="view(cover[0])"/>
+            </div>
+            <h2>{{ad.title}}</h2>
+            <span>
+                <img ng-hide="state === 2 || ad.whatsapp === 0" class="badge" src="img/whatsapp.png"/>
+                <img ng-hide="state === 2 || ad.promo === 0" class="badge" src="/img/bar-chart-1.png"/>
+                {{ad.price | currency: 'R'}}
+            </span>
+        </div>
+        <div ng-switch-default>
+            <div class="btns">
+                <span class="color-accent-inv" ng-click="sendMessage()">MESSAGE</span>
+                <a ng-href="tel:{{ad.number}}"><span class="color-accent a">CALL<span>{{ad.number.substring(0, 3)}} {{ad.number.substring(3, 6)}} {{ad.number.substring(6, 10)}}</span></span></a>
+            </div>
+        </div>
+        <div ng-switch-when="2">
+            <div class="btns">
+                <span class="color-accent-inv" ng-click="del()">DELETE</span>
+                <span class="color-accent a" ng-click="promote(true)">PROMOTE</span>
+            </div>
+        </div>
+        <h5 class="color-accent-inv" ng-click="userClicked()" ng-hide="state === 2">{{ad.name}}</h5>
+        <p>{{ad.description}}</p>
+        <div class="pics">
+            <div ng-repeat="x in ad.src_id">
+                <img ng-src="api.php/v1/image/thumb.jpg?id={{x}}" ng-click="view(x)"/>
+            </div>
+            <div ng-repeat="x in dummy"></div>
+        </div>
+    </div>
+    <div class="suggests" ng-hide="state === 2">
+        <h2 class="title">Promoted ads</h2>
+        <div ng-hide="x.id === ad.id" class="ad" ng-repeat="x in promo" ng-click="viewAd(x.id)">
+            <div class="head">
+                <img ng-src="api.php/v1/image/thumb.jpg?a={{x.id}}&id=0"/>
+            </div>
+            <div class="body">
+                <!--70 characters for the title-->
+                <h3>{{x.title}}</h3>
+                <span>{{x.price | currency:'R'}}</span>
+                <span>{{x.date_created}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="viewer" ng-show="isViewing">
+    <img ng-src="api.php/v1/image/large.jpg?id={{inView.id}}"/>
+    <div class="closer" ng-click="isViewing = false">
+        <span></span>
+        <span></span>
+    </div>
+    <div class="pager">
+        <div class="key" ng-class="{off: !inView.prev}"  ng-click="prev()">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="key" ng-class="{off: !inView.next}" ng-click="next()">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<div class="ads delete-dialog" ng-show="isDel">
+    <h3>Confirm delete.</h3>
+    <div class="btns">
+        <span class="color-accent-inv" ng-click="isDel = !isDel">CANCEL</span>
+        <span class="color-accent-inv" ng-click="del()">OK</span>
+    </div>
+</div>
+<div class="ads dialog-overlay" ng-show="prom"ng-switch="pState">
+    <div class="ads promo-dialog" ng-switch-default>
+        <div class="loader">
+            <div class="color-primary"></div>
+            <div class="color-primary"></div>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="1">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <h3 class="color-primary">Credit balance : {{bal}}</h3>
+            <div class="package" ng-class="{active: deal === 1}" ng-click="sel(1)">
+                <h3>3 Days</h3>
+                <h4>20 credits</h4>
+            </div>
+            <div class="package" ng-class="{active: deal === 2}" ng-click="sel(2)">
+                <h3>5 Days</h3>
+                <h4>35 credits</h4>
+            </div>
+            <div class="package" ng-class="{active: deal === 3}" ng-click="sel(3)">
+                <h3>7 Days</h3>
+                <h4>50 credits</h4>
+            </div>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CANCEL</span>
+            <span class="color-accent" ng-click="confPromo()">CONFIRM</span>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="2">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <p>This ad is already promoted</p>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CLOSE</span>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="3">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <p>Your credits account is not activated yet. Go to your account prefferences to activate.</p>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CLOSE</span>
+        </div>
+    </div>
+    <div class="ads promo-dialog" ng-switch-when="4">
+        <div class="wrapper">
+            <h2 class="color-primary">Promote advert</h2>
+            <p>You do not have enough credits to promote this advert. Go to your preferences and recharge your credits</p>
+        </div>
+        <div class="btns">
+            <span class="color-accent-inv" ng-click="promote(false)">CLOSE</span>
+        </div>
+    </div>
+</div>
