@@ -10,7 +10,6 @@ require_once('dashboard/_php/v1/messages.php');
 require_once('dashboard/_php/v1/ui.php');
 
 function handleGet(){
-
   if (isset($_SERVER['PATH_INFO'])){
     switch (strtolower($_SERVER['PATH_INFO'])) {
       case '/v1/campuses':
