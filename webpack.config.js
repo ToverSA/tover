@@ -1,0 +1,88 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  entry: {
+    app: './index.js'
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      path: path.resolve(__dirname, 'dist')
+    }),
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      title: 'Output management by sdu',
+      template: './index.html'
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.(png|svg|gif|jpg|jpeg)$/,
+        use: [
+          'file-loader'
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader'
+        ]
+      },
+      {
+        test: /\.vue$/,
+        use: {
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
+              sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
+            },
+            postLoaders: {
+              html: 'babel-loader'
+            }
+          }
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          'babel-loader'
+        ]
+      }
+    ]
+  }
+};
