@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
+    libs: ['vue', 'vue-router'],
     app: './index.js'
   },
   output: {
@@ -18,6 +19,18 @@ module.exports = {
     contentBase: './dist',
     hot: true
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'libs',
+          chunks: 'all'
+        }
+      }
+    }
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -26,7 +39,7 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      title: 'Output management by sdu',
+      title: 'Akomo by toverza',
       template: './index.html'
     }),
     new webpack.NamedModulesPlugin(),
