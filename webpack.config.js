@@ -5,19 +5,25 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+  mode: "development",
   entry: {
-    libs: ['vue', 'vue-router'],
-    app: './index.js'
+    app: './app/main.js'
   },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
     hot: true
+  },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.vue', '.json']
   },
   optimization: {
     splitChunks: {
@@ -38,7 +44,6 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
       title: 'Akomo by toverza',
       template: './index.html'
     }),
@@ -82,9 +87,6 @@ module.exports = {
             loaders: {
               scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
               sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
-            },
-            postLoaders: {
-              html: 'babel-loader'
             }
           }
         }
