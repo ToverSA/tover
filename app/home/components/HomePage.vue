@@ -14,5 +14,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '../../app.scss';
+div{
+  background-color: $home-color;
+}
 </style>
