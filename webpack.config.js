@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: "development",
   entry: {
-    app: './app/main.js'
+    app: './main.js'
   },
   output: {
     filename: '[name].bundle.js',
@@ -21,7 +21,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.common.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
@@ -39,13 +39,15 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].bundle.css',
       path: path.resolve(__dirname, 'dist')
     }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Akomo by toverza',
-      template: './index.html'
+      filename: 'index.html',
+      template: './index.html',
+      favicon: './favicon.ico'
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
@@ -87,7 +89,11 @@ module.exports = {
             loaders: {
               scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
               sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
-            }
+            },
+            // loaders: {
+            //   scss: [ MiniCssExtractPlugin.loader, 'css-loader!sass-loader' ], // <style lang="scss">
+            //   sass: [ MiniCssExtractPlugin.loader, 'css-loader!sass-loader?indentedSyntax' ] // <style lang="sass">
+            // }
           }
         }
       },

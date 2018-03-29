@@ -78,7 +78,7 @@
 
 ## NOTES ##
 Some bugs when creating ads abnormalities show with images. Apparently
-due to the mysql datatype. check that it is set to lognblob other than blob.
+due to the mysql datatype. check that it is set to longblob other than blob.
 
 Remember to change the charset to utf8_genral_ci for better search queries
 in users.name, advert.title and advert.description.
