@@ -7,9 +7,9 @@ $account-color: #000;
 @keyframes market-enter-anim {
   0% {
     background-color: $market-color;
-  } 50% {
-    background-color: $market-color;
+    opacity: 0;
   } 100% {
     background-color: $background-color;
+    opacity: 1;
   }
 }

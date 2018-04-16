@@ -20,7 +20,6 @@
 export default {
   methods: {
     test: function (id) {
-      console.log(this.$router);
       this.$router.push({ name: 'MarketItem', params: { id }});
     }
   }
@@ -30,13 +29,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../app.scss';
 .market-anim-enter-active{
-  animation: market-enter-anim .2s;
-}
-
-.market-anim-enter-active {
-  *{
-    visibility: hidden;
-  }
+  animation: market-enter-anim 2s;
 }
 
 .market-wrapper{

@@ -1,21 +1,34 @@
 <template lang="html">
-<div class="">
-  <div class="loading"></div>
-  <div class="error"></div>
-  <div class="market-item-wrapper">
-    <div class="main-content">
-      <img src="../../../assets/images/placeholder.jpg" alt="">
-      <h3 class="title">Lorem ipsum dolor sit amet.</h3>
-    </div>
-    <div class="side-content">
+  <div class="" @keyup.esc="escapeKeyPress()">
+    <div class="loading"></div>
+    <div class="error"></div>
+    <div class="market-item-wrapper">
+      <div class="main-content">
+        <img src="../../../assets/images/placeholder.jpg" alt="">
+        <h3 class="title">Lorem ipsum dolor sit amet.</h3>
+      </div>
+      <div class="side-content">
 
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
+  methods: {
+    escapeKeyListener: function(evt) {
+      if (evt.keyCode === 27) {
+        this.$router.go(-1);
+      }
+    }
+  },
+  created () {
+    document.addEventListener('keyup', this.escapeKeyListener);
+  },
+  destroyed () {
+    document.removeEventListener('keyup', this.escapeKeyListener);
+  }
 }
 </script>
 
