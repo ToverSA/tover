@@ -1,12 +1,12 @@
 {
-  "name": "my-webpack",
-  "version": "1.0.0",
+  "name": "akomo",
+  "version": "2.0.0",
   "description": "",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
-    "debug": "webpack --mode development --verbose",
+    "debug": "webpack --mode development --progress",
     "start": "webpack-dev-server --open",
     "server": "node server.js",
     "build": "webpack --mode production"
@@ -46,7 +46,10 @@
       "sourceType": "module"
     },
     "rules": {
-      "semi": [2, "always"]
+      "semi": [
+        2,
+        "always"
+      ]
     }
   },
   "dependencies": {

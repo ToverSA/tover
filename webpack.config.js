@@ -25,18 +25,18 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'libs',
-          chunks: 'all'
-        }
-      }
-    }
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: 'all',
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: 'libs',
+  //         chunks: 'all'
+  //       }
+  //     }
+  //   }
+  // },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].bundle.css',

@@ -15,29 +15,31 @@ export default {
 </script>
 
 <style lang="scss">
+@import './app.scss';
 @font-face{
   font-family: 'Roboto';
-  src: url('./../assets/RobotoSlab-Regular.ttf');
+  src: url('./../assets/fonts/RobotoSlab-Regular.ttf');
 }
 @font-face{
   font-family: 'Roboto Bold';
-  src: url('./../assets/RobotoSlab-Bold.ttf');
+  src: url('./../assets/fonts/RobotoSlab-Bold.ttf');
 }
 @font-face{
   font-family: 'Roboto Light';
-  src: url('./../assets/RobotoSlab-Light.ttf');
+  src: url('./../assets/fonts/RobotoSlab-Light.ttf');
 }
 @font-face{
   font-family: 'Roboto Thin';
-  src: url('./../assets/RobotoSlab-Thin.ttf');
+  src: url('./../assets/fonts/RobotoSlab-Thin.ttf');
 }
+
 *{
   box-sizing: border-box;
 }
 
 body{
   margin: 0;
-  background-color: #EFEFEF;
+  background-color: $background-color;
   font-family: 'Roboto';
 }
 </style>

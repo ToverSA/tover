@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="home-header">
-    <img src="../../../assets/Ako.png" alt="">
+    <img src="../../../assets/images/Ako.png" alt="">
     <div class="nav">
       <router-link to="market"><span class="market">Market</span></router-link>
       <span>Events</span>
