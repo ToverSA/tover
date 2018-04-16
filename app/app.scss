@@ -1,6 +1,15 @@
-
 $header-height: 55px;
 $background-color: #ECEFF1;
 $market-color: #FF5722;
 $home-color: #546E7A;
 $account-color: #000;
+
+@keyframes market-enter-anim {
+  0% {
+    background-color: $market-color;
+  } 50% {
+    background-color: $market-color;
+  } 100% {
+    background-color: $background-color;
+  }
+}

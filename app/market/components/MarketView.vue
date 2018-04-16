@@ -1,17 +1,19 @@
 <template lang="html">
-<div class="market-wrapper">
-  <div class="market-header">
-    <!-- Put some header items here -->
-  </div>
-  <div class="p-s">
-    <div class="market-item" @click="test(i)" v-for="i in [1, 2, 3, 4, 5, 6]">
-      <img src="../../../assets/images/placeholder.jpg" alt="Placeholder">
-      <p class="title">Lorem ipsum dolor sgt amet, consectetur adipisicing elit. Nulla, dolorum?</p>
-      <h2 class="price">R200</h2>
-      <span>09/06/18</span>
+  <transition name="market-anim">
+    <div class="market-wrapper">
+      <div class="market-header">
+        <!-- Put some header items here -->
+      </div>
+      <div class="p-s">
+        <div class="market-item" @click="test(i)" v-for="i in [1, 2, 3, 4, 5, 6]">
+          <img src="../../../assets/images/placeholder.jpg" alt="Placeholder">
+          <p class="title">Lorem ipsum dolor sgt amet, consectetur adipisicing elit. Nulla, dolorum?</p>
+          <h2 class="price">R200</h2>
+          <span>09/06/18</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </transition>
 </template>
 
 <script>
@@ -27,6 +29,15 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../app.scss';
+.market-anim-enter-active{
+  animation: market-enter-anim .2s;
+}
+
+.market-anim-enter-active {
+  *{
+    visibility: hidden;
+  }
+}
 
 .market-wrapper{
 

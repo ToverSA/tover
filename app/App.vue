@@ -6,11 +6,7 @@
 
 <script>
 export default {
-  data () {
-    return {
-      msg: 'from sdun'
-    }
-  }
+
 }
 </script>
 
