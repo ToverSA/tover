@@ -1,10 +1,19 @@
 $header-height: 55px;
 $background-color: #ECEFF1;
 $market-color: #FF5722;
-$home-color: #546E7A;
-$account-color: #000;
+$home-color: #607D8B;
+$account-color: #009688;
+$auth-color: #009688;
 
-@keyframes market-enter-anim {
+$color-primary-0: #02AFC7;	// Main Primary color */
+$color-primary-1: #49A6B3;
+$color-primary-2: #27909F;
+$color-primary-3: #026977;
+$color-primary-4: #01525E;
+
+$input-padding: 10px;
+
+@keyframes market-anim {
   0% {
     background-color: $market-color;
     opacity: 0;
@@ -12,4 +21,11 @@ $account-color: #000;
     background-color: $background-color;
     opacity: 1;
   }
+}
+
+@mixin logo-gradient($a, $b) {
+  background: $a;
+  background: -moz-linear-gradient(left, $a 0%, $b 100%);
+  background: -webkit-linear-gradient(left, $a 0%, $b 100%);
+  background: linear-gradient(to right, $a 0%, $b 100%);
 }

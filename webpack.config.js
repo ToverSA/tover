@@ -10,7 +10,7 @@ module.exports = {
     app: './main.js'
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
@@ -21,30 +21,30 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all',
-  //     cacheGroups: {
-  //       commons: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: 'libs',
-  //         chunks: 'all'
-  //       }
-  //     }
-  //   }
-  // },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'libs',
+          chunks: 'all'
+        }
+      }
+    }
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].bundle.css',
+      filename: '[name].[hash].css',
       path: path.resolve(__dirname, 'dist')
     }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'Akomo by toverza',
+      title: 'Tover',
       filename: 'index.html',
       template: './index.html',
       favicon: './favicon.ico'

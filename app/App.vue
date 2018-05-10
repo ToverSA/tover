@@ -12,21 +12,25 @@ export default {
 
 <style lang="scss">
 @import './app.scss';
-@font-face{
-  font-family: 'Roboto';
-  src: url('./../assets/fonts/RobotoSlab-Regular.ttf');
+@font-face {
+  font-family:OpenSans;
+  src:url(./../assets/fonts/OpenSans-Regular.ttf);
 }
-@font-face{
-  font-family: 'Roboto Bold';
-  src: url('./../assets/fonts/RobotoSlab-Bold.ttf');
+@font-face {
+  font-family:OpenSans Bold;
+  src:url(./../assets/fonts/OpenSans-Bold.ttf);
 }
-@font-face{
-  font-family: 'Roboto Light';
-  src: url('./../assets/fonts/RobotoSlab-Light.ttf');
+@font-face {
+  font-family:OpenSans ExtraBold;
+  src:url(./../assets/fonts/OpenSans-ExtraBold.ttf);
 }
-@font-face{
-  font-family: 'Roboto Thin';
-  src: url('./../assets/fonts/RobotoSlab-Thin.ttf');
+@font-face {
+  font-family:OpenSans SemiBold;
+  src:url(./../assets/fonts/OpenSans-SemiBold.ttf);
+}
+@font-face {
+  font-family:OpenSans Light;
+  src:url(./../assets/fonts/OpenSans-Light.ttf);
 }
 
 *{
@@ -36,6 +40,6 @@ export default {
 body{
   margin: 0;
   background-color: $background-color;
-  font-family: 'Roboto';
+  font-family: 'OpenSans';
 }
 </style>

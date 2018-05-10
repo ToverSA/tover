@@ -1,9 +1,7 @@
 <template lang="html">
   <transition name="market-anim">
     <div class="market-wrapper">
-      <div class="market-header">
-        <!-- Put some header items here -->
-      </div>
+      <market-header></market-header>
       <div class="p-s">
         <div class="market-item" @click="test(i)" v-for="i in [1, 2, 3, 4, 5, 6]">
           <img src="../../../assets/images/placeholder.jpg" alt="Placeholder">
@@ -17,7 +15,10 @@
 </template>
 
 <script>
+import MarketHeader from './MarketHeader';
+
 export default {
+  components : { MarketHeader },
   methods: {
     test: function (id) {
       this.$router.push({ name: 'MarketItem', params: { id }});
@@ -29,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../app.scss';
 .market-anim-enter-active{
-  animation: market-enter-anim 2s;
+  animation: market-anim .4s;
 }
 
 .market-wrapper{
@@ -110,6 +111,15 @@ export default {
         opacity: 0.5;
         align-self: end;
         text-align: right;
+
+        @media screen and (max-width: 768px){
+          align-self: center;
+          font-size: 0.7em;
+        }
+
+        @media screen and (max-width: 425px){
+          display: none;
+        }
       }
     }
   }

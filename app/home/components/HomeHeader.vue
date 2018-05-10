@@ -1,10 +1,8 @@
 <template lang="html">
   <div id="home-header">
-    <img src="../../../assets/images/Ako.png" alt="">
+    <img src="../../../assets/images/tover.png" alt="">
     <div class="nav">
-      <router-link to="market"><span class="market">Market</span></router-link>
-      <span>Events</span>
-      <router-link to="account"><span class="login">Login</span></router-link>
+      <router-link to="account"><span class="account">SIGN IN</span></router-link>
     </div>
   </div>
 </template>
@@ -19,35 +17,24 @@ export default {
 div{
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  height: $header-height;
 
   img{
-    height: 50px;
-    width: 50px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 25px;
-    padding: 5px;
+    height: 100%;
   }
   .nav{
     display: flex;
-    height: 50px;
+    height: $header-height;
     padding: 0;
 
     a{
       text-decoration: none;
-
-      .market:hover{
-        background-color: $market-color;
-      }
-      .login:hover{
-        background-color: $market-color;
-      }
     }
 
     span{
       padding: 0 30px;
-      height: 50px;
-      line-height: 50px;
+      height: $header-height;
+      line-height: $header-height;
       display: block;
       color: #FFFFFF;
     }

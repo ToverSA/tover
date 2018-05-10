@@ -9,7 +9,8 @@
     "debug": "webpack --mode development --progress",
     "start": "webpack-dev-server --open",
     "server": "node server.js",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "php": "webpack --mode production && node php.js"
   },
   "keywords": [],
   "author": "",

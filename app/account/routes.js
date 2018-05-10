@@ -2,8 +2,7 @@ import * as components from './components';
 
 export default [
   {
-    path: '/',
-    component: components.HomeView,
-    name: 'Home'
+    path: '/account',
+    component: components.AuthView
   }
 ];

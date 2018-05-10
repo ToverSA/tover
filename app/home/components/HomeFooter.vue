@@ -1,6 +1,5 @@
 <template lang="html">
   <div>
-    copyrights here and some shortcut links
   </div>
 </template>
 
