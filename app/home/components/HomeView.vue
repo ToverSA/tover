@@ -22,6 +22,9 @@
         <h3>EVENTS</h3>
       </div>
     </div>
+    <div class="form">
+      <h1>BECOME A MERCHANT</h1>
+    </div>
   </div>
 </template>
 
@@ -84,10 +87,31 @@ div{
       color: $color-primary-1;
     }
   }
-  >div.cat-1{}
-  >div.cat-2{}
-  >div.cat-3{}
-  >div.cat-4{}
+  >div.cat-1, >div.cat-3{
 
+    @media screen and (max-width: 768px){
+      grid-column: 1 / 3;
+    }
+  }
+  >div.cat-2, >div.cat-4{
+
+    @media screen and (max-width: 768px){
+      grid-column: 3 / 5;
+    }
+  }
+  >div.cat-1, >div.cat-2, >div.cat-3, >div.cat-4{
+    @media screen and (max-width: 425px){
+      grid-column: 1 / 5;
+    }
+  }
+}
+.form{
+  padding: 15px;
+  background-color: $background-color;
+  >h1{
+    font-family: OpenSans Light;
+    color: $color-primary-4;
+    text-align: center;
+  }
 }
 </style>
