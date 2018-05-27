@@ -24,6 +24,13 @@
     </div>
     <div class="form">
       <h1>BECOME A MERCHANT</h1>
+      <h3><span>CREATE AN ACCOUNT</span><a>LEARN MORE</a></h3>
+      <form>
+        <input type="text" name="name" value="" placeholder="Who do we call you?">
+        <input type="email" name="" value="" placeholder="Email address">
+        <input type="password" name="" value="" placeholder="Enter password">
+        <input type="password" name="" value="" placeholder="Re-enter password">
+      </form>
     </div>
   </div>
 </template>
@@ -44,7 +51,7 @@ div{
 }
 .search{
   color: #FFF;
-  padding: 50px;
+  padding: 150px 50px;
   text-align: center;
   max-width: 1024px;
   margin: auto;
@@ -112,6 +119,29 @@ div{
     font-family: OpenSans Light;
     color: $color-primary-4;
     text-align: center;
+  }
+  >h3{
+    text-align: right;
+    margin: 0;
+    height: auto;
+    display: block;
+
+    span{
+      background-color: #FFF;
+      display: inline-block;
+      padding: 20px;
+      color: $color-primary-0;
+    }
+    a{
+      text-decoration: none;
+      background-color: rgba(0, 0, 0, 0.05);
+      display: inline-block;
+      padding: 20px
+    }
+  }
+  >form{
+    background-color: #FFF;
+    min-height: 200px;
   }
 }
 </style>

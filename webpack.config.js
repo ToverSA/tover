@@ -4,14 +4,17 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const outputPath = '/var/www/html';
+
 module.exports = {
   mode: "development",
   entry: {
     app: './main.js'
   },
   output: {
-    filename: '[name].[hash].js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].min.js',
+    // path: path.resolve(__dirname, 'dist'),
+    path: outputPath,
     publicPath: '/'
   },
   devtool: 'source-map',
@@ -39,10 +42,11 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      path: path.resolve(__dirname, 'dist')
+      filename: '[name].min.css',
+      // path: path.resolve(__dirname, 'dist')
+      path: outputPath
     }),
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin([outputPath], { exclude: ['api'], allowExternal: true }),
     new HtmlWebpackPlugin({
       title: 'Tover',
       filename: 'index.html',
