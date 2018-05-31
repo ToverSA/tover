@@ -1,1 +1,1 @@
-export { default as AuthView } from './AuthView';
+export { default as AccountView } from './AccountView';
