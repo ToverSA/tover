@@ -17,7 +17,7 @@ $primary-color-dark:   #303F9F;
 $primary-color:        #3F51B5;
 $primary-color-light:  #C5CAE9;
 $primary-color-text:   #FFFFFF;
-$accent-color:         #009688;
+$accent-color:         #448AFF;
 $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
@@ -39,4 +39,24 @@ $input-padding: 10px;
   background: -moz-linear-gradient(left, $a 0%, $b 100%);
   background: -webkit-linear-gradient(left, $a 0%, $b 100%);
   background: linear-gradient(to right, $a 0%, $b 100%);
+}
+.button{
+  color: $primary-color;
+  cursor: pointer;
+
+  a{
+    text-decoration: none;
+    color: $primary-color;
+  }
+}
+.button.border{
+  border: 1px solid $primary-color;
+}
+.button.theme{
+  color: $primary-color-text;
+  border-color: $primary-color-text;
+
+  a{
+    color: $primary-color-text;
+  }
 }

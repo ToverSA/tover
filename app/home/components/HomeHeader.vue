@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="home-header">
-    <img src="../../../assets/images/tover.png" alt="">
+    <img src="../../../assets/images/tover.png" alt="Tover logo">
     <div class="nav">
       <router-link to="account"><span class="account">SIGN IN</span></router-link>
     </div>
