@@ -1,37 +1,7 @@
 <template lang="html">
   <div>
-    <home-header></home-header>
-    <!-- <home-footer></home-footer> -->
-    <div class="search">
-      <h1>THIS IS WHERE YOU BUY OR SELL... WHATEVER.</h1>
-      <h1>WHAT ARE YOU LOOKING FOR?</h1>
-      <input type="search" name="search" value="" placeholder="search : SHYD321, economics, hp battery, etc.">
-    </div>
-    <div class="browser">
-      <h1>BROWSE CATEGORIES</h1>
-      <div class="cat-1">
-        <h3>BOOKS & STUDY MATERIAL</h3>
-      </div>
-      <div class="cat-2">
-        <h3>ELECTRONICS</h3>
-      </div>
-      <div class="cat-3">
-        <h3>SERVICES</h3>
-      </div>
-      <div class="cat-4">
-        <h3>EVENTS</h3>
-      </div>
-    </div>
-    <div class="form">
-      <h1>BECOME A MERCHANT</h1>
-      <h3><span>CREATE AN ACCOUNT</span><a>LEARN MORE</a></h3>
-      <form>
-        <input type="text" name="name" value="" placeholder="Who do we call you?">
-        <input type="email" name="" value="" placeholder="Email address">
-        <input type="password" name="" value="" placeholder="Enter password">
-        <input type="password" name="" value="" placeholder="Re-enter password">
-      </form>
-    </div>
+    <h1>Hello</h1>
+    <p>This is a demo string</p>
   </div>
 </template>
 
@@ -47,101 +17,8 @@ export default {
 @import '../../app.scss';
 
 div{
-  background-color: $color-primary-0;
+  background-color: $primary-color;
+  padding: 100px;
 }
-.search{
-  color: #FFF;
-  padding: 150px 50px;
-  text-align: center;
-  max-width: 1024px;
-  margin: auto;
 
-  >h1{
-    font-family: OpenSans ExtraBold;
-  }
-  >input{
-    background-color: rgba(255, 255 ,255, 0.9);
-    padding: $input-padding;
-    border: none;
-    width: 100%;
-    max-width: 768px;
-    font-family: OpenSans;
-    outline: none;
-    font-size: 1em;
-  }
-}
-.browser{
-  background-color: $background-color;
-  padding: 15px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 15px 15px;
-
-  >h1{
-    font-family: OpenSans Light;
-    color: $color-primary-4;
-    text-align: center;
-    grid-column: 1 / 5;
-  }
-  >div{
-    background-color: #FFF;
-    min-height: 20px;
-    min-width: 20px;
-    padding: 15PX;
-
-    >h3{
-      text-align: center;
-      color: $color-primary-1;
-    }
-  }
-  >div.cat-1, >div.cat-3{
-
-    @media screen and (max-width: 768px){
-      grid-column: 1 / 3;
-    }
-  }
-  >div.cat-2, >div.cat-4{
-
-    @media screen and (max-width: 768px){
-      grid-column: 3 / 5;
-    }
-  }
-  >div.cat-1, >div.cat-2, >div.cat-3, >div.cat-4{
-    @media screen and (max-width: 425px){
-      grid-column: 1 / 5;
-    }
-  }
-}
-.form{
-  padding: 15px;
-  background-color: $background-color;
-  >h1{
-    font-family: OpenSans Light;
-    color: $color-primary-4;
-    text-align: center;
-  }
-  >h3{
-    text-align: right;
-    margin: 0;
-    height: auto;
-    display: block;
-
-    span{
-      background-color: #FFF;
-      display: inline-block;
-      padding: 20px;
-      color: $color-primary-0;
-    }
-    a{
-      text-decoration: none;
-      background-color: rgba(0, 0, 0, 0.05);
-      display: inline-block;
-      padding: 20px
-    }
-  }
-  >form{
-    background-color: #FFF;
-    min-height: 200px;
-  }
-}
 </style>

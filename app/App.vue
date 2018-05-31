@@ -32,6 +32,14 @@ export default {
   font-family:OpenSans Light;
   src:url(./../assets/fonts/OpenSans-Light.ttf);
 }
+@font-face {
+  font-family: Lato;
+  src:url(./../assets/fonts/Lato-Regular.ttf);
+}
+@font-face {
+  font-family: Lato Light;
+  src:url(./../assets/fonts/Lato-Light.ttf);
+}
 
 *{
   box-sizing: border-box;
