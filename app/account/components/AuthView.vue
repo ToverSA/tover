@@ -1,6 +1,24 @@
 <template lang="html">
-  <div>
-    Hello
+  <div class="auth">
+    <form>
+      <img src="../../../assets/images/tover-black.png" alt="">
+      <h3>Login to your account</h3>
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+      <div class="buttons">
+        <div class="button">
+          <span>Forgot password?</span>
+        </div>
+        <div class="button theme">
+          <span>LOGIN</span>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="button">
+          <span>Already have an account?</span>
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -16,7 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../app.scss';
-div{
+div.auth{
   background-color: $primary-color;
   height: 100vh;
   padding: 100px;
@@ -33,7 +51,24 @@ div{
     max-width: 450px;
     margin: auto;
     background-color: #FFF;
-    padding: 15px;
+    padding: 20px;
+
+    input{
+      width: 100%;
+      margin: 5px 0;
+      font-size: 1em;
+      padding: 10px;
+      border: 0;
+      background-color: $primary-color + unquote("1f");
+    }
+    .buttons{
+      display: flex;
+      justify-content: flex-end;
+      margin: 5px 0;
+    }
+    .button{
+      padding: 10px;
+    }
   }
 }
 </style>

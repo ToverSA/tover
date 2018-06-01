@@ -17,11 +17,10 @@ router.beforeEach((to, from, next) => {
         path: '/auth',
         query: { redirect: to.fullPath }
       });
-    } else {
-      next();
     }
     next();
   }
+  next();
 });
 
 export default router;

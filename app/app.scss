@@ -43,6 +43,7 @@ $input-padding: 10px;
 .button{
   color: $primary-color;
   cursor: pointer;
+  display: inline-block;
 
   a{
     text-decoration: none;
@@ -55,6 +56,7 @@ $input-padding: 10px;
 .button.theme{
   color: $primary-color-text;
   border-color: $primary-color-text;
+  background-color: $primary-color;
 
   a{
     color: $primary-color-text;
