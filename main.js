@@ -1,11 +1,16 @@
 import './app/app.scss';
 import Vue from 'vue';
+import Vuex from 'vuex';
 import { App } from './app';
 import router from './router';
+import store from './store';
+var VueResource = require('vue-resource');
+
+Vue.use(VueResource);
 
 new Vue({
   router,
   el: '#akomo',
-  template: '<App/>',
-  components: { App }
+  store,
+  render: h => h(App)
 });

@@ -12,7 +12,7 @@ module.exports = {
     app: './main.js'
   },
   output: {
-    filename: '[name].min.js',
+    filename: '[hash].min.js',
     // path: path.resolve(__dirname, 'dist'),
     path: outputPath,
     publicPath: '/'
