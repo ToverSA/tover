@@ -1,9 +1,6 @@
 <template lang="html">
   <div>
-    <img src="../../../assets/images/tover.png" alt="">
-    <form>
-
-    </form>
+    Hello
   </div>
 </template>
 

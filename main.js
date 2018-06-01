@@ -2,8 +2,8 @@ import './app/app.scss';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { App } from './app';
-import router from './router';
 import store from './store';
+import router from './router';
 var VueResource = require('vue-resource');
 
 Vue.use(VueResource);
