@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="auth">
     <form>
-      <img src="../../../assets/images/tover-indigo.png" alt="">
+      <img src="../../../assets/images/tover-indigo.png" alt="Tover logo" @click="gotoHome()">
       <template v-if="auth == 'login'">
         <h3>Login to your account</h3>
         <input type="email" placeholder="Email address">
@@ -22,9 +22,10 @@
       </template>
       <template v-else-if="auth == 'create'">
         <h3>Create a new account</h3>
-        <input type="text" placeholder="Your name">
-        <input type="email" placeholder="Your email address">
-        <input type="password" placeholder="Password">
+        <input type="text" placeholder="Your name" :value="name">
+        <input type="email" placeholder="Your email address" v-model="email">
+        <input type="password" placeholder="Password" v-model="password">
+        <input type="password" placeholder="Re-enter password" v-model="repassword">
         <div class="buttons">
           <div class="button" @click="auth = 'login'">
             <span>Already have an account?</span>
@@ -35,7 +36,8 @@
         </div>
       </template>
       <template v-else>
-        <h3>To change your password, an a link to reset your password will be sent to your email address</h3>
+        <h3>To change your password, an a link to reset your password will be
+           sent to your email address</h3>
         <input type="email" placeholder="Enter your email address">
         <div class="buttons">
           <div class="button" @click="auth = 'login'">
@@ -54,7 +56,11 @@
 export default {
   data () {
     return {
-      auth: 'login'
+      auth: 'login',
+      name: '',
+      email: '',
+      password: '',
+      repassword: ''
     }
   },
   methods: {
@@ -62,7 +68,11 @@ export default {
       console.log("logging in");
     },
     signUp () {
-      console.log("sign up");
+      console.log(this.name);
+      console.log(this.$router);
+    },
+    gotoHome () {
+      this.$router.push('/');
     }
   }
 }
