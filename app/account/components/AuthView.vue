@@ -53,14 +53,15 @@
 </template>
 
 <script>
+import api from '../../../api';
 export default {
   data () {
     return {
-      auth: 'login',
-      name: '',
-      email: '',
-      password: '',
-      repassword: ''
+      auth: 'create',
+      name: 'Sduduzo Gumede',
+      email: 'foo@bar.com',
+      password: 'rootuser',
+      repassword: 'rootuser'
     }
   },
   methods: {
@@ -68,8 +69,7 @@ export default {
       console.log("logging in");
     },
     signUp () {
-      console.log(this.name);
-      console.log(this.$router);
+      console.log(api);
     },
     gotoHome () {
       this.$router.push('/');

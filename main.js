@@ -5,10 +5,6 @@ import { App } from './app';
 import store from './store';
 import router from './router';
 
-var VueResource = require('vue-resource');
-
-Vue.use(VueResource);
-
 new Vue({
   router,
   el: '#akomo',
