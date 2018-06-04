@@ -4,8 +4,8 @@
       <img src="../../../assets/images/tover-indigo.png" alt="Tover logo" @click="gotoHome()">
       <template v-if="auth == 'login'">
         <h3>Login to your account</h3>
-        <input type="email" placeholder="Email address">
-        <input type="password" placeholder="Password">
+        <input type="email" placeholder="Email address" :value="email">
+        <input type="password" placeholder="Password" :value="password">
         <div class="buttons">
           <div class="button" @click="auth = 'reset'">
             <span>Forgot password?</span>
@@ -57,16 +57,16 @@ import api from '../../../api';
 export default {
   data () {
     return {
-      auth: 'create',
+      auth: 'login',
       name: 'Sduduzo Gumede',
-      email: 'foo@bar.com',
+      email: 'superuser',
       password: 'rootuser',
       repassword: 'rootuser'
     }
   },
   methods: {
     logIn () {
-      console.log("logging in");
+      api.users.authUser(this.email, this.password);
     },
     signUp () {
       console.log(api);

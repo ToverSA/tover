@@ -5,6 +5,7 @@
       <h1>Find anything that you're are you looking for at a price best suited for you.</h1>
       <input type="search" name="sesrch" placeholder="What are you looking for?">
       <div class="button theme border">
+        <i class="material-icons md-18">search</i>
         <span>SEARCH</span>
       </div>
     </div>
@@ -29,14 +30,29 @@ div{
     max-width: 768px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr) 100px;
+    grid-template-columns: repeat(4, 1fr) 110px;
     grid-column-gap: 10px;
     padding: 30px 0;
+    @media screen and (max-width: 768px){
+      padding: 30px;
+    }
+    @media screen and (max-width: 425px){
+      padding: 30px 5px;
+      grid-template-columns: repeat(4, 1fr) 40px;
+    }
 
     h1{
       grid-column: 1 / 4;
       color: $primary-color-text;
-      font-family: Lato;
+      font-family: Lato Light;
+      @media screen and (max-width: 768px){
+        text-align: center;
+        padding: 0 50px;
+        grid-column: 1 / 6;
+      }
+      @media screen and (max-width: 425px){
+        padding: 0;
+      }
     }
     input{
       grid-column: 1 / 5;
@@ -49,7 +65,16 @@ div{
     .button{
       grid-row: 2 / 3;
       padding: 10px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      i{
+        display: block;
+      }
+      span{
+        @media screen and (max-width: 425px){
+          display: none;
+        }
+      }
     }
   }
 }
