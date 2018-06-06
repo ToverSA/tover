@@ -7,8 +7,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    auth: false,
     count: 0,
-    token: ''
+    access_token: '',
+    refresh_token: ''
   },
   getters,
   plugins: [createPersistedState({

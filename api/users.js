@@ -4,19 +4,20 @@ import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
 var ClientOAuth2 = require('client-oauth2');
+var resource = Vue.resource('/api/users{/id}');
 
 var oAuth = new ClientOAuth2({
-  accessTokenUri: '/api/oauth/access_token',
-  authorizationUri: '/api/oauth/authorize'
+  clientId: 'webclient',
+  accessTokenUri: '/api/oauth/access_token'
 });
 
 export default {
-  createUser () {
-    return 'create user';
+  createUser (username, password) {
+    resource.save({}, {username, password}).then(res => {
+      console.log(res);
+    });
   },
   authUser (username, password) {
-    oAuth.owner.getToken(username, password).then(user  => {
-      console.log(user);
-    });
+    return oAuth.owner.getToken(username, password);
   }
 };

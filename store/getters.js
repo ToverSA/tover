@@ -1,8 +1,6 @@
 export default {
+  /* Check if we have a valid access token */
   loggedIn: (state, getters) => {
-    if (state.token.length == 0){
-      return false;
-    }
-    return true;
+    return state.auth;
   }
 };

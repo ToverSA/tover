@@ -9,6 +9,12 @@
         <span>SEARCH</span>
       </div>
     </div>
+    <div class="categories">
+      <h1>Browse by category</h1>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
   </div>
 </template>
 
@@ -75,6 +81,15 @@ div{
           display: none;
         }
       }
+    }
+  }
+
+  .categories{
+    background-color: $background-color;
+    padding: 15px;
+
+    h1{
+      color: $primary-color;
     }
   }
 }

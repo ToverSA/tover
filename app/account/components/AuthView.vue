@@ -4,8 +4,8 @@
       <img src="../../../assets/images/tover-indigo.png" alt="Tover logo" @click="gotoHome()">
       <template v-if="auth == 'login'">
         <h3>Login to your account</h3>
-        <input type="email" placeholder="Email address" :value="email">
-        <input type="password" placeholder="Password" :value="password">
+        <input type="email" placeholder="Email address" v-model="username">
+        <input type="password" placeholder="Password" v-model="password">
         <div class="buttons">
           <div class="button" @click="auth = 'reset'">
             <span>Forgot password?</span>
@@ -22,7 +22,7 @@
       </template>
       <template v-else-if="auth == 'create'">
         <h3>Create a new account</h3>
-        <input type="text" placeholder="Your name" :value="name">
+        <input type="text" placeholder="Your name" v-model="name">
         <input type="email" placeholder="Your email address" v-model="email">
         <input type="password" placeholder="Password" v-model="password">
         <input type="password" placeholder="Re-enter password" v-model="repassword">
@@ -58,18 +58,23 @@ export default {
   data () {
     return {
       auth: 'login',
-      name: 'Sduduzo Gumede',
-      email: 'superuser',
-      password: 'rootuser',
-      repassword: 'rootuser'
+      name: '',
+      email: '',
+      username: '',
+      password: '',
+      repassword: ''
     }
   },
   methods: {
     logIn () {
-      api.users.authUser(this.email, this.password);
+      api.users.authUser(this.username, this.password).then(user  => {
+        console.log(user);
+      }, err => {
+        console.log(err);
+      });
     },
     signUp () {
-      console.log(api);
+      api.users.createUser(this.email, this.password);
     },
     gotoHome () {
       this.$router.push('/');
