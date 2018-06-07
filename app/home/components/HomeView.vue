@@ -10,19 +10,19 @@
     </div>
     <div class="categories">
       <h1>Browse by category</h1>
-      <div class="box">
+      <div class="box" @click="nav('books')">
         <h2>Books & Study Material</h2>
         <i class="material-icons md-60">library_books</i>
       </div>
-      <div class="box">
+      <div class="box" @click="nav('electronics')">
         <h2>Electronics</h2>
           <i class="material-icons md-60">devices_other</i>
       </div>
-      <div class="box">
+      <div class="box" @click="nav('services')">
         <h2>Services & Other</h2>
         <i class="material-icons md-60">room_service</i>
       </div>
-      <div class="box">
+      <div class="box" @click="nav('events')">
         <h2>Events</h2>
         <i class="material-icons md-60">event_note</i>
       </div>
@@ -35,7 +35,12 @@
 import HomeHeader from './HomeHeader'
 import HomeFooter from './HomeFooter'
 export default {
-  components: { HomeHeader, HomeFooter }
+  components: { HomeHeader, HomeFooter },
+  methods: {
+    nav (to) {
+      this.$router.push({path: to});
+    }
+  }
 }
 </script>
 
@@ -117,6 +122,8 @@ div{
       padding: 10px;
       text-align: center;
       cursor: pointer;
+      display: grid;
+      grid-template-rows: 1fr;
       @include no-select();
       @media screen and (max-width: 425px){
         grid-column: 1 / 3;
