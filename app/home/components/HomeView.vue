@@ -2,18 +2,31 @@
   <div>
     <home-header></home-header>
     <div class="section search">
-      <h1>Find anything that you're are you looking for at a price best suited for you.</h1>
+      <h1>Find anything that you're looking for at a price best suited for you.</h1>
       <input type="search" name="sesrch" placeholder="What are you looking for?">
-      <div class="button theme border">
+      <div class="button theme">
         <i class="material-icons md-18">search</i>
         <span>SEARCH</span>
       </div>
     </div>
     <div class="categories">
       <h1>Browse by category</h1>
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
+      <div class="box">
+        <h2>Books & Study Material</h2>
+        <i class="material-icons md-60">library_books</i>
+      </div>
+      <div class="box">
+        <h2>Electronics</h2>
+          <i class="material-icons md-60">devices_other</i>
+      </div>
+      <div class="box">
+        <h2>Services & Other</h2>
+        <i class="material-icons md-60">room_service</i>
+      </div>
+      <div class="box">
+        <h2>Events</h2>
+        <i class="material-icons md-60">event_note</i>
+      </div>
     </div>
   </div>
 </template>
@@ -73,6 +86,7 @@ div{
       padding: 10px;
       display: flex;
       justify-content: center;
+      background-color: #FFF1;
       i{
         display: block;
       }
@@ -82,14 +96,49 @@ div{
         }
       }
     }
+    .button:hover{
+      background-color: #FFF4;
+    }
   }
 
   .categories{
     background-color: $background-color;
     padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    @media screen and (max-width: 768px){
+      grid-template-columns: repeat(2, 1fr);
+    }
 
     h1{
       color: $primary-color;
+      font-family: Lato Light;
+      grid-column: 1 / 5;
+      @media screen and (max-width: 768px){
+        grid-column: 1 / 3;
+      }
+    }
+    .box{
+      background-color: #FFF;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      @include no-select();
+      @media screen and (max-width: 425px){
+        grid-column: 1 / 3;
+      }
+
+      h2, i{
+        opacity: 0.5;
+      }
+    }
+    .box:hover{
+      color: $accent-color;
+
+      h2, i{
+        opacity: 1;
+      }
     }
   }
 }

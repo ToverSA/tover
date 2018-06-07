@@ -19,7 +19,7 @@ export default {
 }
 @font-face {
   font-family: Lato Light;
-  src:url(./../assets/fonts/Lato-Light.ttf);
+  src:url(./../assets/fonts/Lato-Hairline.ttf);
 }
 @font-face {
   font-family: 'Material Icons';
@@ -58,6 +58,7 @@ export default {
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
+.material-icons.md-60 { font-size: 60px; }
 *{
   box-sizing: border-box;
 }

@@ -39,6 +39,14 @@ $input-padding: 10px;
   background: -webkit-linear-gradient(left, $a 0%, $b 100%);
   background: linear-gradient(to right, $a 0%, $b 100%);
 }
+
+@mixin no-select() {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .button{
   color: $primary-color;
   cursor: pointer;
