@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <home-header></home-header>
+    <home-header/>
     <div class="section search">
       <h1>Find anything that you're looking for at a price best suited for you.</h1>
       <input type="search" name="sesrch" placeholder="What are you looking for?">
@@ -28,6 +28,7 @@
         <i class="material-icons md-60">event_note</i>
       </div>
     </div>
+    <home-footer/>
   </div>
 </template>
 
