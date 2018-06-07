@@ -6,7 +6,6 @@
       <input type="search" name="sesrch" placeholder="What are you looking for?">
       <div class="button theme">
         <i class="material-icons md-18">search</i>
-        <span>SEARCH</span>
       </div>
     </div>
     <div class="categories">
@@ -50,7 +49,7 @@ div{
     max-width: 768px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr) 110px;
+    grid-template-columns: repeat(4, 1fr) 40px;
     grid-column-gap: 10px;
     padding: 30px 0;
     @media screen and (max-width: 768px){
@@ -58,7 +57,6 @@ div{
     }
     @media screen and (max-width: 425px){
       padding: 30px 5px;
-      grid-template-columns: repeat(4, 1fr) 40px;
     }
 
     h1{
@@ -87,18 +85,12 @@ div{
       padding: 10px;
       display: flex;
       justify-content: center;
-      background-color: #FFF1;
       i{
         display: block;
       }
-      span{
-        @media screen and (max-width: 425px){
-          display: none;
-        }
-      }
     }
     .button:hover{
-      background-color: #FFF4;
+      background-color: $primary-color-dark;
     }
   }
 
