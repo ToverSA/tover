@@ -38,7 +38,7 @@
       <span>City of office<br>Downy Rd<br>Surburb<br>4310</span>
     </div>
     <div class="copy">
-      <span>&copy; Copyright {{ year }}, All rightd reserved</span>
+      <span>&copy; Copyright {{ year }}, All rights reserved</span>
     </div>
   </div>
 </template>
