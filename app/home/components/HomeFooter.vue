@@ -37,11 +37,19 @@
       <span>info@tover.co.za</span>
       <span>City of office<br>Downy Rd<br>Surburb<br>4310</span>
     </div>
+    <div class="copy">
+      <span>&copy; Copyright {{ year }}, All rightd reserved</span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  computed: {
+    year () {
+      return new Date().getUTCFullYear();
+    }
+  }
 }
 </script>
 
@@ -54,12 +62,21 @@ div.footer{
   color: #FFF;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  @media screen and (max-width: 700px){
+    grid-template-columns: 1fr 1fr;
+  }
 
   .section{
     padding: 20px;
+    @media screen and (max-width: 450px){
+      grid-column: 1 / 3;
+    }
+
     a, span{
       display: flex;
       margin: 10px 0;
+      text-decoration: none;
+      color: #FFF;
 
       img{
 
@@ -70,9 +87,14 @@ div.footer{
       }
     }
   }
-  a{
-    text-decoration: none;
-    color: #FFF;
+  .copy{
+    grid-column: 1 / 5;
+    padding: 10px;
+    text-align: center;
+    opacity: 0.5;
+    @media screen and (max-width: 700px){
+      grid-column: 1 / 3;
+    }
   }
 }
 </style>
