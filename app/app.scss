@@ -11,10 +11,9 @@ $color-primary-2: #27909F;
 $color-primary-3: #026977;
 $color-primary-4: #01525E;
 
-
-$primary-color-dark:   #303F9F;
-$primary-color:        #3F51B5;
-$primary-color-light:  #C5CAE9;
+$primary-color-dark:   #455A64;
+$primary-color:        #607D8B;
+$primary-color-light:  #CFD8DC;
 $primary-color-text:   #FFFFFF;
 $accent-color:         #448AFF;
 $primary-text-color:   #212121;
@@ -48,22 +47,22 @@ $input-padding: 10px;
 }
 
 .button{
-  color: $primary-color;
+  color: $accent-color;
   cursor: pointer;
   display: inline-block;
 
   a{
     text-decoration: none;
-    color: $primary-color;
+    color: $accent-color;
   }
 }
 .button.border{
-  border: 1px solid $primary-color;
+  border: 1px solid $accent-color;
 }
 .button.theme{
   color: $primary-color-text;
   border-color: $primary-color-text;
-  background-color: $primary-color;
+  background-color: $accent-color;
 
   a{
     color: $primary-color-text;

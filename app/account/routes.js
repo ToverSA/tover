@@ -3,11 +3,11 @@ import * as components from './components';
 export default [
   {
     path: '/account',
-    component: components.AccountView,
+    component: components.Account,
     meta: { requiresAuth: true }
   },
   {
     path: '/auth',
-    component: components.AuthView
+    component: components.Auth
   }
 ];

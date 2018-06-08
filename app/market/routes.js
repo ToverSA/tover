@@ -2,13 +2,13 @@ import * as components from './components';
 
 export default [
   {
-    path: '/market',
-    component: components.MarketView,
-    name: 'Market'
+    path: '/',
+    component: components.Home,
+    name: 'Home'
   },
   {
-    path: '/markets/:id',
-    component: components.MarketItemView,
-    name: 'MarketItem'
+    path: '/books',
+    component: components.Books,
+    name: 'Books'
   }
 ];

@@ -90,6 +90,7 @@ div{
       padding: 10px;
       display: flex;
       justify-content: center;
+      background-color: $primary-color;
       i{
         display: block;
       }

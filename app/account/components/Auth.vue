@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="auth">
     <form>
-      <img src="../../../assets/images/tover-indigo.png" alt="Tover logo" @click="gotoHome()">
+      <img src="../../../assets/images/tover-blue.png" alt="Tover logo" @click="gotoHome()">
       <template v-if="auth == 'login'">
         <h3>Login to your account</h3>
         <input type="email" placeholder="Email address" v-model="username">
@@ -67,14 +67,15 @@ export default {
   },
   methods: {
     logIn () {
-      api.users.authUser(this.username, this.password).then(user  => {
-        console.log(user);
-      }, err => {
-        console.log(err);
-      });
+
+      // api.users.authUser(this.username, this.password).then(user  => {
+      //   console.log(user);
+      // }, err => {
+      //   console.log(err);
+      // });
     },
     signUp () {
-      api.users.createUser(this.email, this.password);
+      // api.users.createUser(this.email, this.password);
     },
     gotoHome () {
       this.$router.push('/');

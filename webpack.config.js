@@ -57,13 +57,13 @@ module.exports = {
     new WebpackPwaManifest({
     name: 'Tover web application',
     short_name: 'Tover',
-    background_color: '#3F51B5',
-    theme_color: '#3F51B5',
+    background_color: '#607D8B',
+    theme_color: '#448AFF',
     display: "standalone",
     icons: [
       {
-        src: path.resolve('./assets/images/tover-icon.png'),
-        size: [192, 512] // you can also use the specifications pattern
+        src: path.resolve('./assets/images/tover_logo.png'),
+        size: [192, 512]
       }
     ]
   }),
