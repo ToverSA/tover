@@ -56,11 +56,8 @@
     }
   },
   "dependencies": {
-    "angular": "^1.6.9",
-    "angular-animate": "^1.6.9",
-    "angular-touch": "^1.6.9",
+    "axios": "^0.18.0",
     "client-oauth2": "^4.2.1",
-    "jquery": "^3.3.1",
     "vue": "^2.5.16",
     "vue-resource": "^1.5.0",
     "vue-router": "^3.0.1",

@@ -1,12 +1,34 @@
 <template lang="html">
-  <div>
+  <div class="main-content" @pick-campus="pickCampus">
+    <div class="overlay">
+      <div class="dialog">
+        <h2>{{ dialogTitle }}</h2>
+        <div class="content">
+          <span>{{ dialogMessage }}</span>
+        </div>
+        <div class="controls">
+          <span>CANCEL</span>
+          <span>OK</span>
+        </div>
+      </div>
+    </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      dialogTitle: 'Hello there',
+      dialogMessage: 'This is a demo message'
+    }
+  },
+  methods: {
+    pickCampus () {
+      console.log('event caught');
+    }
+  }
 }
 </script>
 
@@ -16,6 +38,10 @@ export default {
 @font-face {
   font-family: Lato;
   src:url(./../assets/fonts/Lato-Regular.ttf);
+}
+@font-face {
+  font-family: Lato Bold;
+  src:url(./../assets/fonts/Lato-Bold.ttf);
 }
 @font-face {
   font-family: Lato Light;
@@ -67,5 +93,50 @@ body{
   margin: 0;
   background-color: $background-color;
   font-family: 'Lato';
+}
+div.overlay{
+  z-index: 999;
+  position: fixed;
+  height: 100%;
+  width: 100vw;
+  background-color: #0002;
+}
+div.dialog{
+  z-index: 999;
+  position: fixed;
+  width: 100%;
+  max-width: 600px;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: #FFF;
+  @media screen and (max-width: 768px){
+    width: 90%;
+  }
+  @media screen and (max-width: 450px){
+    bottom: 0;
+    top: auto;
+    width: 100%;
+  }
+
+  h2{
+    margin: 0;
+    padding: 20px 20px 0 20px;
+  }
+  .content{
+    padding: 10px 20px;
+  }
+  .controls{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 5px;
+
+    span{
+      font-family: Lato Bold;
+      color: $accent-color;
+      padding: 10px 15px;
+      margin: 0 5px;
+    }
+  }
 }
 </style>

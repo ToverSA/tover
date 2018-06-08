@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     auth: false,
     count: 0,
+    campusId : -1,
     access_token: '',
     refresh_token: ''
   },

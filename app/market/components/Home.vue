@@ -32,13 +32,18 @@
 </template>
 
 <script>
-import HomeHeader from './HomeHeader'
-import HomeFooter from './HomeFooter'
+import HomeHeader from './HomeHeader';
+import HomeFooter from './HomeFooter';
+import store from '../../../store';
 export default {
   components: { HomeHeader, HomeFooter },
   methods: {
     nav (to) {
-      this.$router.push({path: to});
+      if (store.getters.campusSet){
+        this.$router.push({path: to});
+      } else {
+        this.$emit('pick-campus');
+      }
     }
   }
 }
