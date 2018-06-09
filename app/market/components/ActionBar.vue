@@ -1,17 +1,37 @@
 <template lang="html">
   <div class="action-bar">
     <span @click="back()"><i class="material-icons md-24">arrow_back</i></span>
-    <h3>Books &amp; Study Material</h3>
-    <span><i class="material-icons md-24">search</i></span>
+    <h3>{{ title }}</h3>
+    <span @click="doSearch"><i class="material-icons md-24">search</i></span>
     <span><i class="material-icons md-24">person_outline</i></span>
   </div>
 </template>
 
 <script>
 export default {
+  created () {
+    if (this.$route.name == 'Books') {
+      this.title = 'Books & Study Material';
+    } else if (this.$route.name == 'Electronics') {
+      this.title = 'Electronics';
+    } else if (this.$route.name == 'Services') {
+      this.title = 'Services & Other';
+    } else if (this.$route.name == 'Events') {
+      this.title = 'Events';
+    }
+  },
+  data () {
+    return {
+      title: ''
+    }
+  },
   methods: {
     back () {
       this.$router.push('/');
+    },
+    doSearch () {
+      let route = this.$route.name;
+      this.$router.push({ path: 'search', query: {category: route } });
     }
   }
 }

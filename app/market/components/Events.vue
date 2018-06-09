@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="books">
+  <div class="">
     <action-bar/>
   </div>
 </template>
@@ -11,5 +11,5 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="css">
 </style>

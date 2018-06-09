@@ -37,13 +37,29 @@ import HomeFooter from './HomeFooter';
 import store from '../../../store';
 export default {
   components: { HomeHeader, HomeFooter },
+  created () {
+    this.$eventBus.$on('campus-picked', this.moveOn);
+  },
+  beforeDestroy () {
+    this.$eventBus.$off('campus-picked');
+  },
+  data () {
+    return {
+      to: ''
+    }
+  },
   methods: {
     nav (to) {
       if (store.getters.campusSet){
         this.$router.push({path: to});
       } else {
-        this.$emit('pick-campus');
+        this.to = to;
+        this.$eventBus.$emit('pick-campus');
       }
+    },
+    moveOn () {
+      store.commit('setCampusId', 3);
+      this.$router.push({path: this.to});
     }
   }
 }

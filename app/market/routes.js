@@ -8,7 +8,27 @@ export default [
   },
   {
     path: '/books',
-    component: components.Books,
+    component: components.Market,
     name: 'Books'
+  },
+  {
+    path: '/electronics',
+    component: components.Market,
+    name: 'Electronics'
+  },
+  {
+    path: '/services',
+    component: components.Services,
+    name: 'Services'
+  },
+  {
+    path: '/events',
+    component: components.Events,
+    name: 'Events'
+  },
+  {
+    path: '/search',
+    component: components.Search,
+    name: 'Search'
   }
 ];

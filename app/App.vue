@@ -1,32 +1,50 @@
 <template lang="html">
-  <div class="main-content" @pick-campus="pickCampus">
-    <div class="overlay">
+  <div class="main-content" v-on:pick-campus="pickCampus">
+    <div class="overlay" v-if="campusPick">
       <div class="dialog">
-        <h2>{{ dialogTitle }}</h2>
+        <h2>Choose your campus <i class="material-icons info">info</i></h2>
         <div class="content">
-          <span>{{ dialogMessage }}</span>
+          <input type="search" placeholder="Search for your campus .e.g 'Bay campus'">
+          <div class="item" @click="selectCampus">
+            <h3>KwaDlangezwa Campus</h3>
+            <span>University of Zululand</span>
+          </div>
         </div>
         <div class="controls">
-          <span>CANCEL</span>
-          <span>OK</span>
+          <span @click="cancelPicker">CANCEL</span>
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
+  created () {
+    this.$eventBus.$on('pick-campus', this.pickCampus);
+  },
+  beforeDestroy () {
+    this.$eventBus.$off('pick-campus');
+  },
   data () {
     return {
       dialogTitle: 'Hello there',
-      dialogMessage: 'This is a demo message'
+      dialogMessage: 'This is a demo message',
+      campusPick: false
     }
   },
   methods: {
     pickCampus () {
-      console.log('event caught');
+      console.log('event called');
+      this.campusPick = true;
+    },
+    cancelPicker () {
+      this.campusPick = false;
+    },
+    selectCampus () {
+      this.campusPick = false;
+      this.$eventBus.$emit('campus-picked');
     }
   }
 }
@@ -122,9 +140,37 @@ div.dialog{
   h2{
     margin: 0;
     padding: 20px 20px 0 20px;
+
+    i{
+      color: $accent-color;
+      cursor: pointer;
+    }
   }
   .content{
     padding: 10px 20px;
+    max-height: 450px;
+    overflow-y: auto;
+
+    input{
+      padding: 10px;
+      font-size: 1em;
+      width: 100%;
+      border: none;
+      background-color: $primary-color + unquote('1f');
+    }
+    .item{
+      margin: 5px 0;
+      padding: 10px;
+      cursor: pointer;
+
+      h3{
+        margin: 0;
+        font-family: Lato;
+      }
+      span{
+        opacity: 0.6;
+      }
+    }
   }
   .controls{
     display: flex;
@@ -136,6 +182,7 @@ div.dialog{
       color: $accent-color;
       padding: 10px 15px;
       margin: 0 5px;
+      cursor: pointer;
     }
   }
 }

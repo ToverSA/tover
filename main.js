@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import { App } from './app';
 import store from './store';
 import router from './router';
-
+Vue.prototype.$eventBus = new Vue();
 new Vue({
   router,
   el: '#akomo',
