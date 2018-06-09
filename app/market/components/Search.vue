@@ -36,9 +36,11 @@ div.search{
       cursor: pointer;
     }
     input{
+      width: 100%;
       border: none;
-      margin: 5px;
+      padding: 5px;
       font-size: 1em;
+      outline: none;
     }
   }
 }

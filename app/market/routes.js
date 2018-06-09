@@ -18,7 +18,7 @@ export default [
   },
   {
     path: '/services',
-    component: components.Services,
+    component: components.Market,
     name: 'Services'
   },
   {

@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     back () {
-      this.$router.push('/');
+      this.$router.go(-1);
     },
     doSearch () {
       let route = this.$route.name;
@@ -55,6 +55,7 @@ div.action-bar{
     padding: 12px;
     color: #FFF;
     cursor: pointer;
+    @include no-select();
   }
   span:hover{
     background-color: $primary-color-dark;
