@@ -7,24 +7,9 @@ export default [
     name: 'Home'
   },
   {
-    path: '/books',
-    component: components.Market,
-    name: 'Books'
-  },
-  {
-    path: '/electronics',
-    component: components.Market,
-    name: 'Electronics'
-  },
-  {
-    path: '/services',
-    component: components.Market,
-    name: 'Services'
-  },
-  {
-    path: '/events',
-    component: components.Events,
-    name: 'Events'
+    path: '/store',
+    component: components.Store,
+    name: 'Store'
   },
   {
     path: '/search',

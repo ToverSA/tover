@@ -22,7 +22,7 @@
         <h2>Services & Other</h2>
         <i class="material-icons md-60">room_service</i>
       </div>
-      <div class="box" @click="nav('events')">
+      <div class="box">
         <h2>Events</h2>
         <i class="material-icons md-60">event_note</i>
       </div>
@@ -51,7 +51,7 @@ export default {
   methods: {
     nav (to) {
       if (store.getters.campusSet){
-        this.$router.push({path: to});
+        this.$router.push({ path: 'store', query: { category: to } });
       } else {
         this.to = to;
         this.$eventBus.$emit('pick-campus');

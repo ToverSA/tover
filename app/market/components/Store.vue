@@ -26,11 +26,8 @@
       <div class="suggest"></div>
     </div>
     <div class="list-items" v-else>
-      <div class="item" v-for="i in [1, 2, 3, 4]" @click="viewItem(i)">
-        <img src="../../../assets/images/albumart.jpg">
-        <span class="price">R123 456</span>
-        <span class="date">24 Jun 2018</span>
-        <span class="title">Lorem ipsum dolor sit amgqet, consectetur adipisicing elit. Quos quisquam dicta cum minus quasi eius culpa, dolorem maiores fuga! Nemo.</span>
+      <div class="item" v-for="i in [1, 2, 3, 4, 5]">
+        
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@
   <div class="action-bar">
     <span @click="back()"><i class="material-icons md-24">arrow_back</i></span>
     <h3>{{ title }}</h3>
+    <span @click="doSearch"><i class="material-icons md-24">sort</i></span>
     <span @click="doSearch"><i class="material-icons md-24">search</i></span>
     <span><i class="material-icons md-24">person_outline</i></span>
   </div>
@@ -10,14 +11,17 @@
 <script>
 export default {
   created () {
-    if (this.$route.name == 'Books') {
+    let category = this.$route.query.category;
+    if (category == 'books') {
       this.title = 'Books & Study Material';
-    } else if (this.$route.name == 'Electronics') {
+    } else if (category == 'electronics') {
       this.title = 'Electronics';
-    } else if (this.$route.name == 'Services') {
+    } else if (category == 'services') {
       this.title = 'Services & Other';
-    } else if (this.$route.name == 'Events') {
+    } else if (category == 'Events') {
       this.title = 'Events';
+    } else {
+      this.title = 'All';
     }
   },
   data () {
@@ -44,7 +48,7 @@ div.action-bar{
   height: $bar-height;
   background-color: $primary-color;
   display: grid;
-  grid-template-columns: $bar-height 1fr repeat(2, $bar-height);
+  grid-template-columns: $bar-height 1fr repeat(3, $bar-height);
   width: 100%;
 
   span{
