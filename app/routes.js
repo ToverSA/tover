@@ -1,4 +1,4 @@
 import { routes as account } from './account';
-import { routes as store } from './store';
+import { routes as home } from './home';
 
-export default [ ...account, ...store ];
+export default [ ...account, ...home ];
