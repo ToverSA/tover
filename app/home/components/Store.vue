@@ -2,7 +2,11 @@
   <div class="store">
     <action-bar/>
     <div class="content">
-      <div class="box" v-for="i in [1, 2, 3, 4, 5]"></div>
+      <div class="box" v-for="i in [1, 2, 3, 4, 5]">
+        <img src="../../../assets/images/albumart.jpg">
+        <h3>R123 456</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse nostrum id sapiente cupiditate perspiciatis quasi!</span>
+      </div>
     </div>
   </div>
 </template>
@@ -32,14 +36,30 @@ div.store {
     @media screen and (max-width: 1024px) {
       grid-template-columns: repeat(4, 1fr);
     }
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 450px) {
       grid-template-columns: repeat(3, 1fr);
+      width: 100%;
     }
 
     .box{
       background-color: #FFF;
       padding: 10px;
-      min-height: 200px;
+      cursor: pointer;
+      @include no-select();
+
+      img{
+        width: 100%;
+        display: block;
+      }
+      h3{
+        margin: 5px 0;
+      }
+      span{
+        height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+      }
     }
   }
 }
