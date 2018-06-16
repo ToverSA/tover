@@ -13,18 +13,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../app.scss';
 div{
   display: flex;
   justify-content: space-between;
-  height: $header-height;
+  height: 55px;
 
   img{
     height: 100%;
   }
   .nav{
     display: flex;
-    height: $header-height;
+    height: 55px;
     padding: 0;
 
     a{
@@ -33,8 +32,8 @@ div{
 
     span{
       padding: 0 30px;
-      height: $header-height;
-      line-height: $header-height;
+      height: 55px;
+      line-height: 55px;
       display: block;
       color: #FFFFFF;
     }
