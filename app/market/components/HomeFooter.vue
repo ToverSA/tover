@@ -51,7 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../app.scss';
 div.footer{
   background-color: #263238;
   min-height: 200px;
