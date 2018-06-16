@@ -17,7 +17,10 @@
           <span>060 433 5310</span>
         </div>
       </div>
-      <div class="info"></div>
+      <div class="info">
+        <span>by foo</span>
+        <span>posted on 24 July</span>
+      </div>
       <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, veniam, minus? Magni et rem ducimus similique quaerat incidunt, non quae labore quasi iure error quia maxime earum iste tempora, atque exercitationem voluptate cum. Maiores adipisci nesciunt ullam delectus architecto corporis excepturi, odio eaque, sint, deserunt quia. Ipsum dignissimos harum accusantium!</p>
     </div>
     <div class="suggest"></div>
@@ -95,10 +98,17 @@ div.store-item{
         }
       }
     }
+    .info{
+      grid-column: 1 / 5;
+      display: flex;
+      justify-content: space-between;
+      color: $primary-color-dark;
+      padding: 5px;
+    }
     .description{
-      background-color: red;
       grid-column: 1 / 5;
       margin: 0;
+      padding: 5px;
       //TODO add whitespace thingy
     }
   }
