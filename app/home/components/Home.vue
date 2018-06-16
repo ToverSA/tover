@@ -18,13 +18,13 @@
         <h2>Electronics</h2>
           <i class="material-icons md-60">devices_other</i>
       </div>
+      <div class="box" @click="nav('food')">
+        <h2>Food & Beverages</h2>
+        <i class="material-icons md-60">local_dining</i>
+      </div>
       <div class="box" @click="nav('services')">
         <h2>Services & Other</h2>
-        <i class="material-icons md-60">room_service</i>
-      </div>
-      <div class="box">
-        <h2>Events</h2>
-        <i class="material-icons md-60">event_note</i>
+        <i class="material-icons md-60">local_library</i>
       </div>
     </div>
     <home-footer/>

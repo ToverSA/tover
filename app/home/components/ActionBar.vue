@@ -16,10 +16,10 @@ export default {
       this.title = 'Books & Study Material';
     } else if (category == 'electronics') {
       this.title = 'Electronics';
+    } else if (category == 'food') {
+      this.title = 'Food & Beverages';
     } else if (category == 'services') {
       this.title = 'Services & Other';
-    } else if (category == 'Events') {
-      this.title = 'Events';
     } else {
       this.title = 'All';
     }
