@@ -34,8 +34,7 @@ export default {
       this.$router.go(-1);
     },
     doSearch () {
-      let route = this.$route.name;
-      this.$router.push({ path: 'search', query: {category: route } });
+      this.$router.push({ path: 'search' });
     }
   }
 }
