@@ -1,16 +1,4 @@
-$header-height: 55px;
 $background-color: #ECEFF1;
-$market-color: #FF5722;
-$home-color: #607D8B;
-$account-color: #009688;
-$auth-color: #009688;
-
-$color-primary-0: #02AFC7;
-$color-primary-1: #49A6B3;
-$color-primary-2: #27909F;
-$color-primary-3: #026977;
-$color-primary-4: #01525E;
-
 $primary-color-dark:   #455A64;
 $primary-color:        #607D8B;
 $primary-color-light:  #CFD8DC;
@@ -20,18 +8,7 @@ $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
 
-$input-padding: 10px;
 $bar-height: 50px;
-
-@keyframes market-anim {
-  0% {
-    background-color: $market-color;
-    opacity: 0;
-  } 100% {
-    background-color: $background-color;
-    opacity: 1;
-  }
-}
 
 @mixin logo-gradient($a, $b) {
   background: $a;
@@ -45,27 +22,4 @@ $bar-height: 50px;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.button{
-  color: $accent-color;
-  cursor: pointer;
-  display: inline-block;
-
-  a{
-    text-decoration: none;
-    color: $accent-color;
-  }
-}
-.button.border{
-  border: 1px solid $accent-color;
-}
-.button.theme{
-  color: $primary-color-text;
-  border-color: $primary-color-text;
-  background-color: $accent-color;
-
-  a{
-    color: $primary-color-text;
-  }
 }
