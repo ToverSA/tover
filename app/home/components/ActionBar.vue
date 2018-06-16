@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="action-bar">
-    <span @click="back()"><i class="material-icons md-24">arrow_back</i></span>
-    <h3>{{ title }}</h3>
-    <span @click="doSearch"><i class="material-icons md-24">sort</i></span>
-    <span @click="doSearch"><i class="material-icons md-24">search</i></span>
-    <span><i class="material-icons md-24">person_outline</i></span>
+    <span @click="back()" title="Back"><i class="material-icons md-24">arrow_back</i></span>
+    <h3 title="Category">{{ title }}</h3>
+    <span @click="doSearch" title="Sort By"><i class="material-icons md-24">sort</i></span>
+    <span @click="doSearch" title="Search"><i class="material-icons md-24">search</i></span>
+    <span title="My Account"><i class="material-icons md-24">person_outline</i></span>
   </div>
 </template>
 
@@ -71,6 +71,7 @@ div.action-bar{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
   }
 }
 </style>
