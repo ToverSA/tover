@@ -51,7 +51,7 @@ export default {
   methods: {
     nav (to) {
       if (store.getters.campusSet){
-        this.$router.push({ path: 'store', query: { category: to } });
+        this._nav(to);
       } else {
         this.to = to;
         this.$eventBus.$emit('pick-campus');
@@ -59,7 +59,10 @@ export default {
     },
     moveOn () {
       store.commit('setCampusId', 3);
-      this.$router.push({path: this.to});
+      this._nav(this.to);
+    },
+    _nav (to) {
+      this.$router.push({ path: 'store', query: { category: to } });
     }
   }
 }

@@ -46,6 +46,9 @@ div.store {
       padding: 10px;
       cursor: pointer;
       @include no-select();
+      @media screen and (max-width: 450px) {
+        padding: 5px;
+      }
 
       img{
         width: 100%;
