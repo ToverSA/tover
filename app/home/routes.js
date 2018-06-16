@@ -12,6 +12,11 @@ export default [
     name: 'Store'
   },
   {
+    path: '/store/:id',
+    component: components.StoreItem,
+    name: 'StoreItem'
+  },
+  {
     path: '/search',
     component: components.Search,
     name: 'Search'

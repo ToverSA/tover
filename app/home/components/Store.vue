@@ -2,7 +2,7 @@
   <div class="store">
     <action-bar/>
     <div class="content">
-      <div class="box" v-for="i in [1, 2, 3, 4, 5]">
+      <div class="box" v-for="i in [1, 2, 3, 4, 5]" @click="goto(i)">
         <img src="../../../assets/images/albumart.jpg">
         <h3>R123 456</h3>
         <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse nostrum id sapiente cupiditate perspiciatis quasi!</span>
@@ -18,7 +18,11 @@ export default {
   data () {
     return {  }
   },
-  methods: {  }
+  methods: {
+    goto (id) {
+      this.$router.push({ name: 'StoreItem', params: { id: id } });
+    }
+  }
 }
 </script>
 
