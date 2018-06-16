@@ -1,4 +1,4 @@
 import { routes as account } from './account';
-import { routes as market } from './market';
+import { routes as store } from './store';
 
-export default [ ...account, ...market ];
+export default [ ...account, ...store ];
