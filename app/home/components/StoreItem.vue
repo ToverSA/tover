@@ -1,6 +1,17 @@
 <template lang="html">
   <div class="store-item">
-    <div class="dialog">Hello</div>
+    <div class="dialog">
+      <div class="container">
+        <h1 class="icon"><i class="material-icons md-48">chat</i></h1>
+        <h2 class="title">Start a chat</h2>
+        <p class="subtitle">Remember to be kind.</p>
+        <input type="text" placeholder="e.g. Hi, I'd like to make an offer.">
+        <div class="controls">
+          <span>CANCEL</span>
+          <span>OK</span>
+        </div>
+      </div>
+    </div>
     <div class="navbar">
       <span><i class="material-icons">arrow_back</i></span>
     </div>

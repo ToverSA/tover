@@ -1,3 +1,60 @@
 .dialog{
   position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000a;
+
+  .container{
+    position: absolute;
+    background-color: #FFF;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 450px;
+    top: 100px;
+    padding: 15px;
+    @media screen and (max-width: 450px){
+      top: auto;
+      left: 0;
+      bottom: 0;
+      transform: none;
+    }
+
+    .icon{
+      text-align: center;
+      margin: 0;
+      color: $accent-color;
+      // padding-top: 15px;
+    }
+    .title{
+      margin: 5px 0;
+      text-align: center;
+    }
+    input{
+      border: none;
+      outline: none;
+      background-color: rgba($primary-color, 0.05);
+      width: 100%;
+      border-bottom: 3px solid $primary-color-dark;
+      font-size: 1em;
+      padding: 10px;
+      margin: 5px 0;
+      &:focus{
+        border-bottom-color: $accent-color;
+      }
+    }
+    .controls{
+      display: flex;
+      justify-content: flex-end;
+
+      span{
+        color: $accent-color;
+        display: block;
+        padding: 10px 15px;
+        margin-left: 5px;
+        font-family: Lato Bold;
+        cursor: pointer;
+      }
+    }
+  }
 }
