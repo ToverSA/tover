@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="store-item">
+    <div class="dialog">Hello</div>
     <div class="navbar">
       <span><i class="material-icons">arrow_back</i></span>
     </div>
@@ -47,6 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../app.scss';
+@import '../../dialog.scss';
 div.store-item{
   display: grid;
   grid-template-columns: 3fr 2fr;
