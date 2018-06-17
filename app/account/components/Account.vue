@@ -1,19 +1,19 @@
 <template>
   <div class="account">
-    <div class="sidebar">
+    <div class="sidebar" v-bind:class="{ opened: isSidebar }">
       <div class="header">
         <img src="../../../assets/images/tover_logo.png" alt="Tover logo">
         <h3>gumedesduduzo@gmail.com</h3>
       </div>
-      <div class="list-item">
+      <div @click="toCreate" class="list-item">
         <i class="material-icons">add</i>
         <span>Create new</span>
       </div>
-      <div class="list-item">
+      <div @click="toAdverts" class="list-item">
         <i class="material-icons">collections_bookmark</i>
         <span>Adverts</span>
       </div>
-      <div class="list-item">
+      <div @click="toProfile" class="list-item">
         <i class="material-icons">person_outline</i>
         <span>Profile</span>
       </div>
@@ -26,13 +26,37 @@
         <span>Log out</span>
       </div>
     </div>
-    <div class="main"></div>
+    <div class="main">
+      <div class="navbar">
+        <span @click="isSidebar = true"><i class="material-icons">menu</i></span>
+        <h2>Adverts</h2>
+      </div>
+      <router-view class="main"/>
+    </div>
   </div>
 </template>
 
 <script>
 import store from '../../../store'
 export default {
+  data () {
+    return {
+      isSidebar: false
+    }
+  },
+  methods: {
+    toCreate () {
+      this.isSidebar = false;
+    },
+    toAdverts () {
+      this.isSidebar = false;
+      this.$router.push({ path: '/account' });
+    },
+    toProfile () {
+      this.isSidebar = false;
+      this.$router.push({ name: 'Profile' });
+    }
+  }
 }
 </script>
 
@@ -44,8 +68,17 @@ div.account{
   .sidebar{
     width: 320px;
     background-color: $primary-color;
+    height: 100vh;
     @media screen and (max-width: 768px){
       width: 240px;
+    }
+    @media screen and (max-width: 450px){
+      position: absolute;
+      width: 100vw;
+      transform: translateX(-100vw);
+      &.opened{
+        transform: translateX(0vw);
+      }
     }
 
     .header{
@@ -83,15 +116,37 @@ div.account{
       }
 
       span{
-        // background-color: green;
         padding: 2px;
       }
     }
   }
   .main{
     flex-grow: 1;
-    height: 100vh;
+    height: calc(100vh - $bar-height);
+    height: -moz-calc(100vh - $bar-height);
+    height: -webkit-calc(100vh - $bar-height);
     overflow: auto;
+
+    .navbar{
+      display: grid;
+      height: $bar-height;
+      grid-template-columns: minmax(0, $bar-height) 1fr;
+
+      span{
+        display: none;
+        text-align: center;
+        padding-top: 12px;
+        cursor: pointer;
+        color: $accent-color;
+        @media screen and (max-width: 450px){
+          display: block;
+        }
+      }
+      h2{
+        margin: 0;
+        padding: 10px;
+      }
+    }
   }
 }
 </style>
