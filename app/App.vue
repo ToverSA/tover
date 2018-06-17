@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="main-content" v-on:pick-campus="pickCampus">
+  <div class="main-content">
     <div class="overlay" v-if="campusPick">
       <div class="dialog">
         <h2>Choose your campus <i class="material-icons info">info</i></h2>
