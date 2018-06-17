@@ -29,7 +29,7 @@
     <div class="main">
       <div class="navbar">
         <span @click="isSidebar = true"><i class="material-icons">menu</i></span>
-        <h2>Adverts</h2>
+        <h2>{{ section }}</h2>
       </div>
       <router-view class="main"/>
     </div>
@@ -42,6 +42,11 @@ export default {
   data () {
     return {
       isSidebar: false
+    }
+  },
+  computed: {
+    section () {
+      return this.$route.name;
     }
   },
   methods: {
@@ -128,19 +133,20 @@ div.account{
     overflow: auto;
 
     .navbar{
-      display: grid;
+      display: none;
       height: $bar-height;
       grid-template-columns: minmax(0, $bar-height) 1fr;
+      background-color: $primary-color;
+      color: $primary-color-text;
+      @media screen and (max-width: 450px){
+        display: grid;
+      }
 
       span{
-        display: none;
         text-align: center;
         padding-top: 12px;
         cursor: pointer;
         color: $accent-color;
-        @media screen and (max-width: 450px){
-          display: block;
-        }
       }
       h2{
         margin: 0;
