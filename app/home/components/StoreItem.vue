@@ -1,19 +1,19 @@
 <template lang="html">
-  <div class="store-item">
-    <div class="dialog">
+  <div class="store-item" v-bind:class="{ noscroll: isChatbox }">
+    <div class="dialog" v-if="isChatbox">
       <div class="container">
         <h1 class="icon"><i class="material-icons md-48">chat</i></h1>
         <h2 class="title">Start a chat</h2>
         <p class="subtitle">Remember to be kind.</p>
-        <input type="text" placeholder="e.g. Hi, I'd like to make an offer.">
+        <input type="text" placeholder="e.g. I'd like to make an offer.">
         <div class="controls">
-          <span>CANCEL</span>
-          <span>OK</span>
+          <span @click="cancelChat">CANCEL</span>
+          <span @click="okChat">OK</span>
         </div>
       </div>
     </div>
     <div class="navbar">
-      <span><i class="material-icons">arrow_back</i></span>
+      <span @click="goBack"><i class="material-icons">arrow_back</i></span>
     </div>
     <div class="main">
       <img src="../../../assets/images/albumart.jpg">
@@ -36,7 +36,7 @@
       <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, veniam, minus? Magni et rem ducimus similique quaerat incidunt, non quae labore quasi iure error quia maxime earum iste tempora, atque exercitationem voluptate cum. Maiores adipisci nesciunt ullam delectus architecto corporis excepturi, odio eaque, sint, deserunt quia. Ipsum dignissimos harum accusantium!</p>
     </div>
     <div class="suggest">
-      <div class="item" v-for="i in [1, 2]">
+      <div class="item" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]">
         <img src="../../../assets/images/albumart.jpg">
         <div>
           <h3>R123 456</h3>
@@ -49,10 +49,22 @@
 
 <script>
 export default {
-  methods: {
-    doChat () {
-      console.log('do chat');
+  data () {
+    return {
+      isChatbox: false
     }
+  },
+  methods: {
+    goBack () {
+      this.$router.go(-1);
+    },
+    doChat () {
+      this.isChatbox = true;
+    },
+    cancelChat () {
+      this.isChatbox = false;
+    },
+    okChat () {}
   }
 }
 </script>
