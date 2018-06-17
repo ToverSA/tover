@@ -31,7 +31,7 @@
         <span @click="isSidebar = true"><i class="material-icons">menu</i></span>
         <h2>{{ section }}</h2>
       </div>
-      <router-view class="main"/>
+      <router-view class="main-content"/>
     </div>
   </div>
 </template>
@@ -130,9 +130,7 @@ div.account{
   }
   .main{
     flex-grow: 1;
-    height: calc(100vh - $bar-height);
-    height: -moz-calc(100vh - $bar-height);
-    height: -webkit-calc(100vh - $bar-height);
+    height: 100vh;
     overflow: auto;
 
     .navbar{

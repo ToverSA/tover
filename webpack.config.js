@@ -12,7 +12,7 @@ module.exports = {
     app: './main.js'
   },
   output: {
-    filename: '[name][hash].min.js',
+    filename: '[name].[hash].js',
     // path: path.resolve(__dirname, 'dist'),
     path: outputPath,
     publicPath: '/'
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name][hash].min.css',
+      filename: '[name].[hash].css',
       // path: path.resolve(__dirname, 'dist')
       path: outputPath
     }),
