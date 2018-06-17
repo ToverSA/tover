@@ -10,8 +10,18 @@
             <span>University of Zululand</span>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="overlay">
+      <div class="dialog">
+        <h2>Start a chat with foo</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis beatae sed et incidunt amet earum, expedita quos enim consequatur est?</p>
+        <div class="content">
+          <input type="text" placeholder="e.g. I'd like to make an offer">
+        </div>
         <div class="controls">
           <span @click="cancelPicker">CANCEL</span>
+          <span @click="cancelPicker">SEND</span>
         </div>
       </div>
     </div>
@@ -145,6 +155,9 @@ div.dialog{
       color: $accent-color;
       cursor: pointer;
     }
+  }
+  p{
+    padding: 0 20px;
   }
   .content{
     padding: 10px 20px;
