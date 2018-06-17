@@ -36,7 +36,7 @@
       <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, veniam, minus? Magni et rem ducimus similique quaerat incidunt, non quae labore quasi iure error quia maxime earum iste tempora, atque exercitationem voluptate cum. Maiores adipisci nesciunt ullam delectus architecto corporis excepturi, odio eaque, sint, deserunt quia. Ipsum dignissimos harum accusantium!</p>
     </div>
     <div class="suggest">
-      <div class="item" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]">
+      <div class="item" v-for="i in [1]">
         <img src="../../../assets/images/albumart.jpg">
         <div>
           <h3>R123 456</h3>
