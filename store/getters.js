@@ -1,7 +1,9 @@
 export default {
   /* Check if we have a valid access token */
   loggedIn: (state, getters) => {
-    return state.auth;
+    // TODO: Check if access token is valid, or available
+    // return state.auth;
+    return true;
   },
   campusSet (state) {
     return state.campusId != -1;
