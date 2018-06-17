@@ -115,6 +115,8 @@ div{
       display: flex;
       justify-content: center;
       background-color: $primary-color;
+      color: $primary-color-text;
+      cursor: pointer;
       i{
         display: block;
       }
