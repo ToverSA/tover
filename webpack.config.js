@@ -8,7 +8,6 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const outputPath = '/var/www/html';
 
 module.exports = {
-  mode: "development",
   entry: {
     app: './main.js'
   },
@@ -24,9 +23,6 @@ module.exports = {
     hot: true
   },
   resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.js'
-    },
     extensions: ['*', '.js', '.vue', '.json']
   },
   optimization: {
@@ -111,7 +107,7 @@ module.exports = {
             loaders: {
               scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
               sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
-            },
+            }//,
             // loaders: {
             //   scss: [ MiniCssExtractPlugin.loader, 'css-loader!sass-loader' ], // <style lang="scss">
             //   sass: [ MiniCssExtractPlugin.loader, 'css-loader!sass-loader?indentedSyntax' ] // <style lang="sass">

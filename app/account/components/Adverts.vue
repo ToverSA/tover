@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="adverts">
-    
+    <h1>Hello</h1>
   </div>
 </template>
 
