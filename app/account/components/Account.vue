@@ -9,11 +9,11 @@
         <i class="material-icons">add</i>
         <span>Create new</span>
       </div>
-      <div @click="toAdverts" class="list-item">
+      <div @click="toAdverts" class="list-item" v-bind:class="{ active: section == 'Adverts' }">
         <i class="material-icons">collections_bookmark</i>
         <span>Adverts</span>
       </div>
-      <div @click="toProfile" class="list-item">
+      <div @click="toProfile" class="list-item" v-bind:class="{ active: section == 'Profile' }">
         <i class="material-icons">person_outline</i>
         <span>Profile</span>
       </div>
@@ -116,6 +116,9 @@ div.account{
       padding: 10px;
       grid-gap: 10px;
       cursor: pointer;
+      &.active{
+        background-color: rgba($primary-color-dark, 0.5);
+      }
       &:hover{
         background-color: $primary-color-dark;
       }
