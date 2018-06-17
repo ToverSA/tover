@@ -25,8 +25,10 @@
           <span>CHAT</span>
         </div>
         <div>
-          <i class="material-icons">call</i>
-          <span>060 433 5310</span>
+          <a href="tel:0604335310">
+            <i class="material-icons">call</i>
+            <span>060 433 5310</span>
+          </a>
         </div>
       </div>
       <div class="info">
@@ -134,6 +136,11 @@ div.store-item{
           @media screen and (max-width: 768px){
             display: none;
           }
+        }
+        a{
+          display: flex;
+          text-decoration: none;
+          color: $primary-color-text;
         }
       }
     }

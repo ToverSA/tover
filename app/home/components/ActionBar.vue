@@ -2,9 +2,9 @@
   <div class="action-bar">
     <span @click="back()" title="Back"><i class="material-icons md-24">arrow_back</i></span>
     <h3 title="Category">{{ title }}</h3>
-    <span @click="doSearch" title="Sort By"><i class="material-icons md-24">sort</i></span>
+    <span @click="doSort" title="Sort By"><i class="material-icons md-24">sort</i></span>
     <span @click="doSearch" title="Search"><i class="material-icons md-24">search</i></span>
-    <span title="My Account"><i class="material-icons md-24">person_outline</i></span>
+    <span @click="doAccount" title="My Account"><i class="material-icons md-24">person_outline</i></span>
   </div>
 </template>
 
@@ -35,6 +35,10 @@ export default {
     },
     doSearch () {
       this.$router.push({ path: 'search' });
+    },
+    doSort () {},
+    doAccount () {
+      this.$router.push({ path: 'account' });
     }
   }
 }
