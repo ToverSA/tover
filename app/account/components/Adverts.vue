@@ -1,5 +1,8 @@
 <template lang="html">
   <div class="adverts">
+    <div class="dialog">
+      <div class="container"></div>
+    </div>
     <div class="row header">
       <span>Adverts</span>
       <span>Category</span>
@@ -26,6 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../app.scss';
+@import '../../dialog.scss';
 div.adverts{
   height: auto;
   padding: 5px;
