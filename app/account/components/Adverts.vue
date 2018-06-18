@@ -14,7 +14,7 @@
       <span class="value">12 June</span>
       <span class="label">Views</span>
       <span class="value">2345</span>
-      <span><i class="material-icons">star</i></span>
+      <span class="star"><i class="material-icons">star</i></span>
     </div>
   </div>
 </template>
@@ -64,10 +64,11 @@ div.adverts{
           grid-column: 1 / 3;
         }
       }
-      &:last-child{
+      &.star{
         padding: 0;
         padding-top: 5px;
         padding-left: 2px;
+        color: $gold-color;
         @media screen and (max-width: 768px){
           grid-column: 3 / 4;
           grid-row: 1 / 2;
