@@ -14,7 +14,7 @@
       <span class="value">12 June</span>
       <span class="label">Views</span>
       <span class="value">2345</span>
-      <span class="star"><i class="material-icons">star</i></span>
+      <span class="star"><i class="material-icons">bookmark_border</i></span>
     </div>
   </div>
 </template>
