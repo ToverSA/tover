@@ -3,7 +3,7 @@
     <div class="sidebar" v-bind:class="{ opened: isSidebar }">
       <div class="header">
         <img src="../../../assets/images/tover_logo.png" alt="Tover logo">
-        <h3>gumedesduduzo@gmail.com</h3>
+        <h3>foo@bar.com</h3>
       </div>
       <div @click="toCreate" class="list-item">
         <i class="material-icons">add</i>
