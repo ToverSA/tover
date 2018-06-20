@@ -20,6 +20,7 @@
       <router-link to="/account">My account</router-link>
       <router-link to="/search">Search</router-link>
       <router-link to="/store">Brouse store</router-link>
+      <router-link to="/admin">Admin dashboard</router-link>
     </div>
     <div class="section">
       <h3>LINKS</h3>
