@@ -4,6 +4,18 @@ export default [
   {
     path: '/admin',
     component: components.Dashboard,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        component: components.Analytics,
+        name: 'Analytics'
+      },
+      {
+        path: 'campuses',
+        component: components.Campuses,
+        name: 'Campuses'
+      }
+    ]
   }
 ];
