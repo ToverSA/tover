@@ -1,14 +1,10 @@
 <template lang="html">
-  <div class="analytics">
-
-  </div>
+  <div>Chat</div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style lang="scss" scoped>
-div.analytics {
-}
+<style lang="css">
 </style>

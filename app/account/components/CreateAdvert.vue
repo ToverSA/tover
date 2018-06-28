@@ -1,14 +1,10 @@
 <template lang="html">
-  <div class="analytics">
-
-  </div>
+  <div>Create advert</div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style lang="scss" scoped>
-div.analytics {
-}
+<style lang="scss">
 </style>

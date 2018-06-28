@@ -9,6 +9,7 @@
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -36,22 +37,6 @@
     "webpack-dev-middleware": "^3.0.1",
     "webpack-dev-server": "^3.1.1",
     "webpack-pwa-manifest": "^3.6.2"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true,
-      "browser": true
-    },
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "rules": {
-      "semi": [
-        2,
-        "always"
-      ]
-    }
   },
   "dependencies": {
     "axios": "^0.18.0",

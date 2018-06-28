@@ -11,7 +11,7 @@ export default {
 
 <style lang="scss">
 @import './app.scss';
-
+// love
 @font-face {
   font-family: Lato;
   src:url(./../assets/fonts/Lato-Regular.ttf);

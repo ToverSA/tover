@@ -1,15 +1,15 @@
 <template lang="html">
   <div class="adverts">
-    <div class="dialog">
+    <!-- <div class="dialog">
       <div class="container"></div>
-    </div>
+    </div> -->
     <div class="row header">
       <span>Adverts</span>
       <span>Category</span>
       <span>Expires in</span>
       <span>Views</span>
     </div>
-    <div class="row" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]">
+    <div class="row" v-for="i in [1, 2]">
       <span>Example of a title</span>
       <span class="label">category</span>
       <span class="value">Books & study materials</span>
@@ -23,71 +23,70 @@
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>
-@import '../../app.scss';
-@import '../../dialog.scss';
-div.adverts{
+@import "../../app.scss";
+@import "../../dialog.scss";
+div.adverts {
   height: auto;
   padding: 5px;
 
-  .row{
-    background-color: #FFF;
+  .row {
+    background-color: #fff;
     padding: 10px;
     display: grid;
     grid-template-columns: 5fr 4fr repeat(2, minmax(0, 2fr)) 30px;
     grid-gap: 10px;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 768px) {
       grid-template-columns: 1fr 2fr 30px;
       margin-bottom: 2px;
     }
-    &:not(.header){
+    &:not(.header) {
       cursor: pointer;
     }
-    &.header{
+    &.header {
       margin-bottom: 2px;
       color: rgba($primary-color, 0.8);
-      @media screen and (max-width: 768px){
-        span:not(:first-child){
+      @media screen and (max-width: 768px) {
+        span:not(:first-child) {
           display: none;
         }
       }
     }
 
-    span{
+    span {
       padding: 5px;
       font-family: Lato Bold;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      &:first-child{
-        @media screen and (max-width: 768px){
+      &:first-child {
+        @media screen and (max-width: 768px) {
           grid-column: 1 / 3;
         }
       }
-      &.star{
+      &.star {
         padding: 0;
         padding-top: 5px;
         padding-left: 2px;
         color: $gold-color;
-        @media screen and (max-width: 768px){
+        @media screen and (max-width: 768px) {
           grid-column: 3 / 4;
           grid-row: 1 / 2;
         }
       }
-      &.label{
+      &.label {
         display: none;
-        @media screen and (max-width: 768px){
+        @media screen and (max-width: 768px) {
           display: block;
           color: $primary-color;
           text-align: right;
         }
       }
-      &.value{
-        @media screen and (max-width: 768px){
+      &.value {
+        @media screen and (max-width: 768px) {
           grid-column: 2 / 4;
         }
       }

@@ -1,26 +1,36 @@
-import * as components from './components';
+import * as components from "./components";
 
 export default [
   {
-    path: '/account',
+    path: "/account",
     component: components.Account,
     meta: { requiresAuth: true },
-    children : [
+    children: [
       {
-        path: '',
+        path: "",
         component: components.Adverts,
-        name: 'Adverts'
+        name: "Adverts"
       },
       {
-        path: 'profile',
+        path: "profile",
         component: components.Profile,
-        name: 'Profile'
+        name: "Profile"
+      },
+      {
+        path: "create",
+        component: components.CreateAdvert,
+        name: "CreateAdvert"
+      },
+      {
+        path: "chat",
+        component: components.Chat,
+        name: "Chat"
       }
     ]
   },
   {
-    path: 'auth',
+    path: "auth",
     component: components.Auth,
-    name: 'Auth'
+    name: "Auth"
   }
 ];

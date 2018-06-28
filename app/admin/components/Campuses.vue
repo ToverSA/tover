@@ -15,33 +15,31 @@
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>
-div.campus-list{
-  .campus-item{
-    background-color: #FFF;
+div.campus-list {
+  .campus-item {
+    background-color: #fff;
     margin: 2px 5px;
     padding: 5px;
     display: grid;
     grid-template-columns: 4fr 1fr;
 
-    .name{
+    .name {
       display: grid;
       padding-left: 10px;
 
-      span{
-        &.campus{
+      span {
+        &.campus {
           font-family: Lato Bold;
         }
-        &.institution{
+        &.institution {
           opacity: 0.6;
         }
       }
     }
-
   }
 }
 </style>
