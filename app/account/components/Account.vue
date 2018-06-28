@@ -17,10 +17,10 @@
         <i class="material-icons">chat_bubble_outline</i>
         <span>Chat</span>
       </router-link>
-      <div class="list-item">
+      <router-link :to="{ name: 'Home' }" class="list-item">
         <i class="material-icons">exit_to_app</i>
         <span>Exit</span>
-      </div>
+      </router-link>
     </div>
     <div class="main">
       <div class="navbar">
@@ -43,19 +43,6 @@ export default {
   computed: {
     section() {
       return this.$route.name;
-    }
-  },
-  methods: {
-    toCreate() {
-      this.isSidebar = false;
-    },
-    toAdverts() {
-      this.isSidebar = false;
-      this.$router.push({ path: "/account" });
-    },
-    toProfile() {
-      this.isSidebar = false;
-      this.$router.push({ name: "Profile" });
     }
   }
 };

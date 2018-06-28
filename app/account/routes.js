@@ -29,7 +29,7 @@ export default [
     ]
   },
   {
-    path: "auth",
+    path: "/auth",
     component: components.Auth,
     name: "Auth"
   }

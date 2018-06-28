@@ -53,66 +53,76 @@
 </template>
 
 <script>
-import api from '../../../api';
+import api from "../../../api";
 export default {
-  data () {
+  data() {
     return {
-      auth: 'login',
-      name: '',
-      email: '',
-      username: '',
-      password: '',
-      repassword: ''
+      auth: "login",
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+      repassword: ""
+    };
+  },
+  created() {
+    if (this.$route.query.hasOwnProperty("_ref")) {
+      let ref = this.$route.query._ref;
+      if (ref == "get-started") {
+        this.auth = "create";
+      }
     }
   },
   methods: {
-    logIn () {
-
+    logIn() {
       // api.users.authUser(this.username, this.password).then(user  => {
       //   console.log(user);
       // }, err => {
       //   console.log(err);
       // });
     },
-    signUp () {
+    signUp() {
       // api.users.createUser(this.email, this.password);
     },
-    gotoHome () {
-      this.$router.push('/');
+    gotoHome() {
+      this.$router.push("/");
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../app.scss';
-div.auth{
+@import "../../app.scss";
+div.auth {
   background-color: $primary-color;
   min-height: 100vh;
   padding: 100px;
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
     padding: 50px;
   }
-  @media screen and (max-width: 450px){
+  @media screen and (max-width: 450px) {
     padding: 0;
 
-    form{
+    form {
       height: 100vh;
     }
   }
 
-  img{
+  img {
     display: block;
     margin: auto;
     max-width: 200px;
   }
-  form{
+  form {
     max-width: 450px;
     margin: auto;
-    background-color: #FFF;
+    background-color: #fff;
     padding: 20px;
 
-    input{
+    h3 {
+      color: $primary-color;
+    }
+    input {
       width: 100%;
       margin: 5px 0;
       font-size: 1em;
@@ -120,13 +130,19 @@ div.auth{
       border: 0;
       background-color: $primary-color + unquote("1f");
     }
-    .buttons{
+    .buttons {
       display: flex;
       justify-content: flex-end;
       margin: 5px 0;
     }
-    .button{
+    .button {
       padding: 10px;
+      color: $accent-color;
+      cursor: pointer;
+      &.theme {
+        background-color: $accent-color;
+        color: $primary-color-text;
+      }
     }
   }
 }
