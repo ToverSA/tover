@@ -149,6 +149,7 @@ div.auth {
       font-size: 1em;
       padding: 10px;
       border: 0;
+      outline: none;
       background-color: $primary-color + unquote("1f");
     }
     .buttons {
