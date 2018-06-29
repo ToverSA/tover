@@ -12,24 +12,23 @@
 </template>
 
 <script>
-import ActionBar from './ActionBar';
+import ActionBar from "./ActionBar";
 export default {
   components: { ActionBar },
-  data () {
-    return {  }
+  data() {
+    return {};
   },
   methods: {
-    goto (id) {
-      this.$router.push({ name: 'StoreItem', params: { id: id } });
+    goto(id) {
+      this.$router.push({ name: "MarketAsset", params: { id: id } });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../app.scss';
+@import "../../app.scss";
 div.store {
-
   div.content {
     padding: 10px;
     margin: auto;
@@ -45,8 +44,8 @@ div.store {
       width: 100%;
     }
 
-    .box{
-      background-color: #FFF;
+    .box {
+      background-color: #fff;
       padding: 10px;
       cursor: pointer;
       @include no-select();
@@ -54,14 +53,14 @@ div.store {
         padding: 5px;
       }
 
-      img{
+      img {
         width: 100%;
         display: block;
       }
-      h3{
+      h3 {
         margin: 5px 0;
       }
-      span{
+      span {
         height: 40px;
         overflow: hidden;
         text-overflow: ellipsis;

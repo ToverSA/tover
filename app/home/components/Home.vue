@@ -69,7 +69,7 @@ export default {
       this._nav(this.to);
     },
     _nav(to) {
-      this.$router.push({ path: "store", query: { category: to } });
+      this.$router.push({ name: "Market", query: { category: to } });
     }
   }
 };
@@ -168,13 +168,13 @@ div {
     padding: 10px 30px;
 
     > h1 {
-      // text-align: center;
+      text-align: center;
       color: $primary-color;
     }
     > h2 {
       font-family: Lato Light;
     }
-    h1,
+    // h1,
     h2,
     .button {
       max-width: 768px;

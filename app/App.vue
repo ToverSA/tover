@@ -64,6 +64,9 @@ export default {};
 .material-icons.md-18 {
   font-size: 18px;
 }
+.material-icons.md-20 {
+  font-size: 20px;
+}
 .material-icons.md-24 {
   font-size: 24px;
 }

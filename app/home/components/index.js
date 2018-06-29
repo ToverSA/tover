@@ -1,4 +1,4 @@
-export { default as StoreItem } from './StoreItem';
-export { default as Store } from './Store';
-export { default as Home } from './Home';
-export { default as Search } from './Search';
+export { default as MarketAsset } from "./MarketAsset";
+export { default as Market } from "./Market";
+export { default as Home } from "./Home";
+export { default as Search } from "./Search";

@@ -4,8 +4,10 @@
       <img src="../../../assets/images/tover-blue.png" alt="Tover logo" @click="gotoHome()">
       <template v-if="auth == 'login'">
         <h3>Login to your account</h3>
-        <input type="email" placeholder="Email address" v-model="username">
-        <input type="password" placeholder="Password" v-model="password">
+        <label>Email</label>
+        <input type="email" placeholder="john@gmail.com" v-model="username">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password here" v-model="password">
         <div class="buttons">
           <div class="button" @click="auth = 'reset'">
             <span>Forgot password?</span>
@@ -22,15 +24,22 @@
       </template>
       <template v-else-if="auth == 'create'">
         <h3>Create a new account</h3>
-        <input type="text" placeholder="Your name" v-model="name">
+        <label>Your name</label>
+        <input type="text" placeholder="John McLaren" v-model="name">
+        <label>Email address</label>
         <input type="email" placeholder="Your email address" v-model="email">
+        <label>Choose a strong password</label>
         <input type="password" placeholder="Password" v-model="password">
+        <label>Re enter your password</label>
         <input type="password" placeholder="Re-enter password" v-model="repassword">
         <div class="buttons">
           <div class="button" @click="auth = 'login'">
             <span>Already have an account?</span>
           </div>
-          <div class="button theme" @click="signUp()">
+          <div v-if="loading" class="button loading" @click="signUp()">
+            <span><i class="material-icons md-18">refresh</i></span>
+          </div>
+          <div v-else class="button theme" @click="signUp()">
             <span>SIGN UP</span>
           </div>
         </div>
@@ -62,7 +71,8 @@ export default {
       email: "",
       username: "",
       password: "",
-      repassword: ""
+      repassword: "",
+      loading: false
     };
   },
   created() {
@@ -83,6 +93,7 @@ export default {
     },
     signUp() {
       // api.users.createUser(this.email, this.password);
+      this.loading = true;
     },
     gotoHome() {
       this.$router.push("/");
@@ -93,10 +104,20 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../app.scss";
+@keyframes rotation {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 div.auth {
   background-color: $primary-color;
   min-height: 100vh;
   padding: 100px;
+  padding-bottom: 0;
   @media screen and (max-width: 768px) {
     padding: 50px;
   }
@@ -139,9 +160,24 @@ div.auth {
       padding: 10px;
       color: $accent-color;
       cursor: pointer;
+      text-align: center;
       &.theme {
         background-color: $accent-color;
         color: $primary-color-text;
+        width: 82px;
+      }
+      &.loading {
+        background-color: rgba($accent-color, 0.7);
+        color: $primary-color-text;
+        width: 82px;
+        cursor: progress;
+
+        i {
+          animation-name: rotation;
+          animation-duration: 1s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
       }
     }
   }

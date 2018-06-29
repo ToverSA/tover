@@ -1,24 +1,24 @@
-import * as components from './components';
+import * as components from "./components";
 
 export default [
   {
-    path: '/',
+    path: "/",
     component: components.Home,
-    name: 'Home'
+    name: "Home"
   },
   {
-    path: '/store',
-    component: components.Store,
-    name: 'Store'
+    path: "/market",
+    component: components.Market,
+    name: "Market"
   },
   {
-    path: '/store/:id',
-    component: components.StoreItem,
-    name: 'StoreItem'
+    path: "/market/:id",
+    component: components.MarketAsset,
+    name: "MarketAsset"
   },
   {
-    path: '/search',
+    path: "/search",
     component: components.Search,
-    name: 'Search'
+    name: "Search"
   }
 ];
