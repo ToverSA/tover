@@ -26,8 +26,14 @@
       <div class="list"></div>
     </div>
     <div class="side">
-      <div class="image-viewer">IV</div>
-      <div class="suggest">SUGGEST</div>
+      <div class="image-viewer">
+        <i class="material-icons">zoom_in</i>
+        <img src="../../../assets/images/albumart.jpg" alt="">
+        <div class="selector">
+          <img v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10]" src="../../../assets/images/albumart.jpg" alt="">
+        </div>
+      </div>
+      <!-- <div class="suggest">SUGGEST</div> -->
     </div>
   </div>
 </template>
@@ -173,9 +179,46 @@ div.market-asset {
   }
   .side {
     background-color: transparent;
+    width: 100%;
 
     .image-viewer {
       background-color: #fff;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 400px 100px;
+      padding: 10px;
+      width: 100%;
+      grid-row-gap: 5px;
+      @media screen and (max-width: 768px) {
+        grid-template-rows: 250px 70px;
+      }
+
+      i {
+        display: none;
+      }
+      > img {
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+      .selector {
+        background-color: red;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+
+        > img {
+          // display: none;
+          height: 100%;
+          display: block;
+          padding: 5px;
+        }
+      }
+      // background-color: rgba(#000, 0.5);
     }
     .suggest {
       background-color: #fff;
