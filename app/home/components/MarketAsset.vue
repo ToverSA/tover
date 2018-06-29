@@ -27,10 +27,18 @@
     </div>
     <div class="side">
       <div class="image-viewer">
-        <i class="material-icons">zoom_in</i>
+        <img src="../../../assets/images/albumart.jpg" v-for="i in [1, 2, 3, 4, 5, 6]" @click="viewImage(i)">
+      </div>
+      <div class="fullscreen-viewer" v-if="fullScreen">
         <img src="../../../assets/images/albumart.jpg" alt="">
-        <div class="selector">
-          <img v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10]" src="../../../assets/images/albumart.jpg" alt="">
+        <div class="buttons side">
+          <i class="material-icons" @click="fullScreen = false">close</i>
+          <!-- <i class="material-icons">more_vert</i> -->
+        </div>
+        <div class="buttons bottom">
+          <i class="material-icons">chevron_left</i>
+          <span></span>
+          <i class="material-icons">chevron_right</i>
         </div>
       </div>
       <!-- <div class="suggest">SUGGEST</div> -->
@@ -42,15 +50,15 @@
 export default {
   data() {
     return {
-      isChatbox: false
+      fullScreen: false
     };
   },
   methods: {
     goBack() {
       this.$router.go(-1);
     },
-    doChat() {
-      this.isChatbox = true;
+    viewImage(id) {
+      this.fullScreen = true;
     },
     cancelChat() {
       this.isChatbox = false;
@@ -185,13 +193,15 @@ div.market-asset {
       background-color: #fff;
       position: relative;
       display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 400px 100px;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       padding: 10px;
       width: 100%;
-      grid-row-gap: 5px;
+      grid-gap: 10px;
       @media screen and (max-width: 768px) {
-        grid-template-rows: 250px 70px;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      @media screen and (max-width: 450px) {
+        display: none;
       }
 
       i {
@@ -199,26 +209,108 @@ div.market-asset {
       }
       > img {
         display: block;
-        height: 100%;
         width: 100%;
         object-fit: cover;
-      }
-      .selector {
-        background-color: red;
-        position: relative;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        display: flex;
-
-        > img {
-          // display: none;
-          height: 100%;
-          display: block;
-          padding: 5px;
+        &:nth-child(1) {
+          grid-column: 1 / 2;
+          grid-row: 1 / 2;
+        }
+        &:nth-child(2) {
+          grid-column: 2 / 3;
+          grid-row: 1 / 2;
+        }
+        &:nth-child(3) {
+          grid-column: 1 / 3;
+          grid-row: 2 / 4;
+        }
+        &:nth-child(4) {
+          grid-column: 3 / 5;
+          grid-row: 1 / 3;
+        }
+        &:nth-child(5) {
+        }
+        &:nth-child(6) {
+        }
+        @media screen and (max-width: 768px) {
+          &:nth-child(1) {
+            grid-column: 3 / 4;
+            grid-row: 1 / 2;
+          }
+          &:nth-child(2) {
+            grid-column: 3 / 4;
+            grid-row: 2 / 3;
+          }
+          &:nth-child(3) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            // padding: 10px;
+            // display: none;
+          }
+          &:nth-child(4) {
+            grid-column: 1 / 2;
+            grid-row: 3 / 4;
+          }
+          &:nth-child(5) {
+            grid-column: 1 / 2;
+            grid-row: 4 / 5;
+          }
+          &:nth-child(6) {
+            grid-column: 2 / 4;
+            grid-row: 3 / 5;
+          }
         }
       }
-      // background-color: rgba(#000, 0.5);
+    }
+    .fullscreen-viewer {
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+      overflow: auto;
+      background-color: rgba(#ffffff, 0.8);
+      top: 0;
+      left: 0;
+
+      img {
+        display: block;
+        margin: auto;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        padding: 20px;
+      }
+      .buttons {
+        position: absolute;
+        width: auto;
+        height: auto;
+        &.side {
+          top: 0;
+          right: 0;
+        }
+        &.bottom {
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          width: 300px;
+          span {
+            display: block;
+            // background-color: red;
+            flex-grow: 1;
+          }
+        }
+        i {
+          display: block;
+          height: 50px;
+          width: 50px;
+          color: $accent-color;
+          background-color: #ffffff;
+          margin: 10px;
+          padding: 13px;
+          border-radius: 25px;
+          cursor: pointer;
+          box-shadow: 0 1px 2px 1px rgba($accent-color, 0.2);
+        }
+      }
     }
     .suggest {
       background-color: #fff;
