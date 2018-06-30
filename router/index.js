@@ -19,8 +19,7 @@ router.beforeEach((to, from, next) => {
       });
     }
     next();
-  }
-  if (to.matched.some((record) => record.meta.requiresCampus)) {
+  } else if (to.matched.some((record) => record.meta.requiresCampus)) {
     if (!store.getters.campusSet) {
       next({
         name: "CampusChooser",

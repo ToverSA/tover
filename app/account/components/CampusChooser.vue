@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="campus-chooser">
     <div class="status-bar">
-      <router-link :to="{ name: 'Home' }"><i class="material-icons md-20">chevron_left</i></router-link>
+      <router-link :to="{ name: 'Home' }" :replace="true"><i class="material-icons md-20">chevron_left</i></router-link>
       <h3>Choose your campus</h3>
       <i class="material-icons md-20">info</i>
     </div>
@@ -40,14 +40,14 @@ export default {
       this.finishDialog = false;
     },
     saveCampus() {
-      // store.commit("campusId", 3);
-      console.log(this.$route);
+      store.commit("campusId", 3);
       if (this.$route.params.id === "guest") {
         if (this.$route.query.hasOwnProperty("redirect")) {
-          this.$router.push(this.$route.query.redirect);
+          this.$router.push({
+            path: this.$route.query.redirect
+          });
         }
       }
-      // this.$router.push({ path: '' });
     }
   },
   components: {
@@ -59,7 +59,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../app.scss";
-@import "../../dialog.scss";
 .subtitle {
   color: $primary-color-dark;
 }

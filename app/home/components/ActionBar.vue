@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="action-bar">
-    <span @click="back()" title="Back"><i class="material-icons md-24">arrow_back</i></span>
+    <router-link :to="{name: 'Home'}" title="Back"><i class="material-icons md-24">arrow_back</i></router-link>
     <h3 title="Category">{{ title }}</h3>
     <span @click="doSort" title="Sort By"><i class="material-icons md-24">sort</i></span>
     <span @click="doSearch" title="Search"><i class="material-icons md-24">search</i></span>
@@ -10,67 +10,69 @@
 
 <script>
 export default {
-  created () {
+  created() {
     let category = this.$route.query.category;
-    if (category == 'books') {
-      this.title = 'Books & Study Material';
-    } else if (category == 'electronics') {
-      this.title = 'Electronics';
-    } else if (category == 'food') {
-      this.title = 'Food & Beverages';
-    } else if (category == 'services') {
-      this.title = 'Services & Other';
+    if (category == "books") {
+      this.title = "Books & Study Material";
+    } else if (category == "electronics") {
+      this.title = "Electronics";
+    } else if (category == "food") {
+      this.title = "Food & Beverages";
+    } else if (category == "services") {
+      this.title = "Services & Other";
     } else {
-      this.title = 'All';
+      this.title = "All";
     }
   },
-  data () {
+  data() {
     return {
-      title: ''
-    }
+      title: ""
+    };
   },
   methods: {
-    back () {
-      this.$router.go(-1);
+    back() {
+      this.$router.back();
     },
-    doSearch () {
-      this.$router.push({ path: 'search' });
+    doSearch() {
+      this.$router.push({ path: "search" });
     },
-    doSort () {},
-    doAccount () {
-      this.$router.push({ path: 'account' });
+    doSort() {},
+    doAccount() {
+      this.$router.push({ path: "account" });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../app.scss';
+@import "../../app.scss";
 $bar-height: 50px;
-div.action-bar{
+div.action-bar {
   height: $bar-height;
   background-color: $primary-color;
   display: grid;
   grid-template-columns: $bar-height 1fr repeat(3, $bar-height);
   width: 100%;
 
-  span{
+  a,
+  span {
     display: block;
     height: $bar-height;
     width: $bar-height;
     text-align: center;
     padding: 12px;
-    color: #FFF;
+    color: #fff;
+    text-decoration: none;
     cursor: pointer;
     @include no-select();
   }
-  span:hover{
+  span:hover {
     background-color: $primary-color-dark;
   }
-  h3{
+  h3 {
     margin: 0;
     padding: 14px 0;
-    color: #FFF;
+    color: #fff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -15,7 +15,7 @@ export default [
   {
     path: "/market/:category",
     component: components.Market,
-    name: "Market",
+    name: "MarketCategory",
     meta: { requiresCampus: true }
   },
   {

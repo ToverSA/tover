@@ -10,19 +10,19 @@
     </div>
     <div class="categories">
       <h1>BROWSE BY CATEGORY</h1>
-      <router-link :to="{ name: 'Market' }" class="box" @click="nav('books')">
+      <router-link :to="{ name: 'MarketCategory', params: { category: 'books' } }" class="box">
         <h2>Books & Study Material</h2>
         <i class="material-icons md-60">library_books</i>
       </router-link>
-      <router-link :to="{ name: 'Market' }" class="box" @click="nav('electronics')">
+      <router-link :to="{ name: 'MarketCategory', params: { category: 'electronics' } }" class="box">
         <h2>Electronics</h2>
           <i class="material-icons md-60">devices_other</i>
       </router-link>
-      <router-link :to="{ name: 'Market', query: { category: to } }" class="box" @click="nav('food')">
+      <router-link :to="{ name: 'MarketCategory', params: { category: 'food' } }" class="box">
         <h2>Food & Beverages</h2>
         <i class="material-icons md-60">local_dining</i>
       </router-link>
-      <router-link :to="{ name: 'Market', query: { category: to } }" class="box" @click="nav('services')">
+      <router-link :to="{ name: 'MarketCategory', params: { category: 'services' } }" class="box">
         <h2>Services & Other</h2>
         <i class="material-icons md-60">local_library</i>
       </router-link>
