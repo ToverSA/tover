@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="store">
+  <div class="market">
     <action-bar/>
     <div class="content">
       <div class="box" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]" @click="goto(i)">
@@ -28,16 +28,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../app.scss";
-div.store {
+div.market {
   div.content {
     padding-top: 10px;
     margin: auto;
     width: 100%;
     max-width: 1200px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     align-items: center;
-    grid-row-gap: 10px;
+    grid-row-gap: 40px;
     @media screen and (max-width: 1024px) {
       grid-template-columns: repeat(4, 1fr);
       max-width: 900px;
@@ -48,38 +48,37 @@ div.store {
     @media screen and (max-width: 450px) {
       grid-template-columns: repeat(3, 1fr);
       width: 100%;
+      grid-row-gap: 0;
     }
 
     .box {
       background-color: #fff;
       cursor: pointer;
       margin: auto;
-      padding: 20px;
-      width: 200px;
+      width: 160px;
       @include no-select();
+      box-shadow: 0 1px 1px 2px rgba(#ccc, 0.3);
       @media screen and (max-width: 1024px) {
         width: 200px;
       }
       @media screen and (max-width: 768px) {
-        padding: 10px;
-        width: 150px;
-      }
-      @media screen and (max-width: 450px) {
-        padding: 10px;
         width: 140px;
       }
-      @media screen and (max-width: 425px) {
-        width: 120px;
+      @media screen and (max-width: 450px) {
         padding: 5px;
-      }
-      @media screen and (max-width: 375px) {
-        padding: 5px;
-        width: 100px;
+        width: 100%;
       }
 
       img {
         width: 100%;
         display: block;
+      }
+      h3,
+      span {
+        padding: 0 5px;
+        @media screen and (max-width: 450px) {
+          padding: 0;
+        }
       }
       h3 {
         margin: 5px 0;
