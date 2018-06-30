@@ -13,7 +13,13 @@ export default [
     meta: { requiresCampus: true }
   },
   {
-    path: "/market/:id",
+    path: "/market/:category",
+    component: components.Market,
+    name: "Market",
+    meta: { requiresCampus: true }
+  },
+  {
+    path: "/asset/:id",
     component: components.MarketAsset,
     name: "MarketAsset"
   },

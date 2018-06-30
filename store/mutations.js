@@ -1,8 +1,8 @@
 export default {
-  setAuth (state) {
+  setAuth(state) {
     state.auth = true;
   },
-  setCampusId (state, id) {
+  campusId(state, id) {
     state.campusId = id;
   }
 };

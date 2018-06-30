@@ -34,7 +34,7 @@ export default [
     name: "Auth"
   },
   {
-    path: "campus/:id",
+    path: "/campus/:id",
     component: components.CampusChooser,
     name: "CampusChooser"
   }
