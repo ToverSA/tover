@@ -10,22 +10,22 @@
     </div>
     <div class="categories">
       <h1>BROWSE BY CATEGORY</h1>
-      <div class="box" @click="nav('books')">
+      <router-link :to="{ name: 'Market' }" class="box" @click="nav('books')">
         <h2>Books & Study Material</h2>
         <i class="material-icons md-60">library_books</i>
-      </div>
-      <div class="box" @click="nav('electronics')">
+      </router-link>
+      <router-link :to="{ name: 'Market' }" class="box" @click="nav('electronics')">
         <h2>Electronics</h2>
           <i class="material-icons md-60">devices_other</i>
-      </div>
-      <div class="box" @click="nav('food')">
+      </router-link>
+      <router-link :to="{ name: 'Market', query: { category: to } }" class="box" @click="nav('food')">
         <h2>Food & Beverages</h2>
         <i class="material-icons md-60">local_dining</i>
-      </div>
-      <div class="box" @click="nav('services')">
+      </router-link>
+      <router-link :to="{ name: 'Market', query: { category: to } }" class="box" @click="nav('services')">
         <h2>Services & Other</h2>
         <i class="material-icons md-60">local_library</i>
-      </div>
+      </router-link>
     </div>
     <div class="create-account">
       <h1>BECOME A MERCHANT</h1>
@@ -138,6 +138,7 @@ div {
       }
     }
     > .box {
+      text-decoration: none;
       background-color: #fff;
       padding: 10px;
       text-align: center;
@@ -145,13 +146,9 @@ div {
       display: grid;
       grid-template-rows: 1fr;
       @include no-select();
+      color: $primary-color-dark;
       @media screen and (max-width: 425px) {
         grid-column: 1 / 3;
-      }
-
-      h2,
-      i {
-        opacity: 0.5;
       }
     }
     > .box:hover {

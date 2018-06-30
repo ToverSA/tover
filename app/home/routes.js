@@ -9,7 +9,8 @@ export default [
   {
     path: "/market",
     component: components.Market,
-    name: "Market"
+    name: "Market",
+    meta: { requiresCampus: true }
   },
   {
     path: "/market/:id",

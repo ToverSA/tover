@@ -12,7 +12,7 @@
           </div>
           <div class="spacer"></div>
           <div class="button light">
-            <i class="material-icons md-20">more_vert</i>
+            <i class="material-icons md-20">more_horiz</i>
             <span>MORE</span>
           </div>
           <a href="tel:0734004593" class="button">
@@ -266,7 +266,7 @@ div.market-asset {
       height: 100vh;
       width: 100vw;
       overflow: auto;
-      background-color: rgba(#ffffff, 0.8);
+      background-color: rgba(#000, 0.9);
       top: 0;
       left: 0;
 
@@ -276,7 +276,7 @@ div.market-asset {
         height: 100%;
         width: 100%;
         object-fit: contain;
-        padding: 20px;
+        padding: 5px;
       }
       .buttons {
         position: absolute;

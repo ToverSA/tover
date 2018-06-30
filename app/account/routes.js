@@ -12,9 +12,9 @@ export default [
         name: "Adverts"
       },
       {
-        path: "profile",
-        component: components.Profile,
-        name: "Profile"
+        path: "chat",
+        component: components.Chat,
+        name: "Chat"
       },
       {
         path: "create",
@@ -22,9 +22,9 @@ export default [
         name: "CreateAdvert"
       },
       {
-        path: "chat",
-        component: components.Chat,
-        name: "Chat"
+        path: "profile",
+        component: components.Profile,
+        name: "Profile"
       }
     ]
   },
@@ -32,5 +32,10 @@ export default [
     path: "/auth",
     component: components.Auth,
     name: "Auth"
+  },
+  {
+    path: "campus/:id",
+    component: components.CampusChooser,
+    name: "CampusChooser"
   }
 ];
