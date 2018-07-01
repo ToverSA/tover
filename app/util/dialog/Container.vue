@@ -1,16 +1,18 @@
 <template lang="html">
   <div class="dialog-container">
     <div class="dialog-frame">
+      <h3 class="title">{{dialogTitle}}</h3>
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default { props: ["dialogTitle"] };
 </script>
 
 <style lang="scss" scoped>
+@import "../../app.scss";
 div.dialog-container {
   background-color: rgba(#000, 0.5);
   position: fixed;
@@ -43,6 +45,20 @@ div.dialog-container {
       bottom: 0;
       padding: 15px;
       border-radius: 0;
+    }
+
+    h3.title {
+      margin: 10px 0;
+    }
+    input.dialog-input {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+      border: 0;
+      font-size: 1em;
+      background-color: rgba($primary-color, 0.05);
+      border-bottom: 4px solid rgba($primary-color, 0.3);
+      margin: 5px 0;
     }
   }
 }
