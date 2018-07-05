@@ -13,7 +13,7 @@
         <p>{{i}}</p>
       </div>
       <div class="institution form">
-        <input type="text" placeholder="Add new institution here">
+        <input type="text" placeholder="Institution name">
         <p>
           <i class="material-icons md-20">add</i>
           <span>Add</span>
