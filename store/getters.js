@@ -1,9 +1,12 @@
+var mock = true;
 export default {
   /* Check if we have a valid access token */
-  loggedIn: (state, getters) => {
-    return state.auth;
+  loggedIn: (state) => {
+    // TODO: Check if access token is valid, or available
+    if (!mock) return state.auth;
+    return true;
   },
-  campusSet (state) {
-    return state.campusId != -1;
+  campusSet(state) {
+    return state.campusId !== -1;
   }
 };

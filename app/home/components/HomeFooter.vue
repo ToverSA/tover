@@ -19,10 +19,8 @@
       <h3>RESOURCES</h3>
       <router-link to="/account">My account</router-link>
       <router-link to="/search">Search</router-link>
-      <router-link to="/books">Books & Study Materials</router-link>
-      <router-link to="/electronics">Electronics</router-link>
-      <router-link to="/services">Services & Other</router-link>
-      <router-link to="/events">Events</router-link>
+      <router-link to="/store">Brouse store</router-link>
+      <router-link to="/admin">Admin dashboard</router-link>
     </div>
     <div class="section">
       <h3>LINKS</h3>
@@ -54,7 +52,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../app.scss';
 div.footer{
   background-color: #263238;
   min-height: 200px;

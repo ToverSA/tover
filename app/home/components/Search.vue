@@ -3,8 +3,6 @@
     <div class="search-bar">
       <span @click="goBack"><i class="material-icons">arrow_back</i></span>
       <input type="search" placeholder="Search in Electronics"/>
-      <span><i class="material-icons">search</i></span>
-      <span><i class="material-icons">more_horiz</i></span>
     </div>
   </div>
 </template>
@@ -27,7 +25,7 @@ div.search{
     background-color: #FFF;
     height: $bar-height;
     display: grid;
-    grid-template-columns: $bar-height 1fr $bar-height $bar-height;
+    grid-template-columns: $bar-height 1fr;
 
     span{
       text-align: center;
