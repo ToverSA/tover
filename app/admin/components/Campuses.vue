@@ -1,5 +1,7 @@
 <template lang="html">
   <div class="campuses">
+    <div class="insti-view">
+    </div>
     <div class="insti-list">
       <div class="institution">
         <p>Institution</p>
