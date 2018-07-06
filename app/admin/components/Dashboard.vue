@@ -1,8 +1,13 @@
 <template lang="html">
   <div class="admin">
     <div class="sidebar">
-      <router-link :to="{ name: 'Analytics' }">
-        <i class="material-icons md-20">add</i>
+      <i class="material-icons md-20">menu</i>
+      <router-link :to="{ name: 'Home' }">
+        <i class="material-icons md-20">home</i>
+      </router-link>
+      <i class="material-icons md-20">add</i>
+      <router-link :to="{ name: 'Home' }">
+        <i class="material-icons md-20">search</i>
       </router-link>
     </div>
     <router-view class="main"></router-view>
@@ -24,9 +29,11 @@ div.admin {
     height: 100vh;
     display: block;
 
-    a {
+    a,
+    i {
       text-decoration: none;
       color: #fff;
+      cursor: pointer;
     }
     i {
       padding: 10px;
