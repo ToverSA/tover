@@ -13,4 +13,9 @@ export default new Vuex.Store({
   actions: {
 
   },
+  getters: {
+    loggedIn: (state) => {
+      return false;
+    },
+  },
 });

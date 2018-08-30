@@ -1,8 +1,6 @@
 <template lang="html">
   <div class="main-content">
     <router-view/>
-    <footer class="main-content">
-    </footer>
   </div>
 </template>
 
@@ -88,10 +86,5 @@ body {
   margin: 0;
   background-color: $background-color;
   font-family: "Lato";
-}
-
-footer.main-content {
-  background-color: #263238;
-  padding: 20px;
 }
 </style>
