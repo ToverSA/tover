@@ -1,7 +1,11 @@
 <template>
     <div class="auth">
-      <form>
-        <h3>Sign in to your Tover profile</h3>
+      <router-link :to="{name: 'home'}">
+        <i class="material-icons close">close</i>
+      </router-link>
+      <img src="@/assets/img/tover.png" alt="Tover logo" class="logo">
+      <form v-if="state === 0">
+        <h3>Sign in to your profile</h3>
         <label for="email">Email</label><br>
         <input type="text" name="email">
         <label for="password">Password</label><br>
@@ -10,16 +14,63 @@
           <input type="button" value="FORGOT PASSWORD?" class="negative">
           <input type="button" value="SIGN IN">
         </div>
-        <input type="button" value="CREATE AN ACCOUNT" class="negative">
+        <input @click="gotoCreate" type="button" value="CREATE AN ACCOUNT" class="negative">
+      </form>
+      <form v-if="state === 1">
+        <h3>Sign up for a new profile</h3>
+        <label for="names">Names</label><br>
+        <input type="text" name="names" placeholder="John Doe">
+        <label for="email">Email</label><br>
+        <input type="text" name="email" placeholder="john@mail.com">
+        <label for="password">Password</label><br>
+        <input type="password" name="password" placeholder="Keep this as a secret">
+        <div class="grid-x2">
+          <input @click="gotoLogin" type="button" value="ALREADY HAVE ACCOUNT?" class="negative">
+          <input @click="signUp" type="button" value="SIGN UP">
+        </div>
       </form>
     </div>
 </template>
+<script lang="ts">
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+enum View {
+  login,
+  signup,
+}
+@Component
+export default class Auth extends Vue {
+  state: number = View.signup;
+
+  gotoCreate(): void {
+    this.state = View.signup;
+  }
+  gotoLogin(): void {
+    this.state = View.login;
+  }
+  signUp(): void {}
+}
+</script>
+
 <style lang="scss" scoped>
 @import "@/app.scss";
 div.auth {
   background-color: $primary-color;
   height: 100vh;
-  padding-top: 100px;
+
+  i {
+    height: $bar-height;
+    width: $bar-height;
+    padding: 14px;
+    color: white;
+  }
+
+  .logo {
+    height: auto;
+    display: block;
+    width: 300px;
+    margin: auto;
+  }
 
   form {
     // background-color: white;
