@@ -1,92 +1,26 @@
-# README #
-# All Kept Origional #
-## Actors ##
-* User
+# tover
 
-### User ###
-* view/browse ads
-    * sort by latest/earliest
-    * browse by category
-* search ad
-    * filter by location/category
-* bookmark ad
-* create account
-* login/logout with account
-* manage account
-    * edit info/details
-    * delete account
-* manage ads
-    * create ad
-    * edit ad
-    * remove ad
-    * request ad promotion
-* compose message
-* manage inbox
-    * view messages
-    * reply to messages
-    * delete messages
-* report bug issues
-* report misused ads
+## Project setup
+```
+npm install
+```
 
-## URLs ##
-* GET /campuses
-* GET /ads (get list of ads)
-    * limit, count as params
-    * responds with json array
-* GET /ads/:query (get list of searched ads)
-    * query, limit, count as params
-    * responds with json array
-* GET /ads/:id (Get single ad)
-    * id as param
-    * repsonds json object
-* GET /image/:id.jpg
-    * id as param
-    * return base64 resource
-* GET /image/thumb/:id.jpg
-    * id as param
-    * returns base64 resource
-* GET /users/messages (get messages)
-    * returns json resource
-    * requires access token
-* GET /account/ads
-    * returns ads assocciated with account
-    * requires token
-* GET /account
-    * returns logged on user account
-* GET /users
-    * returns users as json data
-* POST /users/messages (send new message)
-    * returns status code
-    * requires access token
-* POST /users/new (create new user)
-    * returns status code
-* POST /users/auth (user auth)
-    * returns access token
-* POST /users/recovery (recover account)
-    * returns status code
-* POST /ads (create new ad)
-    * resurns status code
-    * requires access token
-* POST /promotion/ads/:id (request promotion)
-    * returns status code
-    * requires access token
-* DELETE /ads/:id (Delete single ad)
-    * returns status code
-    * requires access token
-* DELETE /users/:id (Delete account)
-    * requires access token, password
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-## NOTES ##
-Some bugs when creating ads abnormalities show with images. Apparently
-due to the mysql datatype. check that it is set to longblob other than blob.
+### Compiles and minifies for production
+```
+npm run build
+```
 
-Remember to change the charset to utf8_genral_ci for better search queries
-in users.name, advert.title and advert.description.
+### Lints and fixes files
+```
+npm run lint
+```
 
-## Questions ##
-What does it do?
-Why can't I see pictures on the list of ads I created?
-
-* Command to concat files
-
- find app/ -name '*.js' -exec cat {} \; > app/script.js
+### Run your unit tests
+```
+npm run test:unit
+```
