@@ -10,8 +10,7 @@ import market from "@/market/routes";
 Vue.use(Router);
 
 const router = new Router({
-  routes: [...account, ...admin, ...market]
+  routes: [...admin, ...market,],
 });
-
 
 export default router;
