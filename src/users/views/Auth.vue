@@ -7,10 +7,10 @@
         <label for="password">Password</label><br>
         <input type="password" name="password">
         <div class="grid-x2">
-          <router-link :to="{name: 'accountRecovery'}">forgot password?</router-link>
+          <input type="button" value="FORGOT PASSWORD?" class="negative">
           <input type="button" value="SIGN IN">
         </div>
-        <router-link :to="{name: 'createAccount'}">Create a new account</router-link>
+        <input type="button" value="CREATE AN ACCOUNT" class="negative">
       </form>
     </div>
 </template>
@@ -40,13 +40,20 @@ div.auth {
       &[type="button"] {
         background-color: $accent-color;
         color: white;
-        width: auto;
         min-width: 100px;
+        &.negative {
+          background-color: $primary-color-dark;
+          color: white;
+        }
       }
     }
     .grid-x2 {
       display: flex;
       justify-content: space-between;
+
+      input {
+        width: auto;
+      }
     }
     a {
       padding: 10px 0px;

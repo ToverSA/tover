@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="create">
       <form>
         <h3>Sign up for a Tover account</h3>
         <label for="names">Names</label><br>
@@ -8,12 +8,28 @@
         <input type="email">
         <label for="password">Password</label><br>
         <input type="password">
+        <div class="grid-x2">
+          <router-link :to="{name: 'auth'}">Already have an account?</router-link>
+          <input @click="onSignup" type="button" value="SIGN UP">
+        </div>
       </form>
     </div>
 </template>
+<script lang="ts">
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+
+@Component
+export default class CreateAccount extends Vue {
+  onSignup(): void {
+    console.log("on sign up pressed");
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 @import "@/app.scss";
-div {
+div.create {
   background-color: $primary-color;
   height: 100vh;
   padding-top: 100px;
@@ -31,6 +47,23 @@ div {
       font-size: 1em;
       border-radius: 3px;
       border: 0px;
+
+      &[type="button"] {
+        width: auto;
+        min-width: 100px;
+        background-color: $accent-color;
+        color: white;
+      }
+    }
+    .grid-x2 {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    a {
+      display: block;
+      padding: 10px 0;
+      color: $accent-color;
     }
   }
 }
