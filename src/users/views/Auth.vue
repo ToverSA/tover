@@ -29,11 +29,14 @@
           <input @click="signUp" type="button" value="SIGN UP">
         </div>
       </form>
+      <form>
+        <h3>Loading</h3>
+      </form>
     </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 enum View {
   login,
   signup,
@@ -53,7 +56,7 @@ export default class Auth extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "@/app.scss";
+@import '@/app.scss';
 div.auth {
   background-color: $primary-color;
   height: 100vh;
@@ -88,7 +91,7 @@ div.auth {
       border-radius: 3px;
       border: 0;
 
-      &[type="button"] {
+      &[type='button'] {
         background-color: $accent-color;
         color: white;
         min-width: 100px;
