@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import store from '@/store';
 
 import users from '@/users/routes';
+import dashboard from '@/dashboard/routes';
 import market from '@/market/routes';
 
 Vue.use(Router);
@@ -14,6 +15,7 @@ const router = new Router({
   routes: [
     ...users,
     ...market,
+    ...dashboard,
   ],
 });
 

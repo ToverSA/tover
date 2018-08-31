@@ -22,7 +22,7 @@ export default {};
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 20px; /* Preferred icon size */
+  font-size: 18px; /* Preferred icon size */
   display: inline-block;
   line-height: 1;
   text-transform: none;
