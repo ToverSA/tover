@@ -1,13 +1,12 @@
 $background-color: #cfd8dc;
-$primary-color-dark: #ffa000;
-$primary-color: #ffc107;
-$primary-color-light: #ffecb3;
-$primary-color-text: #212121;
+$primary-color-dark: #00796b;
+$primary-color: #009688;
+$primary-color-light: #b2dfdb;
+$primary-color-text: #ffffff;
 $accent-color: #ff5722;
 $primary-text-color: #212121;
 $secondary-text-color: #757575;
 $divider-color: #bdbdbd;
-
 $bar-height: 50px;
 
 @mixin logo-gradient($a, $b) {

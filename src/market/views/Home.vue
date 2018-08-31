@@ -3,7 +3,7 @@
       <header>
         <img src="@/assets/img/tover.png" alt="Tover logo">
         <nav>
-          <router-link to='/account'>SIGN IN</router-link>
+          <router-link v-bind:to="{name: 'profile'}">SIGN IN</router-link>
         </nav>
       </header>
     </div>
