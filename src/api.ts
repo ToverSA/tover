@@ -3,10 +3,10 @@ import MockAdapter from 'axios-mock-adapter';
 
 const mock = new MockAdapter(axios, { delayResponse: 500 });
 
-mock.onGet('/users').reply(200);
 mock.onPost('/api/users').reply(201, {
   message: 'Created successfully',
 });
+mock.onPost('/api/oauth/token');
 
 if (process.env.NODE_ENV === 'production') {
   mock.restore();
@@ -22,5 +22,13 @@ export default {
    */
   createUser(names: string, email: string, password: string): AxiosPromise {
     return axios.post('/api/users', { names, email, password });
+  },
+  /**
+   * Authorises user and saves access_token in to state
+   * @param string authEmail
+   * @param string authPassword
+   */
+  authUser(authEmail: string, authPassword: string): void {
+    // TODO authorise user
   },
 };

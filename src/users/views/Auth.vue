@@ -12,7 +12,7 @@
         <input type="password" name="password">
         <div class="grid-x2">
           <input type="button" value="FORGOT PASSWORD?" class="negative">
-          <input type="button" value="SIGN IN">
+          <input @click="signIn" type="button" value="SIGN IN">
         </div>
         <input @click="gotoCreate" type="button" value="CREATE AN ACCOUNT" class="negative">
       </form>
@@ -42,10 +42,12 @@ enum View {
 }
 @Component
 export default class Auth extends Vue {
-  public state: number = View.signup;
+  public state: number = View.login;
   public names: string = '';
   public email: string = '';
   public password: string = '';
+  public authEmail: string = '';
+  public authPassword: string = '';
 
   public gotoCreate(): void {
     this.state = View.signup;
@@ -58,9 +60,21 @@ export default class Auth extends Vue {
    */
   public signUp(): void {
     this.state = View.loading;
-    api.createUser(this.names, this.email, this.password).then(response => {
-      console.log(response);
-    });
+    api
+      .createUser(this.names, this.email, this.password)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        //TODO catch error
+      })
+      .finally(() => {
+        this.state = View.login;
+      });
+  }
+  public signIn(): void {
+    console.log('signing in');
+    api.authUser(this.authEmail, this.authPassword);
   }
 }
 </script>
