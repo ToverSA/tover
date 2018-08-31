@@ -25,22 +25,27 @@
         <label for="password">Password</label><br>
         <input type="password" name="password" placeholder="Keep this as a secret" v-model="password">
         <div class="grid-x2">
-          <input @click="gotoLogin" type="button" value="ALREADY HAVE ACCOUNT?" class="negative">
+          <input @click="gotoLogin" type="button" value="SIGN IN INSTEAD" class="negative">
           <input @click="signUp" type="button" value="SIGN UP">
         </div>
       </form>
+      <loader-dialog v-if="loading" v-bind:title="loading"/>
     </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import store from '@/store';
 import api from '@/api';
+import LoaderDialog from '@/components/LoaderDialog.vue';
 enum View {
   login,
   signup,
-  loading,
 }
-@Component
+@Component({
+  components: { LoaderDialog },
+})
 export default class Auth extends Vue {
   public state: number = View.login;
   public names: string = '';
@@ -48,6 +53,7 @@ export default class Auth extends Vue {
   public password: string = '';
   public authEmail: string = '';
   public authPassword: string = '';
+  public loading: string | boolean = false;
 
   public gotoCreate(): void {
     this.state = View.signup;
@@ -59,22 +65,38 @@ export default class Auth extends Vue {
    * sigh up button callback
    */
   public signUp(): void {
-    this.state = View.loading;
+    this.loading = 'Signing up';
     api
       .createUser(this.names, this.email, this.password)
       .then(response => {
         console.log(response);
       })
       .catch(error => {
-        //TODO catch error
+        // TODO catch error
       })
       .finally(() => {
-        this.state = View.login;
+        this.loading = false;
       });
   }
   public signIn(): void {
-    console.log('signing in');
-    api.authUser(this.authEmail, this.authPassword);
+    this.loading = 'Signing in';
+    api
+      .authUser(this.authEmail, this.authPassword)
+      .then(response => {
+        const data = response.data;
+        store.commit('token', data.access_token);
+        const query = this.$route.query;
+        if (query.hasOwnProperty('redirect')) {
+          this.$router.push(query.redirect);
+        }
+      })
+      .catch(error => {
+        console.log('error execute');
+        console.log(error);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 }
 </script>
@@ -83,7 +105,8 @@ export default class Auth extends Vue {
 @import '@/app.scss';
 div.auth {
   background-color: $primary-color;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 
   i {
     height: $bar-height;
@@ -110,8 +133,8 @@ div.auth {
     input {
       width: 100%;
       margin: 5px 0;
-      padding: 10px;
-      font-size: 1;
+      padding: 14px 10px;
+      font-size: 1em;
       border-radius: 3px;
       border: 0;
 
