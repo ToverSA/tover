@@ -29,14 +29,12 @@
           <input @click="signUp" type="button" value="SIGN UP">
         </div>
       </form>
-      <form>
-        <h3>Loading</h3>
-      </form>
     </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import api from '@/api';
 enum View {
   login,
   signup,
@@ -52,7 +50,7 @@ export default class Auth extends Vue {
     this.state = View.login;
   }
   public signUp(): void {
-    console.log('HEllo');
+    api.getUsers();
   }
 }
 </script>
