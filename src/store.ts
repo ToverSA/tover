@@ -5,17 +5,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-
+    token: '',
   },
   mutations: {
-
+    token: (state, payload) => {
+      state.token = payload;
+    },
   },
   actions: {
 
   },
   getters: {
     loggedIn: (state) => {
-      return false;
+      return state.token.length > 0;
     },
   },
 });

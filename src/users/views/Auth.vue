@@ -68,10 +68,10 @@ export default class Auth extends Vue {
     this.loading = 'Signing up';
     api
       .createUser(this.names, this.email, this.password)
-      .then(response => {
-        console.log(response);
+      .then((response) => {
+        // TODO implement what happenes here
       })
-      .catch(error => {
+      .catch((error) => {
         // TODO catch error
       })
       .finally(() => {
@@ -82,17 +82,17 @@ export default class Auth extends Vue {
     this.loading = 'Signing in';
     api
       .authUser(this.authEmail, this.authPassword)
-      .then(response => {
+      .then((response) => {
         const data = response.data;
-        store.commit('token', data.access_token);
+        const token = data.access_token;
+        this.$store.commit('token', token);
         const query = this.$route.query;
         if (query.hasOwnProperty('redirect')) {
           this.$router.push(query.redirect);
         }
       })
-      .catch(error => {
-        console.log('error execute');
-        console.log(error);
+      .catch((error) => {
+        // TODO handle errors here
       })
       .finally(() => {
         this.loading = false;

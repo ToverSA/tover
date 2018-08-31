@@ -2,7 +2,7 @@
     <div class="popup-dialog">
       <div class="dialog loader">
         <div></div>
-        <h3 class="status">{{title}}</h3>
+        <h3>{{title}}</h3>
       </div>
     </div>
 </template>
@@ -59,8 +59,6 @@ div.popup-dialog {
         animation-name: loader-animation;
         animation-duration: 1s;
         animation-iteration-count: infinite;
-      }
-      .status {
       }
     }
   }
