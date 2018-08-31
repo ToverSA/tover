@@ -1,12 +1,14 @@
-import axios, { AxiosPromise } from 'axios';
+import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 const mock = new MockAdapter(axios, { delayResponse: 500 });
 
 mock.onPost('/api/users').reply(201, {
   message: 'Created successfully',
+}).onPost('/api/oauth/token').reply(200, {
+  access_token: 'cfksnfnxcsbku',
+  token_type: 'bearer',
 });
-mock.onPost('/api/oauth/token');
 
 if (process.env.NODE_ENV === 'production') {
   mock.restore();
@@ -28,7 +30,12 @@ export default {
    * @param string authEmail
    * @param string authPassword
    */
-  authUser(authEmail: string, authPassword: string): void {
+  authUser(authEmail: string, authPassword: string): AxiosPromise {
+    return axios.post('api/oauth/token', {
+      grant_type: 'password',
+      username: authEmail,
+      password: authPassword,
+    });
     // TODO authorise user
   },
 };
