@@ -16,14 +16,14 @@
         </div>
         <input @click="gotoCreate" type="button" value="CREATE AN ACCOUNT" class="negative">
       </form>
-      <form v-if="state === 1">
+      <form v-else-if="state === 1">
         <h3>Sign up for a new profile</h3>
         <label for="names">Names</label><br>
-        <input type="text" name="names" placeholder="John Doe">
+        <input type="text" name="names" placeholder="John Doe" v-model="names">
         <label for="email">Email</label><br>
-        <input type="text" name="email" placeholder="john@mail.com">
+        <input type="text" name="email" placeholder="john@mail.com" v-model="email">
         <label for="password">Password</label><br>
-        <input type="password" name="password" placeholder="Keep this as a secret">
+        <input type="password" name="password" placeholder="Keep this as a secret" v-model="password">
         <div class="grid-x2">
           <input @click="gotoLogin" type="button" value="ALREADY HAVE ACCOUNT?" class="negative">
           <input @click="signUp" type="button" value="SIGN UP">
@@ -38,10 +38,14 @@ import api from '@/api';
 enum View {
   login,
   signup,
+  loading,
 }
 @Component
 export default class Auth extends Vue {
   public state: number = View.signup;
+  public names: string = '';
+  public email: string = '';
+  public password: string = '';
 
   public gotoCreate(): void {
     this.state = View.signup;
@@ -49,8 +53,14 @@ export default class Auth extends Vue {
   public gotoLogin(): void {
     this.state = View.login;
   }
+  /**
+   * sigh up button callback
+   */
   public signUp(): void {
-    api.getUsers();
+    this.state = View.loading;
+    api.createUser(this.names, this.email, this.password).then(response => {
+      console.log(response);
+    });
   }
 }
 </script>
