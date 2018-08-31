@@ -32,28 +32,30 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
 enum View {
   login,
   signup,
 }
 @Component
 export default class Auth extends Vue {
-  state: number = View.signup;
+  public state: number = View.signup;
 
-  gotoCreate(): void {
+  public gotoCreate(): void {
     this.state = View.signup;
   }
-  gotoLogin(): void {
+  public gotoLogin(): void {
     this.state = View.login;
   }
-  signUp(): void {}
+  public signUp(): void {
+    console.log('HEllo');
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "@/app.scss";
+@import '@/app.scss';
 div.auth {
   background-color: $primary-color;
   height: 100vh;
@@ -88,7 +90,7 @@ div.auth {
       border-radius: 3px;
       border: 0;
 
-      &[type="button"] {
+      &[type='button'] {
         background-color: $accent-color;
         color: white;
         min-width: 100px;

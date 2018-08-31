@@ -1,7 +1,8 @@
 module.exports = {
   pwa: {
     themeColor: '#F4511E',
-    msTileColor: '#FFFFFF'
+    msTileColor: '#FFFFFF',
+    name: 'Tover'
   },
 
   baseUrl: undefined,
