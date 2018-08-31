@@ -43,15 +43,17 @@ enum View {
 }
 @Component
 export default class Auth extends Vue {
-  state: number = View.signup;
+  public state: number = View.signup;
 
-  gotoCreate(): void {
+  public gotoCreate(): void {
     this.state = View.signup;
   }
-  gotoLogin(): void {
+  public gotoLogin(): void {
     this.state = View.login;
   }
-  signUp(): void {}
+  public signUp(): void {
+    console.log('HEllo');
+  }
 }
 </script>
 
