@@ -27,6 +27,14 @@ router.beforeEach((to, from, next) => {
     }
     next();
   }
+  if (to.matched.some((record) => record.meta.requiresNoAuth)) {
+    if (store.getters.loggedIn) {
+      next({
+        path: '/',
+      });
+    }
+    next();
+  }
   next();
 });
 

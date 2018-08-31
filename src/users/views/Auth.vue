@@ -85,6 +85,9 @@ export default class Auth extends Vue {
       .then((response) => {
         const data = response.data;
         const token = data.access_token;
+        if (typeof token === 'undefined') {
+          return; // TODO something about this error
+        }
         this.$store.commit('token', token);
         const query = this.$route.query;
         if (query.hasOwnProperty('redirect')) {
