@@ -166,6 +166,8 @@ export default class Auth extends Vue {
     api
       .createUser(this.names, this.email, this.password)
       .then((response) => {
+        this.authEmail = this.email;
+        this.authPassword = this.password;
         this.signIn();
       })
       .catch((error) => {
@@ -178,6 +180,7 @@ export default class Auth extends Vue {
     api
       .authUser(this.authEmail, this.authPassword)
       .then((response) => {
+        this.loading = false;
         const data = response.data;
         const token = data.access_token;
         if (typeof token === 'undefined') {

@@ -6,8 +6,9 @@ const mock = new MockAdapter(axios, { delayResponse: 500 });
 mock.onPost('/api/users').reply(201, {
   message: 'Created successfully',
 }).onPost('/api/oauth/token').reply(200, {
-  access_token: 'cfksnfnxcsbku',
+  access_token: 'a985d8d9e7e80643633b0b422c0c9f4a7892a88a8192fe2f0742d32455d450d8',
   token_type: 'bearer',
+  expires_in: null,
 });
 
 if (process.env.NODE_ENV === 'production') {
