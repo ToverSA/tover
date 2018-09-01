@@ -5,16 +5,22 @@
         <circle cx="25" cy="25" r="22" stroke-width="4"/>
       </svg>
     </div>
-    <h3 class="status">Loading</h3>
+    <h3 class="status">{{title}}</h3>
   </app-dialog>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import { Dialog } from '@/components/dialog';
 @Component({
   components: { appDialog: Dialog },
+  props: {
+    title: {
+      type: String,
+      default: 'Loading',
+    },
+  },
 })
 export default class Loader extends Vue {}
 </script>

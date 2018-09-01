@@ -39,7 +39,12 @@
           <input @click="signUp" type="button" value="SIGN UP" class="btn-accent">
         </div>
       </form>
-      <app-dialog></app-dialog>
+      <loader-dialog v-if="loading"/>
+      <confirm-dialog
+        v-bind:title="errorMessage"
+        v-bind:on-positive="{label: 'OK', callback: closeDialog}"
+        v-if="isError"
+      />
     </div>
 </template>
 
@@ -48,25 +53,29 @@ import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import store from '@/store';
 import api from '@/api';
-import LoaderDialog from '@/components/LoaderDialog.vue';
-import { Loader } from '@/components/dialog';
+import { Loader, Confirm } from '@/components/dialog';
 // import { default as Computed } from '@/decorators';
 enum View {
   login,
   signup,
 }
 @Component({
-  components: { LoaderDialog, appDialog: Loader },
+  components: {
+    loaderDialog: Loader,
+    confirmDialog: Confirm,
+  },
   $_veeValidate: { validator: 'new' },
 })
 export default class Auth extends Vue {
-  public state: number = View.signup;
+  public state: number = View.login;
   public names: string = '';
   public email: string = '';
   public password: string = '';
   public authEmail: string = '';
   public authPassword: string = '';
-  public loading: string | boolean = 'false';
+  public loading: string | boolean = false;
+  private isError: boolean = false;
+  public errorMessage: string = '';
 
   // @Computed
   get isNamesInvalid() {
@@ -106,21 +115,60 @@ export default class Auth extends Vue {
   public gotoLogin(): void {
     this.state = View.login;
   }
+  public openErrorDialog(error: string): void {
+    this.errorMessage = error;
+    this.isError = true;
+  }
+
+  public closeDialog(): void {
+    this.email = '';
+    this.password = '';
+    this.errorMessage = '';
+    this.isError = false;
+  }
+
+  private handleNetworkError(error: any): void {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      const status = error.response.status;
+      const errors = error.response.data.errors;
+      if (status === 400) {
+        this.openErrorDialog(errors.title);
+      }
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+  }
+
   /**
    * sigh up button callback
    */
   public signUp(): void {
+    if (this.names.length === 0) {
+      return;
+    }
+    if (this.password.length === 0) {
+      return;
+    }
+    if (this.email.length === 0) {
+      return;
+    }
     this.loading = 'Signing up';
     api
       .createUser(this.names, this.email, this.password)
       .then((response) => {
-        // TODO implement what happenes here
+        this.signIn();
       })
       .catch((error) => {
-        // TODO catch error
-      })
-      .finally(() => {
         this.loading = false;
+        this.handleNetworkError(error);
       });
   }
   public signIn(): void {
@@ -140,10 +188,8 @@ export default class Auth extends Vue {
         }
       })
       .catch((error) => {
-        // TODO handle errors here
-      })
-      .finally(() => {
         this.loading = false;
+        this.handleNetworkError(error);
       });
   }
 }

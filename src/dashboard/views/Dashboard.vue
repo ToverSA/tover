@@ -37,7 +37,7 @@ import AppTitle from '@/dashboard/components/AppTitle.vue';
 
 @Component({ components: { AppLoader, AppTitle } })
 export default class Dashboard extends Vue {
-  public sidebarOpened: boolean = false;
+  public sidebarOpened: boolean = true;
 
   public closeSidebar(): void {
     this.sidebarOpened = false;
@@ -100,14 +100,14 @@ div.dashboard {
         margin: 15px 0;
         width: 250px;
         display: block;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
       }
 
       button {
         width: 100%;
-        margin-bottom: 5px;
         text-align: start;
         color: white;
+        background-color: rgba(0, 0, 0, 0.068);
       }
     }
   }

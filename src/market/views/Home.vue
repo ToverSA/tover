@@ -4,7 +4,8 @@
         <app-logo/>
         <nav>
           <router-link v-bind:to="{name: 'dashboard'}" >
-            <icons name="person_outline"/>
+            <icons v-if="signedIn" name="person"/>
+            <icons v-else name="person_outline"/>
             <span>MY ACCOUNT</span>
           </router-link>
         </nav>
@@ -22,6 +23,10 @@ import AppFooter from '@/components/AppFooter.vue';
 export default class Home extends Vue {
   public created(): void {
     // console.log('hello');
+  }
+
+  get signedIn(): boolean {
+    return this.$store.getters.loggedIn;
   }
 }
 </script>
