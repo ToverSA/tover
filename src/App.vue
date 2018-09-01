@@ -71,4 +71,15 @@ body {
   // font-family: "Lato";
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.btn {
+  &.btn-responsive {
+    background-color: red;
+    @media screen and (max-width: 425px) {
+      span {
+        display: none;
+      }
+    }
+  }
+}
 </style>

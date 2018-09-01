@@ -1,9 +1,10 @@
 <template>
     <div>
       <header>
-        <img src="@/assets/img/tover.png" alt="Tover logo">
+        <app-logo/>
+        <!-- <img src="@/assets/img/tover.svg" alt="Tover logo"> -->
         <nav>
-          <router-link v-bind:to="{name: 'profile'}">
+          <router-link v-bind:to="{name: 'profile'}" >
             <i class="material-icons">person_outline</i>
             <span>MY ACCOUNT</span>
           </router-link>
@@ -19,9 +20,12 @@ import { Component } from 'vue-property-decorator';
 import AppFooter from '@/components/AppFooter.vue';
 
 @Component({ components: { AppFooter } })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  public created(): void {
+    console.log('hello');
+  }
+}
 </script>
-
 
 <style lang="scss" scoped>
 @import '@/app.scss';
@@ -31,8 +35,9 @@ header {
   display: flex;
   justify-content: space-between;
 
-  img {
-    height: 100%;
+  .app-logo {
+    height: $bar-height;
+    width: $bar-height;
   }
 
   nav {
@@ -49,6 +54,9 @@ header {
       }
       span {
         padding: 6px 5px;
+        @media screen and (max-width: 450px) {
+          display: none;
+        }
       }
     }
   }

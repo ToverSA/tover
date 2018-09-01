@@ -1,11 +1,14 @@
 <template>
   <div class="dashboard">
     <div class="sidebar">
-
+      <!-- <button>
+        <i class="material-icons">menu</i>
+      </button> -->
+      <router-link class="button" :to="{name: 'home'}">
+        <i class="material-icons">home</i>
+      </router-link>
     </div>
-    <div class="loader">
-      <app-loader/>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -24,13 +27,25 @@ div.dashboard {
   background-color: $primary-color;
   min-height: 100vh;
   height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0px, min-content) auto;
 
-  .loader {
-    margin: auto;
-    display: block;
-    padding-top: 200px;
-    display: flex;
-    justify-content: center;
+  .sidebar {
+    min-height: 100vh;
+    width: 55px;
+    padding: 5px;
+
+    button,
+    .button {
+      background-color: $primary-color-dark;
+      text-decoration: none;
+      color: white;
+      height: 45px;
+      width: 45px;
+      display: block;
+      padding: 13px;
+      border-radius: 23px;
+    }
   }
 }
 </style>

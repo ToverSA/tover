@@ -3,7 +3,7 @@
       <router-link :to="{name: 'home'}">
         <i class="material-icons close">close</i>
       </router-link>
-      <img src="@/assets/img/tover.png" alt="Tover logo" class="logo">
+      <app-logo/>
       <form v-if="state === 0">
         <h3>Sign in to your profile</h3>
         <label for="email">Email</label><br>
@@ -118,10 +118,10 @@ div.auth {
     color: white;
   }
 
-  .logo {
+  .app-logo {
     height: auto;
     display: block;
-    width: 300px;
+    width: 80px;
     margin: auto;
   }
 
