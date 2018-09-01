@@ -1,8 +1,10 @@
 <template>
     <div class="auth">
-      <router-link :to="{name: 'home'}">
-        <i class="material-icons close">close</i>
-      </router-link>
+      <div class="top">
+        <button @click="onCancel">
+          <icons name="close"/>
+        </button>
+      </div>
       <app-logo/>
       <form v-if="state === 0">
         <h3>Sign in to your profile</h3>
@@ -54,6 +56,15 @@ export default class Auth extends Vue {
   public authEmail: string = '';
   public authPassword: string = '';
   public loading: string | boolean = false;
+
+  public created(): void {
+    console.log(window.history);
+  }
+
+  public onCancel(): void {
+    if (window.history.state === null) this.$router.push({ name: 'home' });
+    else this.$router.go(-1);
+  }
 
   public gotoCreate(): void {
     this.state = View.signup;
@@ -111,11 +122,10 @@ div.auth {
   height: 100%;
   min-height: 100vh;
 
-  i {
-    height: $bar-height;
-    width: $bar-height;
-    padding: 14px;
-    color: white;
+  .top {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
   }
 
   .app-logo {

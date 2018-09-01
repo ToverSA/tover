@@ -2,7 +2,7 @@
   <div class="footer">
     <span>&copy; 2018 Tover, Inc. All rights reserved</span>
     <nav>
-      <router-link :to="{name: 'dashboard'}">INTERNAL</router-link>
+      <router-link :to="{name: 'admin'}">INTERNAL</router-link>
       <span>|</span>
       <router-link :to="{name: 'about'}">ABOUT</router-link>
     </nav>

@@ -1,6 +1,5 @@
 <template>
   <div class="overview">
-    <app-title></app-title>
     <div class="loader" v-if="loading">
       <app-loader/>
     </div>
@@ -10,10 +9,9 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppLoader from '@/components/AppLoader.vue';
-import AppTitle from '@/dashboard/components/AppTitle.vue';
 
-@Component({ components: { AppLoader, AppTitle } })
-export default class Overview extends Vue {
+@Component({ components: { AppLoader } })
+export default class Admin extends Vue {
   public loading: boolean = false;
 }
 </script>

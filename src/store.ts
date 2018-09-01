@@ -16,6 +16,9 @@ export default new Vuex.Store({
     token: (state, payload) => {
       state.token = payload;
     },
+    signout: (state) => {
+      state.token = '';
+    },
   },
   actions: {
 

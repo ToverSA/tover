@@ -1,17 +1,25 @@
 <template>
   <div class="dashboard">
-    <div class="sidebar">
-      <!-- <button>
-        <i class="material-icons">menu</i>
-      </button> -->
-      <router-link class="button" :to="{name: 'home'}">
-        <icons name="home"/>
-      </router-link>
-      <button class="button">
-        <icons name="exit"/>
-      </button>
+    <div class="sidebar" v-bind:class="{opened: sidebarOpened}">
+      <div class="strip">
+        <button @click="closeSidebar" class="menu-btn">
+          <icons name="menu"/>
+        </button>
+        <router-link :to="{name: 'home'}" class="button">
+          <icons name="home"/>
+        </router-link>
+        <button @click="signOut">
+          <icons name="exit"/>
+        </button>
+      </div>
+      <div class="options">
+        <app-title></app-title>
+      </div>
     </div>
-    <router-view></router-view>
+    <button @click="openSidebar" class="content-menu">
+      <icons name="menu"/>
+    </button>
+    <router-view class="content"></router-view>
   </div>
 </template>
 
@@ -19,9 +27,24 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppLoader from '@/components/AppLoader.vue';
+import AppTitle from '@/dashboard/components/AppTitle.vue';
 
-@Component({ components: { AppLoader } })
-export default class Dashboard extends Vue {}
+@Component({ components: { AppLoader, AppTitle } })
+export default class Dashboard extends Vue {
+  public sidebarOpened: boolean = false;
+
+  public closeSidebar(): void {
+    this.sidebarOpened = false;
+  }
+  public openSidebar(): void {
+    this.sidebarOpened = true;
+  }
+  public signOut(): void {
+    this.$store.commit('signout');
+    this.closeSidebar();
+    this.$router.push({ name: 'home' });
+  }
+}
 </script>
 
 <style lang="scss">
@@ -31,30 +54,100 @@ div.dashboard {
   min-height: 100vh;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(0px, min-content) auto;
+  grid-template-columns: min-content 1fr;
 
   .sidebar {
     min-height: 100vh;
-    width: 55px;
     padding: 5px;
+    z-index: 3;
+    background-color: $primary-color;
+    display: grid;
+    grid-template-columns: 50px 1fr;
 
-    button,
-    .button {
-      background-color: rgba($primary-color-dark, 0.3);
-      text-decoration: none;
-      color: white;
-      height: 45px;
-      width: 45px;
-      display: block;
-      padding: 13px;
-      border-radius: 23px;
-      margin-bottom: 10px;
-      border: none;
-      outline: none;
-      &:active {
-        background-color: $primary-color-dark;
+    .strip {
+      button,
+      .button {
+        background-color: rgba($primary-color-dark, 0.3);
+        text-decoration: none;
+        color: white;
+        height: 45px;
+        width: 45px;
+        display: block;
+        padding: 13px;
+        border-radius: 23px;
+        margin-bottom: 10px;
+        border: none;
+        outline: none;
+        &:active {
+          background-color: $primary-color-dark;
+        }
+        cursor: pointer;
       }
-      cursor: pointer;
+
+      .menu-btn {
+        display: none;
+      }
+    }
+    .options {
+      .title {
+        padding: 0;
+        color: $primary-color-light;
+        margin: 15px 0;
+        width: 250px;
+        display: block;
+      }
+    }
+  }
+
+  .content-menu {
+    display: none;
+    position: absolute;
+    height: 55px;
+    width: 55px;
+    border: none;
+    background-color: transparent;
+    z-index: 2;
+
+    svg {
+      fill: black;
+    }
+  }
+  .content {
+    width: 100%;
+  }
+  .title {
+    padding: 0 10px;
+    display: none;
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 1fr;
+
+    .sidebar {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+
+      &.opened {
+        transform: translateX(0);
+      }
+      transition: ease-in-out 200ms;
+
+      .strip {
+        .menu-btn {
+          display: inline-block;
+        }
+      }
+    }
+    .content-menu {
+      display: inline-block;
+    }
+    .title {
+      padding-left: 55px;
+      display: block;
     }
   }
 }
