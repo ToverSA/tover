@@ -135,7 +135,9 @@ export default class Auth extends Vue {
       const errors = error.response.data.errors;
       if (status === 400) {
         this.openErrorDialog(errors.title);
+        return;
       }
+      this.openErrorDialog("I don't know what happened");
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -143,7 +145,7 @@ export default class Auth extends Vue {
       console.log(error.request);
     } else {
       // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
+      console.log("'Error'", error.message);
     }
   }
 
