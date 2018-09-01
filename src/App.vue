@@ -30,7 +30,8 @@ body {
 }
 .btn,
 .button,
-button {
+button,
+input[type='button'] {
   border: none;
   padding: 10px;
   outline: none;
@@ -49,6 +50,9 @@ button {
   &.btn-c,
   &.button-color {
     background-color: rgba($primary-color-dark, 0.2);
+  }
+  &.btn-accent {
+    background-color: $accent-color;
   }
 }
 </style>

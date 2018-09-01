@@ -14,7 +14,7 @@
         <input type="password" name="password">
         <div class="grid-x2">
           <input type="button" value="FORGOT PASSWORD?" class="negative">
-          <input @click="signIn" type="button" value="SIGN IN">
+          <input @click="signIn" type="button" value="SIGN IN" class="btn-accent">
         </div>
         <input @click="gotoCreate" type="button" value="CREATE AN ACCOUNT" class="negative">
       </form>
@@ -23,12 +23,12 @@
         <label for="names">Names</label><br>
         <input type="text" name="names" placeholder="John Doe" v-model="names">
         <label for="email">Email</label><br>
-        <input type="text" name="email" placeholder="john@mail.com" v-model="email">
+        <input v-validate="'required|email'" type="text" name="email" placeholder="john@mail.com" v-model="email">
         <label for="password">Password</label><br>
         <input type="password" name="password" placeholder="Keep this as a secret" v-model="password">
         <div class="grid-x2">
-          <input @click="gotoLogin" type="button" value="SIGN IN INSTEAD" class="negative">
-          <input @click="signUp" type="button" value="SIGN UP">
+          <input @click="test" type="button" value="SIGN IN INSTEAD" class="negative">
+          <input @click="signUp" type="button" value="SIGN UP" class="btn-accent">
         </div>
       </form>
       <loader-dialog v-if="loading" v-bind:title="loading"/>
@@ -37,19 +37,21 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 import store from '@/store';
 import api from '@/api';
 import LoaderDialog from '@/components/LoaderDialog.vue';
+import { Computed } from '@/decorators';
 enum View {
   login,
   signup,
 }
 @Component({
   components: { LoaderDialog },
+  $_veeValidate: { validator: 'new' },
 })
 export default class Auth extends Vue {
-  public state: number = View.login;
+  public state: number = View.signup;
   public names: string = '';
   public email: string = '';
   public password: string = '';
@@ -57,8 +59,8 @@ export default class Auth extends Vue {
   public authPassword: string = '';
   public loading: string | boolean = false;
 
-  public created(): void {
-    console.log(window.history);
+  public test() {
+    console.log(this);
   }
 
   public onCancel(): void {
@@ -136,7 +138,6 @@ div.auth {
   }
 
   form {
-    // background-color: white;
     padding: 10px;
     margin: auto;
     width: 100%;
@@ -145,14 +146,13 @@ div.auth {
 
     input {
       width: 100%;
-      margin: 5px 0;
+      margin: 10px 0;
       padding: 14px 10px;
       font-size: 1em;
       border-radius: 3px;
       border: 0;
 
       &[type='button'] {
-        background-color: $accent-color;
         color: white;
         min-width: 100px;
         &.negative {
