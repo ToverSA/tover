@@ -8,10 +8,10 @@
       <app-logo/>
       <form v-if="state === 0">
         <h3>Sign in to your profile</h3>
-        <label for="auth_email">Email</label><br>
-        <input v-model="authEmail" type="text" name="auth_email">
-        <label for="auth_password">Password</label><br>
-        <input v-model="authPassword" type="password" name="auth_password">
+        <label for="email">Email</label><br>
+        <input v-model="authEmail" type="text" name="email">
+        <label for="password">Password</label><br>
+        <input v-model="authPassword" type="password" name="password">
         <div class="grid-x2">
           <input type="button" value="FORGOT PASSWORD?" class="negative">
           <input @click="signIn" type="button" value="SIGN IN" class="btn-accent">
