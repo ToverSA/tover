@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import store from '@/store';
 
-import users from '@/users/routes';
+import About from '@/views/About.vue';
 import dashboard from '@/dashboard/routes';
 import market from '@/market/routes';
 
@@ -13,7 +13,7 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    ...users,
+    { path: '/about', name: 'about', component: About },
     ...market,
     ...dashboard,
   ],

@@ -71,7 +71,14 @@ body {
   // font-family: "Lato";
   font-family: Arial, Helvetica, sans-serif;
 }
-
+.icon {
+  svg {
+    height: 18px;
+    width: 18px;
+    fill: white;
+    display: inline-block;
+  }
+}
 .btn {
   &.btn-responsive {
     background-color: red;

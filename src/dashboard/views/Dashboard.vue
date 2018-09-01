@@ -5,7 +5,7 @@
         <i class="material-icons">menu</i>
       </button> -->
       <router-link class="button" :to="{name: 'home'}">
-        <i class="material-icons">home</i>
+        <icons name="home"/>
       </router-link>
     </div>
     <router-view></router-view>
