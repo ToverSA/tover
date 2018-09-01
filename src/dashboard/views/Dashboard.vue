@@ -5,15 +5,21 @@
         <button @click="closeSidebar" class="menu-btn">
           <icons name="menu"/>
         </button>
-        <router-link :to="{name: 'home'}" class="button">
+        <router-link :to="{name: 'home'}" class="button btn-c">
           <icons name="home"/>
         </router-link>
-        <button @click="signOut">
+        <button @click="signOut" class="btn-c">
           <icons name="exit"/>
         </button>
       </div>
       <div class="options">
         <app-title></app-title>
+        <button>
+          <span>Overview</span>
+        </button>
+        <button>
+          <span>Overview</span>
+        </button>
       </div>
     </div>
     <button @click="openSidebar" class="content-menu">
@@ -67,7 +73,6 @@ div.dashboard {
     .strip {
       button,
       .button {
-        background-color: rgba($primary-color-dark, 0.3);
         text-decoration: none;
         color: white;
         height: 45px;
@@ -95,6 +100,14 @@ div.dashboard {
         margin: 15px 0;
         width: 250px;
         display: block;
+        margin-bottom: 30px;
+      }
+
+      button {
+        width: 100%;
+        margin-bottom: 5px;
+        text-align: start;
+        color: white;
       }
     }
   }

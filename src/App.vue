@@ -29,11 +29,14 @@ body {
   }
 }
 .btn,
+.button,
 button {
   border: none;
   padding: 10px;
   outline: none;
   display: block;
+  font-size: 1em;
+  cursor: pointer;
   background-color: transparent;
 
   &.btn-responsive {
@@ -42,6 +45,10 @@ button {
         display: none;
       }
     }
+  }
+  &.btn-c,
+  &.button-color {
+    background-color: rgba($primary-color-dark, 0.2);
   }
 }
 </style>
