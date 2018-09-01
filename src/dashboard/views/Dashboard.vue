@@ -7,6 +7,9 @@
       <router-link class="button" :to="{name: 'home'}">
         <icons name="home"/>
       </router-link>
+      <button class="button">
+        <icons name="exit"/>
+      </button>
     </div>
     <router-view></router-view>
   </div>
@@ -37,7 +40,7 @@ div.dashboard {
 
     button,
     .button {
-      background-color: $primary-color-dark;
+      background-color: rgba($primary-color-dark, 0.3);
       text-decoration: none;
       color: white;
       height: 45px;
@@ -45,6 +48,13 @@ div.dashboard {
       display: block;
       padding: 13px;
       border-radius: 23px;
+      margin-bottom: 10px;
+      border: none;
+      outline: none;
+      &:active {
+        background-color: $primary-color-dark;
+      }
+      cursor: pointer;
     }
   }
 }
