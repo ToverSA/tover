@@ -1,17 +1,18 @@
 <template>
-    <div class="popup-dialog">
-      <div class="dialog loader">
-        <div></div>
-        <h3>{{title}}</h3>
-      </div>
+    <div class="dialog">
+      <app-loader></app-loader>
+      <h3>{{title}}</h3>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import AppLoader from '@/components/AppLoader.vue';
 
-@Component
+@Component({
+  components: { AppLoader },
+})
 export default class LoaderDialog extends Vue {
   @Prop({ type: String, required: true, default: 'Loading...' })
   public title!: string;
@@ -20,15 +21,6 @@ export default class LoaderDialog extends Vue {
 
 <style lang="scss" scoped>
 @import '@/app.scss';
-
-@keyframes loader-animation {
-  from {
-    background-color: $accent-color;
-  }
-  to {
-    background-color: $primary-color-light;
-  }
-}
 
 div.popup-dialog {
   background-color: rgba(0, 0, 0, 0.2);
@@ -47,19 +39,10 @@ div.popup-dialog {
     left: 50%;
     transform: translateX(-50%);
     padding: 15px;
+    background-color: red;
 
     &.loader {
       display: flex;
-
-      > div {
-        height: 30px;
-        width: 30px;
-        border-radius: 15px;
-        margin: 15px;
-        animation-name: loader-animation;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-      }
     }
   }
 }

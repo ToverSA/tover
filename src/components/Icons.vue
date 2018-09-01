@@ -140,6 +140,6 @@ import { Component, Prop } from 'vue-property-decorator';
 @Component
 export default class Icons extends Vue {
   @Prop({ default: 'home', type: String })
-  name!: string;
+  public name!: string;
 }
 </script>

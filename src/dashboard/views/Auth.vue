@@ -21,17 +21,25 @@
       <form v-else-if="state === 1">
         <h3>Sign up for a new profile</h3>
         <label for="names">Names</label><br>
-        <input type="text" name="names" placeholder="John Doe" v-model="names">
+        <input v-validate="'min:3'" v-bind:class="{invalid: isNamesInvalid}" type="text" name="names" placeholder="John Doe" v-model="names">
         <label for="email">Email</label><br>
-        <input v-validate="'required|email'" type="text" name="email" placeholder="john@mail.com" v-model="email">
+        <input v-validate="'required|email'" v-bind:class="{invalid: isEmailInvalid}" type="text" name="email" placeholder="john@mail.com" v-model="email">
         <label for="password">Password</label><br>
-        <input type="password" name="password" placeholder="Keep this as a secret" v-model="password">
+        <!-- if required => /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$/ -->
+        <input 
+          v-validate="{ required: true, regex: /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/ }"
+          v-bind:class="{invalid: isPasswordInvalid}"
+          type="password"
+          name="password"
+          placeholder="Keep this as a secret"
+          v-model="password"
+        />
         <div class="grid-x2">
-          <input @click="test" type="button" value="SIGN IN INSTEAD" class="negative">
+          <input @click="gotoLogin" type="button" value="SIGN IN INSTEAD" class="negative">
           <input @click="signUp" type="button" value="SIGN UP" class="btn-accent">
         </div>
       </form>
-      <loader-dialog v-if="loading" v-bind:title="loading"/>
+      <app-dialog></app-dialog>
     </div>
 </template>
 
@@ -41,13 +49,14 @@ import { Component, Watch } from 'vue-property-decorator';
 import store from '@/store';
 import api from '@/api';
 import LoaderDialog from '@/components/LoaderDialog.vue';
-import { Computed } from '@/decorators';
+import { Loader } from '@/components/dialog';
+// import { default as Computed } from '@/decorators';
 enum View {
   login,
   signup,
 }
 @Component({
-  components: { LoaderDialog },
+  components: { LoaderDialog, appDialog: Loader },
   $_veeValidate: { validator: 'new' },
 })
 export default class Auth extends Vue {
@@ -57,15 +66,38 @@ export default class Auth extends Vue {
   public password: string = '';
   public authEmail: string = '';
   public authPassword: string = '';
-  public loading: string | boolean = false;
+  public loading: string | boolean = 'false';
 
-  public test() {
-    console.log(this);
+  // @Computed
+  get isNamesInvalid() {
+    const fields = this.$validator.errors;
+    return fields.items.some((item) => {
+      return item.field === 'names';
+    });
+  }
+
+  // @Computed
+  get isEmailInvalid() {
+    const fields = this.$validator.errors;
+    return fields.items.some((item) => {
+      return item.field === 'email';
+    });
+  }
+
+  // @Computed
+  get isPasswordInvalid() {
+    const fields = this.$validator.errors;
+    return fields.items.some((item) => {
+      return item.field === 'password';
+    });
   }
 
   public onCancel(): void {
-    if (window.history.state === null) this.$router.push({ name: 'home' });
-    else this.$router.go(-1);
+    if (window.history.state === null) {
+      this.$router.push({ name: 'home' });
+    } else {
+      this.$router.go(-1);
+    }
   }
 
   public gotoCreate(): void {
@@ -159,6 +191,9 @@ div.auth {
           background-color: $primary-color-dark;
           color: white;
         }
+      }
+      &.invalid {
+        border-right: 10px solid rgb(255, 94, 0);
       }
     }
     .grid-x2 {
