@@ -9,11 +9,6 @@
     <nav class="signed" v-if="signedIn">
       <router-link
         class="btn"
-        v-bind:to="{name: 'search'}">
-        <search-icon/>
-      </router-link>
-      <router-link
-        class="btn"
         :to="{name: 'sell'}">
         <monetization-on-icon/>
         <span>Sell</span>
@@ -44,8 +39,9 @@
     <nav v-else>
       <router-link
         class="btn"
-        v-bind:to="{name: 'search'}">
-        <search-icon/>
+        v-bind:to="{name: 'about'}">
+        <more-icon/>
+        <span>ABOUT</span>
       </router-link>
       <router-link
         class="btn"
@@ -67,6 +63,7 @@ import {
   localAtmIcon,
   monetizationOnIcon,
   personIcon,
+  moreIcon,
 } from '@/icons';
 @Component({
   components: {
@@ -76,6 +73,7 @@ import {
     localAtmIcon,
     monetizationOnIcon,
     personIcon,
+    moreIcon,
   },
   props: {
     inverted: Boolean,
@@ -119,6 +117,7 @@ header {
   background-color: $primary-color;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 
   .app-logo {
     height: $bar-height;
@@ -177,8 +176,10 @@ header {
     button {
       background-color: white;
     }
-    svg {
+    svg,
+    span {
       fill: $primary-color;
+      color: $primary-color;
     }
   }
 }

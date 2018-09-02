@@ -60,7 +60,7 @@ input[type='button'] {
     background-color: $accent-color;
   }
   &.btn-plain {
-    background-color: transparent;
+    background-color: white;
     color: $primary-color;
 
     span {
