@@ -7,10 +7,29 @@ interface State {
   token: string;
 }
 
+interface HeaderState {
+  menuOpened: boolean;
+}
+
 const vuexLocal = new VuexPersistence<State, Payload>({
   storage: window.localStorage,
   reducer: (state) => ({ token: state.token }),
 });
+
+const headerModule = {
+  namespaced: true,
+  state: {
+    menuOpened: false,
+  },
+  mutations: {
+    closeMenu: (state: HeaderState) => {
+      state.menuOpened = false;
+    },
+    openMenu: (state: HeaderState) => {
+      state.menuOpened = true;
+    },
+  },
+};
 
 export default new Vuex.Store<State>({
   state: {
@@ -29,6 +48,9 @@ export default new Vuex.Store<State>({
     loggedIn: (state) => {
       return state.token.length > 0;
     },
+  },
+  modules: {
+    header: headerModule,
   },
   plugins: [vuexLocal.plugin],
 });

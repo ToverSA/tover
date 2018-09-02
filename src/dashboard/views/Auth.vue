@@ -14,7 +14,7 @@
         <input v-model="authPassword" type="password" name="password">
         <div class="grid-x2">
           <input type="button" value="FORGOT PASSWORD?" class="negative">
-          <input @click="signIn" type="button" value="SIGN IN" class="btn-accent">
+          <input @click="signIn" type="button" value="SIGN IN">
         </div>
         <input @click="gotoCreate" type="button" value="CREATE AN ACCOUNT" class="negative">
       </form>
@@ -36,7 +36,7 @@
         />
         <div class="grid-x2">
           <input @click="gotoLogin" type="button" value="SIGN IN INSTEAD" class="negative">
-          <input @click="signUp" type="button" value="SIGN UP" class="btn-accent">
+          <input @click="signUp" type="button" value="SIGN UP">
         </div>
       </form>
       <loader-dialog v-if="loading"/>
@@ -236,10 +236,9 @@ div.auth {
       &[type='button'] {
         color: white;
         min-width: 100px;
-        text-align: center;
         justify-content: center;
         &.negative {
-          background-color: $primary-color-dark;
+          // background-color: $primary-color-dark;
           color: white;
         }
       }
