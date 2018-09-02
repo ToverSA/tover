@@ -3,7 +3,7 @@
   width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
   preserveAspectRatio="xMidYMid meet" class="app-logo">
   <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-  fill="#FFFFFF" stroke="none">
+  stroke="none">
   <path d="M1975 4469 c-168 -16 -374 -72 -537 -146 l-77 -35 48 -38 c85 -67
   159 -168 192 -262 7 -21 16 -38 19 -38 3 0 43 13 88 30 189 69 416 93 622 66
   l124 -17 40 48 c60 73 172 180 240 230 34 25 63 46 64 48 7 6 -213 73 -293 89
@@ -32,3 +32,9 @@
 import Vue from 'vue';
 export default Vue.extend({});
 </script>
+<style lang="scss" scoped>
+@import '@/app.scss';
+svg {
+  fill: #ffffff;
+}
+</style>

@@ -17,5 +17,6 @@ export default [
     path: '/sell',
     name: 'sell',
     component: Sell,
+    meta: { requiresAuth: true },
   },
 ];

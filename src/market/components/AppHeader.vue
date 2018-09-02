@@ -1,7 +1,10 @@
 <template>
-  <header @click="onClickGlobal">
-    <a href="/">
-      <app-logo/>
+  <header @click="onClickGlobal" v-bind:class="{inverted}">
+    <router-link to="/"  v-if="inverted">
+      <app-logo inverted/>
+    </router-link>
+    <a href="/" v-else>
+      <app-logo inverted/>
     </a>
     <nav class="signed" v-if="signedIn">
       <router-link
@@ -12,11 +15,11 @@
       <router-link
         class="btn"
         :to="{name: 'sell'}">
-        <icons name="monetization_on"/>
+        <monetization-on-icon/>
         <span>Sell</span>
       </router-link>
       <button  @click.stop="openMenu">
-        <icons name="person"/>
+        <person-icon/>
         <span>Sduduzo Gumede</span>
       </button>
       <div v-show="menuOpened" class="user-menu">
@@ -57,13 +60,25 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { searchIcon, helpIcon, personOutlineIcon, localAtmIcon } from '@/icons';
+import {
+  searchIcon,
+  helpIcon,
+  personOutlineIcon,
+  localAtmIcon,
+  monetizationOnIcon,
+  personIcon,
+} from '@/icons';
 @Component({
   components: {
     searchIcon,
     helpIcon,
     personOutlineIcon,
     localAtmIcon,
+    monetizationOnIcon,
+    personIcon,
+  },
+  props: {
+    inverted: Boolean,
   },
 })
 export default class AppHeader extends Vue {
@@ -82,6 +97,13 @@ export default class AppHeader extends Vue {
 
   public logOut(): void {
     this.$store.commit('signout');
+    const meta = this.$route.meta;
+    if (!meta.hasOwnProperty('requiresAuth')) {
+      return;
+    }
+    if (meta.requiresAuth) {
+      this.$router.push({ name: 'home' });
+    }
   }
 
   public onClickGlobal() {
@@ -114,7 +136,6 @@ header {
       color: white;
       padding: 10px;
       display: flex;
-      // background-color: transparent;
 
       .icon {
         display: block;
@@ -128,7 +149,7 @@ header {
       position: absolute;
       width: 200px;
       background-color: white;
-      right: 5px;
+      right: 0;
       top: 90%;
 
       button {
@@ -144,6 +165,20 @@ header {
           display: none;
         }
       }
+      .user-menu {
+        right: 5px;
+        top: 5px;
+      }
+    }
+  }
+  &.inverted {
+    background-color: white;
+    a,
+    button {
+      background-color: white;
+    }
+    svg {
+      fill: $primary-color;
     }
   }
 }
