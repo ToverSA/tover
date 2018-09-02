@@ -33,6 +33,13 @@ input[type='button'] {
   cursor: pointer;
   background-color: $primary-color;
 
+  > svg {
+    height: 20px;
+    width: 20px;
+    fill: white;
+    display: inline-block;
+    margin: 5px;
+  }
   .icon {
     svg {
       height: 18px;

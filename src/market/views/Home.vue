@@ -6,7 +6,7 @@
           <router-link
             class="btn"
             v-bind:to="{name: 'search'}">
-            <icons name="search"/>
+            <search-icon/>
           </router-link>
           <button>
             <icons name="monetization_on"/>
@@ -52,8 +52,14 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppFooter from '@/components/AppFooter.vue';
+import { searchIcon } from '@/icons';
 
-@Component({ components: { AppFooter } })
+@Component({
+  components: {
+    AppFooter,
+    searchIcon,
+  },
+})
 export default class Home extends Vue {
   public created(): void {
     // console.log('hello');
