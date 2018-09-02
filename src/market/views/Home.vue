@@ -2,13 +2,21 @@
     <div>
       <header>
         <app-logo/>
-        <nav>
-          <router-link v-bind:to="{name: 'dashboard'}" >
-            <icons v-if="signedIn" name="person"/>
-            <icons v-else name="person_outline"/>
-            <span>MY ACCOUNT</span>
+        <nav v-if="signedIn">
+          <router-link
+            v-bind:to="{name: 'dashboard'}">
+            <icons name="person"/>
+            <span>ACCOUNT</span>
           </router-link>
         </nav>
+        <nav v-else>
+          <router-link
+            v-bind:to="{name: 'dashboard'}">
+            <icons name="person_outline"/>
+            <span>SIGN IN</span>
+          </router-link>
+        </nav>
+        
       </header>
       <app-footer/>
     </div>

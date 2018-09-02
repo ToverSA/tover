@@ -45,5 +45,8 @@ input[type='button'] {
   &:active {
     background-color: rgba($primary-color-dark, 0.3);
   }
+  &.btn-accent {
+    background-color: $accent-color;
+  }
 }
 </style>
