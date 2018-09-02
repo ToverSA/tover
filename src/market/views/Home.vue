@@ -1,17 +1,21 @@
 <template>
     <div class="home" @click="onClickGlobal">
       <header>
-        <app-logo/>
+        <a href="/">
+          <app-logo/>
+        </a>
         <nav class="signed" v-if="signedIn">
           <router-link
             class="btn"
             v-bind:to="{name: 'search'}">
             <search-icon/>
           </router-link>
-          <button>
+          <router-link
+            class="btn"
+            :to="{name: 'sell'}">
             <icons name="monetization_on"/>
             <span>Sell</span>
-          </button>
+          </router-link>
           <button  @click.stop="openMenu">
             <icons name="person"/>
             <span>Sduduzo Gumede</span>
@@ -100,6 +104,7 @@ div.home {
 
     nav {
       padding: 0;
+      margin-right: 50px;
       display: flex;
       position: relative;
       a,
@@ -122,7 +127,7 @@ div.home {
         position: absolute;
         width: 200px;
         background-color: white;
-        right: 20px;
+        right: 5px;
         top: 90%;
 
         button {
@@ -130,6 +135,8 @@ div.home {
         }
       }
       @media screen and (max-width: 450px) {
+        margin: 0;
+
         > a,
         > button {
           span {

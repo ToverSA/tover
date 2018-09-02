@@ -49,7 +49,8 @@ input[type='button'] {
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $primary-color-dark;
   }
   &:active {
@@ -69,7 +70,8 @@ input[type='button'] {
     svg {
       fill: $primary-color;
     }
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: #eceff1;
     }
     &:active {

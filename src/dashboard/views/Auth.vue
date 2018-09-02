@@ -2,7 +2,7 @@
     <div class="auth">
       <div class="top">
         <button @click="onCancel">
-          <icons name="close"/>
+          <close-icon/>
         </button>
       </div>
       <app-logo/>
@@ -54,7 +54,7 @@ import { Component, Watch } from 'vue-property-decorator';
 import store from '@/store';
 import api from '@/api';
 import { Loader, Confirm } from '@/components/dialog';
-// import { default as Computed } from '@/decorators';
+import { closeIcon } from '@/icons';
 enum View {
   login,
   signup,
@@ -63,6 +63,7 @@ enum View {
   components: {
     loaderDialog: Loader,
     confirmDialog: Confirm,
+    closeIcon,
   },
   $_veeValidate: { validator: 'new' },
 })
@@ -208,7 +209,6 @@ div.auth {
   .top {
     display: flex;
     justify-content: flex-end;
-    padding: 5px;
   }
 
   .app-logo {
@@ -236,6 +236,8 @@ div.auth {
       &[type='button'] {
         color: white;
         min-width: 100px;
+        text-align: center;
+        justify-content: center;
         &.negative {
           background-color: $primary-color-dark;
           color: white;
