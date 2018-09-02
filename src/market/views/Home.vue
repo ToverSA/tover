@@ -14,6 +14,16 @@
           </button>
         </div>
       </div>
+      <div class="section" v-bind:key="i" v-for="i in [1, 2]">
+        <div class="wrapper">
+          <div class="heading">
+          <h2>Section {{i}}</h2>
+          <button class="btn-rounded btn-accent-alpha">
+            <span>VIEW MORE</span>
+          </button>
+        </div>
+        </div>
+      </div>
       <!-- <app-footer/> -->
     </div>
 </template>
@@ -23,21 +33,12 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import {
-  searchIcon,
-  helpIcon,
-  personOutlineIcon,
-  localAtmIcon,
-  categoryIcon,
-} from '@/icons';
+import { searchIcon, categoryIcon } from '@/icons';
 @Component({
   components: {
     AppHeader,
     AppFooter,
     searchIcon,
-    helpIcon,
-    personOutlineIcon,
-    localAtmIcon,
     categoryIcon,
   },
 })
@@ -103,6 +104,33 @@ div.home {
           }
         }
       }
+    }
+  }
+  .section {
+    padding: 10px;
+
+    .wrapper {
+      background-color: white;
+      max-width: 1024px;
+      margin: auto;
+      padding: 1px;
+
+      .heading {
+        padding: 10px;
+        max-width: 1024px;
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        padding-right: 5px;
+        h2 {
+          margin: 0;
+          font-weight: lighter;
+          padding: 5px;
+          color: rgb(112, 112, 112);
+        }
+      }
+    }
+    @media screen and (max-width: 768px) {
+      padding: 5px 0;
     }
   }
 }

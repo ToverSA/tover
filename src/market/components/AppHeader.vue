@@ -41,13 +41,13 @@
         class="btn"
         v-bind:to="{name: 'about'}">
         <more-icon/>
-        <span>ABOUT</span>
+        <span>About</span>
       </router-link>
       <router-link
         class="btn"
         v-bind:to="{name: 'auth'}">
         <person-outline-icon/>
-        <span>SIGN IN</span>
+        <span>Sign in</span>
       </router-link>
     </nav>
   </header>
