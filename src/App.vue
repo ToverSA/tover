@@ -65,7 +65,8 @@ input[type='button'] {
     span {
       color: $primary-color;
     }
-    .icon svg {
+    .icon svg,
+    svg {
       fill: $primary-color;
     }
     &:hover {

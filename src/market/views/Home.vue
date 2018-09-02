@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" @click="onClickGlobal">
       <header>
         <app-logo/>
         <nav class="signed" v-if="signedIn">
@@ -12,20 +12,21 @@
             <icons name="monetization_on"/>
             <span>Sell</span>
           </button>
-          <button>
+          <button  @click.stop="openMenu">
             <icons name="person"/>
             <span>Sduduzo Gumede</span>
           </button>
-          <div class="user-menu">
+          <div v-show="menuOpened" class="user-menu">
             <button class="btn-plain">
-              <icons name="person_outline"/>
+              <person-outline-icon/>
               <span>My Profile</span>
             </button>
-            <button class="btn-plain">
+            <button class="btn-plain" @click="logOut">
               <icons name="exit"/>
               <span>Log out</span>
             </button>
             <button class="btn-plain">
+              <help-icon/>
               <span>Help</span>
             </button>
           </div>
@@ -34,11 +35,12 @@
           <router-link
             class="btn"
             v-bind:to="{name: 'search'}">
-            <icons name="search"/>
+            <search-icon/>
           </router-link>
           <router-link
-            v-bind:to="{name: 'dashboard'}">
-            <icons name="person_outline"/>
+            class="btn"
+            v-bind:to="{name: 'auth'}">
+            <person-outline-icon/>
             <span>SIGN IN</span>
           </router-link>
         </nav>
@@ -52,21 +54,32 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppFooter from '@/components/AppFooter.vue';
-import { searchIcon } from '@/icons';
-
+import { searchIcon, helpIcon, personOutlineIcon } from '@/icons';
 @Component({
   components: {
     AppFooter,
     searchIcon,
+    helpIcon,
+    personOutlineIcon,
   },
 })
 export default class Home extends Vue {
-  public created(): void {
-    // console.log('hello');
+  public menuOpened: boolean = false;
+
+  public get signedIn(): boolean {
+    return this.$store.getters.loggedIn;
   }
 
-  get signedIn(): boolean {
-    return this.$store.getters.loggedIn;
+  public openMenu(): void {
+    this.menuOpened = true;
+  }
+
+  public logOut(): void {
+    this.$store.commit('signout');
+  }
+
+  public onClickGlobal() {
+    this.menuOpened = false;
   }
 }
 </script>

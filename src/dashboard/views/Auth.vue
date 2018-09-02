@@ -168,6 +168,8 @@ export default class Auth extends Vue {
         const query = this.$route.query;
         if (query.hasOwnProperty('redirect')) {
           this.$router.push(query.redirect);
+        } else {
+          this.$router.push({ name: 'home' });
         }
       })
       .catch((error) => {
