@@ -1,14 +1,18 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
-// import VuexPersistence from 'vuex-persist';
-
-// const vuexLocal = new VuexPersistence({
-//   storage: window.localStorage,
-// });
+import Vuex, { Payload } from 'vuex';
+import VuexPersistence from 'vuex-persist';
 
 Vue.use(Vuex);
+interface State {
+  token: string;
+}
 
-export default new Vuex.Store({
+const vuexLocal = new VuexPersistence<State, Payload>({
+  storage: window.localStorage,
+  reducer: (state) => ({ token: state.token }),
+});
+
+export default new Vuex.Store<State>({
   state: {
     token: '',
   },
@@ -20,13 +24,11 @@ export default new Vuex.Store({
       state.token = '';
     },
   },
-  actions: {
-
-  },
+  actions: {},
   getters: {
     loggedIn: (state) => {
       return state.token.length > 0;
     },
   },
-  // plugins: [vuexLocal.plugin],
+  plugins: [vuexLocal.plugin],
 });

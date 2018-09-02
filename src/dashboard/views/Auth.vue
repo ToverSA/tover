@@ -74,8 +74,8 @@ export default class Auth extends Vue {
   public authEmail: string = '';
   public authPassword: string = '';
   public loading: string | boolean = false;
-  private isError: boolean = false;
   public errorMessage: string = '';
+  private isError: boolean = false;
 
   // @Computed
   get isNamesInvalid() {
@@ -127,28 +127,6 @@ export default class Auth extends Vue {
     this.isError = false;
   }
 
-  private handleNetworkError(error: any): void {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      const status = error.response.status;
-      const errors = error.response.data.errors;
-      if (status === 400) {
-        this.openErrorDialog(errors.title);
-        return;
-      }
-      this.openErrorDialog("I don't know what happened");
-    } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
-      console.log(error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.log("'Error'", error.message);
-    }
-  }
-
   /**
    * sigh up button callback
    */
@@ -196,6 +174,24 @@ export default class Auth extends Vue {
         this.loading = false;
         this.handleNetworkError(error);
       });
+  }
+
+  private handleNetworkError(error: any): void {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      const status = error.response.status;
+      const errors = error.response.data.errors;
+      if (status === 400) {
+        this.openErrorDialog(errors.title);
+        return;
+      }
+      this.openErrorDialog('I dont know what happened');
+    } else if (error.request) {
+      // TODO
+    } else {
+      // TODO
+    }
   }
 }
 </script>
