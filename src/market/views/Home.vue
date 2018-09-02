@@ -5,7 +5,7 @@
         <div class="wrapper">
           <button class="btn-plain">
             <category-icon/>
-            <span>Browse Categories</span>
+            <span>Browse Category</span>
           </button>
           <input type="search" placeholder="e.g. Study guides, laptop chargers, muffins, etc.">
           <button class="btn-plain">
@@ -14,19 +14,22 @@
           </button>
         </div>
       </div>
-      <div class="section" v-bind:key="i" v-for="i in [1, 2]">
-        <div class="wrapper">
-          <div class="heading">
-            <h2>Section {{i}}</h2>
-            <button class="btn-rounded btn-accent-alpha">
-              <span>MORE</span>
-            </button>
+      <div class="section" v-bind:key="i" v-for="i in [1, 2, 3, 4]">
+        <div class="header">
+          <div class="info">
+            <h3>consectetur adipisicing.</h3>
+            <h4>Lorem ipsum dolor sit amet.</h4>
           </div>
-          <div class="card-wrapper">
-            <div v-bind:key="j" v-for="j in [1, 2, 3, 4, 5, 6, 7, 8]" class="card">
-              <div class="inner">
-                <div class="outer"></div>
-              </div>
+          <button>
+            <span>MORE</span>
+          </button>
+        </div>
+        <div class="scrolling-wrapper">
+          <div class="card" v-bind:key="i" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]">
+            <div class="content">
+              <img src="@/assets/clear.gif" alt="galaxy">
+              <h3>R12 345</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
           </div>
         </div>
@@ -40,13 +43,14 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import { searchIcon, categoryIcon } from '@/icons';
+import { searchIcon, categoryIcon, schoolIcon } from '@/icons';
 @Component({
   components: {
     AppHeader,
     AppFooter,
     searchIcon,
     categoryIcon,
+    schoolIcon,
   },
 })
 export default class Home extends Vue {
@@ -73,7 +77,8 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 @import '@/app.scss';
 div.home {
-  header {
+  overflow-x: hidden;
+  > header {
     position: fixed;
     z-index: 1;
   }
@@ -114,69 +119,108 @@ div.home {
     }
   }
   .section {
-    padding: 10px;
+    margin-bottom: 15px;
 
-    .wrapper {
-      background-color: white;
-      max-width: 1024px;
+    .header {
+      padding: 5px;
+      display: grid;
+      grid-template-columns: 1fr minmax(68px, min-content);
+      max-width: 960px;
+      width: 100vw;
       margin: auto;
-      padding: 1px;
+      padding: 30px;
+      padding-bottom: 0;
+      min-height: 0; /* NEW */
+      min-width: 0;
 
-      .heading {
-        padding: 10px;
-        max-width: 1024px;
-        display: grid;
-        grid-template-columns: 1fr max-content;
-        padding-right: 5px;
-        h2 {
+      .info {
+        width: 100%;
+        overflow: hidden;
+        min-width: 0;
+
+        h3,
+        h4 {
           margin: 0;
-          padding: 5px;
-          color: rgb(112, 112, 112);
+          padding-left: 5px;
+          color: #607d8b;
+          width: 100%;
+        }
+        h4 {
           font-weight: normal;
+          opacity: 0.5;
         }
       }
-      .card-wrapper {
-        padding: 5px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 20px;
-        .card {
-          background-color: rgb(236, 233, 233);
-          padding: 5px;
-          .outer {
-            position: relative;
-            &:before {
-              display: block;
-              content: '';
-              width: 100%;
-              padding-top: (3 / 2) * 100%;
-            }
-            > .inner {
-              position: absolute;
-              top: 0;
-              right: 0;
-              bottom: 0;
-              left: 0;
-            }
+      button {
+        align-self: flex-end;
+      }
+    }
+
+    .scrolling-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 960px;
+      margin: auto;
+      padding: 5px 0;
+
+      .card {
+        padding: 15px;
+
+        .content {
+          background-color: white;
+          display: grid;
+
+          img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background-color: rgba(0, 0, 0, 0.116);
+          }
+          h3,
+          p {
+            margin: 5px;
+          }
+          p {
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-height: 18px;
+            height: 36px;
+            overflow: hidden;
           }
         }
       }
     }
     @media screen and (max-width: 768px) {
-      padding: 0;
-      .wrapper {
-        .card-wrapper {
-          display: flex;
-          flex-wrap: nowrap;
-          overflow-x: auto;
-          padding: 0;
-          -webkit-overflow-scrolling: touch;
-          .card {
-            flex: 0 0 auto;
-            min-width: 130px;
-            height: auto;
-            margin: 5px;
+      background-color: white;
+      margin: 0;
+
+      .header {
+        padding: 10px 5px;
+        padding-top: 25px;
+      }
+
+      .scrolling-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 0;
+
+        .card {
+          flex: 0 0 auto;
+          padding: 5px;
+
+          .content {
+            width: 130px;
+            h3,
+            p {
+              margin: 5px 0;
+            }
           }
+        }
+        &::-webkit-scrollbar {
+          display: none;
         }
       }
     }

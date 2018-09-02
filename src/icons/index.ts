@@ -7,3 +7,4 @@ export { default as personIcon } from './components/Person.vue';
 export { default as categoryIcon } from './components/Category.vue';
 export { default as moreIcon } from './components/More.vue';
 export { default as monetizationOnIcon } from './components/MonetizationOn.vue';
+export { default as schoolIcon } from './components/School.vue';

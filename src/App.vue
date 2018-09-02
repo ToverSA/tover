@@ -42,6 +42,10 @@ body {
   animation-name: placeholderShimmer;
   animation-timing-function: linear;
 }
+a {
+  // text-decoration: none;
+  color: $accent-color;
+}
 .btn,
 .button,
 button,
