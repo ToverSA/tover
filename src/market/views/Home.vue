@@ -14,7 +14,7 @@
           </button>
         </div>
       </div>
-      <div class="section" v-bind:key="i" v-for="i in [1, 2, 3, 4]">
+      <div class="section">
         <div class="header">
           <div class="info">
             <h3>consectetur adipisicing.</h3>
@@ -30,6 +30,24 @@
               <img src="@/assets/clear.gif" alt="galaxy">
               <h3>R12 345</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section shimmer" v-show="1 === 0">
+        <div class="header">
+          <div class="info">
+            <h3 class="shine"></h3>
+            <h4 class="shine"></h4>
+          </div>
+          <button class="shine"></button>
+        </div>
+        <div class="scrolling-wrapper">
+          <div class="card" v-bind:key="i" v-for="i in [1, 2, 3]">
+            <div class="content">
+              <img src="@/assets/clear.gif" alt="galaxy" class="shine">
+              <h3 class="shine"></h3>
+              <p class="shine"></p>
             </div>
           </div>
         </div>
@@ -221,6 +239,48 @@ div.home {
         }
         &::-webkit-scrollbar {
           display: none;
+        }
+      }
+    }
+    &.shimmer {
+      .header {
+        height: 75px;
+        .info {
+          height: 40px;
+          h3 {
+            height: 20px;
+            margin-bottom: 2px;
+            width: 90%;
+          }
+          h4 {
+            height: 18px;
+            opacity: 1;
+            width: 60%;
+          }
+        }
+        button,
+        button:hover,
+        button:active,
+        button:focus {
+          height: 40px;
+          background-color: #f6f7f8;
+        }
+      }
+      .scrolling-wrapper {
+        .card {
+          .content {
+            img {
+              background-color: #f6f7f8;
+            }
+            h3 {
+              height: 22px;
+              width: 80px;
+              background-color: #f6f7f8;
+            }
+            p {
+              background-color: #f6f7f8;
+            }
+          }
         }
       }
     }
