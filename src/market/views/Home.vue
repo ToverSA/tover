@@ -1,15 +1,41 @@
 <template>
-    <div>
+    <div class="home">
       <header>
         <app-logo/>
-        <nav v-if="signedIn">
+        <nav class="signed" v-if="signedIn">
           <router-link
-            v-bind:to="{name: 'dashboard'}">
-            <icons name="person"/>
-            <span>ACCOUNT</span>
+            class="btn"
+            v-bind:to="{name: 'search'}">
+            <icons name="search"/>
           </router-link>
+          <button>
+            <icons name="monetization_on"/>
+            <span>Sell</span>
+          </button>
+          <button>
+            <icons name="person"/>
+            <span>Sduduzo Gumede</span>
+          </button>
+          <div class="user-menu">
+            <button class="btn-plain">
+              <icons name="person_outline"/>
+              <span>My Profile</span>
+            </button>
+            <button class="btn-plain">
+              <icons name="exit"/>
+              <span>Log out</span>
+            </button>
+            <button class="btn-plain">
+              <span>Help</span>
+            </button>
+          </div>
         </nav>
         <nav v-else>
+          <router-link
+            class="btn"
+            v-bind:to="{name: 'search'}">
+            <icons name="search"/>
+          </router-link>
           <router-link
             v-bind:to="{name: 'dashboard'}">
             <icons name="person_outline"/>
@@ -41,34 +67,55 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 @import '@/app.scss';
-header {
-  height: $bar-height;
-  background-color: $primary-color;
-  display: flex;
-  justify-content: space-between;
-
-  .app-logo {
+div.home {
+  header {
     height: $bar-height;
-    width: $bar-height;
-  }
+    background-color: $primary-color;
+    display: flex;
+    justify-content: space-between;
 
-  nav {
-    padding: 0;
-    a {
-      text-decoration: none;
-      color: white;
-      padding: 10px;
+    .app-logo {
+      height: $bar-height;
+      width: $bar-height;
+    }
+
+    nav {
+      padding: 0;
       display: flex;
+      position: relative;
+      a,
+      button {
+        text-decoration: none;
+        color: white;
+        padding: 10px;
+        display: flex;
+        // background-color: transparent;
 
-      i,
-      .icon {
-        display: block;
-        padding: 5px;
+        .icon {
+          display: block;
+          padding: 5px;
+        }
+        span {
+          padding: 6px 5px;
+        }
       }
-      span {
-        padding: 6px 5px;
-        @media screen and (max-width: 450px) {
-          display: none;
+      .user-menu {
+        position: absolute;
+        width: 200px;
+        background-color: white;
+        right: 20px;
+        top: 90%;
+
+        button {
+          width: 100%;
+        }
+      }
+      @media screen and (max-width: 450px) {
+        > a,
+        > button {
+          span {
+            display: none;
+          }
         }
       }
     }
