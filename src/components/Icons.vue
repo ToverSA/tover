@@ -143,6 +143,85 @@
 		      c0.55,0,1-0.45,1-1v-1C20,15.34,14.67,14,12,14z"/>
       </g>
     </svg>
+
+    <svg v-if="name === 'add'" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+	     height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+      <g id="Bounding_Boxes">
+	      <g id="ui_x5F_spec_x5F_header_copy_3" display="none">
+	      </g>
+	      <path fill="none" d="M0,0h24v24H0V0z"/>
+      </g>
+      <g id="Rounded_1_">
+	      <g id="ui_x5F_spec_x5F_header_copy_6" display="none">
+	      </g>
+	      <path d="M18,13h-5v5c0,0.55-0.45,1-1,1h0c-0.55,0-1-0.45-1-1v-5H6c-0.55,0-1-0.45-1-1v0c0-0.55,0.45-1,1-1h5V6c0-0.55,0.45-1,1-1h0
+		      c0.55,0,1,0.45,1,1v5h5c0.55,0,1,0.45,1,1v0C19,12.55,18.55,13,18,13z"/>
+      </g>
+    </svg>
+
+    <svg v-if="name === 'search'" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+	     height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+      <g id="Header_x2F_BG" display="none">
+	      <rect x="-358" y="-314" display="inline" fill="#F1F1F2" width="520" height="520"/>
+      </g>
+      <g id="Bounding_Boxes">
+	      <g id="ui_x5F_spec_x5F_header_copy_3" display="none">
+	      </g>
+	      <path fill="none" d="M0,0h24v24H0V0z"/>
+      </g>
+      <g id="Rounded">
+	      <g id="ui_x5F_spec_x5F_header_copy_5" display="none">
+	      </g>
+	      <path d="M15.5,14h-0.79l-0.28-0.27c1.2-1.4,1.82-3.31,1.48-5.34c-0.47-2.78-2.79-5-5.59-5.34c-4.23-0.52-7.79,3.04-7.27,7.27
+		      c0.34,2.8,2.56,5.12,5.34,5.59c2.03,0.34,3.94-0.28,5.34-1.48L14,14.71v0.79l4.25,4.25c0.41,0.41,1.08,0.41,1.49,0l0,0
+		      c0.41-0.41,0.41-1.08,0-1.49L15.5,14z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14z"/>
+      </g>
+      <g id="Sharp" display="none">
+	      <g id="ui_x5F_spec_x5F_header_copy_4">
+	      </g>
+	      <path display="inline" d="M15.5,14h-0.79l-0.28-0.27C15.41,12.59,16,11.11,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5
+		      S5.91,16,9.5,16c1.61,0,3.09-0.59,4.23-1.57L14,14.71v0.79l5,4.99L20.49,19L15.5,14z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5
+		      S14,7.01,14,9.5S11.99,14,9.5,14z"/>
+      </g>
+      <g id="Outline" display="none">
+	      <g id="ui_x5F_spec_x5F_header">
+	      </g>
+	      <path display="inline" d="M15.5,14h-0.79l-0.28-0.27C15.41,12.59,16,11.11,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5
+		      S5.91,16,9.5,16c1.61,0,3.09-0.59,4.23-1.57L14,14.71v0.79l5,4.99L20.49,19L15.5,14z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5
+		      S14,7.01,14,9.5S11.99,14,9.5,14z"/>
+      </g>
+      <g id="Duotone" display="none">
+	      <g id="ui_x5F_spec_x5F_header_copy_2">
+	      </g>
+	      <g display="inline">
+		      <path d="M15.5,14h-0.79l-0.28-0.27C15.41,12.59,16,11.11,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16
+			      c1.61,0,3.09-0.59,4.23-1.57L14,14.71v0.79l5,4.99L20.49,19L15.5,14z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5S14,7.01,14,9.5
+			      S11.99,14,9.5,14z"/>
+	      </g>
+      </g>
+      <g id="Material" display="none">
+	      <g id="ui_x5F_spec_x5F_header_copy">
+	      </g>
+	      <path display="inline" d="M15.5,14h-0.79l-0.28-0.27C15.41,12.59,16,11.11,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5
+		      S5.91,16,9.5,16c1.61,0,3.09-0.59,4.23-1.57L14,14.71v0.79l5,4.99L20.49,19L15.5,14z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5
+		      S14,7.01,14,9.5S11.99,14,9.5,14z"/>
+      </g>
+    </svg>
+
+    <svg v-if="name === 'school'" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
+			 height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+			<g id="Bounding_Boxes">
+				<g id="ui_x5F_spec_x5F_header_copy_2">
+				</g>
+				<path fill="none" d="M0,0h24v24H0V0z"/>
+			</g>
+			<g id="Rounded">
+				<path d="M5,13.18v2.81c0,0.73,0.4,1.41,1.04,1.76l5,2.73c0.6,0.33,1.32,0.33,1.92,0l5-2.73C18.6,17.4,19,16.72,19,15.99v-2.81
+					l-6.04,3.3c-0.6,0.33-1.32,0.33-1.92,0L5,13.18z M11.04,3.52l-8.43,4.6c-0.69,0.38-0.69,1.38,0,1.76l8.43,4.6
+					c0.6,0.33,1.32,0.33,1.92,0L21,10.09V16c0,0.55,0.45,1,1,1h0c0.55,0,1-0.45,1-1V9.59c0-0.37-0.2-0.7-0.52-0.88l-9.52-5.19
+					C12.36,3.2,11.64,3.2,11.04,3.52z"/>
+			</g>
+		</svg>
   </div>
 </template>
 

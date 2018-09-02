@@ -8,18 +8,24 @@
         <router-link :to="{name: 'home'}" class="button btn-c">
           <icons name="home"/>
         </router-link>
+        <button>
+          <icons name="add"/>
+        </button>
+        <button>
+          <icons name="search"/>
+        </button>
         <button @click="signOut" class="btn-c">
           <icons name="exit"/>
         </button>
       </div>
       <div class="options">
         <app-title></app-title>
-        <button>
-          <span>Overview</span>
-        </button>
-        <button>
-          <span>Overview</span>
-        </button>
+        <div class="section buttons">
+          <button>
+            <icons name="school"/>
+            <span>Campuses</span>
+          </button>
+        </div>
       </div>
     </div>
     <button @click="openSidebar" class="content-menu">
@@ -83,10 +89,6 @@ div.dashboard {
         margin-bottom: 10px;
         border: none;
         outline: none;
-        &:active {
-          background-color: $primary-color-dark;
-        }
-        cursor: pointer;
       }
 
       .menu-btn {
@@ -94,20 +96,41 @@ div.dashboard {
       }
     }
     .options {
+      position: relative;
+      display: block;
       .title {
         padding: 0;
         color: $primary-color-light;
         margin: 15px 0;
         width: 250px;
         display: block;
-        margin-bottom: 40px;
+        margin-bottom: 5px;
       }
 
-      button {
-        width: 100%;
-        text-align: start;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.068);
+      .section {
+        &.buttons {
+          padding: 0;
+          padding-left: 40px;
+
+          button {
+            box-sizing: border-box;
+            text-align: left;
+            width: 100%;
+            color: white;
+            display: flex;
+
+            .icon {
+              svg {
+                fill: rgba(255, 255, 255, 0.582);
+                height: 24px;
+                width: 24px;
+              }
+            }
+            span {
+              padding: 5px;
+            }
+          }
+        }
       }
     }
   }

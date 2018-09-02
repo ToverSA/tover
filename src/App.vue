@@ -37,22 +37,13 @@ input[type='button'] {
   outline: none;
   display: block;
   font-size: 1em;
-  cursor: pointer;
-  background-color: transparent;
-
-  &.btn-responsive {
-    @media screen and (max-width: 425px) {
-      span {
-        display: none;
-      }
-    }
+  cursor: default;
+  background-color: $primary-color;
+  &:hover {
+    background-color: $primary-color-dark;
   }
-  &.btn-c,
-  &.button-color {
-    background-color: rgba($primary-color-dark, 0.2);
-  }
-  &.btn-accent {
-    background-color: $accent-color;
+  &:active {
+    background-color: rgba($primary-color-dark, 0.3);
   }
 }
 </style>
