@@ -69,6 +69,7 @@ input[type='button'] {
   display: flex;
   justify-content: center;
   min-width: 100px;
+  text-decoration: none;
 
   span {
     text-align: center;
@@ -88,6 +89,9 @@ input[type='button'] {
   }
   &.btn-round {
     border-radius: 22px;
+  }
+  &.btn-square {
+    border-radius: 0px;
   }
   &.plain {
     background-color: transparent;
