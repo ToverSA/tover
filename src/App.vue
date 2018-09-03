@@ -51,10 +51,10 @@ a {
 button,
 input[type='button'] {
   border: none;
-  padding: 10px;
+  margin: 5px;
+  padding: 0 15px;
   outline: none;
-  display: flex;
-  font-size: 1em;
+  font-size: 15px;
   cursor: pointer;
   background-color: $primary-color;
   color: white;
@@ -62,63 +62,80 @@ input[type='button'] {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  min-width: 100px;
+
+  span {
+    text-align: center;
+    display: inline-block;
+    margin: 10px 5px;
+  }
 
   > svg {
-    height: 20px;
-    width: 20px;
+    height: 28px;
+    width: 28px;
+    min-height: 28px;
+    min-width: 28px;
     fill: white;
-    display: inline-block;
-    margin: 5px;
+    display: block;
+    padding: 0;
+    margin: 5px 0;
   }
-  .icon {
-    svg {
-      height: 18px;
-      width: 18px;
-      fill: white;
-      display: inline-block;
-    }
+  &.btn-round {
+    border-radius: 22px;
   }
-  &.btn-accent-alpha {
-    background-color: rgba($accent-color, 0.1);
-    color: $accent-color;
-  }
-
-  &:focus {
-    box-shadow: 0 0 1px 1px rgba($accent-color, 0.2);
-  }
-  &:hover {
-    background-color: $primary-color-dark;
-    &.btn-accent-alpha {
-      background-color: rgba($accent-color, 0.4);
-    }
-  }
-  &:active {
-    background-color: rgba($primary-color-dark, 0.3);
-    &.btn-accent-alpha {
-      background-color: rgba($accent-color, 0.05);
-    }
-  }
-  &.btn-accent {
-    background-color: $accent-color;
-  }
-  &.btn-accent-plain {
-    color: $accent-color;
-    background-color: rgba(255, 255, 255, 0.377);
-  }
-  &.btn-rounded {
-    border-radius: 3px;
-  }
-  &.btn-plain {
-    background-color: white;
+  &.plain {
+    background-color: transparent;
     color: $primary-color;
 
-    span {
-      color: $primary-color;
-    }
-    .icon svg,
     svg {
       fill: $primary-color;
     }
+  }
+  &.theme {
+    background-color: white;
+    color: $primary-color;
+    svg {
+      fill: $primary-color;
+    }
+  }
+  &:focus {
+    box-shadow: 0 0 2px 1px $primary-color-dark;
+    &.theme {
+      box-shadow: 0 0 2px 1px $primary-color-light;
+    }
+  }
+  &:active,
+  &:hover {
+    background-color: $primary-color-dark;
+    &.plain {
+      color: $primary-color-dark;
+      background-color: transparent;
+      svg {
+        fill: $primary-color-dark;
+      }
+    }
+    &.theme {
+      background-color: $primary-color-light;
+      svg {
+        fill: $primary-color-light;
+      }
+    }
+  }
+  &[disabled] {
+    background-color: #90a4ae;
+    cursor: default;
+    &.theme {
+      background-color: $primary-color-dark;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    cursor: default;
   }
 }
 </style>

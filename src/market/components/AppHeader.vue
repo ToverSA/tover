@@ -40,7 +40,7 @@
       <router-link
         class="btn"
         v-bind:to="{name: 'about'}">
-        <more-icon/>
+        <info-icon/>
         <span>About</span>
       </router-link>
       <router-link
@@ -63,7 +63,7 @@ import {
   localAtmIcon,
   monetizationOnIcon,
   personIcon,
-  moreIcon,
+  infoIcon,
 } from '@/icons';
 @Component({
   components: {
@@ -73,7 +73,7 @@ import {
     localAtmIcon,
     monetizationOnIcon,
     personIcon,
-    moreIcon,
+    infoIcon,
   },
   props: {
     inverted: Boolean,

@@ -25,7 +25,7 @@
           </button>
         </div>
         <div class="scrolling-wrapper">
-          <div class="card" v-bind:key="i" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]">
+          <div class="card" v-bind:key="i" v-for="i in [1, 2, 3, 4]">
             <div class="content">
               <img src="@/assets/clear.gif" alt="galaxy">
               <h3>R12 345</h3>
