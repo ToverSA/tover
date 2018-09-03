@@ -1,9 +1,6 @@
 <template>
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px"
 	   height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
-    <g id="Bounding_Boxes">
-	    <path fill="none" d="M0,0h24v24H0V0z"/>
-    </g>
     <g id="Rounded">
 	    <g>
 		    <path d="M11.15,3.4L7.43,9.48C7.02,10.14,7.5,11,8.28,11h7.43c0.78,0,1.26-0.86,0.85-1.52L12.85,3.4

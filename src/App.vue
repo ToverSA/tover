@@ -21,6 +21,7 @@ export default {};
 body {
   background-color: $background-color;
 }
+
 .shine {
   background: #f6f7f8;
   background-image: linear-gradient(
@@ -82,7 +83,6 @@ input[type='button'] {
     width: 28px;
     min-height: 28px;
     min-width: 28px;
-    fill: white;
     display: block;
     padding: 0;
     margin: 5px 0;

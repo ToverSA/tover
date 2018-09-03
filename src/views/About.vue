@@ -12,6 +12,10 @@
         <info-icon/>
         <span>icon</span>
       </button>
+      <button>
+        <loader-icon/>
+        <span>loader</span>
+      </button>
       <button disabled>
         <span>Disabled</span>
       </button>
@@ -32,10 +36,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { infoIcon } from '@/icons';
+import { infoIcon, loaderIcon } from '@/icons';
 
 @Component({
-  components: { infoIcon },
+  components: { infoIcon, loaderIcon },
 })
 export default class About extends Vue {
   public backButton() {

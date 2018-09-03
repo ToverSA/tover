@@ -8,5 +8,6 @@ export { default as categoryIcon } from './components/Category.vue';
 export { default as moreIcon } from './components/More.vue';
 export { default as infoIcon } from './components/Info.vue';
 export { default as exitIcon } from './components/Exit.vue';
+export { default as loaderIcon } from './components/Loader.vue';
 export { default as monetizationOnIcon } from './components/MonetizationOn.vue';
 export { default as schoolIcon } from './components/School.vue';

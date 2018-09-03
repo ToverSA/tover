@@ -7,7 +7,7 @@
             <category-icon/>
             <span>Browse Category</span>
           </button>
-          <input type="search" placeholder="e.g. Study guides, laptop chargers, muffins, etc.">
+          <input type="search" placeholder="e.g. Study guides, laptop chargers, muffins, etc." name="search">
           <button class="plain">
             <search-icon/>
             <span>Search</span>
@@ -127,11 +127,7 @@ div.home {
         min-width: 0;
         padding: 0;
         background-color: transparent;
-        svg {
-          margin: 0;
-        }
         span {
-          padding: 1px 5px;
           @media screen and (max-width: 450px) {
             display: none;
           }
