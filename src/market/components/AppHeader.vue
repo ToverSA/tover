@@ -8,29 +8,29 @@
     </a>
     <nav class="signed" v-if="signedIn">
       <router-link
-        class="btn"
+        class="btn btn-responsive"
         :to="{name: 'sell'}">
         <monetization-on-icon/>
         <span>Sell</span>
       </router-link>
-      <button  @click.stop="openMenu">
+      <button  @click.stop="openMenu" class="btn-responsive">
         <person-icon/>
         <span>Sduduzo Gumede</span>
       </button>
       <div v-show="menuOpened" class="user-menu">
-        <button class="btn-plain">
+        <button class="plain">
           <person-outline-icon/>
           <span>My Profile</span>
         </button>
-        <button class="btn-plain">
+        <button class="plain">
           <local-atm-icon/>
           <span>My Adverts</span>
         </button>
-        <button class="btn-plain" @click="logOut">
-          <icons name="exit"/>
+        <button class="plain" @click="logOut">
+          <exit-icon/>
           <span>Log out</span>
         </button>
-        <button class="btn-plain">
+        <button class="plain">
           <help-icon/>
           <span>Help</span>
         </button>
@@ -38,15 +38,11 @@
     </nav>
     <nav v-else>
       <router-link
-        class="btn"
         v-bind:to="{name: 'about'}">
-        <info-icon/>
         <span>About</span>
       </router-link>
       <router-link
-        class="btn"
         v-bind:to="{name: 'auth'}">
-        <person-outline-icon/>
         <span>Sign in</span>
       </router-link>
     </nav>
@@ -64,6 +60,7 @@ import {
   monetizationOnIcon,
   personIcon,
   infoIcon,
+  exitIcon,
 } from '@/icons';
 @Component({
   components: {
@@ -74,6 +71,7 @@ import {
     monetizationOnIcon,
     personIcon,
     infoIcon,
+    exitIcon,
   },
   props: {
     inverted: Boolean,
@@ -126,40 +124,58 @@ header {
 
   nav {
     padding: 0;
-    margin-right: 50px;
     display: flex;
     position: relative;
-    a,
-    button {
+
+    .router-link-active {
+      display: none;
+    }
+    a:not(.btn) {
       text-decoration: none;
       color: white;
-      padding: 10px;
+      padding: 10px 30px;
       display: flex;
+      font-weight: bold;
 
-      .icon {
-        display: block;
-        padding: 5px;
-      }
       span {
         padding: 6px 5px;
+        &::first-letter {
+          text-decoration: underline;
+        }
+      }
+      &:hover {
+        background-color: $primary-color-dark;
+        span {
+          &::first-letter {
+            text-decoration: none;
+          }
+        }
       }
     }
     .user-menu {
       position: absolute;
       width: 200px;
       background-color: white;
-      right: 0;
-      top: 90%;
+      right: 5px;
+      top: 45px;
+      box-shadow: 0 1px 1px 1px rgba(128, 128, 128, 0.356);
+      display: grid;
 
-      button {
-        width: 100%;
+      button,
+      .btn {
+        min-width: auto;
+        justify-content: flex-start;
       }
     }
     @media screen and (max-width: 450px) {
       margin: 0;
-
-      > a,
-      > button {
+      a:not(.btn) {
+        padding: 10px;
+      }
+      > button,
+      .btn {
+        min-width: auto;
+        padding: 0 5px;
         span {
           display: none;
         }
@@ -168,18 +184,6 @@ header {
         right: 5px;
         top: 5px;
       }
-    }
-  }
-  &.inverted {
-    background-color: white;
-    a,
-    button {
-      background-color: white;
-    }
-    svg,
-    span {
-      fill: $primary-color;
-      color: $primary-color;
     }
   }
 }
