@@ -1,7 +1,7 @@
 <template>
     <div class="auth">
       <div class="top">
-        <button @click="onCancel">
+        <button @click="onCancel" class="btn-round">
           <close-icon/>
         </button>
       </div>
@@ -209,6 +209,11 @@ div.auth {
   .top {
     display: flex;
     justify-content: flex-end;
+
+    button {
+      min-width: auto;
+      padding: 0 5px;
+    }
   }
 
   .app-logo {
@@ -233,17 +238,8 @@ div.auth {
       border-radius: 3px;
       border: 0;
 
-      &[type='button'] {
-        color: white;
-        min-width: 100px;
-        justify-content: center;
-        &.negative {
-          // background-color: $primary-color-dark;
-          color: white;
-        }
-      }
       &.invalid {
-        border-right: 10px solid rgb(255, 94, 0);
+        box-shadow: 0 0 1px 2px orangered inset;
       }
     }
     .grid-x2 {

@@ -3,12 +3,12 @@
       <app-header/>
       <div class="quick-search">
         <div class="wrapper">
-          <button class="btn-plain">
+          <button class="plain">
             <category-icon/>
             <span>Browse Category</span>
           </button>
           <input type="search" placeholder="e.g. Study guides, laptop chargers, muffins, etc.">
-          <button class="btn-plain">
+          <button class="plain">
             <search-icon/>
             <span>Search</span>
           </button>
@@ -124,6 +124,9 @@ div.home {
         white-space: nowrap;
       }
       button {
+        min-width: 0;
+        padding: 0;
+        background-color: transparent;
         svg {
           margin: 0;
         }
