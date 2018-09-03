@@ -1,24 +1,22 @@
 <template>
-  <header @click="onClickGlobal" v-bind:class="{inverted}">
-    <router-link to="/"  v-if="inverted">
+  <header @click="onClickGlobal">
+    <router-link to="/">
       <app-logo inverted/>
     </router-link>
-    <a href="/" v-else>
-      <app-logo inverted/>
-    </a>
     <nav class="signed" v-if="signedIn">
       <router-link
+         v-if="!isInProfile"
         class="btn btn-responsive"
         :to="{name: 'sell'}">
         <monetization-on-icon/>
         <span>Sell</span>
       </router-link>
-      <button  @click.stop="openMenu" class="btn-responsive">
+      <button v-if="!isInProfile" @click.stop="openMenu" class="btn-responsive">
         <person-icon/>
         <span>Sduduzo Gumede</span>
       </button>
       <div v-show="menuOpened" class="user-menu">
-        <button class="plain">
+        <button class="plain" @click="gotoProfile">
           <person-outline-icon/>
           <span>My Profile</span>
         </button>
@@ -73,9 +71,6 @@ import {
     infoIcon,
     exitIcon,
   },
-  props: {
-    inverted: Boolean,
-  },
 })
 export default class AppHeader extends Vue {
   get menuOpened(): boolean {
@@ -87,8 +82,16 @@ export default class AppHeader extends Vue {
     return this.$store.getters.loggedIn;
   }
 
+  public get isInProfile(): boolean {
+    return this.$route.name === 'profile';
+  }
+
   public openMenu(): void {
     this.$store.commit('header/openMenu');
+  }
+
+  public gotoProfile(): void {
+    this.$router.push({ name: 'profile' });
   }
 
   public logOut(): void {

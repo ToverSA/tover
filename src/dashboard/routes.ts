@@ -1,7 +1,6 @@
 import Auth from './views/Auth.vue';
 
 const Dashboard = () => import('./views/Dashboard.vue');
-const Profile = () => import('./views/Profile.vue');
 
 const Admin = () => import('./components/Admin.vue');
 const Overview = () => import('./components/Overview.vue');
@@ -29,10 +28,5 @@ export default [
         component: Admin,
       },
     ],
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: Profile,
   },
 ];
