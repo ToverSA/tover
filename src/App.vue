@@ -127,7 +127,7 @@ input[type='button'] {
     &.theme {
       background-color: $primary-color-light;
       svg {
-        fill: $primary-color-light;
+        fill: $primary-color-dark;
       }
     }
   }
@@ -140,6 +140,20 @@ input[type='button'] {
   }
   @media screen and (max-width: 768px) {
     cursor: default;
+  }
+}
+input:not([type='button']) {
+  padding: 15px 10px;
+  border: none;
+  font-size: 1em;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 1px rgba($primary-color-light, 0.2) inset;
+  border: 1px solid rgba(211, 211, 211, 0.486);
+
+  &:focus {
+    box-shadow: 0 0 2px 2px $primary-color-light inset;
+    background-color: rgba($primary-color-light, 0.2);
   }
 }
 </style>
