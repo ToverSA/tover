@@ -15,22 +15,21 @@
         <person-icon/>
         <span>Sduduzo Gumede</span>
       </button>
-      <div v-show="menuOpened" class="user-menu">
-        <button class="plain" @click="gotoProfile">
-          <person-outline-icon/>
-          <span>My Profile</span>
-        </button>
-        <button class="plain">
-          <local-atm-icon/>
-          <span>My Adverts</span>
-        </button>
+      <div v-show="menuOpened" class="user-menu" @click.stop>
+        <div class="profile">
+          <div class="close" @click="onClickGlobal">
+            <close-icon/>
+          </div>
+          <img src="@/assets/clear.gif" alt="profile image">
+          <h3>Sduduzo Gumede</h3>
+          <p>gumedesduduzo@gmail.com</p>
+          <button class="plain" @click="gotoProfile">
+            <span>edit</span>
+          </button>
+        </div>
         <button class="plain" @click="logOut">
           <exit-icon/>
-          <span>Log out</span>
-        </button>
-        <button class="plain">
-          <help-icon/>
-          <span>Help</span>
+          <span>log out</span>
         </button>
       </div>
     </nav>
@@ -59,6 +58,8 @@ import {
   personIcon,
   infoIcon,
   exitIcon,
+  editIcon,
+  closeIcon,
 } from '@/icons';
 @Component({
   components: {
@@ -70,6 +71,8 @@ import {
     personIcon,
     infoIcon,
     exitIcon,
+    editIcon,
+    closeIcon,
   },
 })
 export default class AppHeader extends Vue {
@@ -92,6 +95,7 @@ export default class AppHeader extends Vue {
 
   public gotoProfile(): void {
     this.$router.push({ name: 'profile' });
+    this.$store.commit('header/closeMenu');
   }
 
   public logOut(): void {
@@ -157,35 +161,73 @@ header {
     }
     .user-menu {
       position: absolute;
-      width: 200px;
-      background-color: white;
+      background-color: $background-color;
       right: 5px;
-      top: 45px;
+      top: 5px;
       box-shadow: 0 1px 1px 1px rgba(128, 128, 128, 0.356);
       display: grid;
 
-      button,
-      .btn {
-        min-width: auto;
+      > button {
+        border-radius: 0;
         justify-content: flex-start;
+      }
+
+      .profile {
+        min-width: 280px;
+        background-color: white;
+
+        .close {
+          width: 50px;
+          height: 50px;
+          padding: 10px;
+          right: 0;
+          top: 0;
+          position: absolute;
+          svg {
+            fill: $primary-color;
+          }
+        }
+
+        img {
+          background-color: $primary-color;
+          width: 90px;
+          height: 90px;
+          border-radius: 45px;
+          display: block;
+          margin: 20px auto;
+        }
+
+        h3 {
+          margin: 20px auto 5px;
+          text-align: center;
+        }
+        p {
+          margin: 5px auto;
+          text-align: center;
+          opacity: 0.5;
+        }
+        button {
+          margin: 5px auto;
+        }
       }
     }
     @media screen and (max-width: 450px) {
       margin: 0;
+
       a:not(.btn) {
         padding: 10px;
       }
       > button,
-      .btn {
-        min-width: auto;
+      > .btn {
+        min-width: 0;
         padding: 0 5px;
         span {
           display: none;
         }
       }
       .user-menu {
-        right: 5px;
-        top: 5px;
+        right: 3px;
+        top: 3px;
       }
     }
   }

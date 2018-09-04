@@ -1,17 +1,12 @@
-import Auth from './views/Auth.vue';
+const Dashboard = () =>
+  import(/* webpackChunkName: "v" */ './views/Dashboard.vue');
 
-const Dashboard = () => import('./views/Dashboard.vue');
-
-const Admin = () => import('./components/Admin.vue');
-const Overview = () => import('./components/Overview.vue');
+const Admin = () =>
+  import(/* webpackChunkName: "c" */ './components/Admin.vue');
+const Overview = () =>
+  import(/* webpackChunkName: "c" */ './components/Overview.vue');
 
 export default [
-  {
-    path: '/auth',
-    name: 'auth',
-    component: Auth,
-    meta: { requiresNoAuth: true },
-  },
   {
     path: '/dashboard',
     component: Dashboard,

@@ -2,8 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import store from '@/store';
-
-import About from '@/views/About.vue';
 import dashboard from '@/dashboard/routes';
 import market from '@/market/routes';
 
@@ -12,11 +10,7 @@ Vue.use(Router);
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    { path: '/about', name: 'about', component: About },
-    ...market,
-    ...dashboard,
-  ],
+  routes: [...market, ...dashboard],
 });
 
 router.beforeEach((to, from, next) => {

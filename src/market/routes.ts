@@ -1,10 +1,28 @@
-import Home from './views/Home.vue';
-import Search from './views/Search.vue';
-
-const Profile = () => import('./views/Profile.vue');
-const Sell = () => import('./views/Sell.vue');
+const About = () => import(/* webpackChunkName: "v" */ './views/About.vue');
+const Auth = () => import(/* webpackChunkName: "v" */ './views/Auth.vue');
+const Item = () => import(/* webpackChunkName: "v" */ './views/Item.vue');
+const Home = () => import(/* webpackChunkName: "v" */ './views/Home.vue');
+const Profile = () => import(/* webpackChunkName: "v" */ './views/Profile.vue');
+const Search = () => import(/* webpackChunkName: "v" */ './views/Search.vue');
+const Sell = () => import(/* webpackChunkName: "v" */ './views/Sell.vue');
 
 export default [
+  {
+    path: '/about',
+    name: 'about',
+    component: About,
+  },
+  {
+    path: '/auth',
+    name: 'auth',
+    component: Auth,
+    meta: { requiresNoAuth: true },
+  },
+  {
+    path: '/item/:id',
+    name: 'item',
+    component: Item,
+  },
   {
     path: '/',
     name: 'home',
