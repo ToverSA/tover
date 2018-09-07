@@ -10,9 +10,9 @@
         <h3>Create an account</h3>
         <div class="content">
           <label for="names">Give your full name</label>
-          <input type="text">
+          <input type="text" name="names" v-model="names">
           <label for="email">Your email address</label>
-          <input type="email" name="email">
+          <input type="email" name="email" v-model="email">
         </div>
         <div class="controls">
           <span></span>
@@ -26,16 +26,16 @@
         <h3>Create an account</h3>
         <div class="content">
           <label for="password">Choose a strong password</label>
-          <input type="password" name="password">
+          <input type="password" name="password" v-model="password">
           <label for="password2">Re enter your password</label>
-          <input type="password" name="password2">
+          <input type="password" name="password2" v-model="pwd2">
         </div>
         <div class="controls">
           <button @click="previousStep">
             <chevron-left-icon/>
             <span>back</span>
           </button>
-          <button @click="nextStep" class="theme">
+          <button @click="signUp" class="theme">
             <span>sign up</span>
             <chevron-right-icon/>
           </button>
@@ -60,11 +60,11 @@ import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
   },
 })
 export default class Signup extends Vue {
+  public names: string = '';
   public email: string = '';
   public password: string = '';
+  public pwd2: string = '';
   public loading: boolean = false;
-  public errorMessage: string = '';
-  private isError: boolean = false;
   public step: number = 1;
 
   public gotoCreate() {
@@ -80,6 +80,12 @@ export default class Signup extends Vue {
   }
 
   public nextStep(): void {
+    if (!this.isNameValid(this.names)) {
+      return;
+    }
+    if (!this.isEmailValid(this.email)) {
+      return;
+    }
     this.step++;
   }
 
@@ -87,37 +93,23 @@ export default class Signup extends Vue {
     this.step--;
   }
 
-  public closeDialog(): void {
-    this.email = '';
-    this.password = '';
-    this.errorMessage = '';
-    this.isError = false;
-  }
-
-  public signIn(): void {
-    if (this.loading) return;
+  public signUp(): void {
+    if (this.loading) {
+      return;
+    }
+    if (!this.isPasswordValid(this.password)) {
+      return;
+    }
+    if (this.password !== this.pwd2) {
+      return;
+    }
     this.loading = true;
     api
-      .authUser(this.email, this.password)
+      .createUser(this.names, this.email, this.password)
       .then((response) => {
-        this.loading = false;
-        const data = response.data;
-        const token = data.access_token;
-        if (typeof token === 'undefined') {
-          return; // TODO something about this error
-        }
-        this.$store.commit('token', token);
-        const query = this.$route.query;
-        if (query.hasOwnProperty('redirect')) {
-          this.$router.push(query.redirect);
-        } else {
-          this.$router.push({ name: 'home' });
-        }
+        this.$router.push({ name: 'auth' });
       })
-      .catch((error) => {
-        this.loading = false;
-        this.handleNetworkError(error);
-      });
+      .catch(this.handleNetworkError);
   }
 
   private handleNetworkError(error: any): void {
@@ -134,6 +126,18 @@ export default class Signup extends Vue {
     } else {
       // TODO
     }
+  }
+
+  private isNameValid(name: string): boolean {
+    return /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/.test(name);
+  }
+  private isEmailValid(email: string): boolean {
+    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(
+      email,
+    );
+  }
+  private isPasswordValid(password: string): boolean {
+    return /^(?=.{3,})/.test(password);
   }
 }
 </script>
