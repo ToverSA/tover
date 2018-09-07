@@ -14,7 +14,7 @@
           </button>
         </div>
       </div>
-      <div class="section">
+      <!-- <div class="section">
         <div class="header">
           <div class="info">
             <h3>consectetur adipisicing.</h3>
@@ -25,13 +25,13 @@
           </button>
         </div>
         <div class="scrolling-wrapper">
-          <!-- <div class="card" v-bind:key="i" v-for="i in [1, 2, 3, 4]">
+          <div class="card" v-bind:key="i" v-for="i in [1, 2, 3, 4]">
             <div class="content">
               <img src="@/assets/clear.gif" alt="galaxy">
               <h3>R12 345</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
-          </div> -->
+          </div>
           <router-link :to="{ name: 'item', params: { id: i } }" class="card" v-bind:key="i" v-for="i in [1, 2, 3, 4]">
             <div class="content">
               <img src="@/assets/clear.gif" alt="galaxy">
@@ -40,8 +40,8 @@
             </div>
           </router-link>
         </div>
-      </div>
-      <!-- <div class="section shimmer" v-show="1 === 0">
+      </div> -->
+      <div class="section shimmer" v-show="1 === 1">
         <div class="header">
           <div class="info">
             <h3 class="shine"></h3>
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- <app-footer/> -->
     </div>
 </template>
