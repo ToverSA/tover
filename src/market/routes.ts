@@ -5,6 +5,7 @@ const Home = () => import(/* webpackChunkName: "v" */ './views/Home.vue');
 const Profile = () => import(/* webpackChunkName: "v" */ './views/Profile.vue');
 const Search = () => import(/* webpackChunkName: "v" */ './views/Search.vue');
 const Sell = () => import(/* webpackChunkName: "v" */ './views/Sell.vue');
+const Signup = () => import(/* webpackChunkName: "v" */ './views/Signup.vue');
 
 export default [
   {
@@ -44,5 +45,11 @@ export default [
     name: 'sell',
     component: Sell,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/create-account',
+    name: 'signup',
+    component: Signup,
+    meta: { requiresNoAuth: true },
   },
 ];

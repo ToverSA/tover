@@ -75,6 +75,7 @@ input[type='button'] {
     text-align: center;
     display: inline-block;
     margin: 10px 5px;
+    padding: 1px 0;
   }
 
   > svg {
@@ -130,8 +131,13 @@ input[type='button'] {
       }
     }
   }
-  &[disabled] {
-    background-color: #90a4ae;
+  &[disabled],
+  &:disabled {
+    background-color: #90a4ae38;
+    color: rgba(255, 255, 255, 0.623);
+    svg {
+      fill: rgba(255, 255, 255, 0.623);
+    }
     cursor: default;
     &.theme {
       background-color: $primary-color-dark;

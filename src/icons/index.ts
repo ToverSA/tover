@@ -12,3 +12,5 @@ export { default as editIcon } from './components/Edit.vue';
 export { default as loaderIcon } from './components/Loader.vue';
 export { default as monetizationOnIcon } from './components/MonetizationOn.vue';
 export { default as schoolIcon } from './components/School.vue';
+export { default as chevronRightIcon } from './components/ChevronRight.vue';
+export { default as chevronLeftIcon } from './components/ChevronLeft.vue';

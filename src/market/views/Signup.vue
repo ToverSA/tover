@@ -1,26 +1,47 @@
 <template>
-    <div class="auth">
+    <div class="signup">
       <div class="top">
         <button @click="onCancel" class="btn-round">
           <close-icon/>
         </button>
       </div>
       <app-logo/>
-      <form>
-        <h3>Sign in to your profile</h3>
-        <label for="email">Email</label><br>
-        <input v-model="email" type="text" name="email">
-        <label for="password">Password</label><br>
-        <input v-model="password" type="password" name="password">
-        <div class="grid-x2">
-          <input type="button" value="forgot password?" class="secondary">
-          <input @click="signIn" type="button" value="sign in"
-            v-bind:class="{loading: loading}">
+      <div class="form" v-if="step === 1" @submit.prevent>
+        <h3>Create an account</h3>
+        <div class="content">
+          <label for="names">Give your full name</label>
+          <input type="text">
+          <label for="email">Your email address</label>
+          <input type="email" name="email">
         </div>
-        <input @click="gotoCreate" type="button"
-          value="create an account"
-          class="secondary">
-      </form>
+        <div class="controls">
+          <span></span>
+          <button @click="nextStep">
+            <span>next</span>
+            <chevron-right-icon/>
+          </button>
+        </div>
+      </div>
+      <div class="form" v-if="step === 2">
+        <h3>Create an account</h3>
+        <div class="content">
+          <label for="password">Choose a strong password</label>
+          <input type="password" name="password">
+          <label for="password2">Re enter your password</label>
+          <input type="password" name="password2">
+        </div>
+        <div class="controls">
+          <button @click="previousStep">
+            <chevron-left-icon/>
+            <span>back</span>
+          </button>
+          <button @click="nextStep" class="theme">
+            <span>sign up</span>
+            <chevron-right-icon/>
+          </button>
+        </div>
+        <!-- TODO terms of signing in here -->
+      </div>
     </div>
 </template>
 
@@ -29,20 +50,22 @@ import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import store from '@/store';
 import api from '@/api';
-import { closeIcon } from '@/icons';
-import { loadavg } from 'os';
+import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
 
 @Component({
   components: {
     closeIcon,
+    chevronRightIcon,
+    chevronLeftIcon,
   },
 })
-export default class Auth extends Vue {
+export default class Signup extends Vue {
   public email: string = '';
   public password: string = '';
   public loading: boolean = false;
   public errorMessage: string = '';
   private isError: boolean = false;
+  public step: number = 1;
 
   public gotoCreate() {
     this.$router.push({ name: 'signup' });
@@ -54,6 +77,14 @@ export default class Auth extends Vue {
     } else {
       this.$router.go(-1);
     }
+  }
+
+  public nextStep(): void {
+    this.step++;
+  }
+
+  public previousStep(): void {
+    this.step--;
   }
 
   public closeDialog(): void {
@@ -109,7 +140,7 @@ export default class Auth extends Vue {
 
 <style lang="scss" scoped>
 @import '@/app.scss';
-div.auth {
+div.signup {
   background-color: $primary-color;
   height: 100%;
   min-height: 100vh;
@@ -122,6 +153,11 @@ div.auth {
       min-width: auto;
       padding: 0 5px;
     }
+    h3 {
+      margin: 0;
+      padding: 13px;
+      color: white;
+    }
   }
 
   .app-logo {
@@ -131,9 +167,9 @@ div.auth {
     margin: auto;
   }
 
-  form {
+  .form {
     padding: 10px;
-    margin: auto;
+    margin: 0 auto;
     width: 100%;
     max-width: 425px;
     color: white;
@@ -146,6 +182,7 @@ div.auth {
       border-radius: 5px;
       border: 0;
       background-color: rgba($primary-color-light, 0.2);
+      // background-color: rgba($error-color, 0.4);
       color: white;
       outline: none;
       &:focus {
@@ -168,19 +205,9 @@ div.auth {
         }
       }
     }
-    .grid-x2 {
+    .controls {
       display: flex;
       justify-content: space-between;
-
-      input {
-        width: auto;
-      }
-    }
-    a {
-      padding: 10px 0px;
-      color: $accent-color;
-      text-align: center;
-      display: block;
     }
   }
 }
