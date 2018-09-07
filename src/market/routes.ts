@@ -7,6 +7,9 @@ const Search = () => import(/* webpackChunkName: "v" */ './views/Search.vue');
 const Sell = () => import(/* webpackChunkName: "v" */ './views/Sell.vue');
 const Signup = () => import(/* webpackChunkName: "v" */ './views/Signup.vue');
 
+const Summary = () =>
+  import(/* webpackChunkName: "c" */ './components/Summary.vue');
+
 export default [
   {
     path: '/about',
@@ -26,8 +29,14 @@ export default [
   },
   {
     path: '/',
-    name: 'home',
     component: Home,
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: Summary,
+      },
+    ],
   },
   {
     path: '/profile',
