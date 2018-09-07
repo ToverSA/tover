@@ -6,45 +6,20 @@
         </button>
       </div>
       <app-logo/>
-      <form v-if="state === 0">
+      <form>
         <h3>Sign in to your profile</h3>
         <label for="email">Email</label><br>
-        <input v-model="authEmail" type="text" name="email">
+        <input v-model="email" type="text" name="email">
         <label for="password">Password</label><br>
-        <input v-model="authPassword" type="password" name="password">
+        <input v-model="password" type="password" name="password">
         <div class="grid-x2">
-          <input type="button" value="FORGOT PASSWORD?" class="negative">
+          <input type="button" value="forgot password?" class="secondary">
           <input @click="signIn" type="button" value="SIGN IN">
         </div>
-        <input @click="gotoCreate" type="button" value="CREATE AN ACCOUNT" class="negative">
+        <input @click="gotoCreate" type="button"
+          value="create an account"
+          class="secondary">
       </form>
-      <form v-else-if="state === 1">
-        <h3>Sign up for a new profile</h3>
-        <label for="names">Names</label><br>
-        <input v-validate="'min:3'" v-bind:class="{invalid: isNamesInvalid}" type="text" name="names" placeholder="John Doe" v-model="names">
-        <label for="email">Email</label><br>
-        <input v-validate="'required|email'" v-bind:class="{invalid: isEmailInvalid}" type="text" name="email" placeholder="john@mail.com" v-model="email">
-        <label for="password">Password</label><br>
-        <!-- if required => /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$/ -->
-        <input 
-          v-validate="{ required: true, regex: /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/ }"
-          v-bind:class="{invalid: isPasswordInvalid}"
-          type="password"
-          name="password"
-          placeholder="Keep this as a secret"
-          v-model="password"
-        />
-        <div class="grid-x2">
-          <input @click="gotoLogin" type="button" value="SIGN IN INSTEAD" class="negative">
-          <input @click="signUp" type="button" value="SIGN UP">
-        </div>
-      </form>
-      <loader-dialog v-if="loading"/>
-      <confirm-dialog
-        v-bind:title="errorMessage"
-        v-bind:on-positive="{label: 'OK', callback: closeDialog}"
-        v-if="isError"
-      />
     </div>
 </template>
 
@@ -53,52 +28,24 @@ import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import store from '@/store';
 import api from '@/api';
-import { Loader, Confirm } from '@/components/dialog';
 import { closeIcon } from '@/icons';
-enum View {
-  login,
-  signup,
-}
+
 @Component({
   components: {
-    loaderDialog: Loader,
-    confirmDialog: Confirm,
     closeIcon,
   },
-  $_veeValidate: { validator: 'new' },
 })
 export default class Auth extends Vue {
-  public state: number = View.login;
-  public names: string = '';
   public email: string = '';
   public password: string = '';
-  public authEmail: string = '';
-  public authPassword: string = '';
   public loading: string | boolean = false;
   public errorMessage: string = '';
   private isError: boolean = false;
 
-  // @Computed
   get isNamesInvalid() {
     const fields = this.$validator.errors;
     return fields.items.some((item) => {
       return item.field === 'names';
-    });
-  }
-
-  // @Computed
-  get isEmailInvalid() {
-    const fields = this.$validator.errors;
-    return fields.items.some((item) => {
-      return item.field === 'email';
-    });
-  }
-
-  // @Computed
-  get isPasswordInvalid() {
-    const fields = this.$validator.errors;
-    return fields.items.some((item) => {
-      return item.field === 'password';
     });
   }
 
@@ -110,17 +57,6 @@ export default class Auth extends Vue {
     }
   }
 
-  public gotoCreate(): void {
-    this.state = View.signup;
-  }
-  public gotoLogin(): void {
-    this.state = View.login;
-  }
-  public openErrorDialog(error: string): void {
-    this.errorMessage = error;
-    this.isError = true;
-  }
-
   public closeDialog(): void {
     this.email = '';
     this.password = '';
@@ -128,36 +64,10 @@ export default class Auth extends Vue {
     this.isError = false;
   }
 
-  /**
-   * sigh up button callback
-   */
-  public signUp(): void {
-    if (this.names.length === 0) {
-      return;
-    }
-    if (this.password.length === 0) {
-      return;
-    }
-    if (this.email.length === 0) {
-      return;
-    }
-    this.loading = 'Signing up';
-    api
-      .createUser(this.names, this.email, this.password)
-      .then((response) => {
-        this.authEmail = this.email;
-        this.authPassword = this.password;
-        this.signIn();
-      })
-      .catch((error) => {
-        this.loading = false;
-        this.handleNetworkError(error);
-      });
-  }
   public signIn(): void {
     this.loading = 'Signing in';
     api
-      .authUser(this.authEmail, this.authPassword)
+      .authUser(this.email, this.password)
       .then((response) => {
         this.loading = false;
         const data = response.data;
@@ -186,11 +96,9 @@ export default class Auth extends Vue {
       const status = error.response.status;
       const errors = error.response.data.errors;
       if (status === 400) {
-        this.openErrorDialog(errors.title);
+        // TODO handle error
         return;
       }
-      this.openErrorDialog('I dont know what happened');
-    } else if (error.request) {
       // TODO
     } else {
       // TODO
@@ -235,8 +143,26 @@ div.auth {
       margin: 10px 0;
       padding: 14px 10px;
       font-size: 1em;
-      border-radius: 3px;
+      border-radius: 5px;
       border: 0;
+      background-color: rgba($primary-color-light, 0.2);
+      color: white;
+      outline: none;
+      &:focus {
+        background-color: rgba($primary-color-light, 0.4);
+        box-shadow: 0 0 1px 1px $primary-color-dark;
+      }
+      &[type='button'] {
+        background-color: white;
+        color: $primary-color-dark;
+        padding-bottom: 12px;
+
+        &.secondary {
+          background-color: $primary-color;
+          color: white;
+          text-transform: capitalize;
+        }
+      }
 
       &.invalid {
         box-shadow: 0 0 1px 2px orangered inset;
