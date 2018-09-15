@@ -74,7 +74,7 @@ export default class Home extends Vue {
 @import '@/app.scss';
 div.home {
   > header {
-    margin-bottom: 69px;
+    margin-bottom: 68px;
   }
 
   overflow-x: hidden;
