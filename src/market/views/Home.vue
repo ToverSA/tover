@@ -1,7 +1,7 @@
 <template>
     <div class="home" @click="onClickGlobal">
       <app-header/>
-      <div class="quick-search">
+      <div class="quick-search" v-bind:class="{scrolled}">
         <div class="wrapper">
           <button class="plain">
             <category-icon/>
@@ -14,15 +14,13 @@
           </button>
         </div>
       </div>
-      
-      <!-- <app-footer/> -->
+      <router-view/>
       <router-view/>
     </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
 import { searchIcon, categoryIcon, schoolIcon } from '@/icons';
@@ -36,7 +34,15 @@ import { searchIcon, categoryIcon, schoolIcon } from '@/icons';
   },
 })
 export default class Home extends Vue {
+  public scrolled: boolean = false;
   public menuOpened: boolean = false;
+
+  public created() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+  public destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
 
   public get signedIn(): boolean {
     return this.$store.getters.loggedIn;
@@ -53,21 +59,34 @@ export default class Home extends Vue {
   public onClickGlobal() {
     this.$store.commit('header/closeMenu');
   }
+
+  private handleScroll(event: Event) {
+    this.scrolled = window.scrollY > 50;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/app.scss';
 div.home {
-  overflow-x: hidden;
   > header {
-    position: fixed;
-    z-index: 1;
+    margin-bottom: 65px;
   }
+
+  overflow-x: hidden;
   .quick-search {
+    z-index: 2;
+    position: absolute;
+    top: $bar-height;
+    width: 100%;
     padding: 10px;
-    padding-top: $bar-height + 15px;
     background-color: $primary-color;
+
+    &.scrolled {
+      position: fixed;
+      top: 0;
+    }
+
     .wrapper {
       background-color: $background-color;
       display: grid;

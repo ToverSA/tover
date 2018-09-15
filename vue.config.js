@@ -2,7 +2,7 @@ module.exports = {
   pwa: {
     themeColor: '#009688',
     msTileColor: '#FFFFFF',
-    name: 'Tover'
+    name: 'Tover',
   },
 
   baseUrl: undefined,
@@ -13,6 +13,6 @@ module.exports = {
   parallel: undefined,
 
   css: {
-    sourceMap: true
-  }
-}
+    sourceMap: true,
+  },
+};

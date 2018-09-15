@@ -64,7 +64,7 @@ export default class Auth extends Vue {
   }
 
   public signIn(): void {
-    if (this.loading) return;
+    if (this.loading) { return; }
     this.loading = true;
     api
       .authUser(this.email, this.password)

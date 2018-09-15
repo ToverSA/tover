@@ -8,8 +8,17 @@
           </div>
         </div>
         <div class="details">
-          <p>Hello</p>
           <h2>R12 345</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, aperiam aliquid? Assumenda illum, aperiam voluptatem molestiae tempore amet. Deleniti accusantium labore eius corporis voluptas ex illum ullam mollitia ipsum est exercitationem quidem, consequatur officiis officia vitae provident ratione odit eum repellendus blanditiis aliquid saepe. Soluta voluptas quo illum animi veritatis!</p>
+          <div class="price"></div>
+          <div class="controls">
+            <button>
+              <span>contact</span>
+            </button>
+            <button class="theme">
+              <span>chat</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -22,7 +31,7 @@ import AppFooter from '@/components/AppFooter.vue';
 import { searchIcon, helpIcon, closeIcon } from '@/icons';
 
 @Component({ components: { closeIcon } })
-export default class Item extends Vue {}
+export default class Item extends Vue { }
 </script>
 
 <style lang="scss" scoped>
@@ -61,17 +70,23 @@ div.item {
       }
     }
     .details {
-      background-color: red;
+      padding: 50px;
       grid-row: 1 / 4;
+      h2 {
+        margin: 5px;
+      }
       p {
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
         line-height: 18px;
-        height: 36px;
+        height: 54px;
         overflow: hidden;
-        margin: 7px;
+        margin: 20px 5px;
+      }
+      .controls {
+        display: flex;
       }
     }
   }
@@ -96,6 +111,7 @@ div.item {
         grid-column: 1 / 2;
         grid-row: 3 / 4;
         align-self: flex-start;
+        padding: 5px;
       }
     }
   }
