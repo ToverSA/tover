@@ -1,18 +1,23 @@
 import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+// import MockAdapter from 'axios-mock-adapter';
 
-const mock = new MockAdapter(axios, { delayResponse: 500 });
+if (process.env.NODE_ENV !== 'production') {
+  // const mock = new MockAdapter(axios, { delayResponse: 500 });
+  // tslint:disable-next-line:no-var-requires
+  const mock = require('axios-mock-adapter')(axios, { delayResponse: 500 });
 
-mock.onPost('/api/users').reply(201, {
-  message: 'Created successfully',
-}).onPost('/api/oauth/token').reply(200, {
-  access_token: 'a985d8d9e7e80643633b0b422c0c9f4a7892a88a8192fe2f0742d32455d450d8',
-  token_type: 'bearer',
-  expires_in: null,
-});
-
-if (process.env.NODE_ENV === 'production') {
-  mock.restore();
+  mock
+    .onPost('/api/users')
+    .reply(201, {
+      message: 'Created successfully',
+    })
+    .onPost('/api/oauth/token')
+    .reply(200, {
+      access_token:
+        'a985d8d9e7e80643633b0b422c0c9f4a7892a88a8192fe2f0742d32455d450d8',
+      token_type: 'bearer',
+      expires_in: null,
+    });
 }
 
 export default {

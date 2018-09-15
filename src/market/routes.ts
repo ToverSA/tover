@@ -1,64 +1,71 @@
-const About = () => import(/* webpackChunkName: "v" */ './views/About.vue');
-const Auth = () => import(/* webpackChunkName: "v" */ './views/Auth.vue');
-const Item = () => import(/* webpackChunkName: "v" */ './views/Item.vue');
-const Home = () => import(/* webpackChunkName: "v" */ './views/Home.vue');
-const Profile = () => import(/* webpackChunkName: "v" */ './views/Profile.vue');
-const Search = () => import(/* webpackChunkName: "v" */ './views/Search.vue');
-const Sell = () => import(/* webpackChunkName: "v" */ './views/Sell.vue');
-const Signup = () => import(/* webpackChunkName: "v" */ './views/Signup.vue');
-
-const Summary = () =>
-  import(/* webpackChunkName: "c" */ './components/Summary.vue');
-
 export default [
   {
     path: '/about',
     name: 'about',
-    component: About,
+    component: () =>
+      import(/* webpackChunkName: "market" */ './views/About.vue'),
   },
   {
     path: '/auth',
     name: 'auth',
-    component: Auth,
+    component: () =>
+      import(/* webpackChunkName: "market" */ './views/Auth.vue'),
     meta: { requiresNoAuth: true },
   },
   {
     path: '/item/:id',
     name: 'item',
-    component: Item,
+    component: () => import(/* webpackChunkName: "market" */ './views/Item.vue'),
   },
   {
     path: '/',
-    component: Home,
+    component: () =>
+      import(/* webpackChunkName: "market" */ './views/Home.vue'),
     children: [
       {
         path: '',
         name: 'home',
-        component: Summary,
+        component: () =>
+          import(/* webpackChunkName: "market" */ './components/Summary.vue'),
+      },
+      {
+        path: 'more/:name',
+        name: 'more',
+        component: () =>
+          import(/* webpachChunkName: "market" */ './components/More.vue'),
+      },
+      {
+        path: 'browse',
+        name: 'browse',
+        component: () => import('./components/Browse.vue'),
       },
     ],
   },
   {
     path: '/profile',
     name: 'profile',
-    component: Profile,
+    component: () =>
+      import(/* webpackChunkName: "market" */ './views/Profile.vue'),
     meta: { requiresAuth: true },
   },
   {
     path: '/search',
     name: 'search',
-    component: Search,
+    component: () =>
+      import(/* webpackChunkName: "market" */ './views/Search.vue'),
   },
   {
     path: '/sell',
     name: 'sell',
-    component: Sell,
+    component: () =>
+      import(/* webpackChunkName: "market" */ './views/Sell.vue'),
     meta: { requiresAuth: true },
   },
   {
     path: '/create-account',
     name: 'signup',
-    component: Signup,
+    component: () =>
+      import(/* webpackChunkName: "market" */ './views/Signup.vue'),
     meta: { requiresNoAuth: true },
   },
 ];

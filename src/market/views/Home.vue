@@ -3,9 +3,9 @@
       <app-header/>
       <div class="quick-search" v-bind:class="{scrolled}">
         <div class="wrapper">
-          <button class="plain">
+          <button class="plain" @click="gotoBrowse">
             <category-icon/>
-            <span>Browse Category</span>
+            <span>Browse</span>
           </button>
           <input type="search" placeholder="e.g. Study guides, laptop chargers, muffins, etc." name="search">
           <button class="plain">
@@ -15,7 +15,7 @@
         </div>
       </div>
       <router-view/>
-      <router-view/>
+      <!-- <app-footer/> -->
     </div>
 </template>
 
@@ -34,34 +34,38 @@ import { searchIcon, categoryIcon, schoolIcon } from '@/icons';
   },
 })
 export default class Home extends Vue {
-  public scrolled: boolean = false;
-  public menuOpened: boolean = false;
+  private scrolled: boolean = false;
+  private menuOpened: boolean = false;
 
-  public created() {
+  private created() {
     window.addEventListener('scroll', this.handleScroll);
   }
-  public destroyed() {
+  private destroyed() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
-  public get signedIn(): boolean {
+  private get signedIn(): boolean {
     return this.$store.getters.loggedIn;
   }
 
-  public openMenu(): void {
+  private openMenu(): void {
     this.menuOpened = true;
   }
 
-  public logOut(): void {
+  private logOut(): void {
     this.$store.commit('signout');
   }
 
-  public onClickGlobal() {
+  private onClickGlobal() {
     this.$store.commit('header/closeMenu');
   }
 
   private handleScroll(event: Event) {
     this.scrolled = window.scrollY > 50;
+  }
+
+  private gotoBrowse(): void {
+    this.$router.push({ name: 'browse' });
   }
 }
 </script>
@@ -70,7 +74,7 @@ export default class Home extends Vue {
 @import '@/app.scss';
 div.home {
   > header {
-    margin-bottom: 65px;
+    margin-bottom: 69px;
   }
 
   overflow-x: hidden;
