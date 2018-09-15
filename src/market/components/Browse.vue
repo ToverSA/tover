@@ -4,8 +4,9 @@
       <img src="@/assets/clear.gif" alt="Campus image">
       <h3>University of Zululand</h3>
       <ul>
-        <li>Kwadlangezwa Campus</li>
-        <li>Richard's Bay Campus</li>
+        <li>
+          <router-link :to="{name: 'campus', params: {id: 2}}">Richard's Bay Campus</router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -46,8 +47,12 @@ div.category {
       transform: translateX(-50%);
     }
     li {
-      // list-style: none;
       margin: 15px 0;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
     }
   }
 }

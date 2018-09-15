@@ -29,6 +29,12 @@ export default [
           import(/* webpackChunkName: "market" */ './components/Summary.vue'),
       },
       {
+        path: 'campus/:id',
+        name: 'campus',
+        component: () =>
+          import(/* webpackChunkName: "market" */ './components/Summary.vue'),
+      },
+      {
         path: 'more/:name',
         name: 'more',
         component: () =>
