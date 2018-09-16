@@ -2,35 +2,26 @@
   <div class="dashboard">
     <div class="sidebar" v-bind:class="{opened: sidebarOpened}">
       <div class="strip">
-        <button @click="closeSidebar" class="menu-btn">
-          <icons name="menu"/>
-        </button>
-        <router-link :to="{name: 'home'}" class="button btn-c">
-          <icons name="home"/>
+        <div class="item menu-btn" @click="closeSidebar" >
+          <menu-icon/>
+        </div>
+        <router-link :to="{name: 'home'}" class="item">
+          <home-icon/>
         </router-link>
-        <button>
-          <icons name="add"/>
-        </button>
-        <button>
-          <icons name="search"/>
-        </button>
-        <button @click="signOut" class="btn-c">
-          <icons name="exit"/>
-        </button>
-      </div>
-      <div class="options">
-        <app-title></app-title>
-        <div class="section buttons">
-          <button>
-            <icons name="school"/>
-            <span>Campuses</span>
-          </button>
+        <div class="item">
+          <add-icon/>
+        </div>
+        <div class="item">
+          <search-icon/>
         </div>
       </div>
+      <div class="options">
+
+      </div>
     </div>
-    <button @click="openSidebar" class="content-menu">
-      <icons name="menu"/>
-    </button>
+    <div class="content-menu" @click="openSidebar" >
+      <menu-icon/>
+    </div>
     <router-view class="content"></router-view>
   </div>
 </template>
@@ -40,10 +31,11 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppLoader from '@/components/AppLoader.vue';
 import AppTitle from '@/dashboard/components/AppTitle.vue';
+import { menuIcon, homeIcon, addIcon, searchIcon } from '@/icons';
 
-@Component({ components: { AppLoader, AppTitle } })
+@Component({ components: { AppLoader, AppTitle, menuIcon, homeIcon, addIcon, searchIcon } })
 export default class Dashboard extends Vue {
-  public sidebarOpened: boolean = true;
+  public sidebarOpened: boolean = false;
 
   public closeSidebar(): void {
     this.sidebarOpened = false;
@@ -77,22 +69,18 @@ div.dashboard {
     grid-template-columns: 50px 1fr;
 
     .strip {
-      button,
-      .button {
-        text-decoration: none;
-        color: white;
-        height: 45px;
-        width: 45px;
+      .item {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        padding: 15px;
+        background-color: $primary-color-dark;
         display: block;
-        padding: 13px;
-        border-radius: 23px;
-        margin-bottom: 10px;
-        border: none;
-        outline: none;
-      }
-
-      .menu-btn {
-        display: none;
+        margin-bottom: 5px;
+        &.menu-btn {
+          display: none;
+        }
       }
     }
     .options {
@@ -105,32 +93,6 @@ div.dashboard {
         width: 250px;
         display: block;
         margin-bottom: 5px;
-      }
-
-      .section {
-        &.buttons {
-          padding: 0;
-          padding-left: 40px;
-
-          button {
-            box-sizing: border-box;
-            text-align: left;
-            width: 100%;
-            color: white;
-            display: flex;
-
-            .icon {
-              svg {
-                fill: rgba(255, 255, 255, 0.582);
-                height: 24px;
-                width: 24px;
-              }
-            }
-            span {
-              padding: 5px;
-            }
-          }
-        }
       }
     }
   }
@@ -173,13 +135,19 @@ div.dashboard {
       transition: ease-in-out 200ms;
 
       .strip {
-        .menu-btn {
-          display: inline-block;
+        .item {
+          &.menu-btn {
+            display: inline-block;
+          }
         }
       }
     }
     .content-menu {
       display: inline-block;
+      height: 50px;
+      width: 50px;
+      padding: 15px;
+      margin: 5px 0 0 5px;
     }
     .title {
       padding-left: 55px;

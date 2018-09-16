@@ -40,7 +40,17 @@
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae facilis nesciunt illum nisi ea voluptatum officiis corrupti harum, perspiciatis cum, dicta similique, assumenda dolores. Consequatur nobis labore, maiores atque maxime quos. Excepturi similique, quidem cupiditate laboriosam enim blanditiis quaerat sed voluptate culpa cumque, quas ex rem quam omnis officia soluta?</p>
         </div>
         <div class="owner">
-          
+          <h2>Posted by</h2>
+          <img src="@/assets/clear.gif" alt="owner profile">
+          <div class="info">
+            <h3>Cheese cake inc</h3>
+            <span>3 posts</span>
+          </div>
+          <div class="controls">
+            <button class="theme">
+              <span>follow</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -105,9 +115,7 @@ div.item {
     .details {
       padding: 50px;
       grid-row: 1 / 4;
-      h2 {
-        margin: 5px;
-      }
+
       p {
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -139,6 +147,34 @@ div.item {
     }
     .owner {
       background-color: white;
+      padding: 5px;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      grid-template-rows: auto 56px 50px;
+
+      h2 {
+        grid-column: 1 / 3;
+      }
+      img {
+        background-color: rgba(0, 0, 0, 0.144);
+        width: 100%;
+        height: auto;
+        display: block;
+        align-self: center;
+        grid-row: 2 / 4;
+        border-radius: 50px;
+      }
+      .info {
+        // background-color: red;
+        padding: 10px;
+        padding-top: 15px;
+        h3 {
+          margin: 0;
+        }
+      }
+      .controls {
+        grid-column: 2 / 3;
+      }
     }
   }
   @media screen and (max-width: 450px) {
