@@ -23,6 +23,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
+import api from '@/api';
 import { searchIcon, categoryIcon, schoolIcon } from '@/icons';
 @Component({
   components: {
@@ -39,7 +40,13 @@ export default class Home extends Vue {
 
   private created() {
     window.addEventListener('scroll', this.handleScroll);
+    if (this.signedIn) {
+      api.getProfile().then((response) => {
+        this.$store.commit('profile', response.data);
+      });
+    }
   }
+
   private destroyed() {
     window.removeEventListener('scroll', this.handleScroll);
   }
@@ -89,6 +96,7 @@ div.home {
     &.scrolled {
       position: fixed;
       top: 0;
+      box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.192);
     }
 
     .wrapper {

@@ -1,12 +1,34 @@
 import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
-// import MockAdapter from 'axios-mock-adapter';
 
+import MockAdapter from 'axios-mock-adapter';
 if (process.env.NODE_ENV !== 'production') {
-  // const mock = new MockAdapter(axios, { delayResponse: 500 });
-  // tslint:disable-next-line:no-var-requires
-  const mock = require('axios-mock-adapter')(axios, { delayResponse: 500 });
+  const mock = new MockAdapter(axios, { delayResponse: 200 });
 
   mock
+    .onGet('/api/me')
+    .reply(200, {
+      id: 1,
+      names: 'Sduduzo Gumede',
+      email: 'sdu@gum.com',
+      number: '0812345678',
+    })
+    .onGet('/api/campuses')
+    .reply(200, [
+      {
+        institutionId: 1,
+        institutionName: 'University of Zululand',
+        campuses: [
+          {
+            id: 1,
+            name: 'KwaDlangezwa Campus',
+          },
+          {
+            id: 2,
+            name: 'Richards Bay Campus',
+          },
+        ],
+      },
+    ])
     .onPost('/api/users')
     .reply(201, {
       message: 'Created successfully',
@@ -43,5 +65,11 @@ export default {
       password: authPassword,
     });
     // TODO authorise user
+  },
+  getProfile(): AxiosPromise {
+    return axios.get('/api/me');
+  },
+  getCampuses(): AxiosPromise {
+    return axios.get('/api/campuses');
   },
 };

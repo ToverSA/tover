@@ -5,6 +5,7 @@ import VuexPersistence from 'vuex-persist';
 Vue.use(Vuex);
 interface State {
   token: string;
+  profile: object;
 }
 
 interface HeaderState {
@@ -34,6 +35,7 @@ const headerModule = {
 export default new Vuex.Store<State>({
   state: {
     token: '',
+    profile: {},
   },
   mutations: {
     token: (state, payload) => {
@@ -42,11 +44,17 @@ export default new Vuex.Store<State>({
     signout: (state) => {
       state.token = '';
     },
+    profile: (state, payload) => {
+      state.profile = payload;
+    },
   },
   actions: {},
   getters: {
     loggedIn: (state) => {
       return state.token.length > 0;
+    },
+    profile: (state) => {
+      return state.profile;
     },
   },
   modules: {

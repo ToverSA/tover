@@ -1,21 +1,28 @@
 <template>
   <div class="category">
-    <div class="campus">
+    <div class="campus" v-for="insti in insties" v-bind:key="insti.institutionId">
       <img src="@/assets/clear.gif" alt="Campus image">
-      <h3>University of Zululand</h3>
+      <h3>{{insti.institutionName}}</h3>
       <ul>
-        <li>
-          <router-link :to="{name: 'campus', params: {id: 2}}">Richard's Bay Campus</router-link>
+        <li v-for="campus in insti.campuses" v-bind:key="campus.id">
+          <router-link :to="{name: 'campus', params: {id: campus.id}}">{{campus.name}}</router-link>
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-
-})
+import { Vue, Component } from 'vue-property-decorator';
+import api from '@/api';
+@Component
+export default class Browse extends Vue {
+  private insties: object = [];
+  private created() {
+    api.getCampuses().then((responses) => {
+      this.insties = responses.data;
+    });
+  }
+}
 </script>
 <style lang="scss" scoped>
 @import '@/app.scss';

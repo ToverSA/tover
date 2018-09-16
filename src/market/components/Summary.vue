@@ -2,8 +2,8 @@
   <div class="section">
         <div class="header">
           <div class="info">
-            <h3>consectetur adipisicing.</h3>
-            <h4>Lorem ipsum dolor sit amet.</h4>
+            <h3>KwaDlangezwa Campus</h3>
+            <h4>Most viewed</h4>
           </div>
           <button>
             <span>MORE</span>

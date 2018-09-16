@@ -3,7 +3,7 @@
     <router-link to="/">
       <app-logo inverted/>
     </router-link>
-    <nav class="signed" v-if="signedIn">
+    <nav class="signed" v-if="$store.getters.loggedIn">
       <router-link
          v-if="!isInProfile"
         class="btn btn-responsive"
@@ -13,7 +13,7 @@
       </router-link>
       <button v-if="!isInProfile" @click.stop="openMenu" class="btn-responsive">
         <person-icon/>
-        <span>Sduduzo Gumede</span>
+        <span>{{$store.getters.profile.names}}</span>
       </button>
       <div v-show="menuOpened" class="user-menu" @click.stop>
         <div class="profile">
@@ -21,8 +21,8 @@
             <close-icon/>
           </div>
           <img src="@/assets/clear.gif" alt="profile image">
-          <h3>Sduduzo Gumede</h3>
-          <p>gumedesduduzo@gmail.com</p>
+          <h3>{{$store.getters.profile.names}}</h3>
+          <p>{{$store.getters.profile.email}}</p>
           <button class="plain" @click="gotoProfile">
             <span>edit</span>
           </button>
@@ -49,6 +49,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import api from '@/api';
 import {
   searchIcon,
   helpIcon,
@@ -61,6 +62,7 @@ import {
   editIcon,
   closeIcon,
 } from '@/icons';
+
 @Component({
   components: {
     searchIcon,
@@ -76,29 +78,30 @@ import {
   },
 })
 export default class AppHeader extends Vue {
-  get menuOpened(): boolean {
+
+  private get menuOpened(): boolean {
     const header = this.$store.state.header;
     return header.menuOpened;
   }
 
-  public get signedIn(): boolean {
+  private get signedIn(): boolean {
     return this.$store.getters.loggedIn;
   }
 
-  public get isInProfile(): boolean {
+  private get isInProfile(): boolean {
     return this.$route.name === 'profile';
   }
 
-  public openMenu(): void {
+  private openMenu(): void {
     this.$store.commit('header/openMenu');
   }
 
-  public gotoProfile(): void {
+  private gotoProfile(): void {
     this.$router.push({ name: 'profile' });
     this.$store.commit('header/closeMenu');
   }
 
-  public logOut(): void {
+  private logOut(): void {
     this.$store.commit('signout');
     const meta = this.$route.meta;
     if (!meta.hasOwnProperty('requiresAuth')) {
@@ -109,7 +112,7 @@ export default class AppHeader extends Vue {
     }
   }
 
-  public onClickGlobal() {
+  private onClickGlobal() {
     this.$store.commit('header/closeMenu');
   }
 }
@@ -160,6 +163,7 @@ header {
       }
     }
     .user-menu {
+      z-index: 3;
       position: absolute;
       background-color: $background-color;
       right: 5px;
