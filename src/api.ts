@@ -66,8 +66,12 @@ export default {
     });
     // TODO authorise user
   },
-  getProfile(): AxiosPromise {
-    return axios.get('/api/me');
+  getProfile(token: string): AxiosPromise {
+    return axios.get('/api/me', {
+      params: {
+        access_token: token,
+      },
+    });
   },
   getCampuses(): AxiosPromise {
     return axios.get('/api/campuses');

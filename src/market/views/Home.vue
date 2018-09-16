@@ -41,7 +41,8 @@ export default class Home extends Vue {
   private created() {
     window.addEventListener('scroll', this.handleScroll);
     if (this.signedIn) {
-      api.getProfile().then((response) => {
+      const token = this.$store.getters.token;
+      api.getProfile(token).then((response) => {
         this.$store.commit('profile', response.data);
       });
     }

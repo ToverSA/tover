@@ -56,6 +56,9 @@ export default new Vuex.Store<State>({
     profile: (state) => {
       return state.profile;
     },
+    token: (state) => {
+      return state.token;
+    },
   },
   modules: {
     header: headerModule,
