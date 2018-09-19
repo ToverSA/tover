@@ -8,18 +8,23 @@
         <router-link :to="{name: 'home'}" class="item">
           <home-icon/>
         </router-link>
-        <div class="item">
+        <div class="item" @click="toggleAdd">
           <add-icon/>
         </div>
-        <div class="item">
+        <div class="item" @click="toggleSearch">
           <search-icon/>
         </div>
       </div>
-      <div class="options">
-
+      <div class="options" v-bind:class="{active: optionsActive === 1}" @click="closeAdd">
+        <h2>Create</h2>
+        <router-link :to="{name: 'createCampus'}">Campus</router-link>
+        <router-link :to="{name: 'createInstitution'}">Institution</router-link>
+      </div>
+      <div class="options" v-bind:class="{active: optionsActive === 2}">
+        <h2>Search</h2>
       </div>
     </div>
-    <div class="content-menu" @click="openSidebar" >
+    <div id="testing" class="content-menu" @click="openSidebar" >
       <menu-icon/>
     </div>
     <router-view class="content"></router-view>
@@ -35,15 +40,34 @@ import { menuIcon, homeIcon, addIcon, searchIcon } from '@/icons';
 
 @Component({ components: { AppLoader, AppTitle, menuIcon, homeIcon, addIcon, searchIcon } })
 export default class Dashboard extends Vue {
-  public sidebarOpened: boolean = false;
+  private sidebarOpened: boolean = false;
+  private optionsActive: boolean | number = false;
 
-  public closeSidebar(): void {
-    this.sidebarOpened = false;
+  private closeSidebar() { this.sidebarOpened = false; }
+  private openAdd() { this.optionsActive = 1; }
+  private closeAdd() {
+    this.optionsActive = false;
+    this.closeSidebar();
   }
-  public openSidebar(): void {
-    this.sidebarOpened = true;
+  private openSearch() { this.optionsActive = 2; }
+  private closeSearch() { this.optionsActive = false; }
+  private toggleAdd() {
+    if (this.optionsActive === 1) {
+      this.closeAdd();
+    } else {
+      this.openAdd();
+    }
   }
-  public signOut(): void {
+  private toggleSearch() {
+    if (this.optionsActive === 2) {
+      this.closeSearch();
+    } else {
+      this.openSearch();
+    }
+  }
+  private openSidebar() { this.sidebarOpened = true; }
+
+  private signOut(): void {
     this.$store.commit('signout');
     this.closeSidebar();
     this.$router.push({ name: 'home' });
@@ -75,9 +99,13 @@ div.dashboard {
         height: 50px;
         border-radius: 25px;
         padding: 15px;
-        background-color: $primary-color-dark;
+        background-color: rgba($primary-color-dark, 0.3);
         display: block;
         margin-bottom: 5px;
+
+        &:hover {
+          background-color: $primary-color-dark;
+        }
         &.menu-btn {
           display: none;
         }
@@ -85,14 +113,30 @@ div.dashboard {
     }
     .options {
       position: relative;
-      display: block;
-      .title {
-        padding: 0;
-        color: $primary-color-light;
-        margin: 15px 0;
-        width: 250px;
+      display: none;
+      width: 200px;
+
+      &.active {
         display: block;
-        margin-bottom: 5px;
+      }
+
+      h2 {
+        padding: 5px;
+        color: $primary-color-light;
+        opacity: 0.5;
+      }
+      span,
+      a {
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        margin-left: 15px;
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+        &:hover {
+          background-color: rgba($primary-color-dark, 0.3);
+        }
       }
     }
   }

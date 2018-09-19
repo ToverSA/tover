@@ -1,26 +1,27 @@
-const Dashboard = () =>
-  import(/* webpackChunkName: "v" */ './views/Dashboard.vue');
-
-const Admin = () =>
-  import(/* webpackChunkName: "c" */ './components/Admin.vue');
-const Overview = () =>
-  import(/* webpackChunkName: "c" */ './components/Overview.vue');
-
 export default [
   {
     path: '/dashboard',
-    component: Dashboard,
+    component: () =>
+      import(/* webpackChunkName: "admin" */ './views/Dashboard.vue'),
     meta: { requiresAuth: true },
     children: [
       {
         path: '',
         name: 'dashboard',
-        component: Overview,
+        component: () =>
+          import(/* webpackChunkName: "admin" */ './components/Overview.vue'),
       },
       {
-        path: 'admin',
-        name: 'admin',
-        component: Admin,
+        path: 'create-campus',
+        name: 'createCampus',
+        component: () =>
+          import(/* webpackChunkName: "admin" */ './components/CreateCampus.vue'),
+      },
+      {
+        path: 'create-institution',
+        name: 'createInstitution',
+        component: () =>
+          import(/* webpackChunkName "admin" */ './components/CreateInstitution.vue'),
       },
     ],
   },
