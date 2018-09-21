@@ -9,7 +9,7 @@
         <input type="file" name="image" id="image" @change="onFileChanged" accept="image/*">
       </button>
       <input type="text" v-model="institutionName" placeholder="Institution name">
-      <button>
+      <button @click="onFinish">
         <span>finish</span>
       </button>
     </div>
@@ -21,20 +21,20 @@ import { Component } from 'vue-property-decorator';
 import AppLoader from '@/components/AppLoader.vue';
 import AppTitle from '@/dashboard/components/AppTitle.vue';
 import { loaderIcon } from '@/icons';
-import api from '@/api';
+import { createInstitution } from '@/api';
+
 
 @Component({ components: { AppLoader, AppTitle, loaderIcon } })
 export default class CreateInstitution extends Vue {
   private imageChosen: boolean = false;
-  private image: string = "data:image/gif;base64,R0lGODlhQABAAIAAAAAAAAAAACH5BAEKAAEALAAAAABAAEAAAAJFjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yuN1AAADs=";
+  private image = require('@/assets/clear.gif');
   private institutionName = '';
 
   private onFileChanged(event: any) {
-    console.log(typeof event);
     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.addEventListener('load', (event: ProgressEvent) => {
-      this.image = reader.result;
+    reader.addEventListener('load', (evt: ProgressEvent) => {
+      this.image = reader.result + '';
       this.imageChosen = true;
     });
     reader.readAsDataURL(file);
@@ -47,7 +47,9 @@ export default class CreateInstitution extends Vue {
     if (!this.imageChosen) {
       return;
     }
-
+    createInstitution(this.image, this.institutionName).then((response) => {
+      this.$router.push({ name: 'dashboard' });
+    });
   }
 }
 </script>

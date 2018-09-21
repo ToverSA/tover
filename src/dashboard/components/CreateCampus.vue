@@ -1,17 +1,18 @@
 <template>
   <div class="create-campus">
     <app-title/>
-    <div class="form">
-      <input type="text" placeholder="Institution name">
-      <select>
-        <option>- Select institution -</option>
-      </select>
-      <button>
-        <span>next</span>
+    <div class="form choose" v-if="!institutionChosen">
+      <h3>Choose Institution</h3>
+      <div class="institution" :key="i.id" v-for="i in institutions" @click="choose(i.id)">
+        <span>{{i.name}}</span>
+      </div>
+    </div>
+    <div class="form" v-else>
+      <h3>{{institutionChosen}}</h3>
+      <input type="text" placeholder="Campus name" v-model="campusName">
+      <button @click="onFinish">
+        <span>finish</span>
       </button>
-      <router-link :to="{name: 'dashboard'}" class="btn theme">
-        <span>cancel</span>
-      </router-link>
     </div>
   </div>
 </template>
@@ -20,10 +21,40 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import AppLoader from '@/components/AppLoader.vue';
 import AppTitle from '@/dashboard/components/AppTitle.vue';
+import { getInstitutions, createCampus } from '@/api';
 
 @Component({ components: { AppLoader, AppTitle } })
 export default class CreateCampus extends Vue {
-  public loading: boolean = false;
+  private institutions = [];
+  private institutionChosen: boolean | string = false;
+  private institutionId!: number;
+  private campusName: string = '';
+
+  private created() {
+    getInstitutions().then((response) => {
+      this.institutions = response.data;
+    });
+  }
+
+  private choose(id: number) {
+    this.institutions.some((item: any) => {
+      if (item.id === id) {
+        this.institutionChosen = item.name;
+        return true;
+      }
+      return false;
+    });
+    this.institutionId = id;
+  }
+
+  private onFinish() {
+    if (this.campusName.length === 0) {
+      return;
+    }
+    createCampus(this.institutionId, this.campusName).then((response) => {
+      this.$router.push({ name: 'dashboard' });
+    });
+  }
 }
 </script>
 
@@ -38,6 +69,15 @@ div.create-campus {
     max-width: 400px;
     padding: 20px 50px;
 
+    &.choose {
+      margin: 5px auto;
+
+      .institution {
+        padding: 15px 5px;
+        display: block;
+        cursor: pointer;
+      }
+    }
     input {
       margin: 10px 0;
       border: 0;

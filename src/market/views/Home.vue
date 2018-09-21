@@ -8,7 +8,7 @@
             <span>Browse</span>
           </button>
           <input type="search" placeholder="e.g. Study guides, laptop chargers, muffins, etc." name="search">
-          <button class="plain">
+          <button class="plain" @click="gotoSearch">
             <search-icon/>
             <span>Search</span>
           </button>
@@ -23,15 +23,14 @@
 import { Vue, Component } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import api from '@/api';
-import { searchIcon, categoryIcon, schoolIcon } from '@/icons';
+import { getProfile } from '@/api';
+import { searchIcon, categoryIcon } from '@/icons';
 @Component({
   components: {
     AppHeader,
     AppFooter,
     searchIcon,
     categoryIcon,
-    schoolIcon,
   },
 })
 export default class Home extends Vue {
@@ -42,7 +41,7 @@ export default class Home extends Vue {
     window.addEventListener('scroll', this.handleScroll);
     if (this.signedIn) {
       const token = this.$store.getters.token;
-      api.getProfile(token).then((response) => {
+      getProfile(token).then((response) => {
         this.$store.commit('profile', response.data);
       });
     }
@@ -74,6 +73,10 @@ export default class Home extends Vue {
 
   private gotoBrowse(): void {
     this.$router.push({ name: 'browse' });
+  }
+
+  private gotoSearch() {
+    this.$router.push({ name: 'search' });
   }
 }
 </script>

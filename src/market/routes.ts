@@ -43,7 +43,14 @@ export default [
       {
         path: 'browse',
         name: 'browse',
-        component: () => import('./components/Browse.vue'),
+        component: () =>
+          import(/* webpachChunkName: "market" */ './components/Browse.vue'),
+      },
+      {
+        path: 'search',
+        name: 'search',
+        component: () =>
+          import(/* webpackChunkName: "market" */ './components/Search.vue'),
       },
     ],
   },
@@ -54,12 +61,7 @@ export default [
       import(/* webpackChunkName: "market" */ './views/Profile.vue'),
     meta: { requiresAuth: true },
   },
-  {
-    path: '/search',
-    name: 'search',
-    component: () =>
-      import(/* webpackChunkName: "market" */ './views/Search.vue'),
-  },
+
   {
     path: '/sell',
     name: 'sell',

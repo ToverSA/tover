@@ -32,7 +32,7 @@ const headerModule = {
   },
 };
 
-export default new Vuex.Store<State>({
+const store = new Vuex.Store<State>({
   state: {
     token: '',
     profile: {},
@@ -65,3 +65,5 @@ export default new Vuex.Store<State>({
   },
   plugins: [vuexLocal.plugin],
 });
+
+export default store;
