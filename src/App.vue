@@ -30,7 +30,6 @@ body {
     #f6f7f8 100%
   );
   background-repeat: no-repeat;
-  // background-size: 800px 104px;
   background-size: 600px;
   display: inline-block;
   position: relative;
@@ -42,7 +41,6 @@ body {
   animation-timing-function: linear;
 }
 a {
-  // text-decoration: none;
   color: $accent-color;
 }
 

@@ -76,8 +76,15 @@ export const createCampus = (institutionId: number, name: string) => {
   });
 };
 
-export const createInstitution = (image: string, name: string) => {
-  return axios.post(uri.institutions, { image, name });
+export const createInstitution = (image: Blob, name: string) => {
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('image', image);
+  return axios.post(uri.institutions, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
 export const createUser = (names: string, email: string, password: string) => {

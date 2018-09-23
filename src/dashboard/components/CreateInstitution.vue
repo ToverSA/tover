@@ -28,16 +28,17 @@ import { createInstitution } from '@/api';
 export default class CreateInstitution extends Vue {
   private imageChosen: boolean = false;
   private image = require('@/assets/clear.gif');
+  private file!: Blob;
   private institutionName = '';
 
   private onFileChanged(event: any) {
-    const file = event.target.files[0];
+    this.file = event.target.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (evt: ProgressEvent) => {
       this.image = reader.result + '';
       this.imageChosen = true;
     });
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.file);
   }
 
   private onFinish(): void {
@@ -47,7 +48,7 @@ export default class CreateInstitution extends Vue {
     if (!this.imageChosen) {
       return;
     }
-    createInstitution(this.image, this.institutionName).then((response) => {
+    createInstitution(this.file, this.institutionName).then((response) => {
       this.$router.push({ name: 'dashboard' });
     });
   }
