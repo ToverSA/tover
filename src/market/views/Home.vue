@@ -13,6 +13,17 @@
             <span>Search</span>
           </button>
         </div>
+        <div class="suggest">
+          <div class="box">
+            <h4>Hello</h4>
+            <span>This is a hint</span>
+          </div>
+          <h3>First suggestions</h3>
+          <div class="box" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+            <h4>Hello</h4>
+            <span>This is a hint</span>
+          </div>
+        </div>
       </div>
       <router-view/>
       <app-footer/>
@@ -85,7 +96,7 @@ export default class Home extends Vue {
 @import '@/app.scss';
 div.home {
   > header {
-    margin-bottom: 68px;
+    margin-bottom: 67px;
   }
 
   overflow-x: hidden;
@@ -112,6 +123,7 @@ div.home {
       max-width: 768px;
       overflow: hidden;
       border-radius: 9px;
+      position: relative;
 
       input {
         font-size: 1em;
@@ -131,6 +143,47 @@ div.home {
             display: none;
           }
         }
+      }
+    }
+    .suggest {
+      min-height: 100px;
+      width: 100%;
+      background-color: white;
+      max-width: 768px;
+      max-height: 400px;
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.24);
+      padding: 5px;
+      overflow: auto;
+
+      h3 {
+        margin: 10px 0;
+        opacity: 0.5;
+      }
+
+      .box {
+        padding: 5px;
+        padding-left: 20px;
+        h4 {
+          margin: 0;
+        }
+        span {
+          font-size: 0.9em;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .quick-search {
+      .suggest {
+        left: 5px;
+        right: 5px;
+        transform: none;
+        width: auto;
       }
     }
   }

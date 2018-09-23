@@ -39,7 +39,7 @@ div.category {
     margin: 10px;
     margin-top: 50px;
     background-color: $primary-color;
-    border-radius: 10px;
+    border-radius: 5px;
     position: relative;
     color: white;
     img {
