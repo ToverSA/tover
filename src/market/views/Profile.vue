@@ -14,16 +14,18 @@
       <div class="sub info">
         <label for="names">Full name</label>
         <input type="text" name="names">
-        <label for="email">Email</label>
-        <input type="email" name="email">
+        <label for="username">Username</label>
+        <input type="text" name="username">
         <label for="number">Phone number</label>
         <input type="text" name="number">
+        <label for="email">Primary email</label>
+        <input type="email" name="email">
         <div class="buttons">
-          <button>
-            <span>save</span>
-          </button>
           <button class="plain">
             <span>cancel</span>
+          </button>
+          <button>
+            <span>save</span>
           </button>
         </div>
         <div class="divider"></div>
@@ -90,7 +92,6 @@ div.profile {
             position: absolute;
             top: 0;
             left: 0;
-            background-color: red;
             height: 100%;
             width: 100%;
             opacity: 0;
@@ -100,16 +101,26 @@ div.profile {
       &.info {
         display: grid;
         grid-template-columns: 130px 1fr;
-        grid-gap: 10px;
+        grid-gap: 20px 10px;
         padding: 20px 50px 20px 20px;
 
         label {
           margin: 10px 0;
           text-align-last: auto;
+          text-align: right;
+          opacity: 0.5;
+        }
+        input {
+          outline: none;
+          border: none;
+          border-bottom: 2px solid lightgrey;
+          font-size: 1em;
+          padding: 10px;
         }
         .buttons {
           grid-column: 1 / 3;
           display: flex;
+          justify-content: flex-end;
         }
         .divider {
           height: 1px;
@@ -119,8 +130,25 @@ div.profile {
         }
       }
     }
-    @media screen and (max-width: 450px) {
-      padding: 20px;
+  }
+  @media screen and (max-width: 450px) {
+    .section {
+      padding: 10px;
+
+      .sub {
+        &.info {
+          grid-gap: 5px;
+          padding: 10px;
+
+          label,
+          input {
+            grid-column: 1 / 3;
+          }
+          label {
+            text-align: left;
+          }
+        }
+      }
     }
   }
 }

@@ -19,7 +19,7 @@
             <span>This is a hint</span>
           </div>
           <h3>First suggestions</h3>
-          <div class="box" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+          <div class="box" :key="i" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
             <h4>Hello</h4>
             <span>This is a hint</span>
           </div>
@@ -146,6 +146,7 @@ div.home {
       }
     }
     .suggest {
+      display: none;
       min-height: 100px;
       width: 100%;
       background-color: white;
