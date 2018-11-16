@@ -16,6 +16,11 @@ export default {};
     background-position: 468px 0;
   }
 }
+:root {
+  --primary-color: #ffa000;
+  --primary-color-hover: #fff8e1;
+  --secondary-color: #efd;
+}
 body {
   background-color: $background-color;
 }

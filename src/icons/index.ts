@@ -17,3 +17,4 @@ export { default as monetizationOnIcon } from './components/MonetizationOn.vue';
 export { default as schoolIcon } from './components/School.vue';
 export { default as chevronRightIcon } from './components/ChevronRight.vue';
 export { default as chevronLeftIcon } from './components/ChevronLeft.vue';
+export { default as logoIcon } from './components/Logo.vue';

@@ -1,7 +1,7 @@
 <template>
   <header @click="onClickGlobal">
     <router-link to="/">
-      <app-logo inverted/>
+    <logo-icon class="app-logo"/>
     </router-link>
     <nav class="signed" v-if="$store.getters.loggedIn">
       <router-link
@@ -50,6 +50,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import api from '@/api';
+
 import {
   searchIcon,
   helpIcon,
@@ -61,7 +62,9 @@ import {
   exitIcon,
   editIcon,
   closeIcon,
+  logoIcon,
 } from '@/icons';
+
 
 @Component({
   components: {
@@ -75,6 +78,7 @@ import {
     exitIcon,
     editIcon,
     closeIcon,
+    logoIcon,
   },
 })
 export default class AppHeader extends Vue {
@@ -122,14 +126,15 @@ export default class AppHeader extends Vue {
 @import '@/app.scss';
 header {
   height: $bar-height;
-  background-color: $primary-color;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   width: 100%;
 
   .app-logo {
-    height: $bar-height;
-    width: $bar-height;
+    height: $bar-height - 5px;
+    width: $bar-height - 5px;
+    margin: 5px;
   }
 
   nav {
@@ -142,24 +147,15 @@ header {
     }
     a:not(.btn) {
       text-decoration: none;
-      color: white;
+      color: black;
       padding: 10px 30px;
       display: flex;
-      font-weight: bold;
 
       span {
         padding: 6px 5px;
-        &::first-letter {
-          text-decoration: underline;
-        }
       }
       &:hover {
-        background-color: $primary-color-dark;
-        span {
-          &::first-letter {
-            text-decoration: none;
-          }
-        }
+        background-color: var(--primary-color-hover);
       }
     }
     .user-menu {

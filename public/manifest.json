@@ -3,18 +3,18 @@
   "short_name": "tover",
   "icons": [
     {
-      "src": "/img/icons/android-chrome-192x192.png",
+      "src": "/img/icons/tover-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/img/icons/android-chrome-512x512.png",
+      "src": "/img/icons/tover-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#009688",
-  "theme_color": "#4DBA87"
+  "background_color": "#FFF",
+  "theme_color": "#FFA000"
 }

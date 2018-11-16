@@ -8,7 +8,6 @@ import AppLogo from '@/components/AppLogo.vue';
 import Icons from '@/components/Icons.vue';
 
 Vue.config.productionTip = false;
-
 Vue.component('AppLogo', AppLogo);
 Vue.component('Icons', Icons);
 
