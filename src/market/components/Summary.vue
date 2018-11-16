@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="scrolling-wrapper">
-          <router-link :to="{ name: 'item', params: { id: j } }" class="card" v-bind:key="j" v-for="j in [1, 2, 3, 4]">
+          <router-link :to="{ name: 'item', params: { id: j } }" class="card" v-bind:key="j" v-for="j in [1, 2, 3, 4, 5, 6, 7, 8]">
             <div class="content">
               <img src="@/assets/clear.gif" alt="galaxy">
               <h3>R12 345</h3>

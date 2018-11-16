@@ -19,6 +19,7 @@ export default {};
 :root {
   --primary-color: #ffa000;
   --primary-color-hover: #fff8e1;
+  --primary-color-header: #ffecb3;
   --secondary-color: #efd;
 }
 body {

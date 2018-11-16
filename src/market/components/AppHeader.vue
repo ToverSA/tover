@@ -1,47 +1,10 @@
 <template>
   <header @click="onClickGlobal">
     <router-link to="/">
-    <logo-icon class="app-logo"/>
+      <logo-icon class="app-logo"/>
     </router-link>
-    <nav class="signed" v-if="$store.getters.loggedIn">
-      <router-link
-         v-if="!isInProfile"
-        class="btn btn-responsive"
-        :to="{name: 'sell'}">
-        <monetization-on-icon/>
-        <span>Sell</span>
-      </router-link>
-      <button v-if="!isInProfile" @click.stop="openMenu" class="btn-responsive">
-        <person-icon/>
-        <span>{{$store.getters.profile.names}}</span>
-      </button>
-      <div v-show="menuOpened" class="user-menu" @click.stop>
-        <div class="profile">
-          <div class="close" @click="onClickGlobal">
-            <close-icon/>
-          </div>
-          <img src="@/assets/clear.gif" alt="profile image">
-          <h3>{{$store.getters.profile.names}}</h3>
-          <p>{{$store.getters.profile.email}}</p>
-          <button class="plain" @click="gotoProfile">
-            <span>edit</span>
-          </button>
-        </div>
-        <button class="plain" @click="logOut">
-          <exit-icon/>
-          <span>log out</span>
-        </button>
-      </div>
-    </nav>
-    <nav v-else>
-      <router-link
-        v-bind:to="{name: 'about'}">
-        <span>About</span>
-      </router-link>
-      <router-link
-        v-bind:to="{name: 'auth'}">
-        <span>Sign in</span>
-      </router-link>
+    <nav>
+     
     </nav>
   </header>
 </template>
@@ -52,32 +15,12 @@ import { Component } from 'vue-property-decorator';
 import api from '@/api';
 
 import {
-  searchIcon,
-  helpIcon,
-  personOutlineIcon,
-  localAtmIcon,
-  monetizationOnIcon,
-  personIcon,
-  infoIcon,
-  exitIcon,
-  editIcon,
-  closeIcon,
   logoIcon,
 } from '@/icons';
 
 
 @Component({
   components: {
-    searchIcon,
-    helpIcon,
-    personOutlineIcon,
-    localAtmIcon,
-    monetizationOnIcon,
-    personIcon,
-    infoIcon,
-    exitIcon,
-    editIcon,
-    closeIcon,
     logoIcon,
   },
 })
@@ -130,10 +73,11 @@ header {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  box-shadow: 0 1px 1px 1px #ccc;
 
   .app-logo {
-    height: $bar-height - 5px;
-    width: $bar-height - 5px;
+    height: $bar-height - 10px;
+    width: $bar-height - 10px;
     margin: 5px;
   }
 
@@ -141,95 +85,8 @@ header {
     padding: 0;
     display: flex;
     position: relative;
-
-    .router-link-active {
-      display: none;
-    }
-    a:not(.btn) {
-      text-decoration: none;
-      color: black;
-      padding: 10px 30px;
-      display: flex;
-
-      span {
-        padding: 6px 5px;
-      }
-      &:hover {
-        background-color: var(--primary-color-hover);
-      }
-    }
-    .user-menu {
-      z-index: 3;
-      position: absolute;
-      background-color: $background-color;
-      right: 5px;
-      top: 5px;
-      box-shadow: 0 1px 1px 1px rgba(128, 128, 128, 0.356);
-      display: grid;
-
-      > button {
-        border-radius: 0;
-        justify-content: flex-start;
-      }
-
-      .profile {
-        min-width: 280px;
-        background-color: white;
-
-        .close {
-          width: 50px;
-          height: 50px;
-          padding: 10px;
-          right: 0;
-          top: 0;
-          position: absolute;
-          svg {
-            fill: $primary-color;
-          }
-        }
-
-        img {
-          background-color: $primary-color;
-          width: 90px;
-          height: 90px;
-          border-radius: 45px;
-          display: block;
-          margin: 20px auto;
-        }
-
-        h3 {
-          margin: 20px auto 5px;
-          text-align: center;
-        }
-        p {
-          margin: 5px auto;
-          text-align: center;
-          opacity: 0.5;
-        }
-        button {
-          margin: 5px auto;
-        }
-      }
-    }
-    @media screen and (max-width: 450px) {
-      margin: 0;
-
-      a:not(.btn) {
-        padding: 10px;
-      }
-      > button,
-      > .btn {
-        min-width: 0;
-        padding: 0 5px;
-        span {
-          display: none;
-        }
-      }
-      .user-menu {
-        right: 3px;
-        top: 3px;
-      }
-    }
+  }
+  @media screen and (max-width: 450px) {
   }
 }
 </style>
