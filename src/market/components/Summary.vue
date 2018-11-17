@@ -28,21 +28,21 @@ import { Route } from 'vue-router';
 @Component
 export default class Summary extends Vue {
 
-  @Watch('$route')
-  private onRoute(route: Route) {
-    if (route.name === 'home') {
-      this.loadHomeRoute();
-    }
-    if (route.name === 'campus') {
-      this.loadCampusRoute();
-    }
-  }
-  private created() {
-    this.onRoute(this.$route);
-  }
+  // @Watch('$route')
+  // private onRoute(route: Route) {
+  //   if (route.name === 'home') {
+  //     this.loadHomeRoute();
+  //   }
+  //   if (route.name === 'campus') {
+  //     this.loadCampusRoute();
+  //   }
+  // }
+  // private created() {
+  //   this.onRoute(this.$route);
+  // }
 
-  private loadCampusRoute() { }
-  private loadHomeRoute() { }
+  // private loadCampusRoute() { }
+  // private loadHomeRoute() { }
 }
 </script>
 

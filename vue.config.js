@@ -15,5 +15,8 @@ module.exports = {
   css: {
     sourceMap: true,
   },
+  configureWebpack: {
+    devtool: 'source-map',
+  },
   transpileDependencies: ['vuex-persist'],
 };

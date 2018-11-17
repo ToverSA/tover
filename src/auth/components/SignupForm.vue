@@ -66,10 +66,11 @@ import authForm from '@/auth/components/AuthForm.vue';
   components: {
     authForm,
   },
-  $_veeValidate: { validator: "new" }
+  $_veeValidate: { validator: 'new' },
 })
 export default class SignupForm extends Vue {
   @Prop() private onSignin!: () => void;
+  @Prop() private onDone!: () => void;
 
 
   private loading = false;
@@ -80,7 +81,6 @@ export default class SignupForm extends Vue {
 
   private toSignin() {
     this.onSignin();
-    console.log(this)
   }
 
   private handleNetworkError(error: any): void {
@@ -103,7 +103,7 @@ export default class SignupForm extends Vue {
     if (this.loading) {
       return;
     }
-    if (this.email.length == 0) {
+    if (this.email.length === 0) {
       return;
     }
     if (this.$validator.errors.count() > 0) {
@@ -113,7 +113,7 @@ export default class SignupForm extends Vue {
     api
       .createUser(this.names, this.email, this.password)
       .then((response) => {
-        this.$router.push({ name: 'auth' });
+        this.toSignin();
       })
       .catch(this.handleNetworkError);
   }
