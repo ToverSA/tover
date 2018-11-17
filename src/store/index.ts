@@ -8,29 +8,10 @@ interface State {
   profile: object;
 }
 
-interface HeaderState {
-  menuOpened: boolean;
-}
-
-const vuexLocal = new VuexPersistence<State, Payload>({
+const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
-  reducer: (state) => ({ token: state.token }),
+  reducer: (state: State) => ({ token: state.token }),
 });
-
-const headerModule = {
-  namespaced: true,
-  state: {
-    menuOpened: false,
-  },
-  mutations: {
-    closeMenu: (state: HeaderState) => {
-      state.menuOpened = false;
-    },
-    openMenu: (state: HeaderState) => {
-      state.menuOpened = true;
-    },
-  },
-};
 
 const store = new Vuex.Store<State>({
   state: {
@@ -59,9 +40,6 @@ const store = new Vuex.Store<State>({
     token: (state) => {
       return state.token;
     },
-  },
-  modules: {
-    header: headerModule,
   },
   plugins: [vuexLocal.plugin],
 });

@@ -3,8 +3,7 @@ import store from '@/store';
 
 import MockAdapter from 'axios-mock-adapter';
 const mock = new MockAdapter(axios, { delayResponse: 200 });
-
-const uri = {
+const endPoint = {
   profile: '/api/me',
   campuses: '/api/campuses',
   users: '/api/users',
@@ -12,7 +11,7 @@ const uri = {
   institutions: '/api/institutions',
 };
 
-mock.onGet(uri.profile).reply(200, {
+mock.onGet(endPoint.profile).reply(200, {
   id: 1,
   names: 'Sduduzo Gumede',
   email: 'sdu@gum.com',
@@ -20,7 +19,7 @@ mock.onGet(uri.profile).reply(200, {
 });
 
 mock
-  .onGet(uri.campuses)
+  .onGet(endPoint.campuses)
   .reply(200, [
     {
       institutionId: 1,
@@ -37,14 +36,14 @@ mock
       ],
     },
   ])
-  .onPost(uri.campuses)
+  .onPost(endPoint.campuses)
   .reply(200);
 
-mock.onPost(uri.users).reply(201, {
+mock.onPost(endPoint.users).reply(201, {
   message: 'Created successfully',
 });
 
-mock.onPost(uri.accessToken).reply(200, {
+mock.onPost(endPoint.accessToken).reply(200, {
   access_token:
     'a985d8d9e7e80643633b0b422c0c9f4a7892a88a8192fe2f0742d32455d450d8',
   token_type: 'bearer',
@@ -52,9 +51,9 @@ mock.onPost(uri.accessToken).reply(200, {
 });
 
 mock
-  .onPost(uri.institutions)
+  .onPost(endPoint.institutions)
   .reply(200)
-  .onGet(uri.institutions)
+  .onGet(endPoint.institutions)
   .reply(200, [{ id: 1, name: 'University of Zululand', image: 'xxx' }]);
 
 if (process.env.NODE_ENV === 'production') {
@@ -62,7 +61,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export const authUser = (username: string, password: string) => {
-  return axios.post(uri.accessToken, {
+  return axios.post(endPoint.accessToken, {
     grant_type: 'password',
     username,
     password,
@@ -70,7 +69,7 @@ export const authUser = (username: string, password: string) => {
 };
 
 export const createCampus = (institutionId: number, name: string) => {
-  return axios.post(uri.campuses, {
+  return axios.post(endPoint.campuses, {
     institutionId,
     name,
   });
@@ -80,7 +79,7 @@ export const createInstitution = (image: Blob, name: string) => {
   const formData = new FormData();
   formData.append('name', name);
   formData.append('image', image);
-  return axios.post(uri.institutions, formData, {
+  return axios.post(endPoint.institutions, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -88,19 +87,19 @@ export const createInstitution = (image: Blob, name: string) => {
 };
 
 export const createUser = (names: string, email: string, password: string) => {
-  return axios.post(uri.users, { names, email, password });
+  return axios.post(endPoint.users, { names, email, password });
 };
 
 export const getCampuses = () => {
-  return axios.get(uri.campuses);
+  return axios.get(endPoint.campuses);
 };
 
 export const getInstitutions = () => {
-  return axios.get(uri.institutions);
+  return axios.get(endPoint.institutions);
 };
 
 export const getProfile = (token: string) => {
-  return axios.get(uri.profile, {
+  return axios.get(endPoint.profile, {
     params: {
       access_token: token,
     },

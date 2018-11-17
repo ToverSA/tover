@@ -6,13 +6,6 @@ export default [
       import(/* webpackChunkName: "market" */ './views/About.vue'),
   },
   {
-    path: '/auth',
-    name: 'auth',
-    component: () =>
-      import(/* webpackChunkName: "market" */ './views/Auth.vue'),
-    meta: { requiresNoAuth: true },
-  },
-  {
     path: '/item/:id',
     name: 'item',
     component: () => import(/* webpackChunkName: "market" */ './views/Item.vue'),
@@ -68,12 +61,5 @@ export default [
     component: () =>
       import(/* webpackChunkName: "market" */ './views/Sell.vue'),
     meta: { requiresAuth: true },
-  },
-  {
-    path: '/create-account',
-    name: 'signup',
-    component: () =>
-      import(/* webpackChunkName: "market" */ './views/Signup.vue'),
-    meta: { requiresNoAuth: true },
   },
 ];

@@ -18,8 +18,11 @@ export default {};
 }
 :root {
   --primary-color: #ffa000;
+  --primary-color-dark: #ff6f00;
+  --primary-color-light: #ffca28;
   --primary-color-hover: #fff8e1;
   --primary-color-header: #ffecb3;
+  --accent-color: #ff5722;
   --secondary-color: #efd;
 }
 body {
@@ -47,7 +50,7 @@ body {
   animation-timing-function: linear;
 }
 a {
-  color: $accent-color;
+  color: var(--primary-color);
 }
 
 .btn,
@@ -60,7 +63,7 @@ input[type='button'] {
   outline: none;
   font-size: 15px;
   cursor: pointer;
-  background-color: $primary-color;
+  background-color: var(--primary-color);
   color: white;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -68,7 +71,7 @@ input[type='button'] {
   user-select: none;
   font-weight: bold;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 7px;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
@@ -99,39 +102,37 @@ input[type='button'] {
   }
   &.plain {
     background-color: transparent;
-    color: $primary-color;
+    color: var(--primary-color);
 
     svg {
-      fill: $primary-color;
+      fill: var(--primary-color);
+    }
+    &:focus {
+      background-color: var(--primary-color-light);
     }
   }
   &.theme {
     background-color: white;
-    color: $primary-color;
+    color: var(--primary-color);
     svg {
-      fill: $primary-color;
-    }
-  }
-  &:focus {
-    box-shadow: 0 0 2px 1px $primary-color-dark;
-    &.theme {
-      box-shadow: 0 0 2px 1px $primary-color-light;
+      fill: var(--primary-color);
     }
   }
   &:active,
+  &:focus,
   &:hover {
-    background-color: $primary-color-dark;
+    background-color: var(--primary-color-dark);
     &.plain {
-      color: $primary-color-dark;
+      color: var(--primary-color-dark);
       background-color: transparent;
       svg {
-        fill: $primary-color-dark;
+        fill: var(--primary-color-dark);
       }
     }
     &.theme {
-      background-color: $primary-color-light;
+      background-color: var(--primary-color-light);
       svg {
-        fill: $primary-color-dark;
+        fill: var(--primary-color-dark);
       }
     }
   }
@@ -144,7 +145,7 @@ input[type='button'] {
     }
     cursor: default;
     &.theme {
-      background-color: $primary-color-dark;
+      background-color: var(--primary-color-dark);
     }
   }
   @media screen and (max-width: 768px) {

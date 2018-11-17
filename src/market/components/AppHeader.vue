@@ -1,10 +1,27 @@
 <template>
-  <header @click="onClickGlobal">
+  <header>
     <router-link to="/">
       <logo-icon class="app-logo"/>
     </router-link>
-    <nav>
-     
+    <nav v-if="!signedIn">
+      <router-link :to="{name: 'auth'}">
+        <person-outline-icon/>
+        <span>Sign in</span>
+      </router-link>
+    </nav>
+    <nav v-else>
+      <router-link :to="{name:'sell'}">
+        <monetization-on-icon/>
+        <span>Sell</span>
+      </router-link>
+      <router-link :to="{name:'profile'}">
+        <person-icon/>
+        <span>Profile</span>
+      </router-link>
+      <div @click="logOut">
+        <exit-icon/>
+        <span>Log out</span>
+      </div>
     </nav>
   </header>
 </template>
@@ -16,36 +33,32 @@ import api from '@/api';
 
 import {
   logoIcon,
+  personIcon,
+  menuIcon,
+  personOutlineIcon,
+  exitIcon,
+  monetizationOnIcon,
 } from '@/icons';
 
 
 @Component({
   components: {
     logoIcon,
+    personIcon,
+    personOutlineIcon,
+    menuIcon,
+    exitIcon,
+    monetizationOnIcon,
   },
 })
 export default class AppHeader extends Vue {
-
-  private get menuOpened(): boolean {
-    const header = this.$store.state.header;
-    return header.menuOpened;
-  }
 
   private get signedIn(): boolean {
     return this.$store.getters.loggedIn;
   }
 
-  private get isInProfile(): boolean {
-    return this.$route.name === 'profile';
-  }
-
-  private openMenu(): void {
-    this.$store.commit('header/openMenu');
-  }
-
   private gotoProfile(): void {
     this.$router.push({ name: 'profile' });
-    this.$store.commit('header/closeMenu');
   }
 
   private logOut(): void {
@@ -85,8 +98,41 @@ header {
     padding: 0;
     display: flex;
     position: relative;
+
+    a,
+    div {
+      text-decoration: none;
+      display: flex;
+      padding: 15px;
+      cursor: pointer;
+
+      svg {
+        height: 20px;
+        width: 20px;
+        display: block;
+        fill: var(--primary-color);
+      }
+      span {
+        display: block;
+        margin: 2px;
+        color: var(--primary-color);
+        margin-left: 10px;
+      }
+      &:hover,
+      &.router-link-active {
+        background-color: var(--primary-color-hover);
+      }
+    }
   }
   @media screen and (max-width: 450px) {
+    nav {
+      a,
+      div {
+        span {
+          display: none;
+        }
+      }
+    }
   }
 }
 </style>

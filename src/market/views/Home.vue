@@ -1,8 +1,9 @@
 <template>
-    <div class="home" @click="onClickGlobal">
+    <div class="home">
       <app-header/>
       <quick-search/>
       <router-view/>
+      <app-footer/>
     </div>
 </template>
 
@@ -23,32 +24,6 @@ import { searchIcon, categoryIcon } from '@/icons';
   },
 })
 export default class Home extends Vue {
-  private menuOpened: boolean = false;
-
-  private created() {
-    if (this.signedIn) {
-      const token = this.$store.getters.token;
-      getProfile(token).then((response) => {
-        this.$store.commit('profile', response.data);
-      });
-    }
-  }
-
-  private get signedIn(): boolean {
-    return this.$store.getters.loggedIn;
-  }
-
-  private openMenu(): void {
-    this.menuOpened = true;
-  }
-
-  private logOut(): void {
-    this.$store.commit('signout');
-  }
-
-  private onClickGlobal() {
-    this.$store.commit('header/closeMenu');
-  }
 }
 </script>
 
@@ -62,14 +37,6 @@ div.home {
   overflow-x: hidden;
 
   @media screen and (max-width: 450px) {
-    .quick-search {
-      .suggest {
-        left: 5px;
-        right: 5px;
-        transform: none;
-        width: auto;
-      }
-    }
   }
 }
 </style>

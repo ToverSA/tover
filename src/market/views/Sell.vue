@@ -1,5 +1,6 @@
 <template>
   <div class="sell">
+    <app-header/>
   </div>
 </template>
 
@@ -19,10 +20,5 @@ export default class Sell extends Vue {
 
 <style lang="scss" scoped>
 div.sell {
-  margin: auto;
-  margin-top: 100px;
-  max-width: 768px;
-  padding: 30px;
-  background-color: white;
 }
 </style>

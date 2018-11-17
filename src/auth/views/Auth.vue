@@ -1,26 +1,7 @@
 <template>
     <div class="auth">
-      <div class="top">
-        <button @click="onCancel" class="btn-round">
-          <close-icon/>
-        </button>
-      </div>
-      <app-logo/>
-      <form>
-        <h3>Sign in to your profile</h3>
-        <label for="email">Email</label><br>
-        <input v-model="email" type="text" name="email">
-        <label for="password">Password</label><br>
-        <input v-model="password" type="password" name="password">
-        <div class="grid-x2">
-          <input type="button" value="forgot password?" class="secondary">
-          <input @click="signIn" type="button" value="sign in"
-            v-bind:class="{loading: loading}">
-        </div>
-        <input @click="gotoCreate" type="button"
-          value="create an account"
-          class="secondary">
-      </form>
+      <signin-form :on-signup="gotoSignup" v-if="signingIn"/>
+      <signup-form :on-signin="gotoSignin" v-else/>
     </div>
 </template>
 
@@ -31,10 +12,14 @@ import store from '@/store';
 import api from '@/api';
 import { closeIcon } from '@/icons';
 import { loadavg } from 'os';
+import signupForm from '@/auth/components/SignupForm.vue';
+import signinForm from '@/auth/components/SigninForm.vue';
 
 @Component({
   components: {
     closeIcon,
+    signinForm,
+    signupForm,
   },
 })
 export default class Auth extends Vue {
@@ -44,8 +29,14 @@ export default class Auth extends Vue {
   public errorMessage: string = '';
   private isError: boolean = false;
 
-  public gotoCreate() {
-    this.$router.push({ name: 'signup' });
+  private signingIn: boolean = false;
+
+  public gotoSignin() {
+    this.signingIn = true;
+  }
+
+  public gotoSignup() {
+    this.signingIn = false;
   }
 
   public onCancel(): void {
@@ -110,17 +101,30 @@ export default class Auth extends Vue {
 <style lang="scss" scoped>
 @import '@/app.scss';
 div.auth {
-  background-color: $primary-color;
+  background-color: $background-color;
+  // background-color: var(--primary-color);
   height: 100%;
   min-height: 100vh;
+  padding-top: 50px;
+  .form {
+    max-width: 450px;
+    height: 300px;
+    background-color: white;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 1px rgb(187, 185, 185);
+  }
 
   .top {
     display: flex;
-    justify-content: flex-end;
 
-    button {
-      min-width: auto;
-      padding: 0 5px;
+    a {
+      cursor: pointer;
+      span {
+        padding: 15px;
+        margin: 5px;
+        display: block;
+      }
     }
   }
 
@@ -182,6 +186,9 @@ div.auth {
       text-align: center;
       display: block;
     }
+  }
+  @media screen and (max-width: 450px) {
+    padding-top: 0;
   }
 }
 </style>
