@@ -4,6 +4,9 @@ import router from './router';
 import store from '@/store';
 import './registerServiceWorker';
 
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate, { inject: false });
+
 import AppLogo from '@/components/AppLogo.vue';
 import Icons from '@/components/Icons.vue';
 

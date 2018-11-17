@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Vuex, { Payload } from 'vuex';
 import VuexPersistence from 'vuex-persist';
+import notifications from './modules/notifications';
+import { IState as State } from '@/types';
+import mutations from './mutations';
+import actions from './actions';
+import getters from './getters';
 
 Vue.use(Vuex);
-interface State {
-  token: string;
-  profile: object;
-}
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
@@ -18,28 +19,11 @@ const store = new Vuex.Store<State>({
     token: '',
     profile: {},
   },
-  mutations: {
-    token: (state, payload) => {
-      state.token = payload;
-    },
-    signout: (state) => {
-      state.token = '';
-    },
-    profile: (state, payload) => {
-      state.profile = payload;
-    },
-  },
-  actions: {},
-  getters: {
-    loggedIn: (state) => {
-      return state.token.length > 0;
-    },
-    profile: (state) => {
-      return state.profile;
-    },
-    token: (state) => {
-      return state.token;
-    },
+  mutations,
+  actions,
+  getters,
+  modules: {
+    notifications,
   },
   plugins: [vuexLocal.plugin],
 });

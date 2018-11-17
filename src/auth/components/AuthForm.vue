@@ -77,6 +77,11 @@ div.auth-form {
     &:focus {
       border-color: var(--primary-color);
     }
+
+    &.error {
+      border-color: #f44336;
+      background-color: #f4433657;
+    }
   }
 
   .auth-buttons {
