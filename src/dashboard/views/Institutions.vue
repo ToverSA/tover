@@ -7,7 +7,18 @@
         <span @click="onBack">Back</span>
       </sidebar>
       <main-content>
-        <div class="content-card">Hello</div>
+        <div class="buttons">
+          <button>
+            <span>Add institution</span>
+          </button>
+        </div>
+        <div class="content-card">
+          <div class="insti labels">
+            <span>Name</span>
+            <span>Campuses</span>
+          </div>
+          <div class="insti" :key="i" v-for="i in [1, 2, 3, 4]">h</div>
+        </div>
       </main-content>
     </dashboard>
   </div>
@@ -30,3 +41,30 @@ export default class Institutions extends Vue {
   }
 }
 </script>
+<style lang="scss" scoped>
+div.institutions {
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 0 10px;
+  }
+  .content-card {
+    padding: 20px;
+
+    .insti {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+
+      span {
+        display: inline-block;
+        padding: 5px 0;
+      }
+      &.labels {
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+</style>

@@ -60,9 +60,9 @@ button,
 input[type='button'] {
   border: none;
   margin: 5px;
-  padding: 0 15px;
+  padding: 0 10px;
   outline: none;
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
   background-color: var(--primary-color);
   color: white;
@@ -72,17 +72,17 @@ input[type='button'] {
   user-select: none;
   font-weight: bold;
   text-align: center;
-  border-radius: 7px;
+  border-radius: 3px;
   text-transform: uppercase;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-  min-width: 100px;
   text-decoration: none;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.158);
 
   span {
     text-align: center;
     display: inline-block;
-    margin: 10px 5px;
+    margin: 7px 5px;
     padding: 1px 0;
   }
 
@@ -95,60 +95,15 @@ input[type='button'] {
     padding: 0;
     margin: 5px 0;
   }
-  &.btn-round {
-    border-radius: 22px;
-  }
-  &.btn-square {
-    border-radius: 0px;
-  }
-  &.plain {
-    background-color: transparent;
-    color: var(--primary-color);
 
-    svg {
-      fill: var(--primary-color);
-    }
-    &:focus {
-      background-color: var(--primary-color-light);
-    }
-  }
-  &.theme {
-    background-color: white;
-    color: var(--primary-color);
-    svg {
-      fill: var(--primary-color);
-    }
-  }
-  &:active,
   &:focus,
   &:hover {
-    background-color: var(--primary-color-dark);
-    &.plain {
-      color: var(--primary-color-dark);
-      background-color: transparent;
-      svg {
-        fill: var(--primary-color-dark);
-      }
-    }
-    &.theme {
-      background-color: var(--primary-color-light);
-      svg {
-        fill: var(--primary-color-dark);
-      }
-    }
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.288);
   }
-  &[disabled],
-  &:disabled {
-    background-color: #90a4ae38;
-    color: rgba(255, 255, 255, 0.623);
-    svg {
-      fill: rgba(255, 255, 255, 0.623);
-    }
-    cursor: default;
-    &.theme {
-      background-color: var(--primary-color-dark);
-    }
+  &:active {
+    background-color: var(--primary-color-light);
   }
+
   @media screen and (max-width: 768px) {
     cursor: default;
   }
