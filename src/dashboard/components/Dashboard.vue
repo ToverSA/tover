@@ -7,11 +7,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import AppLoader from '@/components/AppLoader.vue';
-import AppTitle from '@/dashboard/components/AppTitle.vue';
-import Sidebar from '@/dashboard/components/Sidebar.vue';
 
-@Component({ components: { AppLoader, AppTitle, Sidebar } })
+@Component
 export default class Dashboard extends Vue {
 
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="overview">
     <dashboard>
-      <sidebar title="Test">
-        <span>Option</span>
+      <sidebar title="Overview">
+        <router-link :to="{name: 'institutions'}">Institutions</router-link>
       </sidebar>
     </dashboard>
   </div>
@@ -11,11 +11,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import AppLoader from '@/components/AppLoader.vue';
 import Dashboard from '@/dashboard/components/Dashboard.vue';
 import Sidebar from '@/dashboard/components/Sidebar.vue';
 
-@Component({ components: { AppLoader, Dashboard, Sidebar } })
+@Component({ components: { Dashboard, Sidebar } })
 export default class Overview extends Vue {
 
 }

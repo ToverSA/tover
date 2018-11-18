@@ -51,6 +51,21 @@ div.sidebar {
   svg {
     display: none;
   }
+
+  .options {
+    span,
+    a {
+      display: block;
+      padding: 15px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.103);
+      }
+    }
+  }
+
   @media screen and (max-width: 450px) {
     display: flex;
     position: relative;
@@ -79,13 +94,6 @@ div.sidebar {
 
       &.open {
         display: block;
-      }
-
-      span {
-        display: block;
-        padding: 15px;
-        color: white;
-        cursor: pointer;
       }
     }
   }
