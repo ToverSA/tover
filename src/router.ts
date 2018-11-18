@@ -16,7 +16,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!store.getters.loggedIn) {
+    if (!store.getters['auth/loggedIn']) {
       next({
         path: '/auth',
         query: { redirect: to.fullPath },
@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (to.matched.some((record) => record.meta.requiresNoAuth)) {
-    if (store.getters.loggedIn) {
+    if (store.getters['auth/loggedIn']) {
       next({
         path: '/',
       });

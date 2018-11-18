@@ -30,6 +30,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import api from '@/api';
+import store from '@/store';
 
 import {
   logoIcon,
@@ -54,7 +55,7 @@ import {
 export default class AppHeader extends Vue {
 
   private get signedIn(): boolean {
-    return this.$store.getters.loggedIn;
+    return this.$store.getters['auth/loggedIn'];
   }
 
   private gotoProfile(): void {
@@ -62,7 +63,7 @@ export default class AppHeader extends Vue {
   }
 
   private logOut(): void {
-    this.$store.commit('signout');
+    store.commit('auth/signout');
     const meta = this.$route.meta;
     if (!meta.hasOwnProperty('requiresAuth')) {
       return;
@@ -70,10 +71,6 @@ export default class AppHeader extends Vue {
     if (meta.requiresAuth) {
       this.$router.push({ name: 'home' });
     }
-  }
-
-  private onClickGlobal() {
-    this.$store.commit('header/closeMenu');
   }
 }
 </script>

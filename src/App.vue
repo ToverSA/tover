@@ -24,6 +24,7 @@ export default {};
   --primary-color-header: #ffecb3;
   --accent-color: #ff5722;
   --secondary-color: #efd;
+  --background-color: #eceff1;
 }
 body {
   background-color: $background-color;

@@ -1,4 +1,4 @@
-export declare interface IState {
-  token: string;
-  profile: object;
+export declare interface IGlobalState {}
+export declare interface IAuthState {
+  accessToken: string | undefined;
 }

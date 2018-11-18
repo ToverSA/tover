@@ -55,7 +55,7 @@ export default class SigninForm extends Vue {
         if (typeof token === 'undefined') {
           return; // TODO something about this error
         }
-        this.$store.commit('token', token);
+        store.commit('auth/signin', token);
         const query = this.$route.query;
         if (query.hasOwnProperty('redirect')) {
           this.$router.push(query.redirect);
