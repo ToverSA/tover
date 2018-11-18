@@ -18,7 +18,7 @@ div.content {
   .content-card {
     background-color: white;
     box-shadow: 0 1px 1px 1px #ccc;
-    border-radius: 5px;
+    border-radius: 2px;
     padding: 5px;
   }
   @media screen and (max-width: 768px) {
