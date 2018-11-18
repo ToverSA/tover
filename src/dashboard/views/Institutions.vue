@@ -2,8 +2,6 @@
   <div class="institutions">
     <dashboard>
       <sidebar title="Institutions">
-        <span>Add Institution</span>
-        <span>Add Campus</span>
         <span @click="onBack">Back</span>
       </sidebar>
       <main-content>
@@ -13,12 +11,30 @@
           </button>
         </div>
         <div class="content-card">
+          <div class="image-section">
+            <span class="label">
+              No image file chosen
+            </span>
+            <button class="borderless">
+              <span>Upload image</span>
+              <input type="file" name="image" accept="image/*">
+            </button>
+          </div>
+          <div class="info-section">
+            <span class="label">Institution name</span>
+            <input type="text" name="institution">
+            <!-- <button class="borderless">
+              <span>edit</span>
+            </button> -->
+          </div>
+        </div>
+        <!-- <div class="content-card">
           <div class="insti labels">
             <span>Name</span>
             <span>Campuses</span>
           </div>
           <div class="insti" :key="i" v-for="i in [1, 2, 3, 4]">h</div>
-        </div>
+        </div> -->
       </main-content>
     </dashboard>
   </div>
@@ -63,6 +79,47 @@ div.institutions {
         span {
           font-weight: bold;
         }
+      }
+    }
+    .image-section {
+      display: flex;
+      justify-content: space-between;
+
+      .label {
+        display: block;
+        padding: 12px;
+      }
+      button {
+        position: relative;
+        overflow: hidden;
+        input {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+    }
+    .info-section {
+      padding: 5px 0;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      .label {
+        display: block;
+        padding: 12px;
+      }
+      input {
+        border: none;
+        outline: none;
+        // background-color: var(--primary-color-hover);
+        font-size: 1em;
+        padding: 10px;
+        border-bottom: 2px solid #ccc;
+        flex-grow: 1;
       }
     }
   }

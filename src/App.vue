@@ -79,7 +79,7 @@ input[type='button'] {
   text-decoration: none;
   box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.158);
 
-  span {
+  > span {
     text-align: center;
     display: inline-block;
     margin: 7px 5px;
@@ -102,6 +102,19 @@ input[type='button'] {
   }
   &:active {
     background-color: var(--primary-color-light);
+  }
+
+  &.borderless {
+    box-shadow: none;
+    background-color: transparent;
+    color: var(--primary-color);
+    &:hover,
+    &:focus {
+      background-color: var(--primary-color-hover);
+    }
+    &:active {
+      background-color: rgba(0, 0, 0, 0.13);
+    }
   }
 
   @media screen and (max-width: 768px) {
