@@ -48,9 +48,9 @@ export default class CreateInstitution extends Vue {
     if (!this.imageChosen) {
       return;
     }
-    createInstitution(this.file, this.institutionName).then((response) => {
-      this.$router.push({ name: 'dashboard' });
-    });
+    // createInstitution(this.file, this.institutionName).then((response) => {
+    //   this.$router.push({ name: 'dashboard' });
+    // });
   }
 }
 </script>

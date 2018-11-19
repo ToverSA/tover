@@ -30,10 +30,7 @@ export const createCampus = (institutionId: number, name: string) => {
   });
 };
 
-export const createInstitution = (image: Blob, name: string) => {
-  const formData = new FormData();
-  formData.append('name', name);
-  formData.append('image', image);
+export const createInstitution = (formData: FormData) => {
   return axios.post(paths.institutions, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -66,4 +63,5 @@ export default {
   authUser,
   getProfile,
   getCampuses,
+  createInstitution,
 };

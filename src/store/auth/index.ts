@@ -1,21 +1,26 @@
-import { IAuthState as State } from '@/types';
-export default {
+export interface AuthState {
+  accessToken: string | undefined;
+}
+
+const authModule = {
   namespaced: true,
   state: {
     accessToken: undefined,
   },
   mutations: {
-    signin: (state: State, payload: string) => {
+    signin: (state: AuthState, payload: string) => {
       state.accessToken = payload;
     },
-    signout: (state: State) => {
+    signout: (state: AuthState) => {
       state.accessToken = undefined;
     },
   },
   actions: {},
   getters: {
-    loggedIn: (state: State) => {
+    loggedIn: (state: AuthState) => {
       return typeof state.accessToken === 'string';
     },
   },
 };
+
+export default authModule;
