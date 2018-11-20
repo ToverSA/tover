@@ -10,41 +10,7 @@
             <span>Add institution</span>
           </button>
         </div>
-        <div class="content-card" v-else>
-          <div class="image-section">
-            <img :src="file" alt="try this" v-if="fileChosen">
-            <span class="label">
-              {{imageLabel}}
-            </span>
-            <button class="borderless">
-              <span>{{uploadButton}}</span>
-              <input type="file" name="image" accept="image/*" @change="onFileChange($event.target.files[0])">
-            </button>
-          </div>
-          <div class="info-section" v-if="steps > 0">
-            <span class="label" v-if="instiName">{{instiName}}</span>
-            <input @keyup.enter="captureName" type="text" v-else name="institution" placeholder="Institution name" v-model="instiInput">
-          </div>
-          <div class="campus-section" v-if="steps > 1">
-            <div class="campus" v-for="c in campuses" :key="c.id">
-              <span>{{c.name}}</span>
-              <span @click="removeCampus(campuses.indexOf(c))">
-                <close-icon/>
-              </span>
-            </div>
-            <input @keyup.enter="captureCampus" type="text" placeholder="Campus name" v-model="instiInput">
-          </div>
-          <div class="buttons">
-            <button class="borderless" @click="cancelInsti">
-              <span>cancel</span>
-            </button>
-            <button
-              @click="finishInsti"
-              :disabled="campuses.length === 0 || loading">
-              <span>finish</span>
-            </button>
-          </div>
-        </div>
+        <institution-form class="content-card" v-else/>
         <div class="content-card">
           <div class="insti labels">
             <span>Name</span>
@@ -64,16 +30,17 @@ import { createInstitution } from '@/api';
 import Dashboard from '@/dashboard/components/Dashboard.vue';
 import Sidebar from '@/dashboard/components/Sidebar.vue';
 import MainContent from '@/dashboard/components/MainContent.vue';
+import InstitutionForm from '@/dashboard/components/InstitutionForm.vue';
 import { Campus, Institution } from '@/store/insties';
 const prev = require('@/assets/clear.gif');
 
-@Component({ components: { Dashboard, Sidebar, MainContent, closeIcon } })
+@Component({ components: { Dashboard, Sidebar, MainContent, InstitutionForm, closeIcon } })
 export default class Institutions extends Vue {
 
   private steps: number = 0;
   private uploadButton = 'upload';
 
-  private addingInsti = false;
+  private addingInsti = true;
 
   private fileChosen = false;
   private file!: string
@@ -163,11 +130,6 @@ export default class Institutions extends Vue {
 </script>
 <style lang="scss" scoped>
 div.institutions {
-  .buttons {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 0 10px;
-  }
   .content-card {
     padding: 20px;
     margin-bottom: 20px;
@@ -186,109 +148,10 @@ div.institutions {
         }
       }
     }
-    .image-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      .label {
-        display: block;
-        padding: 12px;
-        flex-grow: 1;
-        color: #ccc;
-      }
-      img {
-        flex-shrink: 0;
-        --box: 70px;
-        height: var(--box);
-        width: var(--box);
-        background-color: rgba(168, 168, 168, 0.603);
-        object-fit: cover;
-      }
-      button {
-        position: relative;
-        overflow: hidden;
-        input {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          opacity: 0;
-        }
-      }
-    }
-    .info-section {
-      padding: 5px 0;
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-
-      .label {
-        display: block;
-        padding: 10px;
-        font-size: 1.6em;
-      }
-      input {
-        border: none;
-        outline: none;
-        font-size: 1.6em;
-        padding: 10px;
-        border-bottom: 2px solid #ccc;
-        flex-grow: 1;
-      }
-    }
-    .campus-section {
-      padding: 20px 0;
-      display: flex;
-      flex-wrap: wrap;
-
-      .campus {
-        display: flex;
-        border-radius: 20px;
-        margin: 10px 5px;
-        box-shadow: 0 1px 2px 1px rgba(133, 133, 133, 0.459);
-        overflow: hidden;
-
-        span {
-          display: block;
-          padding: 10px;
-          padding-top: 12px;
-
-          &:last-child {
-            cursor: pointer;
-          }
-          svg {
-            height: 20px;
-            width: 20px;
-            display: block;
-            fill: black;
-          }
-        }
-      }
-      input {
-        flex-grow: 1;
-        flex-basis: 100%;
-        border: none;
-        outline: none;
-        padding: 10px;
-        font-size: 1.2em;
-        border-bottom: 2px solid #ccc;
-      }
-    }
   }
   @media screen and (max-width: 450px) {
     .content-card {
       padding: 5px;
-
-      .campus-section {
-        .campus {
-          margin: 5px 0;
-          width: 100%;
-          justify-content: space-between;
-          border-radius: 5px;
-        }
-      }
     }
   }
 }

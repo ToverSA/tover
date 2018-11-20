@@ -1,5 +1,5 @@
 import api from '@/api';
-import { ActionContext } from 'vuex';
+import { ActionContext, Module } from 'vuex';
 import { RootState } from '..';
 import { AxiosResponse } from 'axios';
 
@@ -18,11 +18,11 @@ export interface UserAuth {
   grant_type: string;
 }
 
-const authModule = {
+const authModule: Module<AuthState, RootState> = {
   namespaced: true,
   state: {
     accessToken: null,
-    authorising: false,
+    authenticating: false,
   },
   mutations: {
     signin: (state: AuthState, payload: TokenType) => {
@@ -33,6 +33,9 @@ const authModule = {
     },
     authenticating: (state: AuthState, payload: boolean) => {
       state.authenticating = payload;
+    },
+    initAuth: (state: AuthState) => {
+      state.authenticating = false;
     },
   },
   actions: {

@@ -1,6 +1,6 @@
 import api from '@/api';
 import { RootState } from '..';
-import { ActionContext } from 'vuex';
+import { ActionContext, Store, Module } from 'vuex';
 import { TokenType } from '../auth';
 export interface Campus {
   id: number;
@@ -8,18 +8,20 @@ export interface Campus {
 }
 export interface Institution {
   id: number;
-  name: string;
-  imageData: string;
+  name: string | null;
+  imageData: string | null;
   campuses: Campus[];
 }
 export interface InstiesState {
   insties: Institution[];
+  addingInstitution: boolean;
 }
 
-const instiesModule = {
+const instiesModule: Module<InstiesState, RootState> = {
   namespaced: true,
   state: {
     insties: [],
+    addingInstitution: false,
   },
   actions: {
     addInstitution: async (
@@ -27,6 +29,7 @@ const instiesModule = {
       payload: Institution,
     ) => {
       try {
+        context.commit('addingInstitution', true);
         const config = {
           headers: {
             Authorization:
@@ -38,7 +41,22 @@ const instiesModule = {
         console.log(response);
       } catch (error) {
         console.log('my error', error);
+      } finally {
+        context.commit('addingInstitution', false);
       }
+    },
+  },
+  mutations: {
+    addingInstitution: (state: InstiesState, payload: boolean) => {
+      state.addingInstitution = payload;
+    },
+    initAdd: (state: InstiesState) => {
+      state.addingInstitution = false;
+    },
+  },
+  getters: {
+    addingInstitution: (state: InstiesState) => {
+      return state.addingInstitution;
     },
   },
 };

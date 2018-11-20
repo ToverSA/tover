@@ -38,6 +38,10 @@ export default class SigninForm extends Vue {
   private username: string = '';
   private password: string = '';
 
+  private created() {
+    store.commit('auth/initAuth');
+  }
+
   private get loading() {
     return store.getters['auth/authenticating']
   };
