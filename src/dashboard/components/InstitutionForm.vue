@@ -52,13 +52,13 @@ import { Institution, Campus } from '@/store/insties';
 @Component({ components: { closeIcon } })
 export default class InstitutionForm extends Vue {
 
-  private instieInput = ''
+  private instieInput = '';
   private instie: Institution = {
     id: 0,
     name: null,
     imageData: null,
-    campuses: []
-  }
+    campuses: [],
+  };
 
   private created() {
     store.commit('insties/initAdd');
@@ -69,13 +69,14 @@ export default class InstitutionForm extends Vue {
       return 'upload';
     }
     return 'change';
-  };
+  }
+
   private get inputPlaceholder() {
     if (this.instie.name === null) {
       return 'Institution name';
     }
     return 'Campus name';
-  };
+  }
 
   private get loading() {
     return store.getters['insties/addingInstitution'];
@@ -93,12 +94,12 @@ export default class InstitutionForm extends Vue {
         exists = true;
       }
       return exists;
-    })
+    });
     if (!exists) {
-      let campus: Campus = {
+      const campus: Campus = {
         id: this.instie.campuses.length,
-        name: this.instieInput
-      }
+        name: this.instieInput,
+      };
       this.instie.campuses.push(campus);
       this.instieInput = '';
     }
@@ -113,7 +114,7 @@ export default class InstitutionForm extends Vue {
       id: 0,
       name: null,
       imageData: null,
-      campuses: []
+      campuses: [],
     }
   }
 
@@ -126,7 +127,7 @@ export default class InstitutionForm extends Vue {
     const reader = new FileReader();
     reader.onload = (e) => {
       this.instie.imageData = reader.result as string;
-    }
+    };
     reader.readAsDataURL(file);
   }
 }

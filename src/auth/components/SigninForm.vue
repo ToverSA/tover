@@ -43,8 +43,8 @@ export default class SigninForm extends Vue {
   }
 
   private get loading() {
-    return store.getters['auth/authenticating']
-  };
+    return store.getters['auth/authenticating'];
+  }
 
   private toSignup() {
     this.onSignup();
@@ -55,8 +55,8 @@ export default class SigninForm extends Vue {
     const userAuth: UserAuth = {
       username: this.username,
       password: this.password,
-      grant_type: 'password'
-    }
+      grant_type: 'password',
+    };
     try {
       await store.dispatch('auth/authenticate', userAuth);
       const query = this.$route.query;
@@ -66,7 +66,7 @@ export default class SigninForm extends Vue {
         this.$router.push({ name: 'home' });
       }
     } catch (error) {
-      console.log(error);
+      // TODO just in case
     }
   }
 }

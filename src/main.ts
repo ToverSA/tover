@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from '@/store';
 import './registerServiceWorker';
 
 import VeeValidate from 'vee-validate';
+
 Vue.use(VeeValidate, { inject: false });
 
 import AppLogo from '@/components/AppLogo.vue';
@@ -16,6 +16,5 @@ Vue.component('Icons', Icons);
 
 new Vue({
   router,
-  store,
   render: (h) => h(App),
 }).$mount('#app');

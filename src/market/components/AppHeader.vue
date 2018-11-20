@@ -55,7 +55,7 @@ import {
 export default class AppHeader extends Vue {
 
   private get signedIn(): boolean {
-    return this.$store.getters['auth/loggedIn'];
+    return store.getters['auth/loggedIn']
   }
 
   private gotoProfile(): void {

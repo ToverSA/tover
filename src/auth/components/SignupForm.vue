@@ -7,8 +7,8 @@
           name="names"
           v-validate="{
             required: true,
-            min: 3,
-            alpha: true
+            min: 2,
+            alpha_spaces: true
           }"
           placeholder="Full names" v-model="names"
           :class="{error: errors.has('names')}">
@@ -84,6 +84,7 @@ export default class SignupForm extends Vue {
   }
 
   private handleNetworkError(error: any): void {
+    this.loading = false;
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
