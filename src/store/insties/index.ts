@@ -15,6 +15,7 @@ export interface Institution {
 export interface InstiesState {
   insties: Institution[];
   addingInstitution: boolean;
+  savingInstitution: boolean;
 }
 
 const instiesModule: Module<InstiesState, RootState> = {
@@ -22,6 +23,7 @@ const instiesModule: Module<InstiesState, RootState> = {
   state: {
     insties: [],
     addingInstitution: false,
+    savingInstitution: false,
   },
   actions: {
     addInstitution: async (
@@ -29,7 +31,7 @@ const instiesModule: Module<InstiesState, RootState> = {
       payload: Institution,
     ) => {
       try {
-        context.commit('addingInstitution', true);
+        context.commit('savingInstitution', true);
         const config = {
           headers: {
             Authorization:
@@ -42,16 +44,22 @@ const instiesModule: Module<InstiesState, RootState> = {
       } catch (error) {
         console.log('my error', error);
       } finally {
-        context.commit('addingInstitution', false);
+        context.commit('savingInstitution', false);
       }
     },
   },
   mutations: {
-    addingInstitution: (state: InstiesState, payload: boolean) => {
+    addInstitution: (state: InstiesState) => {
+      state.addingInstitution = true;
+    },
+    savingInstitution: (state: InstiesState, payload: boolean) => {
       state.addingInstitution = payload;
+      if (!payload) {
+        state.addingInstitution = payload;
+      }
     },
     initAdd: (state: InstiesState) => {
-      state.addingInstitution = false;
+      state.savingInstitution = false;
     },
   },
   getters: {

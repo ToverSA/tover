@@ -37,86 +37,12 @@ const prev = require('@/assets/clear.gif');
 @Component({ components: { Dashboard, Sidebar, MainContent, InstitutionForm, closeIcon } })
 export default class Institutions extends Vue {
 
-  private steps: number = 0;
-  private uploadButton = 'upload';
-
-  private addingInsti = true;
-
-  private fileChosen = false;
-  private file!: string
-
-  private imageLabel: String = 'Choose image';
-  private imagePreview: string | ArrayBuffer | null = prev;
-
-  private instiName: string | boolean = false;
-  private instiInput: string = ''
-
-  private campuses: Campus[] = []
-
-  private loading = false;
-
-  private onFileChange(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.file = reader.result as string;
-      this.fileChosen = true;
-      this.imageLabel = 'Press enter to capture';
-      this.steps++;
-      this.uploadButton = 'change';
-    }
-    reader.readAsDataURL(file);
+  private get addingInsti() {
+    return store.getters['insties/addingInstitution'];
   }
 
-  private captureName() {
-    this.instiName = this.instiInput;
-    this.instiInput = '';
-    this.steps++;
-  }
-
-  private captureCampus() {
-    let exists = false;
-    this.campuses.some((e) => {
-      if (e.name === this.instiInput) {
-        exists = true;
-      }
-      return exists;
-    })
-    if (!exists) {
-      let campus: Campus = {
-        id: this.campuses.length,
-        name: this.instiInput
-      }
-      this.campuses.push(campus);
-      this.instiInput = '';
-    }
-  }
-
-  private removeCampus(i: number) {
-    this.campuses.splice(i, 1);
-  }
-
-  private addInsti(): void {
-    this.addingInsti = true;
-    this.steps = 0;
-  }
-
-  private cancelInsti(): void {
-    this.addingInsti = false;
-    this.steps = 0;
-    this.fileChosen = false;
-    this.imageLabel = 'Choose image';
-    this.imagePreview = prev;
-  }
-
-  private async finishInsti() {
-    const instie: Institution = {
-      id: 0,
-      name: this.instiName as string,
-      imageData: this.file,
-      campuses: this.campuses
-    }
-    await store.dispatch('insties/addInstitution', instie);
-    this.cancelInsti();
+  private addInsti() {
+    store.commit('insties/addInstitution');
   }
 
   private onBack(): void {
@@ -130,6 +56,10 @@ export default class Institutions extends Vue {
 </script>
 <style lang="scss" scoped>
 div.institutions {
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
   .content-card {
     padding: 20px;
     margin-bottom: 20px;

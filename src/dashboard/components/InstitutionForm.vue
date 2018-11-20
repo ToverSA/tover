@@ -79,7 +79,7 @@ export default class InstitutionForm extends Vue {
   }
 
   private get loading() {
-    return store.getters['insties/addingInstitution'];
+    return store.getters['insties/savingInstitution'];
   }
 
   private capture() {
@@ -110,12 +110,11 @@ export default class InstitutionForm extends Vue {
   }
 
   private cancelInsti(): void {
-    this.instie = {
-      id: 0,
-      name: null,
-      imageData: null,
-      campuses: [],
-    }
+    this.instie.id = 0;
+    this.instie.name = null;
+    this.instie.imageData = null;
+    this.instie.campuses = [];
+    store.commit('insties/savingInstitution', false);
   }
 
   private async finishInsti() {
