@@ -1,7 +1,26 @@
 import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
 import mockAxios from './axios-mock';
 
-const mock = mockAxios();
+const instance = axios.create();
+
+import MockAdapter from 'axios-mock-adapter';
+const mock = new MockAdapter(instance, { delayResponse: 1000 });
+
+mock.onPost('/api/institutions').reply((config) => {
+  return [200, config.data];
+});
+
+mock.onPost('/api/oauth/token').reply((config) => {
+  return [
+    200,
+    {
+      access_token:
+        'a985d8d9e7e80643633b0b422c0c9f4a7892a88a8192fe2f0742d32455d450d8',
+      token_type: 'bearer',
+      expires_in: null,
+    },
+  ];
+});
 
 if (process.env.NODE_ENV === 'production') {
   mock.restore();
@@ -16,7 +35,7 @@ export const paths = {
 };
 
 export const authUser = (username: string, password: string) => {
-  return axios.post(paths.accessToken, {
+  return instance.post(paths.accessToken, {
     grant_type: 'password',
     username,
     password,
@@ -58,10 +77,4 @@ export const getProfile = (token: string) => {
   });
 };
 
-export default {
-  createUser,
-  authUser,
-  getProfile,
-  getCampuses,
-  createInstitution,
-};
+export default instance;

@@ -5,14 +5,14 @@
         <input type="text" placeholder="Username" v-model="username">
         <input type="password" placeholder="Password" v-model="password">
         <div class="auth-buttons">
-          <button class="plain">
+          <button class="borderless">
             <span>forgot password?</span>
           </button>
           <button @click="signIn">
             <span>sign in</span>
           </button>
         </div>
-        <button class="plain" @click="toSignup">
+        <button class="borderless" @click="toSignup">
             <span>create an account</span>
         </button>
       </auth-form>
@@ -23,8 +23,9 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import store from '@/store';
-import api from '@/api';
+import { authUser } from '@/api';
 import authForm from '@/auth/components/AuthForm.vue';
+import { UserAuth } from '@/store/auth';
 
 @Component({
   components: {
@@ -37,36 +38,32 @@ export default class SigninForm extends Vue {
   private username: string = '';
   private password: string = '';
 
-  private loading = false;
+  private get loading() {
+    return store.getters['auth/authenticating']
+  };
 
   private toSignup() {
     this.onSignup();
   }
 
-  private signIn(): void {
+  private async signIn(): Promise<any> {
     if (this.loading) { return; }
-    this.loading = true;
-    api
-      .authUser(this.username, this.password)
-      .then((response) => {
-        this.loading = false;
-        const data = response.data;
-        const token = data.access_token;
-        if (typeof token === 'undefined') {
-          return; // TODO something about this error
-        }
-        store.commit('auth/signin', token);
-        const query = this.$route.query;
-        if (query.hasOwnProperty('redirect')) {
-          this.$router.push(query.redirect);
-        } else {
-          this.$router.push({ name: 'home' });
-        }
-      })
-      .catch((error) => {
-        this.loading = false;
-        // TODO handle error of signing in
-      });
+    const userAuth: UserAuth = {
+      username: this.username,
+      password: this.password,
+      grant_type: 'password'
+    }
+    try {
+      await store.dispatch('auth/authenticate', userAuth);
+      const query = this.$route.query;
+      if (query.hasOwnProperty('redirect')) {
+        this.$router.push(query.redirect);
+      } else {
+        this.$router.push({ name: 'home' });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 </script>

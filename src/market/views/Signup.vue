@@ -49,7 +49,7 @@
 import Vue from 'vue';
 import { Component, Watch } from 'vue-property-decorator';
 import store from '@/store';
-import api from '@/api';
+import { createUser } from '@/api';
 import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
 
 @Component({
@@ -104,8 +104,8 @@ export default class Signup extends Vue {
       return;
     }
     this.loading = true;
-    api
-      .createUser(this.names, this.email, this.password)
+
+    createUser(this.names, this.email, this.password)
       .then((response) => {
         this.$router.push({ name: 'auth' });
       })

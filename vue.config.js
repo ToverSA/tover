@@ -1,12 +1,12 @@
 module.exports = {
   pwa: {
-    themeColor: '#009688',
+    themeColor: '#FFA000',
     msTileColor: '#FFFFFF',
     name: 'Tover',
   },
 
   baseUrl: undefined,
-  outputDir: undefined,
+  outputDir: '../public_html',
   assetsDir: undefined,
   runtimeCompiler: undefined,
   productionSourceMap: undefined,

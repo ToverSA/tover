@@ -59,7 +59,7 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import store from '@/store';
-import api from '@/api';
+import { createUser } from '@/api';
 import authForm from '@/auth/components/AuthForm.vue';
 
 @Component({
@@ -110,8 +110,7 @@ export default class SignupForm extends Vue {
       return;
     }
     this.loading = true;
-    api
-      .createUser(this.names, this.email, this.password)
+    createUser(this.names, this.email, this.password)
       .then((response) => {
         this.toSignin();
       })

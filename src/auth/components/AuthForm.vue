@@ -89,7 +89,8 @@ div.auth-form {
     justify-content: space-between;
   }
   > button {
-    margin-left: auto;
+    flex-grow: 1;
+    width: calc(100% - 10px);
   }
 
   @media screen and (max-width: 450px) {

@@ -12,12 +12,12 @@
         </div>
         <div class="content-card" v-else>
           <div class="image-section">
-            <img :src="imagePreview" alt="try this" v-if="fileChosen">
+            <img :src="file" alt="try this" v-if="fileChosen">
             <span class="label">
               {{imageLabel}}
             </span>
             <button class="borderless">
-              <span>upload</span>
+              <span>{{uploadButton}}</span>
               <input type="file" name="image" accept="image/*" @change="onFileChange($event.target.files[0])">
             </button>
           </div>
@@ -58,6 +58,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import store from '@/store';
 import { closeIcon } from '@/icons';
 import { createInstitution } from '@/api';
 import Dashboard from '@/dashboard/components/Dashboard.vue';
@@ -70,11 +71,12 @@ const prev = require('@/assets/clear.gif');
 export default class Institutions extends Vue {
 
   private steps: number = 0;
+  private uploadButton = 'upload';
 
   private addingInsti = false;
 
   private fileChosen = false;
-  private file!: File
+  private file!: string
 
   private imageLabel: String = 'Choose image';
   private imagePreview: string | ArrayBuffer | null = prev;
@@ -87,17 +89,13 @@ export default class Institutions extends Vue {
   private loading = false;
 
   private onFileChange(file: File) {
-    this.setPreview(file);
-    this.file = file;
-  }
-
-  private setPreview(file: File) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      this.imagePreview = reader.result;
+      this.file = reader.result as string;
       this.fileChosen = true;
       this.imageLabel = 'Press enter to capture';
       this.steps++;
+      this.uploadButton = 'change';
     }
     reader.readAsDataURL(file);
   }
@@ -143,19 +141,15 @@ export default class Institutions extends Vue {
     this.imagePreview = prev;
   }
 
-  private finishInsti() {
-    const formData = new FormData();
-    formData.append('institutionName', this.instiName as string);
-    formData.append('image', this.file);
-    this.campuses.forEach((e) => {
-      formData.append('campuses[]', e.name);
-    })
-    createInstitution(formData).then((response) => {
-      console.log(response);
-    }).catch((error) => {
-      // Do nothing
-    });
-    this.loading = true;
+  private async finishInsti() {
+    const instie: Institution = {
+      id: 0,
+      name: this.instiName as string,
+      imageData: this.file,
+      campuses: this.campuses
+    }
+    await store.dispatch('insties/addInstitution', instie);
+    this.cancelInsti();
   }
 
   private onBack(): void {

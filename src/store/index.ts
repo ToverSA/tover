@@ -6,19 +6,19 @@ import insties, { InstiesState } from './insties';
 
 Vue.use(Vuex);
 
-interface State {
+export interface RootState {
   auth: AuthState;
   insties: InstiesState;
 }
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
-  reducer: (state: State) => ({ auth: state.auth }),
+  reducer: (state: RootState) => ({ auth: state.auth }),
   filter: (mutation) =>
     mutation.type === 'auth/signin' || mutation.type === 'auth/signout',
 });
 
-const store = new Vuex.Store<State>({
+const store = new Vuex.Store<RootState>({
   modules: {
     auth,
     insties,
