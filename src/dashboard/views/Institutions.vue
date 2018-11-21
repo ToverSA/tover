@@ -26,13 +26,12 @@
 import { Vue, Component } from 'vue-property-decorator';
 import store from '@/store';
 import { closeIcon } from '@/icons';
-import { createInstitution } from '@/api';
 import Dashboard from '@/dashboard/components/Dashboard.vue';
 import Sidebar from '@/dashboard/components/Sidebar.vue';
 import MainContent from '@/dashboard/components/MainContent.vue';
 import InstitutionForm from '@/dashboard/components/InstitutionForm.vue';
 import { Campus, Institution } from '@/store/insties';
-const prev = require('@/assets/clear.gif');
+
 
 @Component({ components: { Dashboard, Sidebar, MainContent, InstitutionForm, closeIcon } })
 export default class Institutions extends Vue {

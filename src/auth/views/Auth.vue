@@ -19,7 +19,7 @@ import signinForm from '@/auth/components/SigninForm.vue';
 })
 export default class Auth extends Vue {
 
-  private signingIn: boolean = true;
+  private signingIn: boolean = false;
 
   public gotoSignin() {
     this.signingIn = true;

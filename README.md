@@ -1,33 +1,21 @@
-# Tover
+sduduzog@gmail.com
 
-Campus based online auction site
+ir.maleka22@gmail.com
 
-## Project setup
+201426351@gmail.co.za
 
-```
-npm install
-```
+201426351@gmail.co.za
 
-### Compiles and hot-reloads for development
+sduduzo@
 
-```
-npm run serve
-```
+@gmail.com
 
-### Compiles and minifies for production
+sduduzo@gmail
 
-```
-npm run build
-```
+itu
 
-### Lints and fixes files
+2342
 
-```
-npm run lint
-```
+88
 
-### Run your unit tests
-
-```
-npm run test:unit
-```
+duDeool@?`

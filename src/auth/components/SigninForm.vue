@@ -23,7 +23,6 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import store from '@/store';
-import { authUser } from '@/api';
 import authForm from '@/auth/components/AuthForm.vue';
 import { UserAuth } from '@/store/auth';
 

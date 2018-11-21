@@ -3,51 +3,37 @@
       <auth-form>
         <h2>Create an account</h2>
         <input
+          @blur="touch('names')"
           type="text"
           name="names"
-          v-validate="{
-            required: true,
-            min: 2,
-            alpha_spaces: true
-          }"
           placeholder="Full names" v-model="names"
-          :class="{error: errors.has('names')}">
+          :class="{error: !namesValid}">
         <input
           type="text" 
           name="email"
-          v-validate="{
-            required: true,
-            email: true
-          }"
-          :class="{error: errors.has('email')}"
+          @blur="touch('email')"
+          :class="{error: !emailValid}"
           placeholder="Email" 
           v-model="email">
         <input
-          type="password" 
+          type="password"
+          @blur="touch('password')"
           placeholder="Password" 
           name="password"
-          v-validate="{
-            required: true,
-            min: 3
-          }"
-          ref="passwordRef"
-          :class="{error: errors.has('password')}"
+          :class="{error: !passwordValid}"
           v-model="password">
         <input
           type="password"
           placeholder="Repeat password" 
           name="password_confirm"
-          v-validate="{
-            required: true,
-            confirmed: 'passwordRef'
-          }"
-          :class="{error: errors.has('password_confirm')}"
+          @blur="touch('password_confirm')"
+          :class="{error: !passwordConfirmed}"
           v-model="pwd2">
         <div class="auth-buttons">
-          <button class="plain" @click="toSignin">
+          <button class="borderless" @click="toSignin">
             <span>Signed up already</span>
           </button>
-          <button @click="signUp">
+          <button @click="signUp" :disabled="empty.length !== 0">
             <span>sign up</span>
           </button>
         </div>
@@ -66,7 +52,6 @@ import authForm from '@/auth/components/AuthForm.vue';
   components: {
     authForm,
   },
-  $_veeValidate: { validator: 'new' },
 })
 export default class SignupForm extends Vue {
   @Prop() private onSignin!: () => void;
@@ -74,6 +59,8 @@ export default class SignupForm extends Vue {
 
 
   private loading = false;
+  private validate = false;
+  private dirty: string[] = [];
   private password = '';
   private pwd2 = '';
   private names = '';
@@ -81,6 +68,86 @@ export default class SignupForm extends Vue {
 
   private toSignin() {
     this.onSignin();
+  }
+
+  private touch(item: string) {
+    this.validate = true;
+    if (!this.dirty.includes(item)) {
+      this.dirty.push(item);
+    }
+  }
+
+  private get empty(): string[] {
+    const field: string[] = [];
+    if (this.names.length === 0) {
+      field.push('names');
+    }
+    if (this.email.length === 0) {
+      field.push('email');
+    }
+    if (this.password.length === 0) {
+      field.push('password');
+    }
+    if (this.pwd2.length === 0) {
+      field.push('password_confirm');
+    }
+    return field;
+  }
+
+  private get errors(): string[] {
+    const field: string[] = [];
+    if (!this.namesValid) {
+      field.push('names');
+    }
+    if (!this.emailValid) {
+      field.push('email');
+    }
+    if (!this.passwordValid) {
+      field.push('password');
+    }
+    if (!this.passwordConfirmed) {
+      field.push('password_confirm');
+    }
+    return field;
+  }
+
+  private get namesValid() {
+    if (this.dirty.includes('names')) {
+      const valid = /^(.)[^\~%&`]{1,63}$/.test(this.names);
+      if (valid) {
+        this.dirty.splice(this.dirty.indexOf('names'));
+      }
+      return valid;
+    }
+    return true;
+  }
+
+  private get emailValid() {
+    if (this.dirty.includes('email')) {
+      const valid = /^([\w\.]+@[a-zA-Z_]+?(\.[a-zA-Z]{2,6}){1,2})$/.test(this.email);
+      if (valid) {
+        this.dirty.splice(this.dirty.indexOf('email'));
+      }
+      return valid;
+    }
+    return true;
+  }
+  /**
+   * checks if password is valid
+   * @returns boolean true if field is not touched or if passes regex | false if fails regex
+   */
+  private get passwordValid() {
+    if (this.dirty.includes('password')) {
+      return /\S{3,}$/.test(this.password);
+    }
+    return true;
+  }
+
+  private get passwordConfirmed() {
+    if (this.dirty.includes('password_confirm')) {
+      return this.password === this.pwd2;
+    }
+    return true;
   }
 
   private handleNetworkError(error: any): void {
@@ -104,10 +171,10 @@ export default class SignupForm extends Vue {
     if (this.loading) {
       return;
     }
-    if (this.email.length === 0) {
+    if (this.empty.length !== 0) {
       return;
     }
-    if (this.$validator.errors.count() > 0) {
+    if (this.errors.length !== 0) {
       return;
     }
     this.loading = true;

@@ -2,6 +2,7 @@
   <div class="overview">
     <dashboard>
       <sidebar title="Overview">
+        <router-link :to="{name: 'home'}">Home</router-link>
         <router-link :to="{name: 'institutions'}">Institutions</router-link>
       </sidebar>
     </dashboard>

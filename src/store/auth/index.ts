@@ -56,7 +56,7 @@ const authModule: Module<AuthState, RootState> = {
         };
         context.commit('signin', token);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         // TODO handle auth error here
       } finally {
         context.commit('authenticating', false);

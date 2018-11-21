@@ -13,15 +13,10 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { getCampuses } from '@/api';
 @Component
 export default class Browse extends Vue {
   private insties: object = [];
-  private created() {
-    getCampuses().then((responses) => {
-      this.insties = responses.data;
-    });
-  }
+
 }
 </script>
 <style lang="scss" scoped>

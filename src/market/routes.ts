@@ -11,6 +11,11 @@ export default [
     component: () => import(/* webpackChunkName: "market" */ './views/Item.vue'),
   },
   {
+    path: '/post/preview',
+    name: 'postPreview',
+    component: () => import(/* webpackChunkName: "market" */ './views/Item.vue'),
+  },
+  {
     path: '/',
     component: () =>
       import(/* webpackChunkName: "market" */ './views/Home.vue'),

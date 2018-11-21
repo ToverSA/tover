@@ -106,6 +106,12 @@ input[type='button'] {
   &:disabled {
     opacity: 0.5;
     box-shadow: none;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background-color: var(--primary-color);
+    }
   }
 
   &.borderless {

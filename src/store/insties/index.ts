@@ -40,9 +40,9 @@ const instiesModule: Module<InstiesState, RootState> = {
           },
         };
         const response = await api.post('/api/institutions', payload, config);
-        console.log(response);
+        // console.log(response);
       } catch (error) {
-        console.log('my error', error);
+        // console.log('my error', error);
       } finally {
         context.commit('savingInstitution', false);
       }

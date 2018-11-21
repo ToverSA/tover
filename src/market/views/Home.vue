@@ -12,7 +12,6 @@ import { Vue, Component } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import QuickSearch from '@/market/components/QuickSearch.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import { getProfile } from '@/api';
 import { searchIcon, categoryIcon } from '@/icons';
 @Component({
   components: {

@@ -1,5 +1,4 @@
 import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
-import mockAxios from './axios-mock';
 
 const instance = axios.create();
 
@@ -8,6 +7,10 @@ const mock = new MockAdapter(instance, { delayResponse: 1000 });
 
 mock.onPost('/api/institutions').reply((config) => {
   return [200, config.data];
+});
+
+mock.onPost('/api/users').reply((config) => {
+  return [200];
 });
 
 mock.onPost('/api/oauth/token').reply((config) => {
@@ -22,59 +25,60 @@ mock.onPost('/api/oauth/token').reply((config) => {
   ];
 });
 
+mock.onGet('/api/posts/categories').reply((config) => {
+  return [
+    200,
+    [
+      {
+        id: 1,
+        name: 'food & beverages',
+      },
+      {
+        id: 2,
+        name: 'books & study material',
+      },
+      {
+        id: 1,
+        name: 'electronics & gadgets',
+        sub: [
+          {
+            id: 3,
+            name: 'phones & laptops',
+          },
+          {
+            id: 4,
+            name: 'accessories & appliances',
+          },
+        ],
+      },
+      {
+        id: 4,
+        name: 'services & other',
+        sub: [
+          {
+            id: 5,
+            name: 'accommodation',
+          },
+          {
+            id: 6,
+            name: 'events',
+          },
+          {
+            id: 7,
+            name: 'other services',
+          },
+        ],
+      },
+    ],
+  ];
+});
+
 if (process.env.NODE_ENV === 'production') {
   mock.restore();
 }
 
-export const paths = {
-  profile: '/api/me',
-  campuses: '/api/campuses',
-  users: '/api/users',
-  accessToken: '/api/oauth/token',
-  institutions: '/api/institutions',
-};
-
-export const authUser = (username: string, password: string) => {
-  return instance.post(paths.accessToken, {
-    grant_type: 'password',
-    username,
-    password,
-  });
-};
-
-export const createCampus = (institutionId: number, name: string) => {
-  return axios.post(paths.campuses, {
-    institutionId,
-    name,
-  });
-};
-
-export const createInstitution = (formData: FormData) => {
-  return axios.post(paths.institutions, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-};
-
 export const createUser = (names: string, email: string, password: string) => {
-  return axios.post(paths.users, { names, email, password });
-};
-
-export const getCampuses = () => {
-  return axios.get(paths.campuses);
-};
-
-export const getInstitutions = () => {
-  return axios.get(paths.institutions);
-};
-
-export const getProfile = (token: string) => {
-  return axios.get(paths.profile, {
-    params: {
-      access_token: token,
-    },
-  });
+  return instance.post('/api/users', { names, email, password });
 };
 
 export default instance;
