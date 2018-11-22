@@ -140,7 +140,7 @@ export default class Sell extends Vue {
   }
 
   private get priceSet() {
-    return /^[0]$|^[1-9]{1,6}$/.test(this.priceInput);
+    return /^(0|[1-9]\d{0,5})(\.\d\d$)*$/.test(this.priceInput);
   }
 
   private saveTitle() {
@@ -204,6 +204,7 @@ export default class Sell extends Vue {
 
   private finishPreview() {
     store.commit('adverts/postDescription', this.descriptionInput);
+    this.$router.push({ name: 'postPreview' });
   }
 
 }
