@@ -18,7 +18,15 @@
     <div class="card">
       <h2>R {{price}}</h2>
       <p>{{title}}</p>
-      <div class="buttons">
+      <div class="buttons" v-if="preview">
+        <button>
+          <span>post ad</span>
+        </button>
+        <button class="borderless">
+          <span>more</span>
+        </button>
+      </div>
+      <div class="buttons" v-else>
         <button>
           <span>contact</span>
         </button>
@@ -30,7 +38,7 @@
         </button>
       </div>
       <div class="posted-by">
-        <span>posted by</span>
+        <span>posted by:</span>
         <a href="#">Trevor Noah</a>
       </div>
     </div>
@@ -58,6 +66,7 @@ import AppHeader from '@/market/components/AppHeader.vue';
 import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
 import store from '@/store';
 import { Advert } from '@/store/adverts';
+import { User } from '@/store/auth'
 
 @Component({ components: { closeIcon, chevronLeftIcon, chevronRightIcon } })
 export default class Post extends Vue {
@@ -68,15 +77,22 @@ export default class Post extends Vue {
   private title = '';
   private description = '';
   private descriptionExpanded = false;
+  private preview = false;
+  private owner: User = {};
 
   private created() {
     if (this.$route.name === 'postPreview') {
       const advert: Advert = store.getters['adverts/post'];
-      this.images = advert.images;
-      this.price = advert.price!;
-      this.title = advert.title!;
-      this.description = advert.description!;
+      this.preview = true;
+      this.init(advert);
     }
+  }
+
+  private init(advert: Advert) {
+    this.images = advert.images;
+    this.price = advert.price!;
+    this.title = advert.title!;
+    this.description = advert.description!;
   }
 
   private get image() {
@@ -133,6 +149,7 @@ div.post {
     padding: 10px;
     opacity: 0.5;
     cursor: pointer;
+    background-color: white;
     svg {
       fill: black;
     }
@@ -158,6 +175,7 @@ div.post {
       transform: translateY(-50%);
       opacity: 0.3;
       background-color: black;
+      cursor: pointer;
       &.left {
         left: 5px;
       }
@@ -215,6 +233,9 @@ div.post {
         padding: 5px;
         text-decoration: none;
       }
+      span {
+        opacity: 0.5;
+      }
     }
   }
   .description {
@@ -224,20 +245,14 @@ div.post {
     box-shadow: 0 1px 2px 1px #ccc;
     padding: 5px 30px;
     position: relative;
+    overflow: hidden;
 
-    h2 {
-      // opacity: 0.5;
-    }
     h2,
     p {
       margin: 10px 0;
-      white-space: pre-line;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: pre-wrap;
     }
-    p {
-      max-height: 110px;
-    }
+
     .shadow {
       padding: 30px;
       background: linear-gradient(transparent, white 80%);
@@ -263,12 +278,12 @@ div.post {
     }
     &.expanded {
       grid-row: 1 / 3;
+      overflow: auto;
       .shadow {
         display: none;
       }
       p {
-        min-height: 340px;
-        overflow: auto;
+        min-height: 330px;
       }
     }
   }
@@ -314,11 +329,6 @@ div.post {
         top: 0;
         right: 35px;
         margin: 3px;
-      }
-      &.expanded {
-        p {
-          min-height: 230px;
-        }
       }
     }
   }

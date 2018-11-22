@@ -8,14 +8,24 @@ export interface TokenType {
   expires_in: string | null;
   token: string;
 }
-export interface AuthState {
-  accessToken: TokenType | null;
-  authenticating: boolean;
-}
+
 export interface UserAuth {
   username: string;
   password: string;
   grant_type: string;
+}
+
+export interface User {
+  id: number;
+  names: string;
+  email: string;
+  number: string;
+  whatsapp: string | boolean;
+}
+
+export interface AuthState {
+  accessToken: TokenType | null;
+  authenticating: boolean;
 }
 
 const authModule: Module<AuthState, RootState> = {

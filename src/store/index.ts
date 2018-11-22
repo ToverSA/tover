@@ -16,13 +16,13 @@ export interface RootState {
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
   reducer: (state: RootState) => ({
-    auth: state.auth,
+    auth: {
+      accessToken: state.auth.accessToken,
+    },
     adverts: {
       post: state.adverts.post,
     },
   }),
-  // filter: (mutation) =>
-  //   mutation.type === 'auth/signin' || mutation.type === 'auth/signout',
 });
 
 const store = new Vuex.Store<RootState>({

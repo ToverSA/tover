@@ -19,6 +19,7 @@ export interface Advert {
   description: string;
   category: AdvertCategory;
   images: string[];
+  owner: number;
 }
 export interface AdvertsState {
   post: Advert;
@@ -38,6 +39,7 @@ const adverts: Module<AdvertsState, RootState> = {
         name: '',
       },
       images: [],
+      owner: 0,
     },
     categories: [],
   },
