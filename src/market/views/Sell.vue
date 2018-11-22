@@ -48,7 +48,7 @@
           <button class="borderless" @click="toImages">
             <span>back</span>
           </button>
-          <button :disabled="!imagesAdded" @click="setPrice">
+          <button :disabled="!imagesAdded && !priceSet" @click="setPrice">
             <span>next</span>
           </button>
         </div>
@@ -85,7 +85,7 @@
             <span>back</span>
           </button>
           <button :disabled="!categorySet" @click="finishPreview">
-            <span>finish</span>
+            <span>preview</span>
           </button>
         </div>
       </div>
@@ -99,7 +99,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import ImageUploader from '@/market/components/ImageUploader.vue';
 import store from '@/store';
-import { Advert } from '@/store/adverts';
+import adverts, { Advert } from '@/store/adverts';
 
 @Component({
   components: { AppHeader, ImageUploader },
@@ -115,6 +115,13 @@ export default class Sell extends Vue {
 
   private created() {
     store.dispatch('adverts/listCategories');
+    this.descriptionInput = (this.advert.description.length !== 0) ? this.advert.description : '';
+    this.choosingPrice = (this.imagesAdded) ? true : false;
+    if (this.advert.price !== null) {
+      this.priceInput = this.advert.price;
+      this.priceCommitted = true;
+    }
+    this.choosingCategory = (this.categorySet) ? true : false;
   }
   private get categories() {
     return store.getters['adverts/listCategories'];
@@ -187,11 +194,12 @@ export default class Sell extends Vue {
 
   private onCancel() {
     store.commit('adverts/cancelPost');
-    if (window.history.state === null) {
-      this.$router.push({ name: 'home' });
-    } else {
-      this.$router.go(-1);
-    }
+    this.titleInput = '';
+    this.priceInput = '0';
+    this.descriptionInput = '';
+    this.priceCommitted = false;
+    this.choosingPrice = false;
+    this.choosingCategory = false;
   }
 
   private finishPreview() {

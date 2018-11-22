@@ -59,7 +59,9 @@ const adverts: Module<AdvertsState, RootState> = {
       state.post.title = payload;
     },
     postImage: (state: AdvertsState, payload: string) => {
-      state.post.images.push(payload);
+      if (!state.post.images.includes(payload)) {
+        state.post.images.push(payload);
+      }
     },
     postPrice: (state: AdvertsState, payload: string | null) => {
       state.post.price = payload;

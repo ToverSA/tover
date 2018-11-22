@@ -17,9 +17,12 @@ const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
   reducer: (state: RootState) => ({
     auth: state.auth,
+    adverts: {
+      post: state.adverts.post,
+    },
   }),
-  filter: (mutation) =>
-    mutation.type === 'auth/signin' || mutation.type === 'auth/signout',
+  // filter: (mutation) =>
+  //   mutation.type === 'auth/signin' || mutation.type === 'auth/signout',
 });
 
 const store = new Vuex.Store<RootState>({
