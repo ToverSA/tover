@@ -34,9 +34,15 @@
         <a href="#">Trevor Noah</a>
       </div>
     </div>
-    <div class="description">
+    <div class="description" :class="{expanded: descriptionExpanded}">
       <h2>Description</h2>
       <p>{{description}}</p>
+      <div class="shadow"></div>
+      <button
+        class="borderless"
+        @click="descriptionExpanded = !descriptionExpanded">
+        <span>Show {{(descriptionExpanded) ? 'less': 'more'}}</span>
+      </button>
     </div>
     <div class="closer" @click="onBack">
       <close-icon/>
@@ -53,8 +59,6 @@ import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
 import store from '@/store';
 import { Advert } from '@/store/adverts';
 
-const clear = require('@/assets/clear.gif');
-
 @Component({ components: { closeIcon, chevronLeftIcon, chevronRightIcon } })
 export default class Post extends Vue {
 
@@ -63,6 +67,7 @@ export default class Post extends Vue {
   private price = '';
   private title = '';
   private description = '';
+  private descriptionExpanded = false;
 
   private created() {
     if (this.$route.name === 'postPreview') {
@@ -78,7 +83,7 @@ export default class Post extends Vue {
     if (this.images.length !== 0) {
       return this.images[this.imageIndex];
     } else {
-      return clear;
+      return '';
     }
   }
 
@@ -97,7 +102,7 @@ export default class Post extends Vue {
     }
   }
 
-  public onBack(): void {
+  private onBack(): void {
     if (window.history.state === null) {
       this.$router.push({ name: 'home' });
     } else {
@@ -109,8 +114,6 @@ export default class Post extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '@/app.scss';
-$max-width: 960px;
 div.post {
   display: grid;
   margin: 50px auto;
@@ -153,6 +156,8 @@ div.post {
       border-radius: 20px;
       padding: 5px;
       transform: translateY(-50%);
+      opacity: 0.3;
+      background-color: black;
       &.left {
         left: 5px;
       }
@@ -217,7 +222,55 @@ div.post {
     grid-row: 2 / 3;
     background-color: white;
     box-shadow: 0 1px 2px 1px #ccc;
-    padding: 5px;
+    padding: 5px 30px;
+    position: relative;
+
+    h2 {
+      // opacity: 0.5;
+    }
+    h2,
+    p {
+      margin: 10px 0;
+      white-space: pre-line;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    p {
+      max-height: 110px;
+    }
+    .shadow {
+      padding: 30px;
+      background: linear-gradient(transparent, white 80%);
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    button {
+      position: absolute;
+      top: 7px;
+      right: 40px;
+      span {
+        text-transform: none;
+        font-weight: 400;
+      }
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: transparent;
+      }
+    }
+    &.expanded {
+      grid-row: 1 / 3;
+      .shadow {
+        display: none;
+      }
+      p {
+        min-height: 340px;
+        overflow: auto;
+      }
+    }
   }
   @media screen and (max-width: 768px) {
     max-width: 570px;
@@ -248,6 +301,25 @@ div.post {
     }
 
     .description {
+      padding: 5px;
+      h2,
+      p {
+        margin: 0;
+      }
+      p {
+        margin: 5px 0;
+        max-height: 36px;
+      }
+      button {
+        top: 0;
+        right: 35px;
+        margin: 3px;
+      }
+      &.expanded {
+        p {
+          min-height: 230px;
+        }
+      }
     }
   }
   @media screen and (max-width: 450px) {
@@ -272,10 +344,6 @@ div.post {
 
     .image {
       height: 100vw;
-      .scroll {
-        opacity: 0.3;
-        background-color: black;
-      }
     }
     .card {
       margin-top: 5px;
@@ -283,7 +351,14 @@ div.post {
     }
     .description {
       margin-top: 10px;
-      padding: 20px;
+      padding: 10px;
+      p {
+        max-height: none;
+      }
+      button,
+      .shadow {
+        display: none;
+      }
     }
   }
 }
