@@ -19,7 +19,7 @@
       <h2>R {{price}}</h2>
       <p>{{title}}</p>
       <div class="buttons" v-if="preview">
-        <button>
+        <button @click="postAd">
           <span>post ad</span>
         </button>
         <button class="borderless">
@@ -39,7 +39,7 @@
       </div>
       <div class="posted-by">
         <span>posted by:</span>
-        <a href="#">Trevor Noah</a>
+        <a href="#">{{owner.names}}</a>
       </div>
     </div>
     <div class="description" :class="{expanded: descriptionExpanded}">
@@ -66,7 +66,7 @@ import AppHeader from '@/market/components/AppHeader.vue';
 import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
 import store from '@/store';
 import { Advert } from '@/store/adverts';
-import { User } from '@/store/auth'
+import { UserInfo } from '@/store/auth';
 
 @Component({ components: { closeIcon, chevronLeftIcon, chevronRightIcon } })
 export default class Post extends Vue {
@@ -78,7 +78,13 @@ export default class Post extends Vue {
   private description = '';
   private descriptionExpanded = false;
   private preview = false;
-  private owner: User = {};
+  private owner: UserInfo = {
+    id: 0,
+    names: 'Trevor Noah',
+    email: '',
+    number: '',
+    whatsapp: '',
+  };
 
   private created() {
     if (this.$route.name === 'postPreview') {
@@ -126,6 +132,9 @@ export default class Post extends Vue {
     }
   }
 
+  private postAd() {
+    store.dispatch('adverts/post');
+  }
 }
 </script>
 
@@ -173,8 +182,7 @@ div.post {
       border-radius: 20px;
       padding: 5px;
       transform: translateY(-50%);
-      opacity: 0.3;
-      background-color: black;
+      background-color: rgba(0, 0, 0, 0.1);
       cursor: pointer;
       &.left {
         left: 5px;
@@ -344,8 +352,8 @@ div.post {
       right: auto;
       left: 5px;
       top: 5px;
-      background-color: black;
-      opacity: 0.2;
+      background-color: rgba(0, 0, 0, 0.1);
+      opacity: 1;
       border-radius: 20px;
       svg {
         fill: white;

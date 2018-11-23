@@ -7,7 +7,7 @@
       </span>
       <button class="borderless">
         <span>{{uploadButton}}</span>
-        <input type="file" name="image" accept="image/*" @change="onFileChange($event.target.files[0])">
+        <input type="file" name="image" accept="image/*" @change="onImageChange($event.target.files[0])">
       </button>
     </div>
     <div class="info-section" v-if="instie.imageData !== null">
@@ -122,12 +122,50 @@ export default class InstitutionForm extends Vue {
     this.cancelInsti();
   }
 
-  private onFileChange(file: File) {
+  private onImageChange(file: File) {
     const reader = new FileReader();
+    const image = new Image();
     reader.onload = (e) => {
-      this.instie.imageData = reader.result as string;
+      image.src = reader.result as string;
+    };
+    image.onload = (e) => {
+      const w = image.naturalWidth;
+      const h = image.naturalHeight;
+      const l = (w > h) ? w : h;
+      const canvas = document.createElement('canvas');
+      canvas.height = l;
+      canvas.width = l;
+
+      const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { alpha: false })!;
+      ctx.fillStyle = '#F5F5F5';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      let x = 0;
+      let y = 0;
+      if (w > h) {
+        y = (w - h) / 2;
+      } else {
+        x = (h - w) / 2;
+      }
+      ctx.drawImage(image, x, y);
+      this.resize(canvas.toDataURL());
     };
     reader.readAsDataURL(file);
+  }
+
+  private resize(dataUrl: string) {
+    const image = new Image();
+    image.src = dataUrl;
+    image.onload = (e) => {
+      const canvas = document.createElement('canvas');
+      canvas.height = 128;
+      canvas.width = 128;
+
+      const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { alpha: false })!;
+      ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight, 0, 0, 128, 128);
+
+      this.instie.imageData = canvas.toDataURL();
+    };
+
   }
 }
 </script>

@@ -52,6 +52,12 @@ const adverts: Module<AdvertsState, RootState> = {
         // TODO handle error
       }
     },
+    post: async (context: ActionContext<AdvertsState, RootState>) => {
+      try {
+      } catch (error) {
+        // TODO handle error
+      }
+    },
   },
   mutations: {
     categories: (state: AdvertsState, payload: AdvertCategory[]) => {

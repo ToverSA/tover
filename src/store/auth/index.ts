@@ -15,7 +15,7 @@ export interface UserAuth {
   grant_type: string;
 }
 
-export interface User {
+export interface UserInfo {
   id: number;
   names: string;
   email: string;
