@@ -20,7 +20,7 @@
       <p>{{title}}</p>
       <div class="buttons" v-if="preview">
         <button @click="postAd">
-          <span>post ad</span>
+          <span>finish</span>
         </button>
         <button class="borderless">
           <span>more</span>
@@ -65,7 +65,7 @@ import AppFooter from '@/components/AppFooter.vue';
 import AppHeader from '@/market/components/AppHeader.vue';
 import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
 import store from '@/store';
-import { Advert } from '@/store/adverts';
+import { Post as PostType } from '@/store/posts';
 import { UserInfo } from '@/store/auth';
 
 @Component({ components: { closeIcon, chevronLeftIcon, chevronRightIcon } })
@@ -88,13 +88,13 @@ export default class Post extends Vue {
 
   private created() {
     if (this.$route.name === 'postPreview') {
-      const advert: Advert = store.getters['adverts/post'];
+      const advert: PostType = store.getters['posts/post'];
       this.preview = true;
       this.init(advert);
     }
   }
 
-  private init(advert: Advert) {
+  private init(advert: PostType) {
     this.images = advert.images;
     this.price = advert.price!;
     this.title = advert.title!;
@@ -133,7 +133,7 @@ export default class Post extends Vue {
   }
 
   private postAd() {
-    store.dispatch('adverts/post');
+    store.dispatch('posts/post');
   }
 }
 </script>
@@ -206,6 +206,7 @@ div.post {
         border-radius: 5px;
         opacity: 0.5;
         background-color: white;
+        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.342);
         &.active {
           opacity: 1;
           background-color: var(--primary-color);

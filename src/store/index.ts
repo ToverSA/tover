@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersistence from 'vuex-persist';
-import adverts, { AdvertsState } from './adverts';
+import posts, { PostsState } from './posts';
 import auth, { AuthState } from './auth';
 import insties, { InstiesState } from './insties';
 
 Vue.use(Vuex);
 
 export interface RootState {
-  adverts: AdvertsState;
+  posts: PostsState;
   auth: AuthState;
   insties: InstiesState;
 }
@@ -19,15 +19,15 @@ const vuexLocal = new VuexPersistence({
     auth: {
       accessToken: state.auth.accessToken,
     },
-    adverts: {
-      post: state.adverts.post,
+    posts: {
+      post: state.posts.post,
     },
   }),
 });
 
 const store = new Vuex.Store<RootState>({
   modules: {
-    adverts,
+    posts,
     auth,
     insties,
   },

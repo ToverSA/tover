@@ -42,7 +42,7 @@ export default class ImageUploader extends Vue {
   @Prop({ type: Boolean, default: false }) private editing!: boolean;
 
   private get images(): string[] {
-    return store.getters['adverts/postImages'];
+    return store.getters['posts/postImages'];
   }
 
   private get spaces() {
@@ -54,7 +54,7 @@ export default class ImageUploader extends Vue {
   private loading = false;
 
   private removeImage(index: number) {
-    store.commit('adverts/removeImage', index);
+    store.commit('posts/removeImage', index);
   }
 
   private onImageChange(file: File) {
@@ -86,7 +86,7 @@ export default class ImageUploader extends Vue {
         sH = h - 2 * y;
       }
       ctx.drawImage(image, x, y, sW, sH, 0, 0, 512, 512);
-      store.commit('adverts/postImage', canvas.toDataURL());
+      store.commit('posts/postImage', canvas.toDataURL());
       this.loading = false;
     };
     reader.readAsDataURL(file);

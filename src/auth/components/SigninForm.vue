@@ -3,7 +3,7 @@
       <auth-form>
         <h2>Sign in to your account</h2>
         <input type="text" placeholder="Username" v-model="username">
-        <input type="password" placeholder="Password" v-model="password">
+        <input type="password" placeholder="Password" @keyup.enter="signIn" v-model="password">
         <div class="auth-buttons">
           <button class="borderless">
             <span>forgot password?</span>

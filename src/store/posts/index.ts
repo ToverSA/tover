@@ -3,30 +3,32 @@ import { Module, ActionContext } from 'vuex';
 import { RootState } from '..';
 import { AxiosResponse } from 'axios';
 
-export interface AdvertCategory {
+export interface CategoryGroup {
   id: number;
   name: string;
 }
 
-export interface AdvertGroupCategory extends AdvertCategory {
-  sub: AdvertCategory[] | undefined;
+export interface PostCategory {
+  id: number;
+  name: string;
+  group: CategoryGroup;
 }
 
-export interface Advert {
+export interface Post {
   id: number;
   title: string | null;
   price: string | null;
   description: string;
-  category: AdvertCategory;
+  category: PostCategory;
   images: string[];
   owner: number;
 }
-export interface AdvertsState {
-  post: Advert;
-  categories: AdvertCategory[];
+export interface PostsState {
+  post: Post;
+  categories: PostCategory[];
 }
 
-const adverts: Module<AdvertsState, RootState> = {
+const posts: Module<PostsState, RootState> = {
   namespaced: true,
   state: {
     post: {
@@ -37,6 +39,10 @@ const adverts: Module<AdvertsState, RootState> = {
       category: {
         id: 0,
         name: '',
+        group: {
+          id: 0,
+          name: '',
+        },
       },
       images: [],
       owner: 0,
@@ -44,7 +50,7 @@ const adverts: Module<AdvertsState, RootState> = {
     categories: [],
   },
   actions: {
-    listCategories: async (context: ActionContext<AdvertsState, RootState>) => {
+    listCategories: async (context: ActionContext<PostsState, RootState>) => {
       try {
         const response: AxiosResponse = await api.get('/api/posts/categories');
         context.commit('categories', response.data);
@@ -52,41 +58,42 @@ const adverts: Module<AdvertsState, RootState> = {
         // TODO handle error
       }
     },
-    post: async (context: ActionContext<AdvertsState, RootState>) => {
+    post: async (context: ActionContext<PostsState, RootState>) => {
       try {
+        // Do nothing
       } catch (error) {
         // TODO handle error
       }
     },
   },
   mutations: {
-    categories: (state: AdvertsState, payload: AdvertCategory[]) => {
+    categories: (state: PostsState, payload: PostCategory[]) => {
       state.categories = payload;
     },
-    postTitle: (state: AdvertsState, payload: string | null) => {
+    postTitle: (state: PostsState, payload: string | null) => {
       state.post.title = payload;
     },
-    postImage: (state: AdvertsState, payload: string) => {
+    postImage: (state: PostsState, payload: string) => {
       if (!state.post.images.includes(payload)) {
         state.post.images.push(payload);
       }
     },
-    postPrice: (state: AdvertsState, payload: string | null) => {
+    postPrice: (state: PostsState, payload: string | null) => {
       state.post.price = payload;
     },
-    postDescription: (state: AdvertsState, payload: string) => {
+    postDescription: (state: PostsState, payload: string) => {
       state.post.description = payload;
     },
-    removeImage: (state: AdvertsState, payload: number) => {
+    removeImage: (state: PostsState, payload: number) => {
       state.post.images.splice(payload, 1);
     },
-    chooseCategory: (state: AdvertsState, payload: AdvertCategory) => {
+    chooseCategory: (state: PostsState, payload: PostCategory) => {
       state.post.category = payload;
     },
-    changeCategory: (state: AdvertsState, payload: AdvertCategory) => {
-      state.post.category = { id: 0, name: '' };
+    changeCategory: (state: PostsState, payload: PostCategory) => {
+      state.post.category = { id: 0, name: '', group: { id: 0, name: '' } };
     },
-    cancelPost: (state: AdvertsState) => {
+    cancelPost: (state: PostsState) => {
       state.post.title = null;
       state.post.price = null;
       state.post.images = [];
@@ -95,26 +102,20 @@ const adverts: Module<AdvertsState, RootState> = {
     },
   },
   getters: {
-    post: (state: AdvertsState) => {
+    post: (state: PostsState) => {
       return state.post;
     },
-    postImages: (state: AdvertsState) => {
+    postImages: (state: PostsState) => {
       return state.post.images;
     },
-    listCategories: (state: AdvertsState) => {
-      const list: AdvertCategory[] = [];
+    listCategories: (state: PostsState) => {
+      const list: PostCategory[] = [];
       state.categories.forEach((element) => {
-        if ((element as AdvertGroupCategory).sub === undefined) {
-          list.push(element);
-        } else {
-          (element as AdvertGroupCategory).sub!.forEach((elem) => {
-            list.push(elem);
-          });
-        }
+        list.push(element);
       });
       return list;
     },
   },
 };
 
-export default adverts;
+export default posts;

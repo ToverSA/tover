@@ -38,7 +38,7 @@
         <p class="price-label" v-if="priceCommitted">R {{advert.price}}</p>
         <div class="price" v-else>
           <span>R</span>
-          <input type="text" placeholder="12 345" v-model="priceInput">
+          <input type="text" placeholder="99 9999.99" v-model="priceInput">
         </div>
         <div class="buttons" v-if="!priceCommitted">
           <button class="borderless" @click="onCancel">
@@ -99,7 +99,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import ImageUploader from '@/market/components/ImageUploader.vue';
 import store from '@/store';
-import adverts, { Advert } from '@/store/adverts';
+import { Post, PostCategory } from '@/store/posts';
 
 @Component({
   components: { AppHeader, ImageUploader },
@@ -114,9 +114,10 @@ export default class Sell extends Vue {
   private choosingCategory = false;
 
   private created() {
-    store.dispatch('adverts/listCategories');
+    store.dispatch('posts/listCategories');
     this.descriptionInput = (this.advert.description.length !== 0) ? this.advert.description : '';
     this.choosingPrice = (this.imagesAdded) ? true : false;
+    this.titleInput = (this.advert.title != null) ? this.advert.title : '';
     if (this.advert.price !== null) {
       this.priceInput = this.advert.price;
       this.priceCommitted = true;
@@ -124,11 +125,21 @@ export default class Sell extends Vue {
     this.choosingCategory = (this.categorySet) ? true : false;
   }
   private get categories() {
-    return store.getters['adverts/listCategories'];
+    const list = store.getters['posts/listCategories'] as PostCategory[];
+    const result: PostCategory[] = [];
+    list.forEach((element) => {
+      const name = element.name.toLowerCase();
+      if (name === 'events' || name === 'accommodation') {
+        // Do nothing
+      } else {
+        result.push(element);
+      }
+    });
+    return result;
   }
 
-  private get advert(): Advert {
-    return store.getters['adverts/post'];
+  private get advert(): Post {
+    return store.getters['posts/post'];
   }
 
   private get titleSet() {
@@ -145,12 +156,12 @@ export default class Sell extends Vue {
 
   private saveTitle() {
     if (this.titleSet) {
-      store.commit('adverts/postTitle', this.titleInput);
+      store.commit('posts/postTitle', this.titleInput);
     }
   }
 
   private toTitle() {
-    store.commit('adverts/postTitle', null);
+    store.commit('posts/postTitle', null);
   }
 
   private get imagesAdded() {
@@ -164,7 +175,7 @@ export default class Sell extends Vue {
 
   private setPrice() {
     if (this.priceSet) {
-      store.commit('adverts/postPrice', this.priceInput);
+      store.commit('posts/postPrice', this.priceInput);
       this.priceCommitted = true;
     }
   }
@@ -174,7 +185,7 @@ export default class Sell extends Vue {
   }
 
   private chooseCategory(index: number) {
-    store.commit('adverts/chooseCategory', {
+    store.commit('posts/chooseCategory', {
       id: this.categories[index].id,
       name: this.categories[index].name,
     });
@@ -185,7 +196,7 @@ export default class Sell extends Vue {
   }
 
   private changeCategory() {
-    store.commit('adverts/changeCategory');
+    store.commit('posts/changeCategory');
   }
 
   private toImages() {
@@ -193,7 +204,7 @@ export default class Sell extends Vue {
   }
 
   private onCancel() {
-    store.commit('adverts/cancelPost');
+    store.commit('posts/cancelPost');
     this.titleInput = '';
     this.priceInput = '0';
     this.descriptionInput = '';
@@ -203,7 +214,7 @@ export default class Sell extends Vue {
   }
 
   private finishPreview() {
-    store.commit('adverts/postDescription', this.descriptionInput);
+    store.commit('posts/postDescription', this.descriptionInput);
     this.$router.push({ name: 'postPreview' });
   }
 

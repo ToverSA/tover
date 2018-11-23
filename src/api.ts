@@ -30,44 +30,76 @@ mock.onGet('/api/posts/categories').reply((config) => {
     200,
     [
       {
-        id: 1,
-        name: 'food & beverages',
+        id: '1',
+        name: 'Food & Beverage',
+        group: {
+          id: '1',
+          name: 'Cafe\' products',
+        },
       },
       {
-        id: 2,
-        name: 'books & study material',
+        id: '2',
+        name: 'Other products',
+        group: {
+          id: '1',
+          name: 'Cafe\' products',
+        },
       },
       {
-        id: 1,
-        name: 'electronics & gadgets',
-        sub: [
-          {
-            id: 3,
-            name: 'phones & laptops',
-          },
-          {
-            id: 4,
-            name: 'accessories & appliances',
-          },
-        ],
+        id: '3',
+        name: 'Textbooks',
+        group: {
+          id: '2',
+          name: 'Study materials',
+        },
       },
       {
-        id: 4,
-        name: 'services & other',
-        sub: [
-          {
-            id: 5,
-            name: 'accommodation',
-          },
-          {
-            id: 6,
-            name: 'events',
-          },
-          {
-            id: 7,
-            name: 'other services',
-          },
-        ],
+        id: '4',
+        name: 'Study guides & notes',
+        group: {
+          id: '2',
+          name: 'Study materials',
+        },
+      },
+      {
+        id: '5',
+        name: 'Phones & laptops',
+        group: {
+          id: '3',
+          name: 'Electronics & Gadgets',
+        },
+      },
+      {
+        id: '6',
+        name: 'Accessories & appliances',
+        group: {
+          id: '3',
+          name: 'Electronics & Gadgets',
+        },
+      },
+      {
+        id: '7',
+        name: 'Accommodation',
+        group: {
+          id: '4',
+          name: 'Services',
+        },
+      },
+      {
+        id: '8',
+        name: 'Events',
+        group: {
+          id: '4',
+          name: 'Services',
+        },
+      },
+      {
+        id: '9',
+        name: 'Other services',
+        group: {
+          id: '4',
+          name: 'Services',
+        },
       },
     ],
   ];
