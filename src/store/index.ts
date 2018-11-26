@@ -22,6 +22,9 @@ const vuexLocal = new VuexPersistence({
     posts: {
       post: state.posts.post,
     },
+    insties: {
+      insties: state.insties.insties,
+    },
   }),
 });
 

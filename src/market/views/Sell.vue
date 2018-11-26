@@ -84,12 +84,13 @@
           <button class="borderless" @click="toPrice">
             <span>back</span>
           </button>
-          <button :disabled="!categorySet" @click="finishPreview">
-            <span>preview</span>
+          <button :disabled="!categorySet" @click="publish">
+            <span>publish</span>
           </button>
         </div>
       </div>
     </div>
+    <campus-chooser :on-done="onCancel"/>
   </div>
 </template>
 
@@ -98,11 +99,16 @@ import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import AppHeader from '@/market/components/AppHeader.vue';
 import ImageUploader from '@/market/components/ImageUploader.vue';
+import CampusChooser from '@/components/dialogs/CampusChooser.vue';
 import store from '@/store';
 import { Post, PostCategory } from '@/store/posts';
 
 @Component({
-  components: { AppHeader, ImageUploader },
+  components: {
+    AppHeader,
+    ImageUploader,
+    CampusChooser,
+  },
 })
 export default class Sell extends Vue {
 
@@ -115,7 +121,8 @@ export default class Sell extends Vue {
 
   private created() {
     store.dispatch('posts/listCategories');
-    this.descriptionInput = (this.advert.description.length !== 0) ? this.advert.description : '';
+    this.descriptionInput =
+      (this.advert.description.length !== 0) ? this.advert.description : '';
     this.choosingPrice = (this.imagesAdded) ? true : false;
     this.titleInput = (this.advert.title != null) ? this.advert.title : '';
     if (this.advert.price !== null) {
@@ -204,7 +211,7 @@ export default class Sell extends Vue {
   }
 
   private onCancel() {
-    store.commit('posts/cancelPost');
+    store.commit('posts/clearPost');
     this.titleInput = '';
     this.priceInput = '0';
     this.descriptionInput = '';
@@ -213,9 +220,14 @@ export default class Sell extends Vue {
     this.choosingCategory = false;
   }
 
-  private finishPreview() {
+  private async publish() {
     store.commit('posts/postDescription', this.descriptionInput);
-    this.$router.push({ name: 'postPreview' });
+    try {
+      await store.dispatch('insties/fetchInstitutions');
+      store.commit('posts/chooseCampus');
+    } catch (error) {
+      // Send notification here
+    }
   }
 
 }

@@ -40,11 +40,23 @@ const instiesModule: Module<InstiesState, RootState> = {
           },
         };
         const response = await api.post('/api/institutions', payload, config);
-        // console.log(response);
       } catch (error) {
-        // console.log('my error', error);
+        // TODO handle error
       } finally {
         context.commit('savingInstitution', false);
+      }
+    },
+    fetchInstitutions: async (
+      context: ActionContext<InstiesState, RootState>,
+    ) => {
+      try {
+        const response = await api.get('/api/institutions');
+        context.commit('saveInsties', response.data);
+      } catch (error) {
+        // Do nothing yet
+        if (context.state.insties.length === 0) {
+          throw new Error('No institutions set yet');
+        }
       }
     },
   },
@@ -61,10 +73,16 @@ const instiesModule: Module<InstiesState, RootState> = {
     initAdd: (state: InstiesState) => {
       state.savingInstitution = false;
     },
+    saveInsties: (state: InstiesState, payload: Institution[]) => {
+      state.insties = payload;
+    },
   },
   getters: {
     addingInstitution: (state: InstiesState) => {
       return state.addingInstitution;
+    },
+    institutions: (state: InstiesState) => {
+      return state.insties;
     },
   },
 };

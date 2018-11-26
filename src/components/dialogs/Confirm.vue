@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-import { Dialog } from '@/components/dialog';
+import { Dialog } from '@/components/dialogs';
 @Component({
   components: { appDialog: Dialog },
   props: {
@@ -41,5 +41,5 @@ import { Dialog } from '@/components/dialog';
     },
   },
 })
-export default class Confirm extends Vue {}
+export default class Confirm extends Vue { }
 </script>

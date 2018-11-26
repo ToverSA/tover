@@ -2,6 +2,7 @@ import api from '@/api';
 import { Module, ActionContext } from 'vuex';
 import { RootState } from '..';
 import { AxiosResponse } from 'axios';
+import { TokenType } from '../auth';
 
 export interface CategoryGroup {
   id: number;
@@ -23,9 +24,15 @@ export interface Post {
   images: string[];
   owner: number;
 }
+
+export interface PostPublish extends Post {
+  campus: number;
+}
+
 export interface PostsState {
   post: Post;
   categories: PostCategory[];
+  choosingCampus: boolean;
 }
 
 const posts: Module<PostsState, RootState> = {
@@ -47,6 +54,7 @@ const posts: Module<PostsState, RootState> = {
       images: [],
       owner: 0,
     },
+    choosingCampus: false,
     categories: [],
   },
   actions: {
@@ -58,10 +66,24 @@ const posts: Module<PostsState, RootState> = {
         // TODO handle error
       }
     },
-    post: async (context: ActionContext<PostsState, RootState>) => {
+    publishPost: async (
+      context: ActionContext<PostsState, RootState>,
+      payload: number,
+    ) => {
       try {
-        // Do nothing
+        const config = {
+          headers: {
+            Authorization:
+              'Bearer ' +
+              (context.rootGetters['auth/accessToken'] as TokenType).token,
+          },
+        };
+        const post = context.state.post as PostPublish;
+        post.campus = payload;
+        const response = await api.post('/api/posts', post, config);
+        console.log(response);
       } catch (error) {
+        console.log(error);
         // TODO handle error
       }
     },
@@ -93,12 +115,16 @@ const posts: Module<PostsState, RootState> = {
     changeCategory: (state: PostsState, payload: PostCategory) => {
       state.post.category = { id: 0, name: '', group: { id: 0, name: '' } };
     },
-    cancelPost: (state: PostsState) => {
+    clearPost: (state: PostsState) => {
       state.post.title = null;
       state.post.price = null;
       state.post.images = [];
       state.post.description = '';
       state.post.category.id = 0;
+      state.choosingCampus = false;
+    },
+    chooseCampus: (state: PostsState) => {
+      state.choosingCampus = true;
     },
   },
   getters: {
@@ -114,6 +140,13 @@ const posts: Module<PostsState, RootState> = {
         list.push(element);
       });
       return list;
+    },
+    listCampuses: (state: PostsState) => {
+      const list: PostCategory[] = [];
+      return list;
+    },
+    choosingCampus: (state: PostsState) => {
+      return state.choosingCampus;
     },
   },
 };

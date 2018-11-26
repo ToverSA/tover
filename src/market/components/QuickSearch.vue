@@ -3,7 +3,7 @@
     <div class="search-bar">
       <div class="cat-button">
         <school-icon/>
-        <span>campus</span>
+        <span>KwaDlangezwa Campus</span>
       </div>
       <input type="search" placeholder="Searching for books, chargers, a fridge, or a burger maybe? Find it here.">
       <div class="search-button">
@@ -84,6 +84,10 @@ div.quick-search {
       }
       span {
         color: white;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .search-button {

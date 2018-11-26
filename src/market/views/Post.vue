@@ -1,59 +1,62 @@
 <template>
-  <div class="post">
-    <div class="image">
-      <img :src="image">
-      <div class="left scroll" @click="prevImage">
-        <chevron-left-icon/>
+  <div class="post-wrapper">
+    <div class="post">
+      <div class="image">
+        <img :src="image">
+        <div class="left scroll" @click="prevImage">
+          <chevron-left-icon/>
+        </div>
+        <div class="right scroll" @click="nextImage">
+          <chevron-right-icon/>
+        </div>
+        <div class="dots">
+          <span
+            :class="{active: images.indexOf(i) == imageIndex}"
+            v-for="i in images"
+            :key="i"></span>
+        </div>
       </div>
-      <div class="right scroll" @click="nextImage">
-        <chevron-right-icon/>
+      <div class="card">
+        <h2>R {{price}}</h2>
+        <p>{{title}}</p>
+        <div class="buttons" v-if="preview">
+          <button @click="postAd">
+            <span>publish</span>
+          </button>
+          <button class="borderless">
+            <span>more</span>
+          </button>
+        </div>
+        <div class="buttons" v-else>
+          <button>
+            <span>contact</span>
+          </button>
+          <button class="borderless">
+            <span>chat</span>
+          </button>
+          <button class="borderless">
+            <span>more</span>
+          </button>
+        </div>
+        <div class="posted-by">
+          <span v-if="preview">This is a preview only you can see.</span>
+          <span v-else>posted by:</span>
+          <a v-if="!preview" href="#">{{owner.names}}</a>
+        </div>
       </div>
-      <div class="dots">
-        <span
-          :class="{active: images.indexOf(i) == imageIndex}"
-          v-for="i in images"
-          :key="i"></span>
-      </div>
-    </div>
-    <div class="card">
-      <h2>R {{price}}</h2>
-      <p>{{title}}</p>
-      <div class="buttons" v-if="preview">
-        <button @click="postAd">
-          <span>finish</span>
+      <div class="description" :class="{expanded: descriptionExpanded}">
+        <h2>Description</h2>
+        <p>{{description}}</p>
+        <div class="shadow"></div>
+        <button
+          class="borderless"
+          @click="descriptionExpanded = !descriptionExpanded">
+          <span>Show {{(descriptionExpanded) ? 'less': 'more'}}</span>
         </button>
-        <button class="borderless">
-          <span>more</span>
-        </button>
       </div>
-      <div class="buttons" v-else>
-        <button>
-          <span>contact</span>
-        </button>
-        <button class="borderless">
-          <span>chat</span>
-        </button>
-        <button class="borderless">
-          <span>more</span>
-        </button>
+      <div class="closer" @click="onBack">
+        <close-icon/>
       </div>
-      <div class="posted-by">
-        <span>posted by:</span>
-        <a href="#">{{owner.names}}</a>
-      </div>
-    </div>
-    <div class="description" :class="{expanded: descriptionExpanded}">
-      <h2>Description</h2>
-      <p>{{description}}</p>
-      <div class="shadow"></div>
-      <button
-        class="borderless"
-        @click="descriptionExpanded = !descriptionExpanded">
-        <span>Show {{(descriptionExpanded) ? 'less': 'more'}}</span>
-      </button>
-    </div>
-    <div class="closer" @click="onBack">
-      <close-icon/>
     </div>
   </div>
 </template>
@@ -61,14 +64,20 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import AppFooter from '@/components/AppFooter.vue';
 import AppHeader from '@/market/components/AppHeader.vue';
+import AppDialog from '@/components/AppDialog.vue';
 import { closeIcon, chevronRightIcon, chevronLeftIcon } from '@/icons';
 import store from '@/store';
 import { Post as PostType } from '@/store/posts';
 import { UserInfo } from '@/store/auth';
 
-@Component({ components: { closeIcon, chevronLeftIcon, chevronRightIcon } })
+@Component({
+  components: {
+    closeIcon,
+    chevronLeftIcon,
+    chevronRightIcon,
+  },
+})
 export default class Post extends Vue {
 
   private images: string[] = [];
@@ -139,77 +148,79 @@ export default class Post extends Vue {
 </script>
 
 <style lang="scss" scoped>
-div.post {
-  display: grid;
-  margin: 50px auto;
-  margin-bottom: 0;
-  max-width: 870px;
-  grid-template-columns: repeat(2, 400px);
-  grid-template-rows: repeat(2, 175px);
-  grid-gap: 50px 70px;
-  position: relative;
-
-  .closer {
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    right: 0;
-    top: 0;
-    padding: 10px;
-    opacity: 0.5;
-    cursor: pointer;
-    background-color: white;
-    svg {
-      fill: black;
-    }
-  }
-
-  .image {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    background-color: white;
-    box-shadow: 0 1px 2px 1px #ccc;
+div.post-wrapper {
+  .post {
+    display: grid;
+    margin: 50px auto;
+    margin-bottom: 0;
+    max-width: 870px;
+    grid-template-columns: repeat(2, 400px);
+    grid-template-rows: repeat(2, 175px);
+    grid-gap: 50px 70px;
     position: relative;
-    img {
-      height: 100%;
-      width: 100%;
-    }
-    .scroll {
+
+    .closer {
       position: absolute;
-      top: 50%;
       height: 40px;
       width: 40px;
-      border-radius: 20px;
-      padding: 5px;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.1);
+      right: 0;
+      top: 0;
+      padding: 10px;
+      opacity: 0.5;
       cursor: pointer;
-      &.left {
-        left: 5px;
-      }
-      &.right {
-        right: 5px;
+      background-color: white;
+      svg {
+        fill: black;
       }
     }
-    .dots {
-      padding: 10px;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      span {
-        display: block;
-        margin: 10px;
-        height: 10px;
-        width: 10px;
-        border-radius: 5px;
-        opacity: 0.5;
-        background-color: white;
-        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.342);
-        &.active {
-          opacity: 1;
-          background-color: var(--primary-color);
+
+    .image {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      background-color: white;
+      box-shadow: 0 1px 2px 1px #ccc;
+      position: relative;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+      .scroll {
+        position: absolute;
+        top: 50%;
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+        padding: 5px;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        &.left {
+          left: 5px;
+        }
+        &.right {
+          right: 5px;
+        }
+      }
+      .dots {
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        span {
+          display: block;
+          margin: 10px;
+          height: 10px;
+          width: 10px;
+          border-radius: 5px;
+          opacity: 0.5;
+          background-color: white;
+          box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.342);
+          &.active {
+            opacity: 1;
+            background-color: var(--primary-color);
+          }
         }
       }
     }
@@ -297,86 +308,90 @@ div.post {
     }
   }
   @media screen and (max-width: 768px) {
-    max-width: 570px;
-    grid-template-columns: repeat(2, 270px);
-    grid-template-rows: 150px 90px;
-    grid-gap: 30px;
+    .post {
+      max-width: 570px;
+      grid-template-columns: repeat(2, 270px);
+      grid-template-rows: 150px 90px;
+      grid-gap: 30px;
 
-    .image {
-      .dots {
-        span {
-          height: 6px;
-          width: 6px;
+      .image {
+        .dots {
+          span {
+            height: 6px;
+            width: 6px;
+          }
         }
       }
-    }
-    .card {
-      padding: 0;
-      h2 {
-        font-size: 1.7em;
-        margin: 5px;
-      }
-      p {
-        font-size: 0.9em;
-      }
-      .posted-by {
+      .card {
         padding: 0;
+        h2 {
+          font-size: 1.7em;
+          margin: 5px;
+        }
+        p {
+          font-size: 0.9em;
+        }
+        .posted-by {
+          padding: 0;
+        }
       }
-    }
 
-    .description {
-      padding: 5px;
-      h2,
-      p {
-        margin: 0;
-      }
-      p {
-        margin: 5px 0;
-        max-height: 36px;
-      }
-      button {
-        top: 0;
-        right: 35px;
-        margin: 3px;
+      .description {
+        padding: 5px;
+        h2,
+        p {
+          margin: 0;
+        }
+        p {
+          margin: 5px 0;
+          max-height: 36px;
+        }
+        button {
+          top: 0;
+          right: 35px;
+          margin: 3px;
+        }
       }
     }
   }
   @media screen and (max-width: 450px) {
-    display: block;
-    max-width: 570px;
-    grid-template-columns: repeat(2, 270px);
-    grid-template-rows: repeat(2, 120px);
-    grid-gap: 30px;
-    margin: 0;
+    .post {
+      display: block;
+      max-width: 570px;
+      grid-template-columns: repeat(2, 270px);
+      grid-template-rows: repeat(2, 120px);
+      grid-gap: 30px;
+      margin: 0;
 
-    .closer {
-      right: auto;
-      left: 5px;
-      top: 5px;
-      background-color: rgba(0, 0, 0, 0.1);
-      opacity: 1;
-      border-radius: 20px;
-      svg {
-        fill: white;
+      .closer {
+        right: auto;
+        left: 5px;
+        top: 5px;
+        background-color: rgba(0, 0, 0, 0.1);
+        opacity: 1;
+        border-radius: 20px;
+        svg {
+          fill: white;
+        }
       }
-    }
 
-    .image {
-      height: 100vw;
-    }
-    .card {
-      margin-top: 5px;
-      padding: 5px;
-    }
-    .description {
-      margin-top: 10px;
-      padding: 10px;
-      p {
-        max-height: none;
+      .image {
+        height: 100vw;
       }
-      button,
-      .shadow {
-        display: none;
+      .card {
+        margin-top: 5px;
+        padding: 5px;
+      }
+      .description {
+        margin-top: 10px;
+        padding: 10px;
+        p {
+          max-height: none;
+        }
+        button,
+        .shadow {
+          display: none;
+        }
       }
     }
   }

@@ -3,14 +3,22 @@ import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
 const instance = axios.create();
 
 import MockAdapter from 'axios-mock-adapter';
-const mock = new MockAdapter(instance, { delayResponse: 1000 });
+const mock = new MockAdapter(instance, { delayResponse: 200 });
 
 mock.onPost('/api/institutions').reply((config) => {
-  return [200, config.data];
+  return [201, config.data];
+});
+
+mock.onGet('/api/institutions').reply((config) => {
+  return [201, require('@/assets/insties')];
 });
 
 mock.onPost('/api/users').reply((config) => {
   return [200];
+});
+
+mock.onPost('/api/posts').reply((config) => {
+  return [201];
 });
 
 mock.onPost('/api/oauth/token').reply((config) => {
