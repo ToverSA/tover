@@ -1,8 +1,11 @@
 <template>
   <header>
-    <router-link to="/">
-      <logo-icon class="app-logo"/>
-    </router-link>
+    <div class="title">
+      <router-link to="/">
+        <logo-icon class="app-logo"/>
+      </router-link>
+      <h3>Market</h3>
+    </div>
     <nav v-if="!signedIn">
       <router-link :to="{name: 'auth'}">
         <person-outline-icon/>
@@ -84,6 +87,16 @@ header {
   justify-content: space-between;
   width: 100%;
   box-shadow: 0 1px 1px 1px #ccc;
+  .title {
+    display: flex;
+
+    h3 {
+      margin: 0;
+      padding: 15px;
+      font-weight: 100;
+      opacity: 0.3;
+    }
+  }
 
   .app-logo {
     height: $bar-height - 10px;
